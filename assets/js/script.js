@@ -32,3 +32,21 @@ $(document).ready(function () {
     );
   });
 });
+
+$(document).ready(function () {
+  $("#layer-segment").change(function (e) {
+    $(".building-layer-panel").toggleClass('d-none');
+    $(".legal-layer-panel").toggleClass('d-none');
+  });
+
+  $("#layer-toggle").click(function (e) {
+    $(".layer-panel").toggleClass('layer-panel-show');
+  });
+
+  $("#clip-toggle").click(function (e) {
+    $(".clip-panel").toggleClass('clip-panel-show');
+    $("#sliderX").val(90);
+    $("#sliderY").val(90);
+    $("#sliderZ").val(90);
+  });
+});

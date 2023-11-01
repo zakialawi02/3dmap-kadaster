@@ -13,20 +13,25 @@ body {
   font-weight: 500;
   color: #141414;
 }
+
 header {
   padding: 0rem 2rem;
   top: 0;
   position: sticky;
   align-items: center;
-  background-color: #4bb4de;
-  z-index: 1000;
+  background-color: #013880;
+  z-index: 10;
 }
+
 .nav-logo {
   padding: 5px;
 }
+
 .nav-logo .name-logo h1 {
   font-size: 2rem;
+  color: white;
 }
+
 header nav {
   display: flex;
   flex-wrap: wrap;
@@ -35,11 +40,13 @@ header nav {
   align-items: center;
   gap: 1.4em;
 }
+
 header .nav-menu {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 header .nav-menu-group {
   display: flex;
   list-style: none;
@@ -52,17 +59,72 @@ header .nav-menu-group li {
   margin: 5px;
   font-weight: 700;
 }
+
 header .nav-menu-group li a {
   color: white;
 }
+
 header .nav-menu-group li a:hover {
-  color: #345da7;
+  color: #0a9df1;
 }
+
 header .nav-menu .hamb {
   color: white;
   display: none;
   font-size: x-large;
   font-weight: 700;
+}
+
+.layer-panel {
+  position: absolute;
+  margin-top: 4rem;
+  top: 5px;
+  left: -18rem;
+  z-index: 100;
+  transition: left 0.3s ease;
+}
+
+.layer-panel-show {
+  position: absolute;
+  margin-top: 4rem;
+  top: 5px;
+  left: 0;
+  width: 18rem;
+  z-index: 100;
+}
+
+.layer-item {
+  display: block;
+  font-size: 16px;
+  color: #000000;
+  padding-bottom: 1px;
+
+}
+
+.clip-panel {
+  position: absolute;
+  margin-top: 4rem;
+  top: -15rem;
+  right: 0;
+  z-index: 100;
+  transition: left 0.5s ease;
+}
+
+.clip-panel-show {
+  position: absolute;
+  margin-top: 4rem;
+  top: 0;
+  right: 0;
+  width: 15rem;
+  z-index: 100;
+}
+
+.clip-item {
+  display: block;
+  font-size: 16px;
+  color: #000000;
+  padding-bottom: 1px;
+
 }
 
 /* css cesium */
