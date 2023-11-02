@@ -34,17 +34,31 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $("#layer-segment").change(function (e) {
-    $(".building-layer-panel").toggleClass('d-none');
-    $(".legal-layer-panel").toggleClass('d-none');
+  $(".building-segment").click(function (e) {
+    $(".legal-segment").removeClass('active');
+    $(".siola-building-layer-panel").removeClass('d-none');
+    $(".siola-legal-layer-panel").addClass('d-none');
+    $(".balai-building-layer-panel").removeClass('d-none');
+    $(".balai-legal-layer-panel").addClass('d-none');
+    $(".building-segment").addClass('active');
+  });
+  $(".legal-segment").click(function (e) {
+    $(".building-segment").removeClass('active');
+    $(".legal-segment").addClass('active');
+    $(".siola-building-layer-panel").addClass('d-none');
+    $(".siola-legal-layer-panel").removeClass('d-none');
+    $(".balai-building-layer-panel").addClass('d-none');
+    $(".balai-legal-layer-panel").removeClass('d-none');
   });
 
   $("#layer-toggle").click(function (e) {
     $(".layer-panel").toggleClass('layer-panel-show');
+    $("#layer-toggle").toggleClass('selected');
   });
 
   $("#clip-toggle").click(function (e) {
     $(".clip-panel").toggleClass('clip-panel-show');
+    $("#clip-toggle").toggleClass('selected');
     $("#sliderX").val(90);
     $("#sliderY").val(90);
     $("#sliderZ").val(90);
