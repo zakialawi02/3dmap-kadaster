@@ -8,6 +8,22 @@
   scroll-behavior: smooth;
 }
 
+.preload {
+  position: absolute;
+  display: block;
+  padding: 1rem;
+  width: 100%;
+  height: 92vh;
+  z-index: 100;
+  background-color: white;
+}
+
+.preload .bg-loading {
+  color: #909090;
+  text-align: center;
+  padding: 1rem;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
@@ -20,7 +36,7 @@ header {
   position: sticky;
   align-items: center;
   background-color: #013880;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .nav-logo {
@@ -97,7 +113,7 @@ header .nav-menu .hamb {
   margin-top: 4rem;
   top: 5px;
   left: -18rem;
-  z-index: 100;
+  z-index: 10;
   transition: left 0.3s ease;
 }
 
@@ -107,7 +123,6 @@ header .nav-menu .hamb {
   top: 5px;
   left: 0;
   width: 18rem;
-  z-index: 100;
 }
 
 .layer-item {
@@ -116,6 +131,11 @@ header .nav-menu .hamb {
   color: #000000;
   padding-bottom: 1px;
 
+}
+
+.collapse.show {
+  height: 50vh;
+  overflow-y: scroll;
 }
 
 .clip-panel {
@@ -133,7 +153,6 @@ header .nav-menu .hamb {
   top: 0;
   right: 0;
   width: 15rem;
-  z-index: 1;
 }
 
 .clip-item {
