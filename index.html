@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>3D Cadastral</title>
+  <title>3D Cadastre</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -36,7 +36,7 @@
     <nav>
       <div class="nav-logo">
         <div class="name-logo">
-          <h1>3D Cadastral</h1>
+          <h1>3D Cadastre</h1>
         </div>
       </div>
       <div class="nav-menu">
@@ -53,6 +53,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li class="dropdown-li" id="first-camera"><a class="dropdown-item" href="#">Siola</a></li>
               <li class="dropdown-li" id="second-camera"><a class="dropdown-item" href="#">Balai pemuda</a></li>
+              <li class="dropdown-li" id="third-camera"><a class="dropdown-item" href="#">Rusunawa</a></li>
             </ul>
           </li>
           <li>
@@ -272,7 +273,43 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                belum
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-primary building-segment active">Building</button>
+                    <button type="button" class="btn btn-primary legal-segment">Legal object</button>
+                  </div>
+                </div>
+
+                <div class="balai-building-layer-panel p-2 m-1">
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_r" id="rusunawaevel_r"> Roof</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_5" id="rusunawaevel_5"> Level 5</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_4" id="rusunawaevel_4"> Level 4</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_3" id="rusunawaevel_3"> Level 3</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_2" id="rusunawaevel_2"> Level 2</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="rusunawaevel_1" id="rusunawaevel_1"> Level 1</label>
+                </div>
+
+                <div class="balai-legal-layer-panel p-2 m-1 d-none">
+                  -
+                  <!-- <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                      autocomplete="off" class="set_legal" name="balaiLegal_2" id="balaiLegal_2"> belum</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                      autocomplete="off" class="set_legal" name="balaiLegal_1" id="balaiLegal_1"> belum</label> -->
+                </div>
               </div>
             </div>
           </div>
