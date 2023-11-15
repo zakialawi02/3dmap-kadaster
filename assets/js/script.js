@@ -33,6 +33,7 @@ $(document).ready(function () {
   });
 });
 
+// Switch Building/Legal segment
 $(document).ready(function () {
   $(".building-segment").click(function (e) {
     $(".legal-segment").removeClass('active');
@@ -40,6 +41,8 @@ $(document).ready(function () {
     $(".siola-legal-layer-panel").addClass('d-none');
     $(".balai-building-layer-panel").removeClass('d-none');
     $(".balai-legal-layer-panel").addClass('d-none');
+    $(".rusunawa-building-layer-panel").removeClass('d-none');
+    $(".rusunawa-legal-layer-panel").addClass('d-none');
     $(".building-segment").addClass('active');
   });
   $(".legal-segment").click(function (e) {
@@ -49,6 +52,8 @@ $(document).ready(function () {
     $(".siola-legal-layer-panel").removeClass('d-none');
     $(".balai-building-layer-panel").addClass('d-none');
     $(".balai-legal-layer-panel").removeClass('d-none');
+    $(".rusunawa-building-layer-panel").addClass('d-none');
+    $(".rusunawa-legal-layer-panel").removeClass('d-none');
   });
 
   $("#layer-toggle").click(function (e) {
@@ -62,5 +67,24 @@ $(document).ready(function () {
     $("#sliderX").val(90);
     $("#sliderY").val(90);
     $("#sliderZ").val(90);
+  });
+});
+
+// node tree view
+$(document).ready(function () {
+  $(".caret").click(function () {
+    $(this).parent().find(".nested").first().toggleClass("active");
+    $(this).toggleClass("caret-down");
+  });
+
+  $(".set_legal").change(function () {
+    let isChecked = $(this).prop("checked");
+    // Handle child checkboxes
+    $(this).closest("li").find(".set_legal").prop("checked", isChecked);
+    // Handle parent checkboxes
+    $(this).parentsUntil("#myUL", "ul").each(function () {
+      let hasCheckedChild = $(this).find(".set_legal:checked").length > 0;
+      $(this).prev().find(".set_legal").prop("checked", hasCheckedChild);
+    });
   });
 });

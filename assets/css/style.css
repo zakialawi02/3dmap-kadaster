@@ -112,7 +112,7 @@ header .nav-menu .hamb {
   position: absolute;
   margin-top: 4rem;
   top: 5px;
-  left: -18rem;
+  left: -20rem;
   z-index: 10;
   transition: left 0.3s ease;
 }
@@ -122,7 +122,7 @@ header .nav-menu .hamb {
   margin-top: 4rem;
   top: 5px;
   left: 0;
-  width: 18rem;
+  width: 20rem;
 }
 
 .layer-item {
@@ -165,6 +165,84 @@ header .nav-menu .hamb {
 
 .selected {
   color: #fec410 !important;
+}
+
+/* button size custom */
+.asbn {
+  padding: 3px 6px;
+  font-size: 1rem;
+}
+
+.xs-btn {
+  font-size: 14px;
+  padding: 5px;
+}
+
+.s-btn {
+  font-size: 14px;
+  padding: 8px;
+}
+
+/* node tree */
+ul,
+#myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+#autocompleteResults {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  min-width: 18rem;
+  width: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 6px 6px;
+  background-color: #fff;
+}
+
+.autocomplete-item {
+  padding: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.autocomplete-item:hover {
+  background-color: #f0f0f0;
 }
 
 /* css cesium */
