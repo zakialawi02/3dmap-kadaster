@@ -16,6 +16,11 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
+// viewer.imageryLayers.removeAll();
+// viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+//   url: 'https://tile.openstreetmap.org/'
+// }));
+
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
 viewer.scene.highDynamicRange = true;
@@ -71,6 +76,19 @@ function thirdCamera() {
   });
 }
 
+function zoomToLocation(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
+  // Zoom to the tileset
+  const heading = Cesium.Math.toRadians(headingDegrees);
+  const pitch = Cesium.Math.toRadians(pitchDegrees);
+  viewer.flyTo(tileset, {
+    offset: new Cesium.HeadingPitchRange(heading, pitch, zoomDistance),
+    orientation: {
+      heading: heading,
+      pitch: pitch,
+    }
+  });
+}
+
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -123,85 +141,229 @@ function makeOtherTransparentSiola(selectedLayer, alphaValue) {
 }
 
 // Get Siola
-const siolaBuildingL0 = await Cesium.Cesium3DTileset.fromIonAssetId(2337813);
-viewer.scene.primitives.add(siolaBuildingL0);
-const siolaBuildingL1 = await Cesium.Cesium3DTileset.fromIonAssetId(2337814);
-viewer.scene.primitives.add(siolaBuildingL1);
-const siolaBuildingL2 = await Cesium.Cesium3DTileset.fromIonAssetId(2337815);
-viewer.scene.primitives.add(siolaBuildingL2);
-const siolaBuildingL3 = await Cesium.Cesium3DTileset.fromIonAssetId(2337816);
-viewer.scene.primitives.add(siolaBuildingL3);
-const siolaBuildingL4 = await Cesium.Cesium3DTileset.fromIonAssetId(2337817);
-viewer.scene.primitives.add(siolaBuildingL4);
-const siolaBuildingL5 = await Cesium.Cesium3DTileset.fromIonAssetId(2337818);
-viewer.scene.primitives.add(siolaBuildingL5);
+const siolaBuildingL0 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
+    show: true,
+    featureIdLabel: "SBL0",
+  })
+);
+const siolaBuildingL1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
+    show: true,
+    featureIdLabel: "SBL1",
+  })
+);
+const siolaBuildingL2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
+    show: true,
+    featureIdLabel: "SBL2",
+  })
+);
+const siolaBuildingL3 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
+    show: true,
+    featureIdLabel: "SBL3",
+  })
+);
+const siolaBuildingL4 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
+    show: true,
+    featureIdLabel: "SBL4",
+  })
+);
+const siolaBuildingL5 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
+    show: true,
+    featureIdLabel: "SBL5",
+  }, )
+);
 
-const siolaLegalL1a1 = await Cesium.Cesium3DTileset.fromIonAssetId(2346408);
-viewer.scene.primitives.add(siolaLegalL1a1);
-const siolaLegalL1a2 = await Cesium.Cesium3DTileset.fromIonAssetId(2346409);
-viewer.scene.primitives.add(siolaLegalL1a2);
-const siolaLegalL1a3 = await Cesium.Cesium3DTileset.fromIonAssetId(2346410);
-viewer.scene.primitives.add(siolaLegalL1a3);
-const siolaLegalL1a4 = await Cesium.Cesium3DTileset.fromIonAssetId(2346413);
-viewer.scene.primitives.add(siolaLegalL1a4);
-const siolaLegalL1a5 = await Cesium.Cesium3DTileset.fromIonAssetId(2346415);
-viewer.scene.primitives.add(siolaLegalL1a5);
-const siolaLegalL1a6 = await Cesium.Cesium3DTileset.fromIonAssetId(2346416);
-viewer.scene.primitives.add(siolaLegalL1a6);
-const siolaLegalL1a7 = await Cesium.Cesium3DTileset.fromIonAssetId(2347030);
-viewer.scene.primitives.add(siolaLegalL1a7);
-const siolaLegalL1a8 = await Cesium.Cesium3DTileset.fromIonAssetId(2346419);
-viewer.scene.primitives.add(siolaLegalL1a8);
-const siolaLegalL1a9 = await Cesium.Cesium3DTileset.fromIonAssetId(2346420);
-viewer.scene.primitives.add(siolaLegalL1a9);
-const siolaLegalL1a10 = await Cesium.Cesium3DTileset.fromIonAssetId(2346553);
-viewer.scene.primitives.add(siolaLegalL1a10);
+const siolaLegalL1a1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346408, {
+    show: true,
+    featureIdLabel: "SL1a1",
+  }, )
+);
+const siolaLegalL1a2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346409, {
+    show: true,
+    featureIdLabel: "SL1a2",
+  }, )
+);
+const siolaLegalL1a3 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346410, {
+    show: true,
+    featureIdLabel: "SL1a3",
+  }, )
+);
+const siolaLegalL1a4 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346413, {
+    show: true,
+    featureIdLabel: "SL1a4",
+  }, )
+);
+const siolaLegalL1a5 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346415, {
+    show: true,
+    featureIdLabel: "SL1a5",
+  }, )
+);
+const siolaLegalL1a6 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346416, {
+    show: true,
+    featureIdLabel: "SL1a6",
+  }, )
+);
+const siolaLegalL1a7 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347030, {
+    show: true,
+    featureIdLabel: "SL1a7",
+  }, )
+);
+const siolaLegalL1a8 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346419, {
+    show: true,
+    featureIdLabel: "SL1a8",
+  }, )
+);
+const siolaLegalL1a9 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346420, {
+    show: true,
+    featureIdLabel: "SL1a9",
+  }, )
+);
+const siolaLegalL1a10 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346553, {
+    show: true,
+    featureIdLabel: "SL1a10",
+  }, )
+);
 
-const siolaLegalL2a1 = await Cesium.Cesium3DTileset.fromIonAssetId(2346717);
-viewer.scene.primitives.add(siolaLegalL2a1);
-const siolaLegalL2a2 = await Cesium.Cesium3DTileset.fromIonAssetId(2346718);
-viewer.scene.primitives.add(siolaLegalL2a2);
-const siolaLegalL2a3 = await Cesium.Cesium3DTileset.fromIonAssetId(2346720);
-viewer.scene.primitives.add(siolaLegalL2a3);
-const siolaLegalL2a4 = await Cesium.Cesium3DTileset.fromIonAssetId(2346721);
-viewer.scene.primitives.add(siolaLegalL2a4);
-const siolaLegalL2a5 = await Cesium.Cesium3DTileset.fromIonAssetId(2346722);
-viewer.scene.primitives.add(siolaLegalL2a5);
-const siolaLegalL2a6 = await Cesium.Cesium3DTileset.fromIonAssetId(2346723);
-viewer.scene.primitives.add(siolaLegalL2a6);
-const siolaLegalL2a7 = await Cesium.Cesium3DTileset.fromIonAssetId(2346724);
-viewer.scene.primitives.add(siolaLegalL2a7);
+const siolaLegalL2a1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346717, {
+    show: true,
+    featureIdLabel: "SL2a1",
+  }, )
+);
+const siolaLegalL2a2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346718, {
+    show: true,
+    featureIdLabel: "SL2a2",
+  }, )
+);
+const siolaLegalL2a3 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346720, {
+    show: true,
+    featureIdLabel: "SL2a3",
+  }, )
+);
+const siolaLegalL2a4 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346721, {
+    show: true,
+    featureIdLabel: "SL2a4",
+  }, )
+);
+const siolaLegalL2a5 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346722, {
+    show: true,
+    featureIdLabel: "SL2a5",
+  }, )
+);
+const siolaLegalL2a6 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346723, {
+    show: true,
+    featureIdLabel: "SL2a6",
+  }, )
+);
+const siolaLegalL2a7 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346724, {
+    show: true,
+    featureIdLabel: "SL2a7",
+  }, )
+);
 
-const siolaLegalL3a1 = await Cesium.Cesium3DTileset.fromIonAssetId(2347178);
-viewer.scene.primitives.add(siolaLegalL3a1);
-const siolaLegalL3a2 = await Cesium.Cesium3DTileset.fromIonAssetId(2347184);
-viewer.scene.primitives.add(siolaLegalL3a2);
-const siolaLegalL3a3 = await Cesium.Cesium3DTileset.fromIonAssetId(2347185);
-viewer.scene.primitives.add(siolaLegalL3a3);
-const siolaLegalL3a4 = await Cesium.Cesium3DTileset.fromIonAssetId(2347186);
-viewer.scene.primitives.add(siolaLegalL3a4);
-const siolaLegalL3a5 = await Cesium.Cesium3DTileset.fromIonAssetId(2347187);
-viewer.scene.primitives.add(siolaLegalL3a5);
-const siolaLegalL3a6 = await Cesium.Cesium3DTileset.fromIonAssetId(2347188);
-viewer.scene.primitives.add(siolaLegalL3a6);
-const siolaLegalL3a7 = await Cesium.Cesium3DTileset.fromIonAssetId(2347190);
-viewer.scene.primitives.add(siolaLegalL3a7);
+const siolaLegalL3a1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347178, {
+    show: true,
+    featureIdLabel: "SL3a1",
+  }, )
+);
+const siolaLegalL3a2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347184, {
+    show: true,
+    featureIdLabel: "SL3a2",
+  }, )
+);
+const siolaLegalL3a3 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347185, {
+    show: true,
+    featureIdLabel: "SL3a3",
+  }, )
+);
+const siolaLegalL3a4 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347186, {
+    show: true,
+    featureIdLabel: "SL3a4",
+  }, )
+);
+const siolaLegalL3a5 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347187, {
+    show: true,
+    featureIdLabel: "SL3a5",
+  }, )
+);
+const siolaLegalL3a6 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347188, {
+    show: true,
+    featureIdLabel: "SL3a6",
+  }, )
+);
+const siolaLegalL3a7 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347190, {
+    show: true,
+    featureIdLabel: "SL3a7",
+  }, )
+);
 
-const siolaLegalL4a1 = await Cesium.Cesium3DTileset.fromIonAssetId(2347193);
-viewer.scene.primitives.add(siolaLegalL4a1);
-const siolaLegalL4a2 = await Cesium.Cesium3DTileset.fromIonAssetId(2347195);
-viewer.scene.primitives.add(siolaLegalL4a2);
-const siolaLegalL4a3 = await Cesium.Cesium3DTileset.fromIonAssetId(2347197);
-viewer.scene.primitives.add(siolaLegalL4a3);
+const siolaLegalL4a1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347193, {
+    show: true,
+    featureIdLabel: "SL4a1",
+  }, )
+);
+const siolaLegalL4a2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347195, {
+    show: true,
+    featureIdLabel: "SL4a2",
+  }, )
+);
+const siolaLegalL4a3 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347197, {
+    show: true,
+    featureIdLabel: "SL4a3",
+  }, )
+);
 
-const siolaLegalL5a1 = await Cesium.Cesium3DTileset.fromIonAssetId(2347200);
-viewer.scene.primitives.add(siolaLegalL5a1);
+const siolaLegalL5a1 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2347200, {
+    show: true,
+    featureIdLabel: "SL5a1",
+  }, )
+);
 
-const siolaLegalBT = await Cesium.Cesium3DTileset.fromIonAssetId(2346402);
-viewer.scene.primitives.add(siolaLegalBT);
+const siolaLegalBT = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346402, {
+    show: true,
+    featureIdLabel: "SBT",
+  }, )
+);
+const siolaLegalBB = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2346745, {
+    show: true,
+    featureIdLabel: "SBB",
+  }, )
+);
 siolaLegalBT.style = createTransparentStyle(0.2);
-const siolaLegalBB = await Cesium.Cesium3DTileset.fromIonAssetId(2346745);
-viewer.scene.primitives.add(siolaLegalBB);
 siolaLegalBB.style = createTransparentStyle(0.2);
 
 // Get Balai Pemuda
@@ -226,16 +388,11 @@ viewer.scene.primitives.add(rusunawaBuildingL5);
 const rusunawaBuildingLR = await Cesium.Cesium3DTileset.fromIonAssetId(2346671);
 viewer.scene.primitives.add(rusunawaBuildingLR);
 
-// Get default left click handler for when a feature is not picked on left click
-const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
-  Cesium.ScreenSpaceEventType.LEFT_CLICK
-);
 viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     // Pick a new feature
     const pickedFeature = viewer.scene.pick(movement.position);
     console.log(pickedFeature);
-    console.log(pickedFeature.getProperty());
-
+    console.log(pickedFeature.primitive.featureIdLabel);
   },
   Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
@@ -313,179 +470,179 @@ $("#reset-clip").click(function (e) {
 
 // Layering button Siola
 $("#siolaLevel_0").on('click', function () {
-  siolaBuildingL0.show = !siolaBuildingL0.show;
+  siolaBuildingL0.show = $(this).prop("checked");
 });
 $("#siolaLevel_1").on('click', function () {
-  siolaBuildingL1.show = !siolaBuildingL1.show;
+  siolaBuildingL1.show = $(this).prop("checked");
 });
 $("#siolaLevel_2").on('click', function () {
-  siolaBuildingL2.show = !siolaBuildingL2.show;
+  siolaBuildingL2.show = $(this).prop("checked");
 });
 $("#siolaLevel_3").on('click', function () {
-  siolaBuildingL3.show = !siolaBuildingL3.show;
+  siolaBuildingL3.show = $(this).prop("checked");
 });
 $("#siolaLevel_4").on('click', function () {
-  siolaBuildingL4.show = !siolaBuildingL4.show;
+  siolaBuildingL4.show = $(this).prop("checked");
 });
 $("#siolaLevel_5").on('click', function () {
-  siolaBuildingL5.show = !siolaBuildingL5.show;
+  siolaBuildingL5.show = $(this).prop("checked");
 });
 
 $("#siolaVirtual_1").on('click', function () {
-  siolaLegalBT.show = !siolaLegalBT.show;
+  siolaLegalBT.show = $(this).prop("checked");
 });
 $("#siolaVirtual_2").on('click', function () {
-  siolaLegalBB.show = !siolaLegalBB.show;
+  siolaLegalBB.show = $(this).prop("checked");
 });
 
 $("#siolaLegal_1a1").on('click', function () {
-  siolaLegalL1a1.show = !siolaLegalL1a1.show;
+  siolaLegalL1a1.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a1, 0.3);
 });
 $("#siolaLegal_1a2").on('click', function () {
-  siolaLegalL1a2.show = !siolaLegalL1a2.show;
+  siolaLegalL1a2.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a2, 0.3);
 });
 $("#siolaLegal_1a3").on('click', function () {
-  siolaLegalL1a3.show = !siolaLegalL1a3.show;
+  siolaLegalL1a3.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a3, 0.3);
 });
 $("#siolaLegal_1a4").on('click', function () {
-  siolaLegalL1a4.show = !siolaLegalL1a4.show;
+  siolaLegalL1a4.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a4, 0.3);
 });
 $("#siolaLegal_1a5").on('click', function () {
-  siolaLegalL1a5.show = !siolaLegalL1a5.show;
+  siolaLegalL1a5.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a5, 0.3);
 });
 $("#siolaLegal_1a6").on('click', function () {
-  siolaLegalL1a6.show = !siolaLegalL1a6.show;
+  siolaLegalL1a6.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a6, 0.3);
 });
 $("#siolaLegal_1a7").on('click', function () {
-  siolaLegalL1a7.show = !siolaLegalL1a7.show;
+  siolaLegalL1a7.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a7, 0.3);
 });
 $("#siolaLegal_1a8").on('click', function () {
-  siolaLegalL1a8.show = !siolaLegalL1a8.show;
+  siolaLegalL1a8.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a8, 0.3);
 });
 $("#siolaLegal_1a9").on('click', function () {
-  siolaLegalL1a9.show = !siolaLegalL1a9.show;
+  siolaLegalL1a9.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a9, 0.3);
 });
 $("#siolaLegal_1a10").on('click', function () {
-  siolaLegalL1a10.show = !siolaLegalL1a10.show;
+  siolaLegalL1a10.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL1a10, 0.3);
 });
 
 $("#siolaLegal_2a1").on('click', function () {
-  siolaLegalL2a1.show = !siolaLegalL2a1.show;
+  siolaLegalL2a1.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a1, 0.3);
 });
 $("#siolaLegal_2a2").on('click', function () {
-  siolaLegalL2a2.show = !siolaLegalL2a2.show;
+  siolaLegalL2a2.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a2, 0.3);
 });
 $("#siolaLegal_2a3").on('click', function () {
-  siolaLegalL2a3.show = !siolaLegalL2a3.show;
-  makeOtherTransparentSiola(siolaLegalL1a1, 0.3);
+  siolaLegalL2a3.show = $(this).prop("checked");
+  makeOtherTransparentSiola(siolaLegalL2a3, 0.3);
 });
 $("#siolaLegal_2a4").on('click', function () {
-  siolaLegalL2a4.show = !siolaLegalL2a4.show;
+  siolaLegalL2a4.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a4, 0.3);
 });
 $("#siolaLegal_2a5").on('click', function () {
-  siolaLegalL2a5.show = !siolaLegalL2a5.show;
+  siolaLegalL2a5.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a5, 0.3);
 });
 $("#siolaLegal_2a6").on('click', function () {
-  siolaLegalL2a6.show = !siolaLegalL2a6.show;
+  siolaLegalL2a6.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a6, 0.3);
 });
 $("#siolaLegal_2a7").on('click', function () {
-  siolaLegalL2a7.show = !siolaLegalL2a7.show;
+  siolaLegalL2a7.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL2a7, 0.3);
 });
 
 $("#siolaLegal_3a1").on('click', function () {
-  siolaLegalL3a1.show = !siolaLegalL3a1.show;
+  siolaLegalL3a1.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a1, 0.3);
 });
 $("#siolaLegal_3a2").on('click', function () {
-  siolaLegalL3a2.show = !siolaLegalL3a2.show;
+  siolaLegalL3a2.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a2, 0.3);
 });
 $("#siolaLegal_3a3").on('click', function () {
-  siolaLegalL3a3.show = !siolaLegalL3a3.show;
+  siolaLegalL3a3.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a3, 0.3);
 });
 $("#siolaLegal_3a4").on('click', function () {
-  siolaLegalL3a4.show = !siolaLegalL3a4.show;
+  siolaLegalL3a4.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a4, 0.3);
 });
 $("#siolaLegal_3a5").on('click', function () {
-  siolaLegalL3a5.show = !siolaLegalL3a5.show;
+  siolaLegalL3a5.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a5, 0.3);
 });
 $("#siolaLegal_3a6").on('click', function () {
-  siolaLegalL3a6.show = !siolaLegalL3a6.show;
+  siolaLegalL3a6.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a6, 0.3);
 });
 $("#siolaLegal_3a7").on('click', function () {
-  siolaLegalL3a7.show = !siolaLegalL3a7.show;
+  siolaLegalL3a7.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL3a7, 0.3);
 });
 
 $("#siolaLegal_4a1").on('click', function () {
-  siolaLegalL4a1.show = !siolaLegalL4a1.show;
+  siolaLegalL4a1.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL4a1, 0.3);
 });
 $("#siolaLegal_4a2").on('click', function () {
-  siolaLegalL4a2.show = !siolaLegalL4a2.show;
+  siolaLegalL4a2.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL4a2, 0.3);
 });
 $("#siolaLegal_4a3").on('click', function () {
-  siolaLegalL4a3.show = !siolaLegalL4a3.show;
+  siolaLegalL4a3.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL4a3, 0.3);
 });
 
 $("#siolaLegal_5a1").on('click', function () {
-  siolaLegalL5a1.show = !siolaLegalL5a1.show;
+  siolaLegalL5a1.show = $(this).prop("checked");
   makeOtherTransparentSiola(siolaLegalL5a1, 0.3);
 });
 
 
 // Layering button Balai pemuda
 $("#balaiLevel_0").on('click', function () {
-  balaiBuildingL0.show = !balaiBuildingL0.show;
+  balaiBuildingL0.show = $(this).prop("checked");
 });
 $("#balaiLevel_1").on('click', function () {
-  balaiBuildingL1.show = !balaiBuildingL1.show;
+  balaiBuildingL1.show = $(this).prop("checked");
 });
 $("#balaiLevel_2").on('click', function () {
-  balaiBuildingL2.show = !balaiBuildingL2.show;
+  balaiBuildingL2.show = $(this).prop("checked");
 });
 
 
 // Layering button Rusunawa
 $("#rusunawaLevel_1").on('click', function () {
-  rusunawaBuildingL1.show = !rusunawaBuildingL1.show;
+  rusunawaBuildingL1.show = $(this).prop("checked");
 });
 $("#rusunawaLevel_2").on('click', function () {
-  rusunawaBuildingL2.show = !rusunawaBuildingL2.show;
+  rusunawaBuildingL2.show = $(this).prop("checked");
 });
 $("#rusunawaLevel_3").on('click', function () {
-  rusunawaBuildingL3.show = !rusunawaBuildingL3.show;
+  rusunawaBuildingL3.show = $(this).prop("checked");
 });
 $("#rusunawaLevel_4").on('click', function () {
-  rusunawaBuildingL4.show = !rusunawaBuildingL4.show;
+  rusunawaBuildingL4.show = $(this).prop("checked");
 });
 $("#rusunawaLevel_5").on('click', function () {
-  rusunawaBuildingL5.show = !rusunawaBuildingL5.show;
+  rusunawaBuildingL5.show = $(this).prop("checked");
 });
 $("#rusunawaLevel_r").on('click', function () {
-  rusunawaBuildingLR.show = !rusunawaBuildingLR.show;
+  rusunawaBuildingLR.show = $(this).prop("checked");
 });
 
 
@@ -636,16 +793,16 @@ $("#underground_1").on('click', function () {
 });
 
 // hide preloader after finish load data
-$(document).ready(function () {
+$(function () {
   $(".preload").addClass("d-none");
 });
 
 // handle autocomplete seacrh
 $(document).ready(function () {
-  const suggestions = ["JavaScript", "HTML", "CSS", "Python", "Java", "React", "Node.js", "Angular", "Vue.js"];
+  const suggestions = ["L0", "L1", "L2", "L3", "L4", "L5", "L1.1", "L1.2", "L1.3", "L1.4", "L1.5", "L1.6", "L1.7", "L1.8", "L1.9", "L1.10", "L2.1", "L2.2", "L2.3", "L2.4", "L2.5", "L2.6", "L2.7", "L3.1", "L3.2", "L3.3", "L3.4", "L3.5", "L3.6", "L3.7", "L4.1", "L4.2", "L4.3", "L5.1", "Siola"];
   $("#searchInput").keyup(function (e) {
     const inputValue = $("#searchInput").val().toLowerCase();
-    // Hide autocomplete results if the input is empty
+    // Hide autocomplete results if input empty
     if (!inputValue.trim()) {
       $("#autocompleteResults").html("");
       return;
@@ -669,26 +826,154 @@ $(document).ready(function () {
     $("#autocompleteResults").html("");
 
     // Call specific function based on selected suggestion
+    getSearchResult(value);
+  }
+
+  $("#searchButton").click(function (e) {
+    selectSuggestion($("#searchInput").val())
+  });
+
+  function getSearchResult(value) {
+    // Call specific function based on selected suggestion
     switch (value.toLowerCase()) {
-      case "python":
-        python();
+      case "l0":
+        zoomToLocation(siolaBuildingL0, 15, 90, 150); //tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300
         break;
-      case "java":
-        java();
+      case "l1":
+        zoomToLocation(siolaBuildingL1, -5, 90, 150);
+        break;
+      case "l2":
+        zoomToLocation(siolaBuildingL2, -10, 90, 150);
+        break;
+      case "l3":
+        zoomToLocation(siolaBuildingL3, -15, 90, 150);
+        break;
+      case "l4":
+        zoomToLocation(siolaBuildingL4, -20, 90, 150);
+        break;
+      case "l5":
+        zoomToLocation(siolaBuildingL5, -25, 90, 150);
+        break;
+      case "l1.1":
+        zoomToLocation(siolaLegalL1a1, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a1, 0.3);
+        break;
+      case "l1.2":
+        zoomToLocation(siolaLegalL1a2, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a2, 0.3);
+        break;
+      case "l1.3":
+        zoomToLocation(siolaLegalL1a3, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a3, 0.3);
+        break;
+      case "l1.4":
+        zoomToLocation(siolaLegalL1a4, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a4, 0.3);
+        break;
+      case "l1.5":
+        zoomToLocation(siolaLegalL1a5, -10, 160, 100);
+        makeOtherTransparentSiola(siolaLegalL1a5, 0.3);
+        break;
+      case "l1.6":
+        zoomToLocation(siolaLegalL1a6, -10, 140, 100);
+        makeOtherTransparentSiola(siolaLegalL1a6, 0.3);
+        break;
+      case "l1.7":
+        zoomToLocation(siolaLegalL1a7, -10, 150, 100);
+        makeOtherTransparentSiola(siolaLegalL1a7, 0.3);
+        break;
+      case "l1.8":
+        zoomToLocation(siolaLegalL1a8, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a8, 0.3);
+        break;
+      case "l1.9":
+        zoomToLocation(siolaLegalL1a9, -10, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL1a9, 0.3);
+        break;
+      case "l1.10":
+        zoomToLocation(siolaLegalL1a10, -10, 0, 100);
+        makeOtherTransparentSiola(siolaLegalL1a10, 0.3);
+        break;
+      case "l2.1":
+        zoomToLocation(siolaLegalL2a1, -15, 80, 100);
+        makeOtherTransparentSiola(siolaLegalL2a1, 0.3);
+        break;
+      case "l2.2":
+        zoomToLocation(siolaLegalL2a2, -15, 100, 100);
+        makeOtherTransparentSiola(siolaLegalL2a2, 0.3);
+        break;
+      case "l2.3":
+        zoomToLocation(siolaLegalL2a3, -15, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL2a3, 0.3);
+        break;
+      case "l2.4":
+        zoomToLocation(siolaLegalL2a4, -15, 10, 100);
+        makeOtherTransparentSiola(siolaLegalL2a4, 0.3);
+        break;
+      case "l2.5":
+        zoomToLocation(siolaLegalL2a5, -15, 140, 100);
+        makeOtherTransparentSiola(siolaLegalL2a5, 0.3);
+        break;
+      case "l2.6":
+        zoomToLocation(siolaLegalL2a6, -15, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL2a6, 0.3);
+        break;
+      case "l2.7":
+        zoomToLocation(siolaLegalL2a7, -15, -30, 100);
+        makeOtherTransparentSiola(siolaLegalL2a7, 0.3);
+        break;
+      case "l3.1":
+        zoomToLocation(siolaLegalL3a1, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a1, 0.3);
+        break;
+      case "l3.2":
+        zoomToLocation(siolaLegalL3a2, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a1, 0.3);
+        break;
+      case "l3.3":
+        zoomToLocation(siolaLegalL3a3, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a3, 0.3);
+        break;
+      case "l3.4":
+        zoomToLocation(siolaLegalL3a4, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a4, 0.3);
+        break;
+      case "l3.5":
+        zoomToLocation(siolaLegalL3a5, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a5, 0.3);
+        break;
+      case "l3.6":
+        zoomToLocation(siolaLegalL3a6, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a6, 0.3);
+        break;
+      case "l3.7":
+        zoomToLocation(siolaLegalL3a7, -20, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL3a7, 0.3);
+        break;
+      case "l4.1":
+        zoomToLocation(siolaLegalL4a1, -25, 80, 100);
+        makeOtherTransparentSiola(siolaLegalL4a1, 0.3);
+        break;
+      case "l4.2":
+        zoomToLocation(siolaLegalL4a2, -25, -10, 100);
+        makeOtherTransparentSiola(siolaLegalL4a2, 0.3);
+        break;
+      case "l4.3":
+        zoomToLocation(siolaLegalL4a3, -25, 150, 100);
+        makeOtherTransparentSiola(siolaLegalL4a3, 0.3);
+        break;
+      case "l5.1":
+        zoomToLocation(siolaLegalL5a1, -25, 90, 100);
+        makeOtherTransparentSiola(siolaLegalL5a1, 0.3);
+        break;
+      case "siola":
+        firstCamera()
         break;
       default:
         // Default case if no specific function is defined for the suggestion
         break;
     }
+
   }
 
-  function python() {
-    // Your Python function implementation here
-    console.log("Running Python function");
-  }
-
-  function java() {
-    // Your Python function implementation here
-    console.log("Running Java function");
-  }
 });
