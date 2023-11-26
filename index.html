@@ -26,7 +26,12 @@
 
   <style>
     #cesiumMap {
+      position: absolute;
       height: 91vh;
+      margin-top: auto;
+      padding: 0;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
@@ -144,68 +149,69 @@
                       <span class="caret caret-down"> </span>
                       <label class="" style="margin-left: 0px">
                         <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
-                          class="set_legal" name="siolaLegal_1all" id="siolaLegal_1all"> Level 1</label>
+                          class="set_legal" name="siolaLegal_1all" id="siolaLegal_1all"> Level 1 <a href="#"
+                          id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested active">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a1" id="siolaLegal_1a1">
-                            L1.1</label>
+                            L1.1 <a href="#" id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a2" id="siolaLegal_1a2">
-                            L1.2</label>
+                            L1.2 <a href="#" id="zoomToSiolaLegal_1a2"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a3" id="siolaLegal_1a3">
-                            L1.3</label>
+                            L1.3 <a href="#" id="zoomToSiolaLegal_1a3"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a4" id="siolaLegal_1a4">
-                            L1.4</label>
+                            L1.4 <a href="#" id="zoomToSiolaLegal_1a4"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a5" id="siolaLegal_1a5">
-                            L1.5</label>
+                            L1.5 <a href="#" id="zoomToSiolaLegal_1a5"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a6" id="siolaLegal_1a6">
-                            L1.6</label>
+                            L1.6 <a href="#" id="zoomToSiolaLegal_1a6"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a7" id="siolaLegal_1a7">
-                            L1.7</label>
+                            L1.7 <a href="#" id="zoomToSiolaLegal_1a7"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a8" id="siolaLegal_1a8">
-                            L1.8</label>
+                            L1.8 <a href="#" id="zoomToSiolaLegal_1a8"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a9" id="siolaLegal_1a9">
-                            L1.9</label>
+                            L1.9 <a href="#" id="zoomToSiolaLegal_1a9"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_1a10" id="siolaLegal_1a10">
-                            L1.10</label>
+                            L1.10 <a href="#" id="zoomToSiolaLegal_1a10"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -216,50 +222,51 @@
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
                         <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
-                          class="set_legal" name="siolaLegal_2all" id="siolaLegal_2all"> Level 2</label>
+                          class="set_legal" name="siolaLegal_2all" id="siolaLegal_2all"> Level 2 <a href="#"
+                          id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a1" id="siolaLegal_2a1">
-                            L2.1</label>
+                            L2.1 <a href="#" id="zoomToSiolaLegal_2a1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a2" id="siolaLegal_2a2">
-                            L2.2</label>
+                            L2.2 <a href="#" id="zoomToSiolaLegal_2a2"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a3" id="siolaLegal_2a3">
-                            L2.3</label>
+                            L2.3 <a href="#" id="zoomToSiolaLegal_2a3"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a4" id="siolaLegal_2a4">
-                            L2.4</label>
+                            L2.4 <a href="#" id="zoomToSiolaLegal_2a4"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a5" id="siolaLegal_2a5">
-                            L2.5</label>
+                            L2.5 <a href="#" id="zoomToSiolaLegal_2a5"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a6" id="siolaLegal_2a6">
-                            L2.6</label>
+                            L2.6 <a href="#" id="zoomToSiolaLegal_2a6"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_2a7" id="siolaLegal_2a7">
-                            L2.7</label>
+                            L2.7 <a href="#" id="zoomToSiolaLegal_2a7"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -270,50 +277,51 @@
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
                         <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
-                          class="set_legal" name="siolaLegal_3all" id="siolaLegal_3all"> Level 3</label>
+                          class="set_legal" name="siolaLegal_3all" id="siolaLegal_3all"> Level 3 <a href="#"
+                          id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a1" id="siolaLegal_3a1">
-                            L3.1</label>
+                            L3.1 <a href="#" id="zoomToSiolaLegal_3a1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a2" id="siolaLegal_3a2">
-                            L3.2</label>
+                            L3.2 <a href="#" id="zoomToSiolaLegal_3a2"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a3" id="siolaLegal_3a3">
-                            L3.3</label>
+                            L3.3 <a href="#" id="zoomToSiolaLegal_3a3"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a4" id="siolaLegal_3a4">
-                            L3.4</label>
+                            L3.4 <a href="#" id="zoomToSiolaLegal_3a4"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a5" id="siolaLegal_3a5">
-                            L3.5</label>
+                            L3.5 <a href="#" id="zoomToSiolaLegal_3a5"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a6" id="siolaLegal_3a6">
-                            L3.6</label>
+                            L3.6 <a href="#" id="zoomToSiolaLegal_3a6"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_3a7" id="siolaLegal_3a7">
-                            L3.7</label>
+                            L3.7 <a href="#" id="zoomToSiolaLegal_3a7"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -324,26 +332,27 @@
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
                         <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
-                          class="set_legal" name="siolaLegal_4all" id="siolaLegal_4all"> Level 4</label>
+                          class="set_legal" name="siolaLegal_4all" id="siolaLegal_4all"> Level 4 <a href="#"
+                          id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_4a1" id="siolaLegal_4a1">
-                            L4.1</label>
+                            L4.1 <a href="#" id="zoomToSiolaLegal_4a1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_4a2" id="siolaLegal_4a2">
-                            L4.2</label>
+                            L4.2 <a href="#" id="zoomToSiolaLegal_4a2"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_4a3" id="siolaLegal_4a3">
-                            L4.3</label>
+                            L4.3 <a href="#" id="zoomToSiolaLegal_4a3"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -354,14 +363,15 @@
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
                         <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
-                          class="set_legal" name="siolaLegal_5all" id="siolaLegal_5all"> Level 5</label>
+                          class="set_legal" name="siolaLegal_5all" id="siolaLegal_5all"> Level 5 <a href="#"
+                          id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
                               checked autocomplete="off" class="set_legal" name="siolaLegal_5a1" id="siolaLegal_5a1">
-                            L5.1</label>
+                            L5.1 <a href="#" id="zoomToSiolaLegal_5a1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -371,15 +381,15 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="virtual" name="siolaVirtual_1" id="siolaVirtual_1"> Apperground
-                    space</label>
+                    space <a href="#" id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="virtual" name="siolaVirtual_2" id="siolaVirtual_2"> Underground
-                    space</label>
+                    space <a href="#" id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="virtual" name="siolaVirtual_3" id="siolaVirtual_3"> Building
-                    boundary line</label>
+                    boundary line <a href="#" id="zoomToSiolaLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
 
                 </div>
               </div>

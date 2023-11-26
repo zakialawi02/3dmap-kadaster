@@ -497,118 +497,179 @@ $("#siolaVirtual_2").on('click', function () {
 
 $("#siolaLegal_1a1").on('click', function () {
   siolaLegalL1a1.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a1, 0.3);
 });
 $("#siolaLegal_1a2").on('click', function () {
   siolaLegalL1a2.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a2, 0.3);
 });
 $("#siolaLegal_1a3").on('click', function () {
   siolaLegalL1a3.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a3, 0.3);
 });
 $("#siolaLegal_1a4").on('click', function () {
   siolaLegalL1a4.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a4, 0.3);
 });
 $("#siolaLegal_1a5").on('click', function () {
   siolaLegalL1a5.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a5, 0.3);
 });
 $("#siolaLegal_1a6").on('click', function () {
   siolaLegalL1a6.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a6, 0.3);
 });
 $("#siolaLegal_1a7").on('click', function () {
   siolaLegalL1a7.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a7, 0.3);
 });
 $("#siolaLegal_1a8").on('click', function () {
   siolaLegalL1a8.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a8, 0.3);
 });
 $("#siolaLegal_1a9").on('click', function () {
   siolaLegalL1a9.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a9, 0.3);
 });
 $("#siolaLegal_1a10").on('click', function () {
   siolaLegalL1a10.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL1a10, 0.3);
 });
 
 $("#siolaLegal_2a1").on('click', function () {
   siolaLegalL2a1.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a1, 0.3);
 });
 $("#siolaLegal_2a2").on('click', function () {
   siolaLegalL2a2.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a2, 0.3);
 });
 $("#siolaLegal_2a3").on('click', function () {
   siolaLegalL2a3.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a3, 0.3);
 });
 $("#siolaLegal_2a4").on('click', function () {
   siolaLegalL2a4.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a4, 0.3);
 });
 $("#siolaLegal_2a5").on('click', function () {
   siolaLegalL2a5.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a5, 0.3);
 });
 $("#siolaLegal_2a6").on('click', function () {
   siolaLegalL2a6.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a6, 0.3);
 });
 $("#siolaLegal_2a7").on('click', function () {
   siolaLegalL2a7.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL2a7, 0.3);
 });
 
 $("#siolaLegal_3a1").on('click', function () {
   siolaLegalL3a1.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a1, 0.3);
 });
 $("#siolaLegal_3a2").on('click', function () {
   siolaLegalL3a2.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a2, 0.3);
 });
 $("#siolaLegal_3a3").on('click', function () {
   siolaLegalL3a3.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a3, 0.3);
 });
 $("#siolaLegal_3a4").on('click', function () {
   siolaLegalL3a4.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a4, 0.3);
 });
 $("#siolaLegal_3a5").on('click', function () {
   siolaLegalL3a5.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a5, 0.3);
 });
 $("#siolaLegal_3a6").on('click', function () {
   siolaLegalL3a6.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a6, 0.3);
 });
 $("#siolaLegal_3a7").on('click', function () {
   siolaLegalL3a7.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL3a7, 0.3);
 });
 
 $("#siolaLegal_4a1").on('click', function () {
   siolaLegalL4a1.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL4a1, 0.3);
 });
 $("#siolaLegal_4a2").on('click', function () {
   siolaLegalL4a2.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL4a2, 0.3);
 });
 $("#siolaLegal_4a3").on('click', function () {
   siolaLegalL4a3.show = $(this).prop("checked");
-  makeOtherTransparentSiola(siolaLegalL4a3, 0.3);
 });
 
 $("#siolaLegal_5a1").on('click', function () {
   siolaLegalL5a1.show = $(this).prop("checked");
+});
+
+$("#zoomToSiolaLegal_1a1").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a1, 0.3);
+});
+$("#zoomToSiolaLegal_1a2").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a2, 0.3);
+});
+$("#zoomToSiolaLegal_1a3").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a3, 0.3);
+});
+$("#zoomToSiolaLegal_1a4").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a4, 0.3);
+});
+$("#zoomToSiolaLegal_1a5").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a5, 0.3);
+});
+$("#zoomToSiolaLegal_1a6").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a6, 0.3);
+});
+$("#zoomToSiolaLegal_1a7").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a7, 0.3);
+});
+$("#zoomToSiolaLegal_1a8").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a8, 0.3);
+});
+$("#zoomToSiolaLegal_1a9").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a9, 0.3);
+});
+$("#zoomToSiolaLegal_1a10").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL1a10, 0.3);
+});
+
+$("#zoomToSiolaLegal_2a1").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a1, 0.3);
+});
+$("#zoomToSiolaLegal_2a2").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a2, 0.3);
+});
+$("#zoomToSiolaLegal_2a3").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a3, 0.3);
+});
+$("#zoomToSiolaLegal_2a4").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a4, 0.3);
+});
+$("#zoomToSiolaLegal_2a5").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a5, 0.3);
+});
+$("#zoomToSiolaLegal_2a6").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a6, 0.3);
+});
+$("#zoomToSiolaLegal_2a7").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL2a7, 0.3);
+});
+
+$("#zoomToSiolaLegal_3a1").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a1, 0.3);
+});
+$("#zoomToSiolaLegal_3a2").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a2, 0.3);
+});
+$("#zoomToSiolaLegal_3a3").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a3, 0.3);
+});
+$("#zoomToSiolaLegal_3a4").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a4, 0.3);
+});
+$("#zoomToSiolaLegal_3a5").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a5, 0.3);
+});
+$("#zoomToSiolaLegal_3a6").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a6, 0.3);
+});
+$("#zoomToSiolaLegal_3a7").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL3a7, 0.3);
+});
+
+$("#zoomToSiolaLegal_4a1").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL4a1, 0.3);
+});
+$("#zoomToSiolaLegal_4a2").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL4a2, 0.3);
+});
+$("#zoomToSiolaLegal_4a3").on('click', function () {
+  makeOtherTransparentSiola(siolaLegalL4a3, 0.3);
+});
+
+$("#zoomToSiolaLegal_5a1").on('click', function () {
   makeOtherTransparentSiola(siolaLegalL5a1, 0.3);
 });
 
