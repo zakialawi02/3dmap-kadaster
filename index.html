@@ -380,15 +380,15 @@
                   <p class="mt-2 mb-1">Restriction Space</p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
-                      autocomplete="off" class="virtual" name="siolaVirtual_1" id="siolaVirtual_1"> Upperground
+                      autocomplete="off" class="virtual" name="siolaLegal_BT" id="siolaLegal_BT"> Upperground
                     space <a href="#" id="zoomToSiolaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
-                      autocomplete="off" class="virtual" name="siolaVirtual_2" id="siolaVirtual_2"> Underground
+                      autocomplete="off" class="virtual" name="siolaLegal_BB" id="siolaLegal_BB"> Underground
                     space <a href="#" id="zoomToSiolaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
-                      autocomplete="off" class="virtual" name="siolaVirtual_3" id="siolaVirtual_3"> Building
+                      autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Building
                     boundary line <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
 
                 </div>
@@ -426,19 +426,192 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="set_level" name="balaiLevel_1" id="balaiLevel_1"> Level 1</label>
+
+                  <p class="mt-2 mb-1">Underground object</p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="set_level" name="balaiLevel_0" id="balaiLevel_0"> Basement</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="set_level" name="balaiLevel_00" id="balaiLevel_00"> Pile or building
+                    foundation</label>
                 </div>
 
                 <div class="balai-legal-layer-panel p-2 m-1 d-none">
-                  -
-                  <!-- <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
-                      autocomplete="off" class="set_legal" name="balaiLegal_2" id="balaiLegal_2"> belum</label>
+                  <p class="mb-1">Rights Unit</p>
+                  <ul id="myUL">
+                    <li>
+                      <span class="caret"> </span>
+                      <label class="" style="margin-left: 0px">
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
+                          class="set_legal" name="balaiLegal_0all" id="balaiLegal_0all"> Level 0 <a href="#"
+                          id="zoomToBalaiLegal_0all"><i class="bi bi-zoom-in"></i></a></label>
+
+                      <ul class="nested">
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a1" id="balaiLegal_0a1">
+                            L0.1 <a href="#" id="zoomToBalaiLegal_0a1"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a2" id="balaiLegal_0a2">
+                            L0.2 <a href="#" id="zoomToBalaiLegal_0a2"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a3" id="balaiLegal_0a3">
+                            L0.3 <a href="#" id="zoomToBalaiLegal_0a3"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a4" id="balaiLegal_0a4">
+                            L0.4 <a href="#" id="zoomToBalaiLegal_0a4"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a5" id="balaiLegal_0a5">
+                            L0.5 <a href="#" id="zoomToBalaiLegal_0a5"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a6" id="balaiLegal_0a6">
+                            L0.6 <a href="#" id="zoomToBalaiLegal_0a6"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a7" id="balaiLegal_0a7">
+                            L0.7 <a href="#" id="zoomToBalaiLegal_0a7"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a8" id="balaiLegal_0a8">
+                            L0.8 <a href="#" id="zoomToBalaiLegal_0a8"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_0a9" id="balaiLegal_0a9">
+                            L0.9 <a href="#" id="zoomToBalaiLegal_0a9"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <ul id="myUL">
+                    <li>
+                      <span class="caret caret-down"> </span>
+                      <label class="" style="margin-left: 0px">
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off"
+                          class="set_legal" name="balaiLegal_1all" id="balaiLegal_1all"> Level 1 <a href="#"
+                          id="zoomToBalaiLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
+
+                      <ul class="nested active">
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a1" id="balaiLegal_1a1">
+                            L1.1 <a href="#" id="zoomToBalaiLegal_1a1"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a2" id="balaiLegal_1a2">
+                            L1.2 <a href="#" id="zoomToBalaiLegal_1a2"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a3" id="balaiLegal_1a3">
+                            L1.3 <a href="#" id="zoomToBalaiLegal_1a3"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a4" id="balaiLegal_1a4">
+                            L1.4 <a href="#" id="zoomToBalaiLegal_1a4"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a5" id="balaiLegal_1a5">
+                            L1.5 <a href="#" id="zoomToBalaiLegal_1a5"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a6" id="balaiLegal_1a6">
+                            L1.6 <a href="#" id="zoomToBalaiLegal_1a6"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a7" id="balaiLegal_1a7">
+                            L1.7 <a href="#" id="zoomToBalaiLegal_1a7"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a8" id="balaiLegal_1a8">
+                            L1.8 <a href="#" id="zoomToBalaiLegal_1a8"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a9" id="balaiLegal_1a9">
+                            L1.9 <a href="#" id="zoomToBalaiLegal_1a9"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a10" id="balaiLegal_1a10">
+                            L1.10 <a href="#" id="zoomToBalaiLegal_1a10"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a11" id="balaiLegal_1a11">
+                            L1.11 <a href="#" id="zoomToBalaiLegal_1a11"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a12" id="balaiLegal_1a12">
+                            L1.12 <a href="#" id="zoomToBalaiLegal_1a12"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
+                              checked autocomplete="off" class="set_legal" name="balaiLegal_1a13" id="balaiLegal_1a13">
+                            L1.13 <a href="#" id="zoomToBalaiLegal_1a13"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <p class="mt-2 mb-1">Restriction Space</p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;"
-                      autocomplete="off" class="set_legal" name="balaiLegal_1" id="balaiLegal_1"> belum</label> -->
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="virtual" name="balaiLegal_BT" id="balaiLegal_BT"> Upperground
+                    space <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="virtual" name="balaiLegal_BB" id="balaiLegal_BB"> Underground
+                    space <a href="#" id="zoomToBalaiLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
+                      autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Building
+                    boundary line <a href="#" id="zoomToBalaiLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
+
+
                 </div>
               </div>
             </div>
@@ -486,9 +659,12 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
                       autocomplete="off" class="set_level" name="rusunawaLevel_1" id="rusunawaLevel_1"> Level 1</label>
+
+                  <p class="mt-2 mb-1">Underground object</p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked
-                      autocomplete="off" class="set_level" name="rusunawaLevel_0" id="rusunawaLevel_0"> Level 0</label>
+                      autocomplete="off" class="set_level" name="rusunawaLevel_0" id="rusunawaLevel_0"> Pile or building
+                    foundation</label>
                 </div>
 
                 <div class="rusunawa-legal-layer-panel p-2 m-1 d-none">
@@ -806,6 +982,16 @@
       </div>
     </div>
 
+    <div class="property-panel card">
+      <div class="card-body p-2">
+        <div class="property-content" id="property-content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, nesciunt.</p>
+          <p>Lorem ipsum dolor sit amet consectetur.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="clip-panel card">
       <div class="card-body p-2">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
@@ -846,7 +1032,8 @@
 
   <script src="assets/js/script.js"></script>
   <!-- <script type="module" src="assets/js/cesiumScript_.js"></script> -->
-  <script type="module" src="assets/js/cesiumScript.js"></script>
+  <script type="module" src="assets/js/cesiumScript_2.js"></script>
+  <!-- <script type="module" src="assets/js/cesiumScript.js"></script> -->
 </body>
 
 </html>
