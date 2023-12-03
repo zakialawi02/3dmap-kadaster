@@ -129,229 +129,229 @@ function resetTransparencyForLayers(layers) {
 const siolaBuildingL0 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
     show: true,
-    featureIdLabel: "SBL0",
+    featureIdLabel: "siolaBuildingL0",
   })
 );
 const siolaBuildingL1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
     show: true,
-    featureIdLabel: "SBL1",
+    featureIdLabel: "siolaBuildingL1",
   })
 );
 const siolaBuildingL2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
     show: true,
-    featureIdLabel: "SBL2",
+    featureIdLabel: "siolaBuildingL2",
   })
 );
 const siolaBuildingL3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
     show: true,
-    featureIdLabel: "SBL3",
+    featureIdLabel: "siolaBuildingL3",
   })
 );
 const siolaBuildingL4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
     show: true,
-    featureIdLabel: "SBL4",
+    featureIdLabel: "siolaBuildingL4",
   })
 );
 const siolaBuildingL5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
     show: true,
-    featureIdLabel: "SBL5",
+    featureIdLabel: "siolaBuildingL5",
   }, )
 );
 
 const siolaLegalL1a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368037, {
-    show: false,
-    featureIdLabel: "SL1a1",
+    show: true,
+    featureIdLabel: "siolaLegalL1a1",
   }, )
 );
 const siolaLegalL1a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368039, {
-    show: false,
-    featureIdLabel: "SL1a2",
+    show: true,
+    featureIdLabel: "siolaLegalL1a2",
   }, )
 );
 const siolaLegalL1a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368041, {
-    show: false,
-    featureIdLabel: "SL1a3",
+    show: true,
+    featureIdLabel: "siolaLegalL1a3",
   }, )
 );
 const siolaLegalL1a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368043, {
-    show: false,
-    featureIdLabel: "SL1a4",
+    show: true,
+    featureIdLabel: "siolaLegalL1a4",
   }, )
 );
 const siolaLegalL1a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368044, {
-    show: false,
-    featureIdLabel: "SL1a5",
+    show: true,
+    featureIdLabel: "siolaLegalL1a5",
   }, )
 );
 const siolaLegalL1a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368045, {
-    show: false,
-    featureIdLabel: "SL1a6",
+    show: true,
+    featureIdLabel: "siolaLegalL1a6",
   }, )
 );
 const siolaLegalL1a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368046, {
-    show: false,
-    featureIdLabel: "SL1a7",
+    show: true,
+    featureIdLabel: "siolaLegalL1a7",
   }, )
 );
 const siolaLegalL1a8 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346662, {
-    show: false,
-    featureIdLabel: "SL1a8",
+    show: true,
+    featureIdLabel: "siolaLegalL1a8",
   }, )
 );
 const siolaLegalL1a9 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346663, {
-    show: false,
-    featureIdLabel: "SL1a9",
+    show: true,
+    featureIdLabel: "siolaLegalL1a9",
   }, )
 );
 const siolaLegalL1a10 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346665, {
-    show: false,
-    featureIdLabel: "SL1a10",
+    show: true,
+    featureIdLabel: "siolaLegalL1a10",
   }, )
 );
 
 const siolaLegalL2a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346725, {
-    show: false,
-    featureIdLabel: "SL2a1",
+    show: true,
+    featureIdLabel: "siolaLegalL2a1",
   }, )
 );
 const siolaLegalL2a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368028, {
-    show: false,
-    featureIdLabel: "SL2a2",
+    show: true,
+    featureIdLabel: "siolaLegalL2a2",
   }, )
 );
 const siolaLegalL2a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368029, {
-    show: false,
-    featureIdLabel: "SL2a3",
+    show: true,
+    featureIdLabel: "siolaLegalL2a3",
   }, )
 );
 const siolaLegalL2a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346728, {
-    show: false,
-    featureIdLabel: "SL2a4",
+    show: true,
+    featureIdLabel: "siolaLegalL2a4",
   }, )
 );
 const siolaLegalL2a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346729, {
-    show: false,
-    featureIdLabel: "SL2a5",
+    show: true,
+    featureIdLabel: "siolaLegalL2a5",
   }, )
 );
 const siolaLegalL2a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346730, {
-    show: false,
-    featureIdLabel: "SL2a6",
+    show: true,
+    featureIdLabel: "siolaLegalL2a6",
   }, )
 );
 const siolaLegalL2a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346732, {
-    show: false,
-    featureIdLabel: "SL2a7",
+    show: true,
+    featureIdLabel: "siolaLegalL2a7",
   }, )
 );
 
 const siolaLegalL3a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347206, {
-    show: false,
-    featureIdLabel: "SL3a1",
+    show: true,
+    featureIdLabel: "siolaLegalL3a1",
   }, )
 );
 const siolaLegalL3a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347209, {
-    show: false,
-    featureIdLabel: "SL3a2",
+    show: true,
+    featureIdLabel: "siolaLegalL3a2",
   }, )
 );
 const siolaLegalL3a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347210, {
-    show: false,
-    featureIdLabel: "SL3a3",
+    show: true,
+    featureIdLabel: "siolaLegalL3a3",
   }, )
 );
 const siolaLegalL3a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347211, {
-    show: false,
-    featureIdLabel: "SL3a4",
+    show: true,
+    featureIdLabel: "siolaLegalL3a4",
   }, )
 );
 const siolaLegalL3a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347212, {
-    show: false,
-    featureIdLabel: "SL3a5",
+    show: true,
+    featureIdLabel: "siolaLegalL3a5",
   }, )
 );
 const siolaLegalL3a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347214, {
-    show: false,
-    featureIdLabel: "SL3a6",
+    show: true,
+    featureIdLabel: "siolaLegalL3a6",
   }, )
 );
 const siolaLegalL3a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347217, {
-    show: false,
-    featureIdLabel: "SL3a7",
+    show: true,
+    featureIdLabel: "siolaLegalL3a7",
   }, )
 );
 
 const siolaLegalL4a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347218, {
-    show: false,
-    featureIdLabel: "SL4a1",
+    show: true,
+    featureIdLabel: "siolaLegalL4a1",
   }, )
 );
 const siolaLegalL4a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347219, {
-    show: false,
-    featureIdLabel: "SL4a2",
+    show: true,
+    featureIdLabel: "siolaLegalL4a2",
   }, )
 );
 const siolaLegalL4a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347220, {
-    show: false,
-    featureIdLabel: "SL4a3",
+    show: true,
+    featureIdLabel: "siolaLegalL4a3",
   }, )
 );
 
 const siolaLegalL5a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2347221, {
-    show: false,
-    featureIdLabel: "SL5a1",
+    show: true,
+    featureIdLabel: "siolaLegalL5a1",
   }, )
 );
 
 const siolaLegalGSB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2368032, {
-    show: false,
-    featureIdLabel: "SBT",
+    show: true,
+    featureIdLabel: "siolaLegalGSB",
   }, )
 );
 const siolaLegalBT = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346648, {
-    show: false,
-    featureIdLabel: "SBT",
+    show: true,
+    featureIdLabel: "siolaLegalBT",
   }, )
 );
 const siolaLegalBB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2346744, {
-    show: false,
-    featureIdLabel: "SBB",
+    show: true,
+    featureIdLabel: "siolaLegalBB",
   }, )
 );
 siolaLegalGSB.style = createTransparentStyle(0.3);
@@ -386,153 +386,153 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
 
 const balaiLegalL1a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376902, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a1",
   }, )
 );
 const balaiLegalL1a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376904, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a2",
   }, )
 );
 const balaiLegalL1a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376906, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a3",
   }, )
 );
 const balaiLegalL1a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376908, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a4",
   }, )
 );
 const balaiLegalL1a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376910, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a5",
   }, )
 );
 const balaiLegalL1a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376912, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a6",
   }, )
 );
 const balaiLegalL1a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376914, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a7",
   }, )
 );
 const balaiLegalL1a8 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376916, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a8",
   }, )
 );
 const balaiLegalL1a9 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376918, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a9",
   }, )
 );
 const balaiLegalL1a10 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376920, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a10",
   }, )
 );
 const balaiLegalL1a11 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376922, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a11",
   }, )
 );
 const balaiLegalL1a12 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376924, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a12",
   }, )
 );
 const balaiLegalL1a13 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376926, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL1a13",
   }, )
 );
 
 const balaiLegalL0a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376952, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a1",
   }, )
 );
 const balaiLegalL0a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376950, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a2",
   }, )
 );
 const balaiLegalL0a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376947, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a3",
   }, )
 );
 const balaiLegalL0a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376945, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a4",
   }, )
 );
 const balaiLegalL0a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376943, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a5",
   }, )
 );
 const balaiLegalL0a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376941, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a6",
   }, )
 );
 const balaiLegalL0a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376940, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a7",
   }, )
 );
 const balaiLegalL0a8 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376938, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a8",
   }, )
 );
 const balaiLegalL0a9 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376936, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalL0a9",
   }, )
 );
 
 const balaiLegalGSB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376955, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalGSB",
   }, )
 );
 const balaiLegalBT = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376953, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalBT",
   }, )
 );
 const balaiLegalBB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376954, {
-    show: false,
+    show: true,
     featureIdLabel: "balaiLegalBB",
   }, )
 );
@@ -586,210 +586,210 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 
 const rusunawaLegalL1a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376608, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a1",
   }, )
 );
 const rusunawaLegalL1a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376609, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a2",
   }, )
 );
 const rusunawaLegalL1a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376610, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a3",
   }, )
 );
 const rusunawaLegalL1a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376612, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a4",
   }, )
 );
 const rusunawaLegalL1a5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376613, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a5",
   }, )
 );
 const rusunawaLegalL1a6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376615, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a6",
   }, )
 );
 const rusunawaLegalL1a7 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376616, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a7",
   }, )
 );
 const rusunawaLegalL1a8 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376617, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a8",
   }, )
 );
 const rusunawaLegalL1a9 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376618, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a9",
   }, )
 );
 const rusunawaLegalL1a10 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376619, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a10",
   }, )
 );
 const rusunawaLegalL1a11 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376621, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a11",
   }, )
 );
 const rusunawaLegalL1a12 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376622, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a12",
   }, )
 );
 const rusunawaLegalL1a13 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376623, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a13",
   }, )
 );
 const rusunawaLegalL1a14 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376625, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a14",
   }, )
 );
 const rusunawaLegalL1a15 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376630, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL1a15",
   }, )
 );
 
 const rusunawaLegalL2a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376665, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL2a1",
   }, )
 );
 const rusunawaLegalL2a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376667, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL2a2",
   }, )
 );
 const rusunawaLegalL2a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376669, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL2a3",
   }, )
 );
 const rusunawaLegalL2a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376670, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL2a4",
   }, )
 );
 
 const rusunawaLegalL3a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376671, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL3a1",
   }, )
 );
 const rusunawaLegalL3a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376672, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL3a2",
   }, )
 );
 const rusunawaLegalL3a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376673, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL3a3",
   }, )
 );
 const rusunawaLegalL3a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376734, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL3a4",
   }, )
 );
 
 const rusunawaLegalL4a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376683, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL4a1",
   }, )
 );
 const rusunawaLegalL4a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376685, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL4a2",
   }, )
 );
 const rusunawaLegalL4a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376686, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL4a3",
   }, )
 );
 const rusunawaLegalL4a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376687, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL4a4",
   }, )
 );
 
 const rusunawaLegalL5a1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376688, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL5a1",
   }, )
 );
 const rusunawaLegalL5a2 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376747, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL5a2",
   }, )
 );
 const rusunawaLegalL5a3 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376689, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL5a3",
   }, )
 );
 const rusunawaLegalL5a4 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376690, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalL5a4",
   }, )
 );
 
 const rusunawaLegalGSB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376607, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalGSB",
   }, )
 );
 const rusunawaLegalBT = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376606, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalBT",
   }, )
 );
 const rusunawaLegalBB = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376605, {
-    show: false,
+    show: true,
     featureIdLabel: "rusunawaLegalBB",
   }, )
 );
