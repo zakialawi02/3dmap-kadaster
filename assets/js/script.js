@@ -33,6 +33,18 @@ $(document).ready(function () {
   });
 });
 
+// Responsive
+$("#hamb").click(function (e) {
+  $(".nav-menu-group").toggleClass("show");
+});
+
+$(".nav-menu-group").click(function (e) {
+  $(".nav-menu-group").removeClass("show");
+});
+$(".nav-menu-group .dropdown-toggle").click(function (e) {
+  e.stopPropagation();
+});
+
 // Switch Building/Legal segment
 $(document).ready(function () {
   $(".building-segment").click(function (e) {
@@ -68,6 +80,11 @@ $(document).ready(function () {
     $("#sliderY").val(90);
     $("#sliderZ").val(90);
   });
+});
+
+$("#minimap").click(function (e) {
+  $(".minimap-panel").toggleClass('minimap-panel-show');
+  $("#minimap").toggleClass('selected');
 });
 
 // node tree view

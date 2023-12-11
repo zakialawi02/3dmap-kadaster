@@ -1,8 +1,8 @@
 // inisiasi cesium token
-Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 // Cesium.Ion.defaultAccessToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+Cesium.Ion.defaultAccessToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
@@ -35,7 +35,16 @@ viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarSca
   1.0
 );
 
-firstCamera();
+viewer.camera.flyTo({
+  destination: Cesium.Cartesian3.fromDegrees(
+    112.73677426629814, -7.259593062440535, 20000
+  ),
+  orientation: {
+    heading: Cesium.Math.toRadians(0.0),
+    pitch: Cesium.Math.toRadians(-90.0),
+  },
+});
+
 // Set first camera the given longitude, latitude, and height.
 function firstCamera() {
   viewer.camera.flyTo({
@@ -125,900 +134,6 @@ function resetTransparencyForLayers(layers) {
 }
 
 
-// Get Siola   #################################################################################
-const siolaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
-    show: true,
-    featureIdLabel: "siolaBuildingL0",
-  })
-);
-const siolaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
-    show: true,
-    featureIdLabel: "siolaBuildingL1",
-  })
-);
-const siolaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
-    show: true,
-    featureIdLabel: "siolaBuildingL2",
-  })
-);
-const siolaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
-    show: true,
-    featureIdLabel: "siolaBuildingL3",
-  })
-);
-const siolaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
-    show: true,
-    featureIdLabel: "siolaBuildingL4",
-  })
-);
-const siolaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
-    show: true,
-    featureIdLabel: "siolaBuildingL5",
-  }, )
-);
-
-const siolaLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2367999, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a1",
-  }, )
-);
-const siolaLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368005, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a2",
-  }, )
-);
-const siolaLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368006, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a3",
-  }, )
-);
-const siolaLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368007, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a4",
-  }, )
-);
-const siolaLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368008, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a5",
-  }, )
-);
-const siolaLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368009, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a6",
-  }, )
-);
-const siolaLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368011, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a7",
-  }, )
-);
-const siolaLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368012, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a8",
-  }, )
-);
-const siolaLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368013, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a9",
-  }, )
-);
-const siolaLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368014, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a10",
-  }, )
-);
-
-const siolaLegalL2a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346717, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a1",
-  }, )
-);
-const siolaLegalL2a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368023, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a2",
-  }, )
-);
-const siolaLegalL2a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368025, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a3",
-  }, )
-);
-const siolaLegalL2a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346721, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a4",
-  }, )
-);
-const siolaLegalL2a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346722, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a5",
-  }, )
-);
-const siolaLegalL2a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346723, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a6",
-  }, )
-);
-const siolaLegalL2a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346724, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a7",
-  }, )
-);
-
-const siolaLegalL3a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347178, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a1",
-  }, )
-);
-const siolaLegalL3a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347184, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a2",
-  }, )
-);
-const siolaLegalL3a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347185, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a3",
-  }, )
-);
-const siolaLegalL3a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347186, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a4",
-  }, )
-);
-const siolaLegalL3a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347187, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a5",
-  }, )
-);
-const siolaLegalL3a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347188, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a6",
-  }, )
-);
-const siolaLegalL3a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347190, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a7",
-  }, )
-);
-
-const siolaLegalL4a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347193, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a1",
-  }, )
-);
-const siolaLegalL4a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347195, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a2",
-  }, )
-);
-const siolaLegalL4a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347197, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a3",
-  }, )
-);
-
-const siolaLegalL5a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347200, {
-    show: true,
-    featureIdLabel: "siolaLegalL5a1",
-  }, )
-);
-
-const siolaLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2367996, {
-    show: true,
-    featureIdLabel: "siolaLegalGSB",
-  }, )
-);
-const siolaLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346402, {
-    show: true,
-    featureIdLabel: "siolaLegalBT",
-  }, )
-);
-const siolaLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346745, {
-    show: true,
-    featureIdLabel: "siolaLegalBB",
-  }, )
-);
-siolaLegalGSB.style = createTransparentStyle(0.4);
-siolaLegalBT.style = createTransparentStyle(0.2);
-siolaLegalBB.style = createTransparentStyle(0.2);
-
-// Get Balai Pemuda   ################################################################################
-const balaiBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376891, {
-    show: true,
-    featureIdLabel: "balaiBuildingL0",
-  })
-);
-const balaiBuildingBasement = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376892, {
-    show: true,
-    featureIdLabel: "balaiBuildingBasement",
-  })
-);
-const balaiBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376888, {
-    show: true,
-    featureIdLabel: "balaiBuildingL1",
-  })
-);
-const balaiBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376890, {
-    show: true,
-    featureIdLabel: "balaiBuildingL2",
-  })
-);
-
-const balaiLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376901, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a1",
-  }, )
-);
-const balaiLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376903, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a2",
-  }, )
-);
-const balaiLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376905, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a3",
-  }, )
-);
-const balaiLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376907, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a4",
-  }, )
-);
-const balaiLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376909, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a5",
-  }, )
-);
-const balaiLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376911, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a6",
-  }, )
-);
-const balaiLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376913, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a7",
-  }, )
-);
-const balaiLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376915, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a8",
-  }, )
-);
-const balaiLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376917, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a9",
-  }, )
-);
-const balaiLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376919, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a10",
-  }, )
-);
-const balaiLegalL1a11 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376921, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a11",
-  }, )
-);
-const balaiLegalL1a12 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376923, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a12",
-  }, )
-);
-const balaiLegalL1a13 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376925, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a13",
-  }, )
-);
-
-const balaiLegalL0a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376951, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a1",
-  }, )
-);
-const balaiLegalL0a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376949, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a2",
-  }, )
-);
-const balaiLegalL0a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376946, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a3",
-  }, )
-);
-const balaiLegalL0a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376948, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a4",
-  }, )
-);
-const balaiLegalL0a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376944, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a5",
-  }, )
-);
-const balaiLegalL0a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376942, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a6",
-  }, )
-);
-const balaiLegalL0a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376939, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a7",
-  }, )
-);
-const balaiLegalL0a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376937, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a8",
-  }, )
-);
-const balaiLegalL0a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376935, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a9",
-  }, )
-);
-
-const balaiLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376895, {
-    show: true,
-    featureIdLabel: "balaiLegalGSB",
-  }, )
-);
-const balaiLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376897, {
-    show: true,
-    featureIdLabel: "balaiLegalBT",
-  }, )
-);
-const balaiLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376899, {
-    show: true,
-    featureIdLabel: "balaiLegalBB",
-  }, )
-);
-balaiLegalGSB.style = createTransparentStyle(0.4);
-balaiLegalBT.style = createTransparentStyle(0.2);
-balaiLegalBB.style = createTransparentStyle(0.2);
-
-// Get Rusunawa   ####################################################################################
-const rusunawaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376563, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL0",
-  })
-);
-const rusunawaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376564, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL1",
-  })
-);
-const rusunawaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376565, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL2",
-  })
-);
-const rusunawaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376566, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL3",
-  })
-);
-const rusunawaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376567, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL4",
-  })
-);
-const rusunawaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL5",
-  }, )
-);
-const rusunawaBuildingL6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
-    show: true,
-    featureIdLabel: "rusunawaBuildingL6",
-  }, )
-);
-
-const rusunawaLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376581, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a1",
-  }, )
-);
-const rusunawaLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376582, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a2",
-  }, )
-);
-const rusunawaLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376583, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a3",
-  }, )
-);
-const rusunawaLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376584, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a4",
-  }, )
-);
-const rusunawaLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376585, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a5",
-  }, )
-);
-const rusunawaLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376586, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a6",
-  }, )
-);
-const rusunawaLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376587, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a7",
-  }, )
-);
-const rusunawaLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376588, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a8",
-  }, )
-);
-const rusunawaLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376589, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a9",
-  }, )
-);
-const rusunawaLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376590, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a10",
-  }, )
-);
-const rusunawaLegalL1a11 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376591, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a11",
-  }, )
-);
-const rusunawaLegalL1a12 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376592, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a12",
-  }, )
-);
-const rusunawaLegalL1a13 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376593, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a13",
-  }, )
-);
-const rusunawaLegalL1a14 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376595, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a14",
-  }, )
-);
-const rusunawaLegalL1a15 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376629, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a15",
-  }, )
-);
-
-const rusunawaLegalL2a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376657, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a1",
-  }, )
-);
-const rusunawaLegalL2a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376658, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a2",
-  }, )
-);
-const rusunawaLegalL2a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376659, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a3",
-  }, )
-);
-const rusunawaLegalL2a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376661, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a4",
-  }, )
-);
-
-const rusunawaLegalL3a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376663, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a1",
-  }, )
-);
-const rusunawaLegalL3a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376664, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a2",
-  }, )
-);
-const rusunawaLegalL3a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376666, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a3",
-  }, )
-);
-const rusunawaLegalL3a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376733, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a4",
-  }, )
-);
-
-const rusunawaLegalL4a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376675, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a1",
-  }, )
-);
-const rusunawaLegalL4a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376677, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a2",
-  }, )
-);
-const rusunawaLegalL4a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376678, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a3",
-  }, )
-);
-const rusunawaLegalL4a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376679, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a4",
-  }, )
-);
-
-const rusunawaLegalL5a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376680, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a1",
-  }, )
-);
-const rusunawaLegalL5a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376681, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a2",
-  }, )
-);
-const rusunawaLegalL5a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376682, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a3",
-  }, )
-);
-const rusunawaLegalL5a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376684, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a4",
-  }, )
-);
-
-const rusunawaLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376571, {
-    show: true,
-    featureIdLabel: "rusunawaLegalGSB",
-  }, )
-);
-const rusunawaLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376580, {
-    show: true,
-    featureIdLabel: "rusunawaLegalBT",
-  }, )
-);
-const rusunawaLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376579, {
-    show: true,
-    featureIdLabel: "rusunawaLegalBB",
-  }, )
-);
-rusunawaLegalGSB.style = createTransparentStyle(0.4);
-rusunawaLegalBT.style = createTransparentStyle(0.2);
-rusunawaLegalBB.style = createTransparentStyle(0.2);
-
-
-const siolaLegalLayers = [
-  siolaLegalL1a1, siolaLegalL1a2, siolaLegalL1a3, siolaLegalL1a4, siolaLegalL1a5, siolaLegalL1a6, siolaLegalL1a7, siolaLegalL1a8, siolaLegalL1a9, siolaLegalL1a10,
-  siolaLegalL2a1, siolaLegalL2a2, siolaLegalL2a3, siolaLegalL2a4, siolaLegalL2a5, siolaLegalL2a6, siolaLegalL2a7,
-  siolaLegalL3a1, siolaLegalL3a2, siolaLegalL3a3, siolaLegalL3a4, siolaLegalL3a5, siolaLegalL3a6, siolaLegalL3a7,
-  siolaLegalL4a1, siolaLegalL4a2, siolaLegalL4a3,
-  siolaLegalL5a1
-];
-
-const balaiLegalLayers = [
-  balaiLegalL0a1, balaiLegalL0a2, balaiLegalL0a3, balaiLegalL0a4, balaiLegalL0a5, balaiLegalL0a6, balaiLegalL0a7, balaiLegalL0a8, balaiLegalL0a9,
-  balaiLegalL1a1, balaiLegalL1a2, balaiLegalL1a3, balaiLegalL1a4, balaiLegalL1a5,
-];
-
-const rusunawaLegalLayers = [
-  rusunawaLegalL1a1, rusunawaLegalL1a2, rusunawaLegalL1a3, rusunawaLegalL1a4, rusunawaLegalL1a5, rusunawaLegalL1a6, rusunawaLegalL1a7, rusunawaLegalL1a8, rusunawaLegalL1a9, rusunawaLegalL1a10, , rusunawaLegalL1a11, rusunawaLegalL1a12, rusunawaLegalL1a13, rusunawaLegalL1a14, rusunawaLegalL1a15,
-  rusunawaLegalL2a1, rusunawaLegalL2a2, rusunawaLegalL2a3, rusunawaLegalL2a4,
-  rusunawaLegalL3a1, rusunawaLegalL3a2, rusunawaLegalL3a3, rusunawaLegalL3a4,
-  rusunawaLegalL4a1, rusunawaLegalL4a2, rusunawaLegalL4a3, rusunawaLegalL4a4,
-  rusunawaLegalL5a1, rusunawaLegalL5a2, rusunawaLegalL5a3, rusunawaLegalL5a4
-];
-
-
-const propertiesModelData = {
-  siolaLegalGSB: {
-    id_parcel: "357807100201GSB",
-    name: "GSB",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalBT: {
-    id_parcel: "357807100201BT",
-    name: "BT",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalBB: {
-    id_parcel: "357807100201BB",
-    name: "BB",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a1: {
-    id_parcel: "3578071002010101", // number only //3578071002=kel. genteng 010101= gedung ke 01 lantai 01 bagian 01
-    name: "L 1.1 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a2: {
-    id_parcel: "3578071002010102",
-    name: "L 1.2 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a3: {
-    id_parcel: "3578071002010103",
-    name: "L 1.3 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a4: {
-    id_parcel: "3578071002010104",
-    name: "L 1.4 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a5: {
-    id_parcel: "3578071002010105",
-    name: "L 1.5 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a6: {
-    id_parcel: "3578071002010106",
-    name: "L 1.6 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a7: {
-    id_parcel: "3578071002010107",
-    name: "L 1.7 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a8: {
-    id_parcel: "3578071002010108",
-    name: "L 1.8 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a9: {
-    id_parcel: "3578071002010109",
-    name: "L 1.9 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL1a10: {
-    id_parcel: "35780710020101010",
-    name: "L 1.10 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a1: {
-    id_parcel: "3578071002010201",
-    name: "L 2.1 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a2: {
-    id_parcel: "3578071002010202",
-    name: "L 2.2 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a3: {
-    id_parcel: "3578071002010203",
-    name: "L 2.3 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a4: {
-    id_parcel: "3578071002010204",
-    name: "L 2.4 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a5: {
-    id_parcel: "3578071002010205",
-    name: "L 2.5 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a6: {
-    id_parcel: "3578071002010206",
-    name: "L 2.6 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL2a7: {
-    id_parcel: "3578071002010207",
-    name: "L 2.7 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a1: {
-    id_parcel: "3578071002010301",
-    name: "L 3.1 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a2: {
-    id_parcel: "3578071002010302",
-    name: "L 3.2 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a3: {
-    id_parcel: "3578071002010303",
-    name: "L 3.3 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a4: {
-    id_parcel: "3578071002010304",
-    name: "L 3.4 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a5: {
-    id_parcel: "3578071002010305",
-    name: "L 3.5 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a6: {
-    id_parcel: "3578071002010306",
-    name: "L 3.6 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL3a7: {
-    id_parcel: "3578071002010307",
-    name: "L 3.7 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL4a1: {
-    id_parcel: "3578071002010401",
-    name: "L 4.1 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL4a2: {
-    id_parcel: "3578071002010402",
-    name: "L 4.2 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL4a3: {
-    id_parcel: "3578071002010403",
-    name: "L 4.3 siola",
-    volume: 11,
-    building: "Siola",
-  },
-  siolaLegalL5a1: {
-    id_parcel: "3578071002010501",
-    name: "L 5.1 siola",
-    volume: 11,
-    building: "Siola",
-  },
-}
-
-function getPropertyModel(objectName) {
-  // Pastikan objek dengan nama tersebut ada dalam propertiesModelData
-  if (propertiesModelData[objectName]) {
-    return propertiesModelData[objectName];
-  } else {
-    console.log("Object not found");
-    return false;
-  }
-}
-
 viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     // Pick a new feature
     const pickedFeature = viewer.scene.pick(movement.position);
@@ -1035,88 +150,20 @@ viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
       const data = getPropertyModel(pickedFeature.primitive.featureIdLabel);
       console.log(data);
       if (data) {
+        console.log(data);
         const htmlContent = `<p>Id parcel: ${data.id_parcel ?? ""}</p>
-                            <p>Name: ${data.name ?? ""}</p>
-                            <p>Volume: ${data.volume ?? ""}</p>
-                            <p>Part of building: ${data.building ?? ""}</p>`;
+                          <p>Name: ${data.name ?? ""}</p>
+                          <p>Volume: ${data.volume ?? ""}</p>
+                          <p>Part of building: ${data.building ?? ""}</p>`;
         $("#property-content").html(htmlContent);
       } else {
-        $("#property-content").empty(); // Kosongkan konten jika data tidak tersedia
+        // $("#property-content").empty();
+        const htmlContent = `NO DATA`;
+        $("#property-content").html(htmlContent);
       }
     }
   },
   Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
-
-
-
-
-// Buat koleksi bidang pemotongan (clipping plane collection) SIOLA
-var clippingPlanes = new Cesium.ClippingPlaneCollection({
-  planes: [
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
-  ],
-  edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
-  edgeColor: Cesium.Color.RED
-});
-// Terapkan koleksi bidang pemotongan pada objek 3D Tileset
-updateClip2Model();
-
-function updateClip2Model() {
-  siolaBuildingL0.clippingPlanes = clippingPlanes;
-  siolaBuildingL1.clippingPlanes = clippingPlanes;
-  siolaBuildingL2.clippingPlanes = clippingPlanes;
-  siolaBuildingL3.clippingPlanes = clippingPlanes;
-  siolaBuildingL4.clippingPlanes = clippingPlanes;
-  siolaBuildingL5.clippingPlanes = clippingPlanes;
-}
-// Event listener for slider X using jQuery
-$('#sliderX').on('input', function () {
-  var xValue = parseFloat($(this).val());
-  clippingPlanes.get(0).distance = xValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(1).distance = -50; // Y-plane
-  clippingPlanes.get(2).distance = -50; // Z-plane
-  $('#sliderY').val(90);
-  $('#sliderZ').val(90);
-  updateClip2Model();
-});
-
-// Event listener for slider Y using jQuery
-$('#sliderY').on('input', function () {
-  var yValue = parseFloat($(this).val());
-  clippingPlanes.get(1).distance = yValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(0).distance = -50; // X-plane
-  clippingPlanes.get(2).distance = -50; // Z-plane
-  $('#sliderX').val(90);
-  $('#sliderZ').val(90);
-  updateClip2Model();
-});
-
-// Event listener for slider Z using jQuery
-$('#sliderZ').on('input', function () {
-  var zValue = parseFloat($(this).val());
-  clippingPlanes.get(2).distance = zValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(0).distance = -50; // X-plane
-  clippingPlanes.get(1).distance = -50; // Y-plane
-  $('#sliderX').val(90);
-  $('#sliderY').val(90);
-  updateClip2Model();
-});
-
-$("#reset-clip").click(function (e) {
-  clippingPlanes.get(0).distance = 50; // X-plane
-  clippingPlanes.get(1).distance = 50; // Y-plane
-  clippingPlanes.get(2).distance = 50; // Z-plane
-  updateClip2Model();
-  $("#sliderX").val(90);
-  $("#sliderY").val(90);
-  $("#sliderZ").val(90);
-});
 
 
 // Layering button Siola  ###########################################################################
@@ -2181,10 +1228,792 @@ $("#underground_1").on('click', function () {
   viewer.scene.globe.translucency.frontFaceAlphaByDistance.nearValue = 0.4;
 });
 
-// hide preloader after finish load data
-$(function () {
-  $(".preload").addClass("d-none");
-});
+
+// // Get Siola   #################################################################################
+// const siolaBuildingL0 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL0",
+//   })
+// );
+// const siolaBuildingL1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL1",
+//   })
+// );
+// const siolaBuildingL2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL2",
+//   })
+// );
+// const siolaBuildingL3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL3",
+//   })
+// );
+// const siolaBuildingL4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL4",
+//   })
+// );
+// const siolaBuildingL5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
+//     show: true,
+//     featureIdLabel: "siolaBuildingL5",
+//   }, )
+// );
+
+// const siolaLegalL1a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368037, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a1",
+//   }, )
+// );
+// const siolaLegalL1a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368039, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a2",
+//   }, )
+// );
+// const siolaLegalL1a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368041, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a3",
+//   }, )
+// );
+// const siolaLegalL1a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368043, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a4",
+//   }, )
+// );
+// const siolaLegalL1a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368044, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a5",
+//   }, )
+// );
+// const siolaLegalL1a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368045, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a6",
+//   }, )
+// );
+// const siolaLegalL1a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368046, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a7",
+//   }, )
+// );
+// const siolaLegalL1a8 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346662, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a8",
+//   }, )
+// );
+// const siolaLegalL1a9 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346663, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a9",
+//   }, )
+// );
+// const siolaLegalL1a10 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346665, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL1a10",
+//   }, )
+// );
+
+// const siolaLegalL2a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346725, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a1",
+//   }, )
+// );
+// const siolaLegalL2a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368028, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a2",
+//   }, )
+// );
+// const siolaLegalL2a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368029, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a3",
+//   }, )
+// );
+// const siolaLegalL2a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346728, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a4",
+//   }, )
+// );
+// const siolaLegalL2a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346729, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a5",
+//   }, )
+// );
+// const siolaLegalL2a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346730, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a6",
+//   }, )
+// );
+// const siolaLegalL2a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346732, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL2a7",
+//   }, )
+// );
+
+// const siolaLegalL3a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347206, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a1",
+//   }, )
+// );
+// const siolaLegalL3a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347209, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a2",
+//   }, )
+// );
+// const siolaLegalL3a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347210, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a3",
+//   }, )
+// );
+// const siolaLegalL3a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347211, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a4",
+//   }, )
+// );
+// const siolaLegalL3a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347212, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a5",
+//   }, )
+// );
+// const siolaLegalL3a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347214, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a6",
+//   }, )
+// );
+// const siolaLegalL3a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347217, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL3a7",
+//   }, )
+// );
+
+// const siolaLegalL4a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347218, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL4a1",
+//   }, )
+// );
+// const siolaLegalL4a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347219, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL4a2",
+//   }, )
+// );
+// const siolaLegalL4a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347220, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL4a3",
+//   }, )
+// );
+
+// const siolaLegalL5a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2347221, {
+//     show: true,
+//     featureIdLabel: "siolaLegalL5a1",
+//   }, )
+// );
+
+// const siolaLegalGSB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2368032, {
+//     show: true,
+//     featureIdLabel: "siolaLegalGSB",
+//   }, )
+// );
+// const siolaLegalBT = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346648, {
+//     show: true,
+//     featureIdLabel: "siolaLegalBT",
+//   }, )
+// );
+// const siolaLegalBB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2346744, {
+//     show: true,
+//     featureIdLabel: "siolaLegalBB",
+//   }, )
+// );
+// siolaLegalGSB.style = createTransparentStyle(0.3);
+// siolaLegalBT.style = createTransparentStyle(0.2);
+// siolaLegalBB.style = createTransparentStyle(0.2);
+
+// const siolaLegalLayers = [
+//   siolaLegalL1a1, siolaLegalL1a2, siolaLegalL1a3, siolaLegalL1a4, siolaLegalL1a5, siolaLegalL1a6, siolaLegalL1a7, siolaLegalL1a8, siolaLegalL1a9, siolaLegalL1a10,
+//   siolaLegalL2a1, siolaLegalL2a2, siolaLegalL2a3, siolaLegalL2a4, siolaLegalL2a5, siolaLegalL2a6, siolaLegalL2a7,
+//   siolaLegalL3a1, siolaLegalL3a2, siolaLegalL3a3, siolaLegalL3a4, siolaLegalL3a5, siolaLegalL3a6, siolaLegalL3a7,
+//   siolaLegalL4a1, siolaLegalL4a2, siolaLegalL4a3,
+//   siolaLegalL5a1
+// ];
+
+// // hide preloader after finish load data
+// $(function () {
+//   $(".preload").addClass("d-none");
+//   $(".loader-container").removeClass("d-none");
+// });
+// firstCamera();
+
+// // Get Balai Pemuda   ################################################################################
+// const balaiBuildingL0 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376896, {
+//     show: true,
+//     featureIdLabel: "balaiBuildingL0",
+//   })
+// );
+// const balaiBuildingBasement = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376894, {
+//     show: true,
+//     featureIdLabel: "balaiBuildingBasement",
+//   })
+// );
+// const balaiBuildingL1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376898, {
+//     show: true,
+//     featureIdLabel: "balaiBuildingL1",
+//   })
+// );
+// const balaiBuildingL2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376900, {
+//     show: true,
+//     featureIdLabel: "balaiBuildingL2",
+//   })
+// );
+
+// const balaiLegalL1a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376902, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a1",
+//   }, )
+// );
+// const balaiLegalL1a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376904, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a2",
+//   }, )
+// );
+// const balaiLegalL1a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376906, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a3",
+//   }, )
+// );
+// const balaiLegalL1a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376908, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a4",
+//   }, )
+// );
+// const balaiLegalL1a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376910, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a5",
+//   }, )
+// );
+// const balaiLegalL1a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376912, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a6",
+//   }, )
+// );
+// const balaiLegalL1a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376914, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a7",
+//   }, )
+// );
+// const balaiLegalL1a8 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376916, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a8",
+//   }, )
+// );
+// const balaiLegalL1a9 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376918, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a9",
+//   }, )
+// );
+// const balaiLegalL1a10 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376920, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a10",
+//   }, )
+// );
+// const balaiLegalL1a11 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376922, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a11",
+//   }, )
+// );
+// const balaiLegalL1a12 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376924, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a12",
+//   }, )
+// );
+// const balaiLegalL1a13 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376926, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL1a13",
+//   }, )
+// );
+
+// const balaiLegalL0a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376952, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a1",
+//   }, )
+// );
+// const balaiLegalL0a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376950, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a2",
+//   }, )
+// );
+// const balaiLegalL0a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376947, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a3",
+//   }, )
+// );
+// const balaiLegalL0a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376945, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a4",
+//   }, )
+// );
+// const balaiLegalL0a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376943, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a5",
+//   }, )
+// );
+// const balaiLegalL0a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376941, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a6",
+//   }, )
+// );
+// const balaiLegalL0a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376940, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a7",
+//   }, )
+// );
+// const balaiLegalL0a8 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376938, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a8",
+//   }, )
+// );
+// const balaiLegalL0a9 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376936, {
+//     show: true,
+//     featureIdLabel: "balaiLegalL0a9",
+//   }, )
+// );
+
+// const balaiLegalGSB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376955, {
+//     show: true,
+//     featureIdLabel: "balaiLegalGSB",
+//   }, )
+// );
+// const balaiLegalBT = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376953, {
+//     show: true,
+//     featureIdLabel: "balaiLegalBT",
+//   }, )
+// );
+// const balaiLegalBB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376954, {
+//     show: true,
+//     featureIdLabel: "balaiLegalBB",
+//   }, )
+// );
+// balaiLegalGSB.style = createTransparentStyle(0.4);
+// balaiLegalBT.style = createTransparentStyle(0.2);
+// balaiLegalBB.style = createTransparentStyle(0.2);
+
+// const balaiLegalLayers = [
+//   balaiLegalL0a1, balaiLegalL0a2, balaiLegalL0a3, balaiLegalL0a4, balaiLegalL0a5, balaiLegalL0a6, balaiLegalL0a7, balaiLegalL0a8, balaiLegalL0a9,
+//   balaiLegalL1a1, balaiLegalL1a2, balaiLegalL1a3, balaiLegalL1a4, balaiLegalL1a5, balaiLegalL1a6, balaiLegalL1a7, balaiLegalL1a8, balaiLegalL1a9, balaiLegalL1a10, balaiLegalL1a11, balaiLegalL1a12, balaiLegalL1a13,
+// ];
+
+// // Get Rusunawa   ####################################################################################
+// const rusunawaBuildingL0 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376598, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL0",
+//   })
+// );
+// const rusunawaBuildingL1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376599, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL1",
+//   })
+// );
+// const rusunawaBuildingL2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376600, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL2",
+//   })
+// );
+// const rusunawaBuildingL3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376601, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL3",
+//   })
+// );
+// const rusunawaBuildingL4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376602, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL4",
+//   })
+// );
+// const rusunawaBuildingL5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376603, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL5",
+//   }, )
+// );
+// const rusunawaBuildingL6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376604, {
+//     show: true,
+//     featureIdLabel: "rusunawaBuildingL6",
+//   }, )
+// );
+
+// const rusunawaLegalL1a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376608, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a1",
+//   }, )
+// );
+// const rusunawaLegalL1a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376609, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a2",
+//   }, )
+// );
+// const rusunawaLegalL1a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376610, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a3",
+//   }, )
+// );
+// const rusunawaLegalL1a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376612, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a4",
+//   }, )
+// );
+// const rusunawaLegalL1a5 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376613, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a5",
+//   }, )
+// );
+// const rusunawaLegalL1a6 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376615, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a6",
+//   }, )
+// );
+// const rusunawaLegalL1a7 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376616, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a7",
+//   }, )
+// );
+// const rusunawaLegalL1a8 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376617, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a8",
+//   }, )
+// );
+// const rusunawaLegalL1a9 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376618, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a9",
+//   }, )
+// );
+// const rusunawaLegalL1a10 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376619, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a10",
+//   }, )
+// );
+// const rusunawaLegalL1a11 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376621, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a11",
+//   }, )
+// );
+// const rusunawaLegalL1a12 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376622, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a12",
+//   }, )
+// );
+// const rusunawaLegalL1a13 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376623, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a13",
+//   }, )
+// );
+// const rusunawaLegalL1a14 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376625, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a14",
+//   }, )
+// );
+// const rusunawaLegalL1a15 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376630, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL1a15",
+//   }, )
+// );
+
+// const rusunawaLegalL2a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376665, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL2a1",
+//   }, )
+// );
+// const rusunawaLegalL2a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376667, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL2a2",
+//   }, )
+// );
+// const rusunawaLegalL2a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376669, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL2a3",
+//   }, )
+// );
+// const rusunawaLegalL2a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376670, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL2a4",
+//   }, )
+// );
+
+// const rusunawaLegalL3a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376671, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL3a1",
+//   }, )
+// );
+// const rusunawaLegalL3a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376672, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL3a2",
+//   }, )
+// );
+// const rusunawaLegalL3a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376673, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL3a3",
+//   }, )
+// );
+// const rusunawaLegalL3a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376734, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL3a4",
+//   }, )
+// );
+
+// const rusunawaLegalL4a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376683, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL4a1",
+//   }, )
+// );
+// const rusunawaLegalL4a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376685, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL4a2",
+//   }, )
+// );
+// const rusunawaLegalL4a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376686, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL4a3",
+//   }, )
+// );
+// const rusunawaLegalL4a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376687, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL4a4",
+//   }, )
+// );
+
+// const rusunawaLegalL5a1 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376688, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL5a1",
+//   }, )
+// );
+// const rusunawaLegalL5a2 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376747, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL5a2",
+//   }, )
+// );
+// const rusunawaLegalL5a3 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376689, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL5a3",
+//   }, )
+// );
+// const rusunawaLegalL5a4 = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376690, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalL5a4",
+//   }, )
+// );
+
+// const rusunawaLegalGSB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376607, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalGSB",
+//   }, )
+// );
+// const rusunawaLegalBT = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376606, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalBT",
+//   }, )
+// );
+// const rusunawaLegalBB = viewer.scene.primitives.add(
+//   await Cesium.Cesium3DTileset.fromIonAssetId(2376605, {
+//     show: true,
+//     featureIdLabel: "rusunawaLegalBB",
+//   }, )
+// );
+// rusunawaLegalGSB.style = createTransparentStyle(0.4);
+// rusunawaLegalBT.style = createTransparentStyle(0.2);
+// rusunawaLegalBB.style = createTransparentStyle(0.2);
+
+// const rusunawaLegalLayers = [
+//   rusunawaLegalL1a1, rusunawaLegalL1a2, rusunawaLegalL1a3, rusunawaLegalL1a4, rusunawaLegalL1a5, rusunawaLegalL1a6, rusunawaLegalL1a7, rusunawaLegalL1a8, rusunawaLegalL1a9, rusunawaLegalL1a10, , rusunawaLegalL1a11, rusunawaLegalL1a12, rusunawaLegalL1a13, rusunawaLegalL1a14, rusunawaLegalL1a15,
+//   rusunawaLegalL2a1, rusunawaLegalL2a2, rusunawaLegalL2a3, rusunawaLegalL2a4,
+//   rusunawaLegalL3a1, rusunawaLegalL3a2, rusunawaLegalL3a3, rusunawaLegalL3a4,
+//   rusunawaLegalL4a1, rusunawaLegalL4a2, rusunawaLegalL4a3, rusunawaLegalL4a4,
+//   rusunawaLegalL5a1, rusunawaLegalL5a2, rusunawaLegalL5a3, rusunawaLegalL5a4
+// ];
+
+// function getPropertyModel(objectName) {
+//   // Pastikan objek dengan nama tersebut ada dalam propertiesModelData
+//   if (propertiesModelData[objectName]) {
+//     return propertiesModelData[objectName];
+//   } else {
+//     console.log("Object not found");
+//     return false;
+//   }
+// }
+
+// // hide preloader after finish load data
+// $(function () {
+//   $(".loader-container").removeClass("d-none");
+// });
+
+
+// // Buat koleksi bidang pemotongan (clipping plane collection) SIOLA
+// var clippingPlanes = new Cesium.ClippingPlaneCollection({
+//   planes: [
+//     new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
+//     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
+//     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+//   ],
+//   edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
+//   edgeColor: Cesium.Color.RED
+// });
+// // Terapkan koleksi bidang pemotongan pada objek 3D Tileset
+// updateClip2Model();
+
+// function updateClip2Model() {
+//   siolaBuildingL0.clippingPlanes = clippingPlanes;
+//   siolaBuildingL1.clippingPlanes = clippingPlanes;
+//   siolaBuildingL2.clippingPlanes = clippingPlanes;
+//   siolaBuildingL3.clippingPlanes = clippingPlanes;
+//   siolaBuildingL4.clippingPlanes = clippingPlanes;
+//   siolaBuildingL5.clippingPlanes = clippingPlanes;
+// }
+// // Event listener for slider X using jQuery
+// $('#sliderX').on('input', function () {
+//   var xValue = parseFloat($(this).val());
+//   clippingPlanes.get(0).distance = xValue;
+//   // Reset the other planes to a distance that allows visibility
+//   clippingPlanes.get(1).distance = -50; // Y-plane
+//   clippingPlanes.get(2).distance = -50; // Z-plane
+//   $('#sliderY').val(90);
+//   $('#sliderZ').val(90);
+//   updateClip2Model();
+// });
+
+// // Event listener for slider Y using jQuery
+// $('#sliderY').on('input', function () {
+//   var yValue = parseFloat($(this).val());
+//   clippingPlanes.get(1).distance = yValue;
+//   // Reset the other planes to a distance that allows visibility
+//   clippingPlanes.get(0).distance = -50; // X-plane
+//   clippingPlanes.get(2).distance = -50; // Z-plane
+//   $('#sliderX').val(90);
+//   $('#sliderZ').val(90);
+//   updateClip2Model();
+// });
+
+// // Event listener for slider Z using jQuery
+// $('#sliderZ').on('input', function () {
+//   var zValue = parseFloat($(this).val());
+//   clippingPlanes.get(2).distance = zValue;
+//   // Reset the other planes to a distance that allows visibility
+//   clippingPlanes.get(0).distance = -50; // X-plane
+//   clippingPlanes.get(1).distance = -50; // Y-plane
+//   $('#sliderX').val(90);
+//   $('#sliderY').val(90);
+//   updateClip2Model();
+// });
+
+// $("#reset-clip").click(function (e) {
+//   clippingPlanes.get(0).distance = 50; // X-plane
+//   clippingPlanes.get(1).distance = 50; // Y-plane
+//   clippingPlanes.get(2).distance = 50; // Z-plane
+//   updateClip2Model();
+//   $("#sliderX").val(90);
+//   $("#sliderY").val(90);
+//   $("#sliderZ").val(90);
+// });
+
+
+
 
 // handle autocomplete seacrh
 $(document).ready(function () {
@@ -2365,4 +2194,8 @@ $(document).ready(function () {
 
   }
 
+});
+
+$(document).ready(function () {
+  $(".loader-container").addClass("d-none");
 });

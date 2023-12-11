@@ -57,9 +57,9 @@
           <li>
             <a href="#" id="layer-toggle" title="Show layer panel"><i class="bi bi-stack"></i> Layer</a>
           </li>
-          <li><a href="#">A</a></li>
-          <li><a href="#">B</a></li>
-          <li><a href="#" id="clip-toggle">Clip</a></li>
+          <li><a href="#" title="">A</a></li>
+          <li><a href="#" title="">B</a></li>
+          <li><a href="#" id="clip-toggle" title="Clip">Clip</a></li>
           <li>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
               aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Camera</a>
@@ -70,20 +70,27 @@
             </ul>
           </li>
           <li>
-            <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i>
-            </a>
+            <a id="minimap" class="selected" href="#" title="Minimap/Inset"><i
+                class="bi bi-globe-asia-australia"></i></a>
+          </li>
+          <li>
+            <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
           </li>
         </ul>
-        <div class="hamb">+</div>
+        <div id="hamb"><i class="bi bi-list"></i></div>
       </div>
     </nav>
   </header>
 
-  <div class="preload">
+  <!-- <div class="preload">
     <div class="bg-loading">
       <img src="assets/img/load.gif">
       <p>Fetching data and rendering content.</p>
     </div>
+  </div> -->
+
+  <div class="loader-container d-none">
+    <div class="loader"></div>
   </div>
 
   <main>
@@ -982,7 +989,13 @@
       </div>
     </div>
 
-    <div class="property-panel card">
+    <div class="minimap-panel card minimap-panel-show">
+      <div class="minimap" id="minimap">
+        <div class=""></div>
+      </div>
+    </div>
+
+    <div class="property-panel card property-panel-show">
       <div class="card-body p-2">
         <div class="property-content" id="property-content">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, nesciunt.</p>
@@ -1031,9 +1044,12 @@
   </script>
 
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/propertiesData.js"></script>
+
   <!-- <script type="module" src="assets/js/cesiumScript_.js"></script> -->
-  <script type="module" src="assets/js/cesiumScript_2.js"></script>
-  <!-- <script type="module" src="assets/js/cesiumScript.js"></script> -->
+  <!-- <script type="module" src="assets/js/cesiumScript_2.js"></script> -->
+
+  <script type="module" src="assets/js/cesiumScript.js"></script>
 </body>
 
 </html>
