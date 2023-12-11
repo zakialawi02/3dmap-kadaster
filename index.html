@@ -19,6 +19,8 @@
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
+  <script src=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.js "></script>
+  <link href=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.css " rel="stylesheet">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
@@ -70,8 +72,7 @@
             </ul>
           </li>
           <li>
-            <a id="minimap" class="selected" href="#" title="Minimap/Inset"><i
-                class="bi bi-globe-asia-australia"></i></a>
+            <a id="minimap" class="" href="#" title="Minimap/Inset"><i class="bi bi-globe-asia-australia"></i></a>
           </li>
           <li>
             <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
@@ -989,13 +990,11 @@
       </div>
     </div>
 
-    <div class="minimap-panel card minimap-panel-show">
-      <div class="minimap" id="minimap">
-        <div class=""></div>
-      </div>
+    <div class="minimap-panel card">
+      <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card property-panel-show">
+    <div class="property-panel card">
       <div class="card-body p-2">
         <div class="property-content" id="property-content">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, nesciunt.</p>
