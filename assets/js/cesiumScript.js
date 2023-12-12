@@ -35,6 +35,18 @@ viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarSca
   1.0
 );
 
+var measureWidget = new Cesium.Measure({
+  container: 'cesiumContainer',
+  scene: viewer.scene,
+  units: new Cesium.MeasureUnits({
+    distanceUnits: Cesium.DistanceUnits.METERS,
+    areaUnits: Cesium.AreaUnits.SQUARE_METERS,
+    volumeUnits: Cesium.VolumeUnits.CUBIC_FEET,
+    angleUnits: Cesium.AngleUnits.DEGREES,
+    slopeUnits: Cesium.AngleUnits.GRADE
+  })
+});
+
 viewer.camera.flyTo({
   destination: Cesium.Cartesian3.fromDegrees(
     112.73677426629814, -7.259593062440535, 20000
