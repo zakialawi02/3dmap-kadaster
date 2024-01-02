@@ -184,16 +184,6 @@ function zoomToLocation(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDis
   });
 }
 
-$("#first-camera").click(function (e) {
-  firstCamera();
-});
-$("#second-camera").click(function (e) {
-  secondCamera();
-});
-$("#third-camera").click(function (e) {
-  thirdCamera();
-});
-
 function createTransparentStyle(alphaValue) {
   return new Cesium.Cesium3DTileStyle({
     color: {
@@ -204,51 +194,33 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
-// Function to make other layers transparent
-function makeOtherLayersTransparent(layersToChange, referenceLayers, alphaValue) {
-  referenceLayers.forEach(layer => {
-    layer.style = layersToChange.includes(layer) ? undefined : createTransparentStyle(alphaValue);
-  });
-}
-
-// Function to reset transparency for all layers
-function resetTransparencyForLayers(layers) {
-  layers.forEach(layer => {
-    layer.style = undefined;
-  });
-}
+$("#first-camera").click(function (e) {
+  firstCamera();
+});
+$("#second-camera").click(function (e) {
+  secondCamera();
+});
+$("#third-camera").click(function (e) {
+  thirdCamera();
+});
 
 
-viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
+viewer.screenSpaceEventHandler.setInputAction(function onRightClick(movement) {
     // Pick a new feature
     const pickedFeature = viewer.scene.pick(movement.position);
-    if (pickedFeature) {
-      $(".property-panel").addClass("property-panel-show");
-      $("#property-content").empty();
-    } else {
-      $(".property-panel").removeClass("property-panel-show");
-    }
-    if (pickedFeature) {
-      console.log(pickedFeature);
-      console.log(pickedFeature.primitive.featureIdLabel);
-
-      const data = getPropertyModel(pickedFeature.primitive.featureIdLabel);
-      console.log(data);
-      if (data) {
-        console.log(data);
-        const htmlContent = `<p>Id parcel: ${data.id_parcel ?? ""}</p>
-                          <p>Name: ${data.name ?? ""}</p>
-                          <p>Volume: ${data.volume ?? ""}</p>
-                          <p>Part of building: ${data.building ?? ""}</p>`;
-        $("#property-content").html(htmlContent);
-      } else {
-        // $("#property-content").empty();
-        const htmlContent = `NO DATA`;
-        $("#property-content").html(htmlContent);
-      }
+    console.log("Properties:");
+    const propertyIds = pickedFeature.getPropertyIds();
+    console.log(propertyIds);
+    const length = propertyIds.length;
+    console.log(length);
+    console.log();
+    for (let i = 0; i < length; ++i) {
+      const propertyId = propertyIds[i];
+      console.log(propertyId);
+      console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
     }
   },
-  Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  Cesium.ScreenSpaceEventType.RIGHT_CLICK);
 
 
 // Layering button Siola  ###########################################################################
@@ -272,123 +244,207 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-  siolaLegalGSB.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_BT").change(function () {
-  siolaLegalBT.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_BB").change(function () {
-  siolaLegalBB.show = $(this).prop("checked");
+
 });
 
 $("#siolaLegal_1a1").change(function () {
-  siolaLegalL1a1.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a2").change(function () {
-  siolaLegalL1a2.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a3").change(function () {
-  siolaLegalL1a3.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a4").change(function () {
-  siolaLegalL1a4.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a5").change(function () {
-  siolaLegalL1a5.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a6").change(function () {
-  siolaLegalL1a6.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a7").change(function () {
-  siolaLegalL1a7.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a8").change(function () {
-  siolaLegalL1a8.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a9").change(function () {
-  siolaLegalL1a9.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_1a10").change(function () {
-  siolaLegalL1a10.show = $(this).prop("checked");
+
 });
 
 $("#siolaLegal_2a1").change(function () {
-  siolaLegalL2a1.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a2").change(function () {
-  siolaLegalL2a2.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a3").change(function () {
-  siolaLegalL2a3.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a4").change(function () {
-  siolaLegalL2a4.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a5").change(function () {
-  siolaLegalL2a5.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a6").change(function () {
-  siolaLegalL2a6.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_2a7").change(function () {
-  siolaLegalL2a7.show = $(this).prop("checked");
+
 });
 
 $("#siolaLegal_3a1").change(function () {
-  siolaLegalL3a1.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a2").change(function () {
-  siolaLegalL3a2.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a3").change(function () {
-  siolaLegalL3a3.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a4").change(function () {
-  siolaLegalL3a4.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a5").change(function () {
-  siolaLegalL3a5.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a6").change(function () {
-  siolaLegalL3a6.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_3a7").change(function () {
-  siolaLegalL3a7.show = $(this).prop("checked");
+
 });
 
 $("#siolaLegal_4a1").change(function () {
-  siolaLegalL4a1.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_4a2").change(function () {
-  siolaLegalL4a2.show = $(this).prop("checked");
+
 });
 $("#siolaLegal_4a3").change(function () {
-  siolaLegalL4a3.show = $(this).prop("checked");
+
 });
 
 $("#siolaLegal_5a1").change(function () {
-  siolaLegalL5a1.show = $(this).prop("checked");
+
 });
 
 $("#zoomToSiolaLegal_1all").on('click', function () {
   zoomToLocation(siolaBuildingL1, -5, 90, 150);
-  makeOtherLayersTransparent([siolaLegalL1a1, siolaLegalL1a2, siolaLegalL1a3, siolaLegalL1a4, siolaLegalL1a5, siolaLegalL1a6, siolaLegalL1a7, siolaLegalL1a8, siolaLegalL1a9, siolaLegalL1a10], siolaLegalLayers, 0.3);
 });
 $("#zoomToSiolaLegal_2all").on('click', function () {
   zoomToLocation(siolaBuildingL2, -10, 90, 150);
-  makeOtherLayersTransparent([siolaLegalL2a1, siolaLegalL2a2, siolaLegalL2a3, siolaLegalL2a4, siolaLegalL2a5, siolaLegalL2a6, siolaLegalL2a7], siolaLegalLayers, 0.3);
 });
 $("#zoomToSiolaLegal_3all").on('click', function () {
   zoomToLocation(siolaBuildingL3, -15, 90, 150);
-  makeOtherLayersTransparent([siolaLegalL3a1, siolaLegalL3a2, siolaLegalL3a3, siolaLegalL3a4, siolaLegalL3a5, siolaLegalL3a6, siolaLegalL3a7], siolaLegalLayers, 0.3);
 });
 $("#zoomToSiolaLegal_4all").on('click', function () {
   zoomToLocation(siolaBuildingL4, -20, 90, 150);
-  makeOtherLayersTransparent([siolaLegalL4a1, siolaLegalL4a2, siolaLegalL4a3], siolaLegalLayers, 0.3);
 });
 $("#zoomToSiolaLegal_5all").on('click', function () {
   zoomToLocation(siolaBuildingL5, -25, 90, 150);
-  makeOtherLayersTransparent([siolaLegalL5a1], siolaLegalLayers, 0.3);
+});
+
+$("#zoomToSiolaLegal_1a1").on('click', function () {
+  zoomToLocation(siolaLegalL1a1, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a2").on('click', function () {
+  zoomToLocation(siolaLegalL1a2, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a3").on('click', function () {
+  zoomToLocation(siolaLegalL1a3, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a4").on('click', function () {
+  zoomToLocation(siolaLegalL1a4, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a5").on('click', function () {
+  zoomToLocation(siolaLegalL1a5, -10, 160, 100);
+});
+$("#zoomToSiolaLegal_1a6").on('click', function () {
+  zoomToLocation(siolaLegalL1a6, -10, 140, 100);
+});
+$("#zoomToSiolaLegal_1a7").on('click', function () {
+  zoomToLocation(siolaLegalL1a7, -10, 150, 100);
+});
+$("#zoomToSiolaLegal_1a8").on('click', function () {
+  zoomToLocation(siolaLegalL1a8, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a9").on('click', function () {
+  zoomToLocation(siolaLegalL1a9, -10, 90, 100);
+});
+$("#zoomToSiolaLegal_1a10").on('click', function () {
+  zoomToLocation(siolaLegalL1a10, -10, 0, 100);
+});
+
+$("#zoomToSiolaLegal_2a1").on('click', function () {
+  zoomToLocation(siolaLegalL2a1, -15, 80, 100);
+});
+$("#zoomToSiolaLegal_2a2").on('click', function () {
+  zoomToLocation(siolaLegalL2a2, -15, 100, 100);
+});
+$("#zoomToSiolaLegal_2a3").on('click', function () {
+  zoomToLocation(siolaLegalL2a3, -15, 90, 100);
+});
+$("#zoomToSiolaLegal_2a4").on('click', function () {
+  zoomToLocation(siolaLegalL2a4, -15, 10, 100);
+});
+$("#zoomToSiolaLegal_2a5").on('click', function () {
+  zoomToLocation(siolaLegalL2a5, -15, 140, 100);
+});
+$("#zoomToSiolaLegal_2a6").on('click', function () {
+  zoomToLocation(siolaLegalL2a6, -15, 90, 100);
+});
+$("#zoomToSiolaLegal_2a7").on('click', function () {
+  zoomToLocation(siolaLegalL2a7, -15, -30, 100);
+});
+
+$("#zoomToSiolaLegal_3a1").on('click', function () {
+  zoomToLocation(siolaLegalL3a1, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a2").on('click', function () {
+  zoomToLocation(siolaLegalL3a2, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a3").on('click', function () {
+  zoomToLocation(siolaLegalL3a3, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a4").on('click', function () {
+  zoomToLocation(siolaLegalL3a4, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a5").on('click', function () {
+  zoomToLocation(siolaLegalL3a5, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a6").on('click', function () {
+  zoomToLocation(siolaLegalL3a6, -20, 90, 100);
+});
+$("#zoomToSiolaLegal_3a7").on('click', function () {
+  zoomToLocation(siolaLegalL3a7, -20, 90, 100);
+});
+
+$("#zoomToSiolaLegal_4a1").on('click', function () {
+  zoomToLocation(siolaLegalL4a1, -25, 80, 100);
+});
+$("#zoomToSiolaLegal_4a2").on('click', function () {
+  zoomToLocation(siolaLegalL4a2, -25, -10, 100);
+});
+$("#zoomToSiolaLegal_4a3").on('click', function () {
+  zoomToLocation(siolaLegalL4a3, -25, 150, 100);
+});
+
+$("#zoomToSiolaLegal_5a1").on('click', function () {
+  zoomToLocation(siolaLegalL5a1, -25, 90, 100);
 });
 
 $("#zoomToSiolaLegal_gsb").on('click', function () {
@@ -399,123 +455,6 @@ $("#zoomToSiolaLegal_bt").on('click', function () {
 });
 $("#zoomToSiolaLegal_bb").on('click', function () {
   zoomToLocation(siolaLegalBB, 15, 90, 150);
-});
-
-$("#zoomToSiolaLegal_1a1").on('click', function () {
-  zoomToLocation(siolaLegalL1a1, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a1], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a2").on('click', function () {
-  zoomToLocation(siolaLegalL1a2, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a2], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a3").on('click', function () {
-  zoomToLocation(siolaLegalL1a3, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a3], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a4").on('click', function () {
-  zoomToLocation(siolaLegalL1a4, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a4], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a5").on('click', function () {
-  zoomToLocation(siolaLegalL1a5, -10, 160, 100);
-  makeOtherLayersTransparent([siolaLegalL1a5], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a6").on('click', function () {
-  zoomToLocation(siolaLegalL1a6, -10, 140, 100);
-  makeOtherLayersTransparent([siolaLegalL1a6], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a7").on('click', function () {
-  zoomToLocation(siolaLegalL1a7, -10, 150, 100);
-  makeOtherLayersTransparent([siolaLegalL1a7], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a8").on('click', function () {
-  zoomToLocation(siolaLegalL1a8, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a8], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a9").on('click', function () {
-  zoomToLocation(siolaLegalL1a9, -10, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL1a9], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_1a10").on('click', function () {
-  zoomToLocation(siolaLegalL1a10, -10, 0, 100);
-  makeOtherLayersTransparent([siolaLegalL1a10], siolaLegalLayers, 0.3);
-});
-
-$("#zoomToSiolaLegal_2a1").on('click', function () {
-  zoomToLocation(siolaLegalL2a1, -15, 80, 100);
-  makeOtherLayersTransparent([siolaLegalL2a1], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a2").on('click', function () {
-  zoomToLocation(siolaLegalL2a2, -15, 100, 100);
-  makeOtherLayersTransparent([siolaLegalL2a2], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a3").on('click', function () {
-  zoomToLocation(siolaLegalL2a3, -15, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL2a3], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a4").on('click', function () {
-  zoomToLocation(siolaLegalL2a4, -15, 10, 100);
-  makeOtherLayersTransparent([siolaLegalL2a4], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a5").on('click', function () {
-  zoomToLocation(siolaLegalL2a5, -15, 140, 100);
-  makeOtherLayersTransparent([siolaLegalL2a5], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a6").on('click', function () {
-  zoomToLocation(siolaLegalL2a6, -15, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL2a6], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_2a7").on('click', function () {
-  zoomToLocation(siolaLegalL2a7, -15, -30, 100);
-  makeOtherLayersTransparent([siolaLegalL2a7], siolaLegalLayers, 0.3);
-});
-
-$("#zoomToSiolaLegal_3a1").on('click', function () {
-  zoomToLocation(siolaLegalL3a1, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a1], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a2").on('click', function () {
-  zoomToLocation(siolaLegalL3a2, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a1], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a3").on('click', function () {
-  zoomToLocation(siolaLegalL3a3, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a3], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a4").on('click', function () {
-  zoomToLocation(siolaLegalL3a4, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a4], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a5").on('click', function () {
-  zoomToLocation(siolaLegalL3a5, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a5], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a6").on('click', function () {
-  zoomToLocation(siolaLegalL3a6, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a6], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_3a7").on('click', function () {
-  zoomToLocation(siolaLegalL3a7, -20, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL3a7], siolaLegalLayers, 0.3);
-});
-
-$("#zoomToSiolaLegal_4a1").on('click', function () {
-  zoomToLocation(siolaLegalL4a1, -25, 80, 100);
-  makeOtherLayersTransparent([siolaLegalL4a1], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_4a2").on('click', function () {
-  zoomToLocation(siolaLegalL4a2, -25, -10, 100);
-  makeOtherLayersTransparent([siolaLegalL4a2], siolaLegalLayers, 0.3);
-});
-$("#zoomToSiolaLegal_4a3").on('click', function () {
-  zoomToLocation(siolaLegalL4a3, -25, 150, 100);
-  makeOtherLayersTransparent([siolaLegalL4a3], siolaLegalLayers, 0.3);
-});
-
-$("#zoomToSiolaLegal_5a1").on('click', function () {
-  zoomToLocation(siolaLegalL5a1, -25, 90, 100);
-  makeOtherLayersTransparent([siolaLegalL5a1], siolaLegalLayers, 0.3);
 });
 
 
@@ -534,90 +473,88 @@ $("#balaiLevel_2").on('click', function () {
 });
 
 $("#balaiLegal_1a1").change(function () {
-  balaiLegalL1a1.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a2").change(function () {
-  balaiLegalL1a2.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a3").change(function () {
-  balaiLegalL1a3.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a4").change(function () {
-  balaiLegalL1a4.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a5").change(function () {
-  balaiLegalL1a5.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a6").change(function () {
-  balaiLegalL1a6.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a7").change(function () {
-  balaiLegalL1a7.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a8").change(function () {
-  balaiLegalL1a8.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a9").change(function () {
-  balaiLegalL1a9.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a10").change(function () {
-  balaiLegalL1a10.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a11").change(function () {
-  balaiLegalL1a11.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a12").change(function () {
-  balaiLegalL1a12.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_1a13").change(function () {
-  balaiLegalL1a13.show = $(this).prop("checked");
+
 });
 
 $("#balaiLegal_0a1").change(function () {
-  balaiLegalL0a1.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a2").change(function () {
-  balaiLegalL0a2.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a3").change(function () {
-  balaiLegalL0a3.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a4").change(function () {
-  balaiLegalL0a4.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a5").change(function () {
-  balaiLegalL0a5.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a6").change(function () {
-  balaiLegalL0a6.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a7").change(function () {
-  balaiLegalL0a7.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a8").change(function () {
-  balaiLegalL0a8.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_0a9").change(function () {
-  balaiLegalL0a9.show = $(this).prop("checked");
+
 });
 
 $("#balaiLegal_GSB").change(function () {
-  balaiLegalGSB.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_BB").change(function () {
-  balaiLegalBB.show = $(this).prop("checked");
+
 });
 $("#balaiLegal_BT").change(function () {
-  balaiLegalBT.show = $(this).prop("checked");
+
 });
 
 $("#zoomToBalaiLegal_0all").on('click', function () {
   zoomToLocation(balaiBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([balaiLegalL0a1, balaiLegalL0a2, balaiLegalL0a3, balaiLegalL0a4, balaiLegalL0a5, balaiLegalL0a6, balaiLegalL0a7, balaiLegalL0a8, balaiLegalL0a9], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1all").on('click', function () {
   zoomToLocation(balaiBuildingL1, -25, 0, 100);
-  makeOtherLayersTransparent([balaiLegalL1a1, balaiLegalL1a2, balaiLegalL1a3, balaiLegalL1a4, balaiLegalL1a5, balaiLegalL1a6, balaiLegalL1a7, balaiLegalL1a8, balaiLegalL1a9, balaiLegalL1a10, , balaiLegalL1a11, balaiLegalL1a12, balaiLegalL1a13], balaiLegalLayers, 0.3);
 });
 
 $("#zoomToBalaiLegal_gsb").on('click', function () {
@@ -632,92 +569,70 @@ $("#zoomToBalaiLegal_bb").on('click', function () {
 
 $("#zoomToBalaiLegal_1a1").on('click', function () {
   zoomToLocation(balaiLegalL1a1, -45, 20, 100);
-  makeOtherLayersTransparent([siolaLegalL1a1], siolaLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a2").on('click', function () {
   zoomToLocation(balaiLegalL1a2, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL1a2], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a3").on('click', function () {
   zoomToLocation(balaiLegalL1a3, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL1a3], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a4").on('click', function () {
   zoomToLocation(balaiLegalL1a4, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL1a4], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a5").on('click', function () {
   zoomToLocation(balaiLegalL1a5, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL1a5], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a6").on('click', function () {
   zoomToLocation(balaiLegalL1a6, -25, 80, 100);
-  makeOtherLayersTransparent([balaiLegalL1a6], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a7").on('click', function () {
   zoomToLocation(balaiLegalL1a7, -25, 80, 100);
-  makeOtherLayersTransparent([balaiLegalL1a7], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a8").on('click', function () {
   zoomToLocation(balaiLegalL1a8, -25, 80, 100);
-  makeOtherLayersTransparent([balaiLegalL1a8], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a9").on('click', function () {
   zoomToLocation(balaiLegalL1a9, -25, 80, 100);
-  makeOtherLayersTransparent([balaiLegalL1a9], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a10").on('click', function () {
   zoomToLocation(balaiLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([balaiLegalL1a10], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a11").on('click', function () {
   zoomToLocation(balaiLegalL1a10, -25, 210, 100);
-  makeOtherLayersTransparent([balaiLegalL1a11], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a12").on('click', function () {
   zoomToLocation(balaiLegalL1a10, -25, 210, 100);
-  makeOtherLayersTransparent([balaiLegalL1a12], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_1a13").on('click', function () {
   zoomToLocation(balaiLegalL1a10, -25, 210, 100);
-  makeOtherLayersTransparent([balaiLegalL1a13], balaiLegalLayers, 0.3);
 });
 
 $("#zoomToBalaiLegal_0a1").on('click', function () {
   zoomToLocation(balaiLegalL0a1, -45, 25, 100);
-  makeOtherLayersTransparent([siolaLegalL0a1], siolaLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a2").on('click', function () {
   zoomToLocation(balaiLegalL0a2, -25, 25, 100);
-  makeOtherLayersTransparent([balaiLegalL0a2], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a3").on('click', function () {
   zoomToLocation(balaiLegalL0a3, -25, 25, 100);
-  makeOtherLayersTransparent([balaiLegalL0a3], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a4").on('click', function () {
   zoomToLocation(balaiLegalL0a4, -25, 25, 100);
-  makeOtherLayersTransparent([balaiLegalL0a4], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a5").on('click', function () {
   zoomToLocation(balaiLegalL0a5, -25, 25, 100);
-  makeOtherLayersTransparent([balaiLegalL0a5], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a6").on('click', function () {
   zoomToLocation(balaiLegalL0a6, -25, 25, 100);
-  makeOtherLayersTransparent([balaiLegalL0a6], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a7").on('click', function () {
   zoomToLocation(balaiLegalL0a7, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL0a7], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a8").on('click', function () {
   zoomToLocation(balaiLegalL0a8, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL0a8], balaiLegalLayers, 0.3);
 });
 $("#zoomToBalaiLegal_0a9").on('click', function () {
   zoomToLocation(balaiLegalL0a9, -25, 20, 100);
-  makeOtherLayersTransparent([balaiLegalL0a9], balaiLegalLayers, 0.3);
 });
 
 // Layering button Rusunawa   ##########################################################################
@@ -744,132 +659,128 @@ $("#rusunawaLevel_r").change(function () {
 });
 
 $("#rusunawaLegal_1a1").change(function () {
-  rusunawaLegalL1a1.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a2").change(function () {
-  rusunawaLegalL1a2.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a3").change(function () {
-  rusunawaLegalL1a3.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a4").change(function () {
-  rusunawaLegalL1a4.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a5").change(function () {
-  rusunawaLegalL1a5.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a6").change(function () {
-  rusunawaLegalL1a6.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a7").change(function () {
-  rusunawaLegalL1a7.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a8").change(function () {
-  rusunawaLegalL1a8.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a9").change(function () {
-  rusunawaLegalL1a9.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a10").change(function () {
-  rusunawaLegalL1a10.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a11").change(function () {
-  rusunawaLegalL1a11.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a12").change(function () {
-  rusunawaLegalL1a12.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a13").change(function () {
-  rusunawaLegalL1a13.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a14").change(function () {
-  rusunawaLegalL1a14.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_1a15").change(function () {
-  rusunawaLegalL1a15.show = $(this).prop("checked");
-});
 
-$("#rusunawaLegal_GSB").change(function () {
-  rusunawaLegalGSB.show = $(this).prop("checked");
-});
-$("#rusunawaLegal_BB").change(function () {
-  rusunawaLegalBT.show = $(this).prop("checked");
-});
-$("#rusunawaLegal_BT").change(function () {
-  rusunawaLegalBB.show = $(this).prop("checked");
 });
 
 $("#rusunawaLegal_2a1").change(function () {
-  rusunawaLegalL2a1.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_2a2").change(function () {
-  rusunawaLegalL2a2.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_2a3").change(function () {
-  rusunawaLegalL2a3.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_2a4").change(function () {
-  rusunawaLegalL2a4.show = $(this).prop("checked");
+
 });
 
 $("#rusunawaLegal_3a1").change(function () {
-  rusunawaLegalL3a1.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_3a2").change(function () {
-  rusunawaLegalL3a2.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_3a3").change(function () {
-  rusunawaLegalL3a3.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_3a4").change(function () {
-  rusunawaLegalL3a4.show = $(this).prop("checked");
+
 });
 
 $("#rusunawaLegal_4a1").change(function () {
-  rusunawaLegalL4a1.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_4a2").change(function () {
-  rusunawaLegalL4a2.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_4a3").change(function () {
-  rusunawaLegalL4a3.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_4a4").change(function () {
-  rusunawaLegalL4a4.show = $(this).prop("checked");
+
 });
 
 $("#rusunawaLegal_5a1").change(function () {
-  rusunawaLegalL5a1.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_5a2").change(function () {
-  rusunawaLegalL5a2.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_5a3").change(function () {
-  rusunawaLegalL5a3.show = $(this).prop("checked");
+
 });
 $("#rusunawaLegal_5a4").change(function () {
-  rusunawaLegalL5a4.show = $(this).prop("checked");
+
 });
+
+$("#rusunawaLegal_GSB").change(function () {
+
+});
+$("#rusunawaLegal_BB").change(function () {
+
+});
+$("#rusunawaLegal_BT").change(function () {
+
+});
+
 
 $("#zoomToRusunawaLegal_1all").on('click', function () {
   zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a1, rusunawaLegalL1a2, rusunawaLegalL1a3, rusunawaLegalL1a4, rusunawaLegalL1a5, rusunawaLegalL1a6, rusunawaLegalL1a7, rusunawaLegalL1a8, rusunawaLegalL1a9, rusunawaLegalL1a10, , rusunawaLegalL1a11, rusunawaLegalL1a12, rusunawaLegalL1a13, rusunawaLegalL1a14, rusunawaLegalL1a15], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_2all").on('click', function () {
   zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL2a1, rusunawaLegalL2a2, rusunawaLegalL2a3, rusunawaLegalL2a4], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_3all").on('click', function () {
   zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL3a1, rusunawaLegalL3a2, rusunawaLegalL3a3, rusunawaLegalL3a4], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_4all").on('click', function () {
   zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL4a1, rusunawaLegalL4a2, rusunawaLegalL4a3, rusunawaLegalL4a4], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_5all").on('click', function () {
   zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL5a1, rusunawaLegalL5a2, rusunawaLegalL5a3, rusunawaLegalL5a4], rusunawaLegalLayers, 0.3);
 });
 
 $("#zoomToRusunawaLegal_gsb").on('click', function () {
@@ -884,131 +795,100 @@ $("#zoomToRusunawaLegal_bb").on('click', function () {
 
 $("#zoomToRusunawaLegal_1a1").on('click', function () {
   zoomToLocation(rusunawaLegalL1a1, -45, 180, 100);
-  makeOtherLayersTransparent([siolaLegalL1a1], siolaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a2").on('click', function () {
   zoomToLocation(rusunawaLegalL1a2, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a2], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a3").on('click', function () {
   zoomToLocation(rusunawaLegalL1a3, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a3], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a4").on('click', function () {
   zoomToLocation(rusunawaLegalL1a4, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a4], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a5").on('click', function () {
   zoomToLocation(rusunawaLegalL1a5, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a5], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a6").on('click', function () {
   zoomToLocation(rusunawaLegalL1a6, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a6], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a7").on('click', function () {
   zoomToLocation(rusunawaLegalL1a7, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a7], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a8").on('click', function () {
   zoomToLocation(rusunawaLegalL1a8, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a8], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a9").on('click', function () {
   zoomToLocation(rusunawaLegalL1a9, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a9], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a10").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a10], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a11").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a11], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a12").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a12], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a13").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a13], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a14").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a14], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_1a15").on('click', function () {
   zoomToLocation(rusunawaLegalL1a10, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL1a15], rusunawaLegalLayers, 0.3);
 });
 
 $("#zoomToRusunawaLegal_2a1").on('click', function () {
   zoomToLocation(rusunawaLegalL2a1, -45, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL2a1], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_2a2").on('click', function () {
   zoomToLocation(rusunawaLegalL2a2, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL2a2], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_2a3").on('click', function () {
   zoomToLocation(rusunawaLegalL2a3, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL2a3], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_2a4").on('click', function () {
   zoomToLocation(rusunawaLegalL2a4, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL2a4], rusunawaLegalLayers, 0.3);
 });
 
 $("#zoomToRusunawaLegal_3a1").on('click', function () {
   zoomToLocation(rusunawaLegalL3a1, -45, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL3a1], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_3a2").on('click', function () {
   zoomToLocation(rusunawaLegalL3a2, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL3a2], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_3a3").on('click', function () {
   zoomToLocation(rusunawaLegalL3a3, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL3a3], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_3a4").on('click', function () {
   zoomToLocation(rusunawaLegalL3a4, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL3a4], rusunawaLegalLayers, 0.3);
 });
 
 $("#zoomToRusunawaLegal_4a1").on('click', function () {
   zoomToLocation(rusunawaLegalL4a1, -45, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL4a1], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_4a2").on('click', function () {
   zoomToLocation(rusunawaLegalL4a2, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL4a2], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_4a3").on('click', function () {
   zoomToLocation(rusunawaLegalL4a3, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL4a3], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_4a4").on('click', function () {
   zoomToLocation(rusunawaLegalL4a4, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL4a4], rusunawaLegalLayers, 0.3);
 });
 
 $("#zoomToRusunawaLegal_5a1").on('click', function () {
   zoomToLocation(rusunawaLegalL5a1, -45, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL5a1], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_5a2").on('click', function () {
   zoomToLocation(rusunawaLegalL5a2, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL5a2], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_5a3").on('click', function () {
   zoomToLocation(rusunawaLegalL5a3, -25, 0, 100);
-  makeOtherLayersTransparent([rusunawaLegalL5a3], rusunawaLegalLayers, 0.3);
 });
 $("#zoomToRusunawaLegal_5a4").on('click', function () {
   zoomToLocation(rusunawaLegalL5a4, -25, 180, 100);
-  makeOtherLayersTransparent([rusunawaLegalL5a4], rusunawaLegalLayers, 0.3);
 });
 
 
@@ -1036,87 +916,41 @@ $('#siolaLevelAllShow').click(function () {
 $("#siolaLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    siolaLegalL1a1.show = true;
-    siolaLegalL1a2.show = true;
-    siolaLegalL1a3.show = true;
-    siolaLegalL1a4.show = true;
-    siolaLegalL1a5.show = true;
-    siolaLegalL1a6.show = true;
-    siolaLegalL1a7.show = true;
-    siolaLegalL1a8.show = true;
-    siolaLegalL1a9.show = true;
-    siolaLegalL1a10.show = true;
+
   } else {
-    siolaLegalL1a1.show = false;
-    siolaLegalL1a2.show = false;
-    siolaLegalL1a3.show = false;
-    siolaLegalL1a4.show = false;
-    siolaLegalL1a5.show = false;
-    siolaLegalL1a6.show = false;
-    siolaLegalL1a7.show = false;
-    siolaLegalL1a8.show = false;
-    siolaLegalL1a9.show = false;
-    siolaLegalL1a10.show = false;
+
   }
 });
 $("#siolaLegal_2all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    siolaLegalL2a1.show = true;
-    siolaLegalL2a2.show = true;
-    siolaLegalL2a3.show = true;
-    siolaLegalL2a4.show = true;
-    siolaLegalL2a5.show = true;
-    siolaLegalL2a6.show = true;
-    siolaLegalL2a7.show = true;
+
   } else {
-    siolaLegalL2a1.show = false;
-    siolaLegalL2a2.show = false;
-    siolaLegalL2a3.show = false;
-    siolaLegalL2a4.show = false;
-    siolaLegalL2a5.show = false;
-    siolaLegalL2a6.show = false;
-    siolaLegalL2a7.show = false;
+
   }
 });
 $("#siolaLegal_3all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    siolaLegalL3a1.show = true;
-    siolaLegalL3a2.show = true;
-    siolaLegalL3a3.show = true;
-    siolaLegalL3a4.show = true;
-    siolaLegalL3a5.show = true;
-    siolaLegalL3a6.show = true;
-    siolaLegalL3a7.show = true;
+
   } else {
-    siolaLegalL3a1.show = false;
-    siolaLegalL3a2.show = false;
-    siolaLegalL3a3.show = false;
-    siolaLegalL3a4.show = false;
-    siolaLegalL3a5.show = false;
-    siolaLegalL3a6.show = false;
-    siolaLegalL3a7.show = false;
+
   }
 });
 $("#siolaLegal_4all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    siolaLegalL4a1.show = true;
-    siolaLegalL4a2.show = true;
-    siolaLegalL4a3.show = true;
+
   } else {
-    siolaLegalL4a1.show = false;
-    siolaLegalL4a2.show = false;
-    siolaLegalL4a3.show = false;
+
   }
 });
 $("#siolaLegal_5all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    siolaLegalL5a1.show = true;
+
   } else {
-    siolaLegalL5a1.show = false;
+
   }
 });
 
@@ -1137,57 +971,17 @@ $('#balaiLevelAllShow').click(function () {
 $("#balaiLegal_0all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    balaiLegalL0a1.show = true;
-    balaiLegalL0a2.show = true;
-    balaiLegalL0a3.show = true;
-    balaiLegalL0a4.show = true;
-    balaiLegalL0a5.show = true;
-    balaiLegalL0a6.show = true;
-    balaiLegalL0a7.show = true;
-    balaiLegalL0a8.show = true;
-    balaiLegalL0a9.show = true;
+
   } else {
-    balaiLegalL0a1.show = false;
-    balaiLegalL0a2.show = false;
-    balaiLegalL0a3.show = false;
-    balaiLegalL0a4.show = false;
-    balaiLegalL0a5.show = false;
-    balaiLegalL0a6.show = false;
-    balaiLegalL0a7.show = false;
-    balaiLegalL0a8.show = false;
-    balaiLegalL0a9.show = false;
+
   }
 });
 $("#balaiLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    balaiLegalL1a1.show = true;
-    balaiLegalL1a2.show = true;
-    balaiLegalL1a3.show = true;
-    balaiLegalL1a4.show = true;
-    balaiLegalL1a5.show = true;
-    balaiLegalL1a6.show = true;
-    balaiLegalL1a7.show = true;
-    balaiLegalL1a8.show = true;
-    balaiLegalL1a9.show = true;
-    balaiLegalL1a10.show = true;
-    balaiLegalL1a11.show = true;
-    balaiLegalL1a12.show = true;
-    balaiLegalL1a13.show = true;
+
   } else {
-    balaiLegalL1a1.show = false;
-    balaiLegalL1a2.show = false;
-    balaiLegalL1a3.show = false;
-    balaiLegalL1a4.show = false;
-    balaiLegalL1a5.show = false;
-    balaiLegalL1a6.show = false;
-    balaiLegalL1a7.show = false;
-    balaiLegalL1a8.show = false;
-    balaiLegalL1a9.show = false;
-    balaiLegalL1a10.show = false;
-    balaiLegalL1a11.show = false;
-    balaiLegalL1a12.show = false;
-    balaiLegalL1a13.show = false;
+
   }
 });
 
@@ -1216,79 +1010,33 @@ $('#rusunawaLevelAllShow').click(function () {
 $("#rusunawaLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    rusunawaLegalL1a1.show = true;
-    rusunawaLegalL1a2.show = true;
-    rusunawaLegalL1a3.show = true;
-    rusunawaLegalL1a4.show = true;
-    rusunawaLegalL1a5.show = true;
-    rusunawaLegalL1a6.show = true;
-    rusunawaLegalL1a7.show = true;
-    rusunawaLegalL1a8.show = true;
-    rusunawaLegalL1a9.show = true;
-    rusunawaLegalL1a10.show = true;
-    rusunawaLegalL1a11.show = true;
-    rusunawaLegalL1a12.show = true;
-    rusunawaLegalL1a13.show = true;
-    rusunawaLegalL1a14.show = true;
-    rusunawaLegalL1a15.show = true;
+
   } else {
-    rusunawaLegalL1a1.show = false;
-    rusunawaLegalL1a2.show = false;
-    rusunawaLegalL1a3.show = false;
-    rusunawaLegalL1a4.show = false;
-    rusunawaLegalL1a5.show = false;
-    rusunawaLegalL1a6.show = false;
-    rusunawaLegalL1a7.show = false;
-    rusunawaLegalL1a8.show = false;
-    rusunawaLegalL1a9.show = false;
-    rusunawaLegalL1a10.show = false;
-    rusunawaLegalL1a11.show = false;
-    rusunawaLegalL1a12.show = false;
-    rusunawaLegalL1a13.show = false;
-    rusunawaLegalL1a14.show = false;
-    rusunawaLegalL1a15.show = false;
+
   }
 });
 $("#rusunawaLegal_2all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    rusunawaLegalL2a1.show = true;
-    rusunawaLegalL2a2.show = true;
-    rusunawaLegalL2a3.show = true;
-    rusunawaLegalL2a4.show = true;
+
   } else {
-    rusunawaLegalL2a1.show = false;
-    rusunawaLegalL2a2.show = false;
-    rusunawaLegalL2a3.show = false;
-    rusunawaLegalL2a4.show = false;
+
   }
 });
 $("#rusunawaLegal_3all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    rusunawaLegalL3a1.show = true;
-    rusunawaLegalL3a2.show = true;
-    rusunawaLegalL3a3.show = true;
-    rusunawaLegalL3a4.show = true;
+
   } else {
-    rusunawaLegalL3a1.show = false;
-    rusunawaLegalL3a2.show = false;
-    rusunawaLegalL3a3.show = false;
-    rusunawaLegalL3a4.show = false;
+
   }
 });
 $("#rusunawaLegal_4all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-    rusunawaLegalL4a1.show = true;
-    rusunawaLegalL4a2.show = true;
-    rusunawaLegalL4a3.show = true;
-    rusunawaLegalL4a4.show = true;
+
   } else {
-    rusunawaLegalL4a1.show = false;
-    rusunawaLegalL4a2.show = false;
-    rusunawaLegalL4a3.show = false;
-    rusunawaLegalL4a4.show = false;
+
   }
 });
 $("#rusunawaLegal_5all").change(function () {
@@ -1352,208 +1100,18 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
   }, )
 );
 
-const siolaLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368037, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a1",
-  }, )
-);
-const siolaLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368039, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a2",
-  }, )
-);
-const siolaLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368041, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a3",
-  }, )
-);
-const siolaLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368043, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a4",
-  }, )
-);
-const siolaLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368044, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a5",
-  }, )
-);
-const siolaLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368045, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a6",
-  }, )
-);
-const siolaLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368046, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a7",
-  }, )
-);
-const siolaLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346662, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a8",
-  }, )
-);
-const siolaLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346663, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a9",
-  }, )
-);
-const siolaLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346665, {
-    show: true,
-    featureIdLabel: "siolaLegalL1a10",
-  }, )
+const siolaLegal = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2410900)
 );
 
-const siolaLegalL2a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346725, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a1",
-  }, )
-);
-const siolaLegalL2a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368028, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a2",
-  }, )
-);
-const siolaLegalL2a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368029, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a3",
-  }, )
-);
-const siolaLegalL2a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346728, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a4",
-  }, )
-);
-const siolaLegalL2a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346729, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a5",
-  }, )
-);
-const siolaLegalL2a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346730, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a6",
-  }, )
-);
-const siolaLegalL2a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346732, {
-    show: true,
-    featureIdLabel: "siolaLegalL2a7",
-  }, )
-);
 
-const siolaLegalL3a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347206, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a1",
-  }, )
-);
-const siolaLegalL3a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347209, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a2",
-  }, )
-);
-const siolaLegalL3a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347210, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a3",
-  }, )
-);
-const siolaLegalL3a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347211, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a4",
-  }, )
-);
-const siolaLegalL3a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347212, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a5",
-  }, )
-);
-const siolaLegalL3a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347214, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a6",
-  }, )
-);
-const siolaLegalL3a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347217, {
-    show: true,
-    featureIdLabel: "siolaLegalL3a7",
-  }, )
-);
 
-const siolaLegalL4a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347218, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a1",
-  }, )
-);
-const siolaLegalL4a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347219, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a2",
-  }, )
-);
-const siolaLegalL4a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347220, {
-    show: true,
-    featureIdLabel: "siolaLegalL4a3",
-  }, )
-);
 
-const siolaLegalL5a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2347221, {
-    show: true,
-    featureIdLabel: "siolaLegalL5a1",
-  }, )
-);
 
-const siolaLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2368032, {
-    show: true,
-    featureIdLabel: "siolaLegalGSB",
-  }, )
-);
-const siolaLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346648, {
-    show: true,
-    featureIdLabel: "siolaLegalBT",
-  }, )
-);
-const siolaLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2346744, {
-    show: true,
-    featureIdLabel: "siolaLegalBB",
-  }, )
-);
-siolaLegalGSB.style = createTransparentStyle(0.3);
-siolaLegalBT.style = createTransparentStyle(0.2);
-siolaLegalBB.style = createTransparentStyle(0.2);
 
-const siolaLegalLayers = [
-  siolaLegalL1a1, siolaLegalL1a2, siolaLegalL1a3, siolaLegalL1a4, siolaLegalL1a5, siolaLegalL1a6, siolaLegalL1a7, siolaLegalL1a8, siolaLegalL1a9, siolaLegalL1a10,
-  siolaLegalL2a1, siolaLegalL2a2, siolaLegalL2a3, siolaLegalL2a4, siolaLegalL2a5, siolaLegalL2a6, siolaLegalL2a7,
-  siolaLegalL3a1, siolaLegalL3a2, siolaLegalL3a3, siolaLegalL3a4, siolaLegalL3a5, siolaLegalL3a6, siolaLegalL3a7,
-  siolaLegalL4a1, siolaLegalL4a2, siolaLegalL4a3,
-  siolaLegalL5a1
-];
+
+
+
 
 // hide preloader after finish load data
 $(function () {
@@ -1588,166 +1146,10 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
   })
 );
 
-const balaiLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376902, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a1",
-  }, )
-);
-const balaiLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376904, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a2",
-  }, )
-);
-const balaiLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376906, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a3",
-  }, )
-);
-const balaiLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376908, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a4",
-  }, )
-);
-const balaiLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376910, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a5",
-  }, )
-);
-const balaiLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376912, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a6",
-  }, )
-);
-const balaiLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376914, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a7",
-  }, )
-);
-const balaiLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376916, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a8",
-  }, )
-);
-const balaiLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376918, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a9",
-  }, )
-);
-const balaiLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376920, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a10",
-  }, )
-);
-const balaiLegalL1a11 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376922, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a11",
-  }, )
-);
-const balaiLegalL1a12 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376924, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a12",
-  }, )
-);
-const balaiLegalL1a13 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376926, {
-    show: true,
-    featureIdLabel: "balaiLegalL1a13",
-  }, )
+const balaiLegal = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2410831)
 );
 
-const balaiLegalL0a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376952, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a1",
-  }, )
-);
-const balaiLegalL0a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376950, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a2",
-  }, )
-);
-const balaiLegalL0a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376947, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a3",
-  }, )
-);
-const balaiLegalL0a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376945, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a4",
-  }, )
-);
-const balaiLegalL0a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376943, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a5",
-  }, )
-);
-const balaiLegalL0a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376941, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a6",
-  }, )
-);
-const balaiLegalL0a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376940, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a7",
-  }, )
-);
-const balaiLegalL0a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376938, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a8",
-  }, )
-);
-const balaiLegalL0a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376936, {
-    show: true,
-    featureIdLabel: "balaiLegalL0a9",
-  }, )
-);
-
-const balaiLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376955, {
-    show: true,
-    featureIdLabel: "balaiLegalGSB",
-  }, )
-);
-const balaiLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376953, {
-    show: true,
-    featureIdLabel: "balaiLegalBT",
-  }, )
-);
-const balaiLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376954, {
-    show: true,
-    featureIdLabel: "balaiLegalBB",
-  }, )
-);
-balaiLegalGSB.style = createTransparentStyle(0.4);
-balaiLegalBT.style = createTransparentStyle(0.2);
-balaiLegalBB.style = createTransparentStyle(0.2);
-
-const balaiLegalLayers = [
-  balaiLegalL0a1, balaiLegalL0a2, balaiLegalL0a3, balaiLegalL0a4, balaiLegalL0a5, balaiLegalL0a6, balaiLegalL0a7, balaiLegalL0a8, balaiLegalL0a9,
-  balaiLegalL1a1, balaiLegalL1a2, balaiLegalL1a3, balaiLegalL1a4, balaiLegalL1a5, balaiLegalL1a6, balaiLegalL1a7, balaiLegalL1a8, balaiLegalL1a9, balaiLegalL1a10, balaiLegalL1a11, balaiLegalL1a12, balaiLegalL1a13,
-];
 
 // Get Rusunawa   ####################################################################################
 const rusunawaBuildingL0 = viewer.scene.primitives.add(
@@ -1793,236 +1195,12 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
   }, )
 );
 
-const rusunawaLegalL1a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376608, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a1",
-  }, )
-);
-const rusunawaLegalL1a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376609, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a2",
-  }, )
-);
-const rusunawaLegalL1a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376610, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a3",
-  }, )
-);
-const rusunawaLegalL1a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376612, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a4",
-  }, )
-);
-const rusunawaLegalL1a5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376613, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a5",
-  }, )
-);
-const rusunawaLegalL1a6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376615, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a6",
-  }, )
-);
-const rusunawaLegalL1a7 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376616, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a7",
-  }, )
-);
-const rusunawaLegalL1a8 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376617, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a8",
-  }, )
-);
-const rusunawaLegalL1a9 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376618, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a9",
-  }, )
-);
-const rusunawaLegalL1a10 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376619, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a10",
-  }, )
-);
-const rusunawaLegalL1a11 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376621, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a11",
-  }, )
-);
-const rusunawaLegalL1a12 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376622, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a12",
-  }, )
-);
-const rusunawaLegalL1a13 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376623, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a13",
-  }, )
-);
-const rusunawaLegalL1a14 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376625, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a14",
-  }, )
-);
-const rusunawaLegalL1a15 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376630, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL1a15",
-  }, )
+const rusunawaLegal = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(2410988)
 );
 
-const rusunawaLegalL2a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376665, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a1",
-  }, )
-);
-const rusunawaLegalL2a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376667, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a2",
-  }, )
-);
-const rusunawaLegalL2a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376669, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a3",
-  }, )
-);
-const rusunawaLegalL2a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376670, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL2a4",
-  }, )
-);
 
-const rusunawaLegalL3a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376671, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a1",
-  }, )
-);
-const rusunawaLegalL3a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376672, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a2",
-  }, )
-);
-const rusunawaLegalL3a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376673, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a3",
-  }, )
-);
-const rusunawaLegalL3a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376734, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL3a4",
-  }, )
-);
 
-const rusunawaLegalL4a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376683, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a1",
-  }, )
-);
-const rusunawaLegalL4a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376685, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a2",
-  }, )
-);
-const rusunawaLegalL4a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376686, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a3",
-  }, )
-);
-const rusunawaLegalL4a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376687, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL4a4",
-  }, )
-);
-
-const rusunawaLegalL5a1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376688, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a1",
-  }, )
-);
-const rusunawaLegalL5a2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376747, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a2",
-  }, )
-);
-const rusunawaLegalL5a3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376689, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a3",
-  }, )
-);
-const rusunawaLegalL5a4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376690, {
-    show: true,
-    featureIdLabel: "rusunawaLegalL5a4",
-  }, )
-);
-
-const rusunawaLegalGSB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376607, {
-    show: true,
-    featureIdLabel: "rusunawaLegalGSB",
-  }, )
-);
-const rusunawaLegalBT = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376606, {
-    show: true,
-    featureIdLabel: "rusunawaLegalBT",
-  }, )
-);
-const rusunawaLegalBB = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376605, {
-    show: true,
-    featureIdLabel: "rusunawaLegalBB",
-  }, )
-);
-rusunawaLegalGSB.style = createTransparentStyle(0.4);
-rusunawaLegalBT.style = createTransparentStyle(0.2);
-rusunawaLegalBB.style = createTransparentStyle(0.2);
-
-const rusunawaLegalLayers = [
-  rusunawaLegalL1a1, rusunawaLegalL1a2, rusunawaLegalL1a3, rusunawaLegalL1a4, rusunawaLegalL1a5, rusunawaLegalL1a6, rusunawaLegalL1a7, rusunawaLegalL1a8, rusunawaLegalL1a9, rusunawaLegalL1a10, , rusunawaLegalL1a11, rusunawaLegalL1a12, rusunawaLegalL1a13, rusunawaLegalL1a14, rusunawaLegalL1a15,
-  rusunawaLegalL2a1, rusunawaLegalL2a2, rusunawaLegalL2a3, rusunawaLegalL2a4,
-  rusunawaLegalL3a1, rusunawaLegalL3a2, rusunawaLegalL3a3, rusunawaLegalL3a4,
-  rusunawaLegalL4a1, rusunawaLegalL4a2, rusunawaLegalL4a3, rusunawaLegalL4a4,
-  rusunawaLegalL5a1, rusunawaLegalL5a2, rusunawaLegalL5a3, rusunawaLegalL5a4
-];
-
-function getPropertyModel(objectName) {
-  // Pastikan objek dengan nama tersebut ada dalam propertiesModelData
-  if (propertiesModelData[objectName]) {
-    return propertiesModelData[objectName];
-  } else {
-    console.log("Object not found");
-    return false;
-  }
-}
 
 // hide preloader after finish load data
 $(function () {
@@ -2159,115 +1337,87 @@ $(document).ready(function () {
         break;
       case "l1.1":
         zoomToLocation(siolaLegalL1a1, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a1], siolaLegalLayers, 0.3);
         break;
       case "l1.2":
         zoomToLocation(siolaLegalL1a2, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a2], siolaLegalLayers, 0.3);
         break;
       case "l1.3":
         zoomToLocation(siolaLegalL1a3, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a3], siolaLegalLayers, 0.3);
         break;
       case "l1.4":
         zoomToLocation(siolaLegalL1a4, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a4], siolaLegalLayers, 0.3);
         break;
       case "l1.5":
         zoomToLocation(siolaLegalL1a5, -10, 160, 100);
-        makeOtherLayersTransparent([siolaLegalL1a5], siolaLegalLayers, 0.3);
         break;
       case "l1.6":
         zoomToLocation(siolaLegalL1a6, -10, 140, 100);
-        makeOtherLayersTransparent([siolaLegalL1a6], siolaLegalLayers, 0.3);
         break;
       case "l1.7":
         zoomToLocation(siolaLegalL1a7, -10, 150, 100);
-        makeOtherLayersTransparent([siolaLegalL1a7], siolaLegalLayers, 0.3);
         break;
       case "l1.8":
         zoomToLocation(siolaLegalL1a8, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a8], siolaLegalLayers, 0.3);
         break;
       case "l1.9":
         zoomToLocation(siolaLegalL1a9, -10, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL1a9], siolaLegalLayers, 0.3);
         break;
       case "l1.10":
         zoomToLocation(siolaLegalL1a10, -10, 0, 100);
-        makeOtherLayersTransparent([siolaLegalL1a10], siolaLegalLayers, 0.3);
         break;
       case "l2.1":
         zoomToLocation(siolaLegalL2a1, -15, 80, 100);
-        makeOtherLayersTransparent([siolaLegalL2a1], siolaLegalLayers, 0.3);
         break;
       case "l2.2":
         zoomToLocation(siolaLegalL2a2, -15, 100, 100);
-        makeOtherLayersTransparent([siolaLegalL2a2], siolaLegalLayers, 0.3);
         break;
       case "l2.3":
         zoomToLocation(siolaLegalL2a3, -15, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL2a3], siolaLegalLayers, 0.3);
         break;
       case "l2.4":
         zoomToLocation(siolaLegalL2a4, -15, 10, 100);
-        makeOtherLayersTransparent([siolaLegalL2a4], siolaLegalLayers, 0.3);
         break;
       case "l2.5":
         zoomToLocation(siolaLegalL2a5, -15, 140, 100);
-        makeOtherLayersTransparent([siolaLegalL2a5], siolaLegalLayers, 0.3);
         break;
       case "l2.6":
         zoomToLocation(siolaLegalL2a6, -15, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL2a6], siolaLegalLayers, 0.3);
         break;
       case "l2.7":
         zoomToLocation(siolaLegalL2a7, -15, -30, 100);
-        makeOtherLayersTransparent([siolaLegalL2a7], siolaLegalLayers, 0.3);
         break;
       case "l3.1":
         zoomToLocation(siolaLegalL3a1, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a1], siolaLegalLayers, 0.3);
         break;
       case "l3.2":
         zoomToLocation(siolaLegalL3a2, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a1], siolaLegalLayers, 0.3);
         break;
       case "l3.3":
         zoomToLocation(siolaLegalL3a3, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a3], siolaLegalLayers, 0.3);
         break;
       case "l3.4":
         zoomToLocation(siolaLegalL3a4, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a4], siolaLegalLayers, 0.3);
         break;
       case "l3.5":
         zoomToLocation(siolaLegalL3a5, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a5], siolaLegalLayers, 0.3);
         break;
       case "l3.6":
         zoomToLocation(siolaLegalL3a6, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a6], siolaLegalLayers, 0.3);
         break;
       case "l3.7":
         zoomToLocation(siolaLegalL3a7, -20, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL3a7], siolaLegalLayers, 0.3);
         break;
       case "l4.1":
         zoomToLocation(siolaLegalL4a1, -25, 80, 100);
-        makeOtherLayersTransparent([siolaLegalL4a1], siolaLegalLayers, 0.3);
         break;
       case "l4.2":
         zoomToLocation(siolaLegalL4a2, -25, -10, 100);
-        makeOtherLayersTransparent([siolaLegalL4a2], siolaLegalLayers, 0.3);
         break;
       case "l4.3":
         zoomToLocation(siolaLegalL4a3, -25, 150, 100);
-        makeOtherLayersTransparent([siolaLegalL4a3], siolaLegalLayers, 0.3);
         break;
       case "l5.1":
         zoomToLocation(siolaLegalL5a1, -25, 90, 100);
-        makeOtherLayersTransparent([siolaLegalL5a1], siolaLegalLayers, 0.3);
         break;
       case "siola":
         firstCamera()
