@@ -244,10 +244,10 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-
+  setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f", $(this).prop("checked"));
 });
 $("#siolaLegal_BT").change(function () {
-
+  setVisibilityByLegalId(siolaLegal, "legal_48caf1fc-88bd-4c04-abae-04087d157a44", $(this).prop("checked"));
 });
 $("#siolaLegal_BB").change(function () {
 
@@ -1097,19 +1097,107 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
-  }, )
+  })
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2410900)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2415786)
 );
 
 
+const colorMap = {
+  "Anotha Blue": new Cesium.Color(0 / 255, 0 / 255, 255 / 255, 1.0), // Anotha Blue
+  "Baby Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Baby Blue
+  "Blue": new Cesium.Color(0.0, 0.0, 1.0, 1.0), // Blue
+  "Brown": new Cesium.Color(165 / 255, 42 / 255, 42 / 255, 1.0), // Brown
+  "Coral": new Cesium.Color(255 / 255, 127 / 255, 80 / 255, 1.0), // Coral
+  "Green": new Cesium.Color(0.0, 1.0, 0.0, 1.0), // Green
+  "Grey": new Cesium.Color(128 / 255, 128 / 255, 128 / 255, 1.0), // Grey
+  "Lumut": new Cesium.Color(25, 133, 54, 1.0),
+  "Light Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Light Blue
+  "Maroon": new Cesium.Color(128 / 255, 0 / 255, 0 / 255, 1.0), // Maroon
+  "Merah": new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Merah
+  "Navy": new Cesium.Color(0 / 255, 0 / 255, 128 / 255, 1.0), // Navy
+  "Neon Green": new Cesium.Color(57 / 255, 255 / 255, 20 / 255, 1.0), // Neon Green
+  "Orange": new Cesium.Color(255 / 255, 165 / 255, 0 / 255, 1.0), // Orange
+  "Pink": new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
+  "Purple": new Cesium.Color(128 / 255, 0 / 255, 128 / 255, 1.0), // Purple
+  "Red": new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Red
+  "Red Pastel": new Cesium.Color(255 / 255, 105 / 255, 97 / 255, 1.0), // Red Pastel
+  "Sienna": new Cesium.Color(160 / 255, 82 / 255, 45 / 255, 1.0), // Sienna
+  "Violet": new Cesium.Color(238 / 255, 130 / 255, 238 / 255, 1.0), // Violet
+  "Yellow": new Cesium.Color(1.0, 1.0, 0.0, 1.0), // Yellow
+};
 
 
 
+// Define a color style
+let setColorStyle = new Cesium.Cesium3DTileStyle({
+  color: {
+    evaluateColor: function (feature, result) {
+      // Ambil nilai "_paint" dari properti fitur
+      const styleName = feature.getProperty("_paint");
+      // Jika "legal_type" adalah "legal_space", atur transparansi menjadi 0.4
+      if (feature.getProperty("legal_type") === "legal_space") {
+        return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
+      }
+      // Temukan warna yang sesuai dari colormap atau gunakan warna default jika tidak ditemukan
+      const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0); // Default: Grey
+      // Kembalikan warna hasil evaluasi
+      return Cesium.Color.clone(color, result);
+    },
+  },
+});
+siolaLegal.style = setColorStyle;
+
+let MappingHideTileset = [];
+
+function mappingId(legalId, isChecked) {
+  if (isChecked) {
+    MappingHideTileset = MappingHideTileset.filter(data => data !== legalId);
+  } else {
+    MappingHideTileset.push(legalId);
+  }
+  // console.log(MappingHideTileset);
+}
+
+function setVisibilityByLegalId(tileset, legalId, isChecked) {
+  mappingId(legalId, isChecked);
+  tileset.style = new Cesium.Cesium3DTileStyle({
+    show: {
+      evaluate: function (feature) {
+        return !MappingHideTileset.includes(feature.getProperty("legal_id"));
+      },
+    },
+    color: setColorStyle.color,
+  });
+}
+// setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f");
 
 
+function setTransparent(legalId, alphaValue) {
+  const newStyle = new Cesium.Cesium3DTileStyle({
+    color: {
+      evaluateColor: function (feature, result) {
+        const styleName = feature.getProperty("_paint");
+        if (feature.getProperty("legal_id") === legalId) {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
+        }
+        if (feature.getProperty("legal_type") === "legal_space") {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
+        }
+        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
+        return Cesium.Color.clone(color, result);
+      },
+    },
+  });
+  siolaLegal.style = newStyle;
+}
+
+
+
+setTransparent("legal_cc6e43c0-8b16-4559-a331-8e5ddc24f639", 0.5);
+// setTransparent("legal_48caf1fc-88bd-4c04-abae-04087d157a44", 0);
 
 
 
@@ -1196,9 +1284,10 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2410988)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2415785)
 );
 
+rusunawaLegal.style = setColorStyle;
 
 
 
