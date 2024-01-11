@@ -26,6 +26,8 @@ viewer.scene.globe.enableLighting = true;
 viewer.scene.highDynamicRange = true;
 // viewer.scene.globe.atmosphereLightIntensity = 5.0;
 viewer.scene.postProcessStages.fxaa.enabled = true;
+viewer.scene.globe.baseColor = Cesium.Color.ALICEBLUE;
+viewer.scene.globe.undergroundColor = Cesium.Color.TRANSPARENT;
 viewer.scene.globe.depthTestAgainstTerrain = true;
 viewer.scene.screenSpaceCameraController.enableCollisionDetection = true;
 viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarScalar(
@@ -255,6 +257,59 @@ $("#siolaLegal_BB").change(function () {
 
 $("#siolaLegal_1a1").change(function () {
 
+});
+
+const layers = viewer.imageryLayers;
+const openStreetMapBasemap = layers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+  url: "https://a.tile.openstreetmap.org/",
+  show: false,
+}));
+
+function changeBasemapLayer(selectedBasemap) {
+  // console.log(layers);
+  if ($("#ShowBasemap").prop("checked") === true) {
+    const basemap = viewer.imageryLayers;
+    const bingMapsAerial = basemap.get(0);
+    const openstreetmap = basemap.get(1);
+    switch (selectedBasemap) {
+      case "OpenStreetMap":
+        openstreetmap.show = true;
+        bingMapsAerial.show = false;
+        break;
+      case "BingMapsAerial":
+        bingMapsAerial.show = true;
+        openstreetmap.show = false;
+        break;
+      default:
+        bingMapsAerial.show = true;
+        openstreetmap.show = false;
+        break;
+    }
+  }
+}
+
+// Set the initial basemap layer
+changeBasemapLayer($("#basemapSelector").val());
+
+// Handle basemap selector change event
+$("#basemapSelector, #ShowBasemap").change(function () {
+  if ($("#ShowBasemap").prop("checked")) {
+    changeBasemapLayer($("#basemapSelector").val());
+  } else {
+    const basemap = viewer.imageryLayers;
+    const bingMapsAerial = basemap.get(0);
+    const openstreetmap = basemap.get(1);
+    bingMapsAerial.show = false;
+    openstreetmap.show = false;
+    viewer.scene.globe.depthTestAgainstTerrain = !viewer.scene.globe.depthTestAgainstTerrain;
+    viewer.scene.screenSpaceCameraController.enableCollisionDetection = !viewer.scene.screenSpaceCameraController.enableCollisionDetection;
+  }
+});
+
+
+$(function () {
+  $(".preload").addClass("d-none");
+  $(".loader-container").removeClass("d-none");
 });
 $("#siolaLegal_1a2").change(function () {
 
@@ -1175,28 +1230,28 @@ function setVisibilityByLegalId(tileset, legalId, isChecked) {
 // setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f");
 
 
-function setTransparent(legalId, alphaValue) {
-  const newStyle = new Cesium.Cesium3DTileStyle({
-    color: {
-      evaluateColor: function (feature, result) {
-        const styleName = feature.getProperty("_paint");
-        if (feature.getProperty("legal_id") === legalId) {
-          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
-        }
-        if (feature.getProperty("legal_type") === "legal_space") {
-          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
-        }
-        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
-        return Cesium.Color.clone(color, result);
-      },
-    },
-  });
-  siolaLegal.style = newStyle;
-}
+// function setTransparent(legalId, alphaValue) {
+//   const newStyle = new Cesium.Cesium3DTileStyle({
+//     color: {
+//       evaluateColor: function (feature, result) {
+//         const styleName = feature.getProperty("_paint");
+//         if (feature.getProperty("legal_id") === legalId) {
+//           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
+//         }
+//         if (feature.getProperty("legal_type") === "legal_space") {
+//           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
+//         }
+//         const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
+//         return Cesium.Color.clone(color, result);
+//       },
+//     },
+//   });
+//   siolaLegal.style = newStyle;
+// }
 
 
 
-setTransparent("legal_cc6e43c0-8b16-4559-a331-8e5ddc24f639", 0.5);
+// setTransparent("legal_cc6e43c0-8b16-4559-a331-8e5ddc24f639", 0.5);
 // setTransparent("legal_48caf1fc-88bd-4c04-abae-04087d157a44", 0);
 
 

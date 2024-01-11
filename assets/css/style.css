@@ -153,7 +153,7 @@ header .nav-menu .hamb {
   left: -22rem;
   z-index: 10;
   width: 22rem;
-  max-height: 40rem;
+  max-height: 38rem;
   overflow-y: scroll;
   transition: left 0.3s ease;
 }
