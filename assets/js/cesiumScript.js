@@ -313,103 +313,102 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-  setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f", $(this).prop("checked"));
+  setVisibilityByGloballId(siolaLegal, "1EwCwYXwzAd9g7MF9jvuEU", $(this).prop("checked"));
 });
 $("#siolaLegal_BT").change(function () {
-  setVisibilityByLegalId(siolaLegal, "legal_48caf1fc-88bd-4c04-abae-04087d157a44", $(this).prop("checked"));
+  setVisibilityByGloballId(siolaLegal, "3d26tVi4bDFB_KinyWWg_x", $(this).prop("checked"));
 });
 $("#siolaLegal_BB").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0j8DfjvwvBhf_NlCGDz13x", $(this).prop("checked"));
 });
 
 $("#siolaLegal_1a1").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "2y$BBZOCbA78pCHrVp30Lr", $(this).prop("checked"));
 });
-
 $("#siolaLegal_1a2").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1pcPKh9k1Fsw2BhrUzMGpO", $(this).prop("checked"));
 });
 $("#siolaLegal_1a3").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VVuH", $(this).prop("checked"));
 });
 $("#siolaLegal_1a4").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VVx_", $(this).prop("checked"));
 });
 $("#siolaLegal_1a5").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "3TLfVhbTLCK9Pg0LkJsfSE", $(this).prop("checked"));
 });
 $("#siolaLegal_1a6").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "2y$BBZOCbA78pCHrVp3Fw2", $(this).prop("checked"));
 });
 $("#siolaLegal_1a7").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VV$a", $(this).prop("checked"));
 });
 $("#siolaLegal_1a8").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1SCZc3EKj8NwyeUEAWj6pC", $(this).prop("checked"));
 });
 $("#siolaLegal_1a9").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1SCZc3EKj8NwyeUEAWj7Gv", $(this).prop("checked"));
 });
 $("#siolaLegal_1a10").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "2xlx6WPoL1rxmFwo5uuDDq", $(this).prop("checked"));
 });
 
 $("#siolaLegal_2a1").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1v9OojEXb8KAGsDLD6VG7$", $(this).prop("checked"));
 });
 $("#siolaLegal_2a2").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1kUW4Oq$jFxuGrqJaV4q6T", $(this).prop("checked"));
 });
 $("#siolaLegal_2a3").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1v9OojEXb8KAGsDLD6VG3n", $(this).prop("checked"));
 });
 $("#siolaLegal_2a4").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "301wrmOXH4SOTRz6q8Xv7z", $(this).prop("checked"));
 });
 $("#siolaLegal_2a5").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "301wrmOXH4SOTRz6q8Xv3v", $(this).prop("checked"));
 });
 $("#siolaLegal_2a6").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "2vmj7xm6L5o8AfvndGHU2E", $(this).prop("checked"));
 });
 $("#siolaLegal_2a7").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "3fILicVDn9PwmdpYV5GVKB", $(this).prop("checked"));
 });
 
 $("#siolaLegal_3a1").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1hbmR_RZTBBOYEenGzkEBz", $(this).prop("checked"));
 });
 $("#siolaLegal_3a2").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1aTTvQ3T53fuvdFQTCLY0t", $(this).prop("checked"));
 });
 $("#siolaLegal_3a3").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "3KJqGmnF16jfwV7zjLMlyq", $(this).prop("checked"));
 });
 $("#siolaLegal_3a4").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "2Z8IIuTMnARO$BcYV3p5MH", $(this).prop("checked"));
 });
 $("#siolaLegal_3a5").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "39zBx4po97Cf5Z$GQgU6N4", $(this).prop("checked"));
 });
 $("#siolaLegal_3a6").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0AaW4fYO997ggGFFs78nlT", $(this).prop("checked"));
 });
 $("#siolaLegal_3a7").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "0AaW4fYO997ggGFFs78nek", $(this).prop("checked"));
 });
 
 $("#siolaLegal_4a1").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCLA", $(this).prop("checked"));
 });
 $("#siolaLegal_4a2").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "3TT5nUcA1AzQzQG79kfeJv", $(this).prop("checked"));
 });
 $("#siolaLegal_4a3").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCIv", $(this).prop("checked"));
 });
 
 $("#siolaLegal_5a1").change(function () {
-
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCef", $(this).prop("checked"));
 });
 
 $("#zoomToSiolaLegal_1all").on('click', function () {
@@ -422,16 +421,31 @@ $("#zoomToSiolaLegal_3all").on('click', function () {
   zoomToLocation(siolaBuildingL3, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_4all").on('click', function () {
-  zoomToLocation(siolaBuildingL4, -20, 90, 150);
+  zoomToLocation(siolaBuildingL4, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_5all").on('click', function () {
-  zoomToLocation(siolaBuildingL5, -25, 90, 150);
+  zoomToLocation(siolaBuildingL5, -20, 90, 150);
+});
+
+$("#zoomToSiolaLegal_gsb").on('click', function () {
+  setTransparentByGlobalId(siolaLegal, "1EwCwYXwzAd9g7MF9jvuEU", $(this).prop("checked"));
+  zoomToLocation(siolaLegalGSB, -20, 90, 150);
+});
+$("#zoomToSiolaLegal_bt").on('click', function () {
+  setTransparentByGlobalId(siolaLegal, "3d26tVi4bDFB_KinyWWg_x", $(this).prop("checked"));
+  zoomToLocation(siolaLegalBT, -20, 90, 150);
+});
+$("#zoomToSiolaLegal_bb").on('click', function () {
+  setTransparentByGlobalId(siolaLegal, "0j8DfjvwvBhf_NlCGDz13x", $(this).prop("checked"));
+  zoomToLocation(siolaLegalBB, 15, 90, 150);
 });
 
 $("#zoomToSiolaLegal_1a1").on('click', function () {
+  setTransparentByGlobalId(siolaLegal, "2y$BBZOCbA78pCHrVp30Lr");
   zoomToLocation(siolaLegalL1a1, -10, 90, 100);
 });
 $("#zoomToSiolaLegal_1a2").on('click', function () {
+  setTransparentByGlobalId(siolaLegal, "1pcPKh9k1Fsw2BhrUzMGpO");
   zoomToLocation(siolaLegalL1a2, -10, 90, 100);
 });
 $("#zoomToSiolaLegal_1a3").on('click', function () {
@@ -441,7 +455,7 @@ $("#zoomToSiolaLegal_1a4").on('click', function () {
   zoomToLocation(siolaLegalL1a4, -10, 90, 100);
 });
 $("#zoomToSiolaLegal_1a5").on('click', function () {
-  zoomToLocation(siolaLegalL1a5, -10, 160, 100);
+  zoomToLocation(siolaLegal, -10, 160, 100);
 });
 $("#zoomToSiolaLegal_1a6").on('click', function () {
   zoomToLocation(siolaLegalL1a6, -10, 140, 100);
@@ -515,16 +529,6 @@ $("#zoomToSiolaLegal_4a3").on('click', function () {
 
 $("#zoomToSiolaLegal_5a1").on('click', function () {
   zoomToLocation(siolaLegalL5a1, -25, 90, 100);
-});
-
-$("#zoomToSiolaLegal_gsb").on('click', function () {
-  zoomToLocation(siolaLegalGSB, -20, 90, 150);
-});
-$("#zoomToSiolaLegal_bt").on('click', function () {
-  zoomToLocation(siolaLegalBT, -20, 90, 150);
-});
-$("#zoomToSiolaLegal_bb").on('click', function () {
-  zoomToLocation(siolaLegalBB, 15, 90, 150);
 });
 
 
@@ -985,43 +989,46 @@ $('#siolaLevelAllShow').click(function () {
 
 $("#siolaLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
-  if (isChecked) {
-
-  } else {
-
-  }
+  setVisibilityByGloballId(siolaLegal, "2y$BBZOCbA78pCHrVp30Lr", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1pcPKh9k1Fsw2BhrUzMGpO", isChecked);
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VVuH", isChecked);
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VVx_", isChecked);
+  setVisibilityByGloballId(siolaLegal, "3TLfVhbTLCK9Pg0LkJsfSE", isChecked);
+  setVisibilityByGloballId(siolaLegal, "2y$BBZOCbA78pCHrVp3Fw2", isChecked);
+  setVisibilityByGloballId(siolaLegal, "0rigewBkbCtQuwSkd8VV$a", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1SCZc3EKj8NwyeUEAWj6pC", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1SCZc3EKj8NwyeUEAWj7Gv", isChecked);
+  setVisibilityByGloballId(siolaLegal, "2xlx6WPoL1rxmFwo5uuDDq", isChecked);
 });
 $("#siolaLegal_2all").change(function () {
   let isChecked = $(this).prop("checked");
-  if (isChecked) {
-
-  } else {
-
-  }
+  setVisibilityByGloballId(siolaLegal, "1v9OojEXb8KAGsDLD6VG7$", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1kUW4Oq$jFxuGrqJaV4q6T", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1v9OojEXb8KAGsDLD6VG3n", isChecked);
+  setVisibilityByGloballId(siolaLegal, "301wrmOXH4SOTRz6q8Xv7z", isChecked);
+  setVisibilityByGloballId(siolaLegal, "301wrmOXH4SOTRz6q8Xv3v", isChecked);
+  setVisibilityByGloballId(siolaLegal, "2vmj7xm6L5o8AfvndGHU2E", isChecked);
+  setVisibilityByGloballId(siolaLegal, "3fILicVDn9PwmdpYV5GVKB", isChecked);
 });
 $("#siolaLegal_3all").change(function () {
   let isChecked = $(this).prop("checked");
-  if (isChecked) {
-
-  } else {
-
-  }
+  setVisibilityByGloballId(siolaLegal, "1hbmR_RZTBBOYEenGzkEBz", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1aTTvQ3T53fuvdFQTCLY0t", isChecked);
+  setVisibilityByGloballId(siolaLegal, "3KJqGmnF16jfwV7zjLMlyq", isChecked);
+  setVisibilityByGloballId(siolaLegal, "2Z8IIuTMnARO$BcYV3p5MH", isChecked);
+  setVisibilityByGloballId(siolaLegal, "39zBx4po97Cf5Z$GQgU6N4", isChecked);
+  setVisibilityByGloballId(siolaLegal, "0AaW4fYO997ggGFFs78nlT", isChecked);
+  setVisibilityByGloballId(siolaLegal, "0AaW4fYO997ggGFFs78nek", isChecked);
 });
 $("#siolaLegal_4all").change(function () {
   let isChecked = $(this).prop("checked");
-  if (isChecked) {
-
-  } else {
-
-  }
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCLA", isChecked);
+  setVisibilityByGloballId(siolaLegal, "3TT5nUcA1AzQzQG79kfeJv", isChecked);
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCIv", isChecked);
 });
 $("#siolaLegal_5all").change(function () {
   let isChecked = $(this).prop("checked");
-  if (isChecked) {
-
-  } else {
-
-  }
+  setVisibilityByGloballId(siolaLegal, "1rxACzsQH15hKLlsWCfCef", isChecked);
 });
 
 // balai pemuda
@@ -1221,53 +1228,84 @@ let setColorStyle = new Cesium.Cesium3DTileStyle({
 siolaLegal.style = setColorStyle;
 
 let MappingHideTileset = [];
+let MappingTransparentTileset = [];
 
-function mappingId(legalId, isChecked) {
+function mappingHide(GlobalId, isChecked) {
   if (isChecked) {
-    MappingHideTileset = MappingHideTileset.filter(data => data !== legalId);
+    MappingHideTileset = MappingHideTileset.filter(data => data !== GlobalId);
   } else {
-    MappingHideTileset.push(legalId);
+    MappingHideTileset.push(GlobalId);
   }
-  // console.log(MappingHideTileset);
+  console.log("hide");
+  console.log(MappingHideTileset);
 }
 
-function setVisibilityByLegalId(tileset, legalId, isChecked) {
-  mappingId(legalId, isChecked);
+function setVisibilityByGloballId(tileset, GlobalId, isChecked) {
+  mappingHide(GlobalId, isChecked);
   tileset.style = new Cesium.Cesium3DTileStyle({
     show: {
       evaluate: function (feature) {
-        return !MappingHideTileset.includes(feature.getProperty("legal_id"));
+        return !MappingHideTileset.includes(feature.getProperty("GlobalId"));
       },
     },
-    color: setColorStyle.color,
-  });
-}
-// setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f");
-
-
-function setTransparent(legalId, alphaValue) {
-  const newStyle = new Cesium.Cesium3DTileStyle({
     color: {
       evaluateColor: function (feature, result) {
+        // Ambil nilai "_paint" dari properti fitur
         const styleName = feature.getProperty("_paint");
-        if (feature.getProperty("legal_id") === legalId) {
-          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
-        }
+        // Jika "legal_type" adalah "legal_space", atur transparansi menjadi 0.4
         if (feature.getProperty("legal_type") === "legal_space") {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
         }
-        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
+        // MappingTransparentTileset
+        if (MappingTransparentTileset.includes(feature.getProperty("GlobalId"))) {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.3);
+        }
+        // Temukan warna yang sesuai dari colormap atau gunakan warna default jika tidak ditemukan
+        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0); // Default: Grey
+        // Kembalikan warna hasil evaluasi
         return Cesium.Color.clone(color, result);
       },
     },
   });
-  siolaLegal.style = newStyle;
+}
+// setVisibilityByGloballId(siolaLegal, "3d26tVi4bDFB_KinyWWg_x");
+
+// make transparent 0.4 fucntion witout override color style and visibility
+function mappingTransparent(GlobalId, isChecked) {
+  MappingTransparentTileset = [GlobalId];
+  console.log("transparent");
+  console.log(MappingTransparentTileset);
 }
 
-
-
-// setTransparent("legal_cc6e43c0-8b16-4559-a331-8e5ddc24f639", 0.5);
-// setTransparent("legal_48caf1fc-88bd-4c04-abae-04087d157a44", 0);
+function setTransparentByGlobalId(tileset, GlobalId, isChecked) {
+  mappingTransparent(GlobalId, isChecked);
+  tileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      evaluateColor: function (feature, result) {
+        // Ambil nilai "_paint" dari properti fitur
+        const styleName = feature.getProperty("_paint");
+        // Jika "legal_type" adalah "legal_space", atur transparansi menjadi 0.4
+        if (feature.getProperty("legal_type") === "legal_space") {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
+        }
+        // MappingTransparentTileset
+        if (MappingTransparentTileset.includes(feature.getProperty("GlobalId"))) {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.3);
+        }
+        // Temukan warna yang sesuai dari colormap atau gunakan warna default jika tidak ditemukan
+        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0); // Default: Grey
+        // Kembalikan warna hasil evaluasi
+        return Cesium.Color.clone(color, result);
+      },
+    },
+    show: {
+      evaluate: function (feature) {
+        return !MappingHideTileset.includes(feature.getProperty("GlobalId"));
+      },
+    },
+  });
+}
+// setTransparentByGlobalId(siolaLegal, "legal_cc6e43c0-8b16-4559-a331-8e5ddc24f639");
 
 
 
