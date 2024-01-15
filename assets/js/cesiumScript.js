@@ -16,10 +16,6 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
-// viewer.imageryLayers.removeAll();
-// viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-//   url: 'https://tile.openstreetmap.org/'
-// }));
 
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
@@ -59,6 +55,7 @@ viewer.camera.flyTo({
   },
 });
 
+
 // Initialize OpenLayers map
 const miniMap = new ol.Map({
   target: 'map2d',
@@ -76,11 +73,34 @@ const miniMap = new ol.Map({
     rotate: false,
   }),
 });
-
+// add marker building object in openlayers
+const markerSiola = new ol.Feature({
+  geometry: new ol.geom.Point(
+    ol.proj.fromLonLat([112.73775781677266, -7.256371890525727])
+  ),
+});
+const markerBalai = new ol.Feature({
+  geometry: new ol.geom.Point(
+    ol.proj.fromLonLat([112.74531573749071, -7.264032458811419])
+  ),
+});
+const markerRusunawa = new ol.Feature({
+  geometry: new ol.geom.Point(
+    ol.proj.fromLonLat([112.64459980831899, -8.010094631402152])
+  ),
+});
+const vectorSource = new ol.source.Vector({
+  features: [markerSiola, markerBalai, markerRusunawa],
+});
+const vectorLayer = new ol.layer.Vector({
+  source: vectorSource,
+});
+miniMap.addLayer(vectorLayer);
+// get center view from cesium
 const getCenterView = function () {
   // Get the current camera position
   const centerCartographic = Cesium.Cartographic.fromCartesian(viewer.camera.positionWC);
-  // Get latitude, longitude, and height
+  // Get latitude, longitude, and height heading
   const latitude = Cesium.Math.toDegrees(centerCartographic.longitude);
   const longitude = Cesium.Math.toDegrees(centerCartographic.latitude);
   const height = centerCartographic.height;
@@ -92,10 +112,9 @@ const getCenterView = function () {
     heading
   }
 }
-
+// Adjust OpenLayers zoom based on height
 const getZoom = function (currentView) {
   let zoomLevel;
-  // Adjust OpenLayers zoom based on height
   if (currentView.height < 450) {
     zoomLevel = 15;
   } else if (currentView.height < 1200) {
@@ -119,7 +138,6 @@ const getZoom = function (currentView) {
   }
   return zoomLevel;
 };
-
 // Add an event listener for camera move end
 viewer.camera.moveEnd.addEventListener(function () {
   const currentView = getCenterView();
@@ -131,6 +149,55 @@ viewer.camera.moveEnd.addEventListener(function () {
   miniMap.getView().setRotation(Cesium.Math.toRadians((-currentView.heading)));
 });
 
+
+const layers = viewer.imageryLayers;
+const openStreetMapBasemap = layers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+  url: "https://a.tile.openstreetmap.org/",
+  show: false,
+}));
+
+function changeBasemapLayer(selectedBasemap) {
+  // console.log(layers);
+  if ($("#ShowBasemap").prop("checked") === true) {
+    const basemap = viewer.imageryLayers;
+    const bingMapsAerial = basemap.get(0);
+    const openstreetmap = basemap.get(1);
+    switch (selectedBasemap) {
+      case "OpenStreetMap":
+        openstreetmap.show = true;
+        bingMapsAerial.show = false;
+        break;
+      case "BingMapsAerial":
+        bingMapsAerial.show = true;
+        openstreetmap.show = false;
+        break;
+      default:
+        bingMapsAerial.show = true;
+        openstreetmap.show = false;
+        break;
+    }
+  }
+}
+
+// Set the initial basemap layer
+changeBasemapLayer($("#basemapSelector").val());
+
+// Handle basemap selector change event
+$("#basemapSelector, #ShowBasemap").change(function () {
+  if ($("#ShowBasemap").prop("checked")) {
+    changeBasemapLayer($("#basemapSelector").val());
+    $("#underground_1").prop("checked", !$("#ShowBasemap").prop("checked"));
+  } else {
+    const basemap = viewer.imageryLayers;
+    const bingMapsAerial = basemap.get(0);
+    const openstreetmap = basemap.get(1);
+    bingMapsAerial.show = false;
+    openstreetmap.show = false;
+    $("#underground_1").prop("checked", !$("#ShowBasemap").prop("checked"));
+  }
+  viewer.scene.globe.depthTestAgainstTerrain = !$("#underground_1").prop("checked");
+  viewer.scene.screenSpaceCameraController.enableCollisionDetection = !$("#underground_1").prop("checked");
+});
 
 // Set first camera the given longitude, latitude, and height.
 function firstCamera() {
@@ -259,58 +326,6 @@ $("#siolaLegal_1a1").change(function () {
 
 });
 
-const layers = viewer.imageryLayers;
-const openStreetMapBasemap = layers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-  url: "https://a.tile.openstreetmap.org/",
-  show: false,
-}));
-
-function changeBasemapLayer(selectedBasemap) {
-  // console.log(layers);
-  if ($("#ShowBasemap").prop("checked") === true) {
-    const basemap = viewer.imageryLayers;
-    const bingMapsAerial = basemap.get(0);
-    const openstreetmap = basemap.get(1);
-    switch (selectedBasemap) {
-      case "OpenStreetMap":
-        openstreetmap.show = true;
-        bingMapsAerial.show = false;
-        break;
-      case "BingMapsAerial":
-        bingMapsAerial.show = true;
-        openstreetmap.show = false;
-        break;
-      default:
-        bingMapsAerial.show = true;
-        openstreetmap.show = false;
-        break;
-    }
-  }
-}
-
-// Set the initial basemap layer
-changeBasemapLayer($("#basemapSelector").val());
-
-// Handle basemap selector change event
-$("#basemapSelector, #ShowBasemap").change(function () {
-  if ($("#ShowBasemap").prop("checked")) {
-    changeBasemapLayer($("#basemapSelector").val());
-  } else {
-    const basemap = viewer.imageryLayers;
-    const bingMapsAerial = basemap.get(0);
-    const openstreetmap = basemap.get(1);
-    bingMapsAerial.show = false;
-    openstreetmap.show = false;
-    viewer.scene.globe.depthTestAgainstTerrain = !viewer.scene.globe.depthTestAgainstTerrain;
-    viewer.scene.screenSpaceCameraController.enableCollisionDetection = !viewer.scene.screenSpaceCameraController.enableCollisionDetection;
-  }
-});
-
-
-$(function () {
-  $(".preload").addClass("d-none");
-  $(".loader-container").removeClass("d-none");
-});
 $("#siolaLegal_1a2").change(function () {
 
 });
@@ -1110,9 +1125,9 @@ $("#rusunawaLegal_5all").change(function () {
 });
 
 // underground view   ###############################################################################
-$("#underground_1").on('click', function () {
-  viewer.scene.globe.depthTestAgainstTerrain = !viewer.scene.globe.depthTestAgainstTerrain;
-  viewer.scene.screenSpaceCameraController.enableCollisionDetection = !viewer.scene.screenSpaceCameraController.enableCollisionDetection;
+$("#underground_1").change(function () {
+  viewer.scene.globe.depthTestAgainstTerrain = !$("#underground_1").prop("checked");
+  viewer.scene.screenSpaceCameraController.enableCollisionDetection = !$("#underground_1").prop("checked");
   viewer.scene.globe.translucency.frontFaceAlphaByDistance.nearValue = 0.4;
 });
 
@@ -1230,24 +1245,24 @@ function setVisibilityByLegalId(tileset, legalId, isChecked) {
 // setVisibilityByLegalId(siolaLegal, "legal_998a4d57-5414-4a8c-ae1d-a5ba62c1a51f");
 
 
-// function setTransparent(legalId, alphaValue) {
-//   const newStyle = new Cesium.Cesium3DTileStyle({
-//     color: {
-//       evaluateColor: function (feature, result) {
-//         const styleName = feature.getProperty("_paint");
-//         if (feature.getProperty("legal_id") === legalId) {
-//           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
-//         }
-//         if (feature.getProperty("legal_type") === "legal_space") {
-//           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
-//         }
-//         const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
-//         return Cesium.Color.clone(color, result);
-//       },
-//     },
-//   });
-//   siolaLegal.style = newStyle;
-// }
+function setTransparent(legalId, alphaValue) {
+  const newStyle = new Cesium.Cesium3DTileStyle({
+    color: {
+      evaluateColor: function (feature, result) {
+        const styleName = feature.getProperty("_paint");
+        if (feature.getProperty("legal_id") === legalId) {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), alphaValue);
+        }
+        if (feature.getProperty("legal_type") === "legal_space") {
+          return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
+        }
+        const color = colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0);
+        return Cesium.Color.clone(color, result);
+      },
+    },
+  });
+  siolaLegal.style = newStyle;
+}
 
 
 
