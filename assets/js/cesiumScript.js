@@ -100,16 +100,20 @@ miniMap.addLayer(vectorLayer);
 const getCenterView = function () {
   // Get the current camera position
   const centerCartographic = Cesium.Cartographic.fromCartesian(viewer.camera.positionWC);
-  // Get latitude, longitude, and height heading
-  const latitude = Cesium.Math.toDegrees(centerCartographic.longitude);
-  const longitude = Cesium.Math.toDegrees(centerCartographic.latitude);
+  // Get latitude, longitude, and height, heading, picth, roll
+  const longitude = Cesium.Math.toDegrees(centerCartographic.longitude);
+  const latitude = Cesium.Math.toDegrees(centerCartographic.latitude);
   const height = centerCartographic.height;
   const heading = Cesium.Math.toDegrees(viewer.camera.heading);
+  const pitch = Cesium.Math.toDegrees(viewer.camera.pitch);
+  const roll = Cesium.Math.toDegrees(viewer.camera.roll);
   return {
-    latitude,
     longitude,
+    latitude,
     height,
-    heading
+    heading,
+    pitch,
+    roll,
   }
 }
 // Adjust OpenLayers zoom based on height
@@ -144,7 +148,7 @@ viewer.camera.moveEnd.addEventListener(function () {
   console.log(currentView);
   const zoomLevel = getZoom(currentView);
   // Update OpenLayers view
-  miniMap.getView().setCenter(ol.proj.fromLonLat([currentView.latitude, currentView.longitude]));
+  miniMap.getView().setCenter(ol.proj.fromLonLat([currentView.longitude, currentView.latitude]));
   miniMap.getView().setZoom(zoomLevel);
   miniMap.getView().setRotation(Cesium.Math.toRadians((-currentView.heading)));
 });
@@ -239,7 +243,7 @@ function thirdCamera() {
   });
 }
 
-function zoomToLocation(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
+function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
   // Zoom to the tileset
   const heading = Cesium.Math.toRadians(headingDegrees);
   const pitch = Cesium.Math.toRadians(pitchDegrees);
@@ -248,6 +252,23 @@ function zoomToLocation(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDis
     orientation: {
       heading: heading,
       pitch: pitch,
+    },
+    duration: 1,
+  });
+}
+
+function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchDegrees = -25, roll = 0) {
+  // Zoom to position
+  const heading = Cesium.Math.toRadians(headingDegrees);
+  const pitch = Cesium.Math.toRadians(pitchDegrees);
+  const position = Cesium.Cartesian3.fromDegrees(longitude, latitude, height);
+  // Zoom to position
+  viewer.camera.flyTo({
+    destination: position,
+    orientation: {
+      heading: heading,
+      pitch: pitch,
+      roll: roll,
     },
     duration: 1,
   });
@@ -273,24 +294,167 @@ $("#third-camera").click(function (e) {
   thirdCamera();
 });
 
+// Tambahkan overlay HTML untuk menampilkan informasi fitur
+const nameOverlay = document.createElement("div");
+viewer.container.appendChild(nameOverlay);
+nameOverlay.className = "backdrop";
+nameOverlay.style.display = "none";
+nameOverlay.style.position = "absolute";
+nameOverlay.style.bottom = "0";
+nameOverlay.style.left = "0";
+nameOverlay.style["pointer-events"] = "none";
+nameOverlay.style.padding = "4px";
+nameOverlay.style.backgroundColor = "black";
 
-viewer.screenSpaceEventHandler.setInputAction(function onRightClick(movement) {
-    // Pick a new feature
-    const pickedFeature = viewer.scene.pick(movement.position);
-    console.log("Properties:");
-    const propertyIds = pickedFeature.getPropertyIds();
-    console.log(propertyIds);
-    const length = propertyIds.length;
-    console.log(length);
-    console.log();
-    for (let i = 0; i < length; ++i) {
-      const propertyId = propertyIds[i];
-      console.log(propertyId);
-      console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
+// Informasi fitur terpilih
+const selected = {
+  feature: undefined,
+  originalColor: new Cesium.Color(),
+};
+
+// Entitas yang menyimpan info tentang fitur terpilih
+const selectedEntity = new Cesium.Entity();
+
+// Penanganan klik kiri default
+const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
+  Cesium.ScreenSpaceEventType.LEFT_CLICK
+);
+
+// Fungsi untuk membuat deskripsi HTML fitur terpilih
+function createPickedFeatureDescription(pickedFeature) {
+  const description =
+    `<table class="cesium-infoBox-defaultTable"><tbody>` +
+    `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
+    `<tr><th>parcel_id ID</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
+    `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
+    `<tr><th>Longitude</th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
+    `<tr><th>Latitude</th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
+    `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
+    `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
+    `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")}</td></tr>` +
+    `<tr><th>Area</th><td>${pickedFeature.getProperty("area")}</td></tr>` +
+    `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")}</td></tr>` +
+    `</tbody></table>`;
+  return description;
+}
+
+// Cek apakah siluet didukung
+if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
+  // Jika siluet didukung, atur warna siluet
+  const silhouetteBlue = Cesium.PostProcessStageLibrary.createEdgeDetectionStage();
+  silhouetteBlue.uniforms.color = Cesium.Color.BLUE;
+  silhouetteBlue.uniforms.length = 0.01;
+  silhouetteBlue.selected = [];
+
+  const silhouetteGreen = Cesium.PostProcessStageLibrary.createEdgeDetectionStage();
+  silhouetteGreen.uniforms.color = Cesium.Color.LIME;
+  silhouetteGreen.uniforms.length = 0.01;
+  silhouetteGreen.selected = [];
+
+  viewer.scene.postProcessStages.add(
+    Cesium.PostProcessStageLibrary.createSilhouetteStage([
+      silhouetteBlue,
+      silhouetteGreen,
+    ])
+  );
+
+  // Saat mouse bergerak, siluetkan fitur berwarna biru
+  viewer.screenSpaceEventHandler.setInputAction(function onMouseMove(movement) {
+    silhouetteBlue.selected = [];
+
+    const pickedFeature = viewer.scene.pick(movement.endPosition);
+
+    if (!Cesium.defined(pickedFeature)) {
+      return;
     }
-  },
-  Cesium.ScreenSpaceEventType.RIGHT_CLICK);
 
+    if (pickedFeature !== selected.feature) {
+      silhouetteBlue.selected = [pickedFeature];
+    }
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  // Saat mouse diklik, siluetkan fitur berwarna hijau dan tampilkan metadata di InfoBox
+  viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
+    silhouetteGreen.selected = [];
+
+    const pickedFeature = viewer.scene.pick(movement.position);
+    if (!Cesium.defined(pickedFeature)) {
+      clickHandler(movement);
+      return;
+    }
+
+    if (silhouetteGreen.selected[0] === pickedFeature) {
+      return;
+    }
+
+    const highlightedFeature = silhouetteBlue.selected[0];
+    if (pickedFeature === highlightedFeature) {
+      silhouetteBlue.selected = [];
+    }
+
+    silhouetteGreen.selected = [pickedFeature];
+
+    viewer.selectedEntity = selectedEntity;
+    selectedEntity.description = createPickedFeatureDescription(pickedFeature);
+  }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+} else {
+  // Jika siluet tidak didukung, atur warna fitur
+
+  const highlighted = {
+    feature: undefined,
+    originalColor: new Cesium.Color(),
+  };
+
+  viewer.screenSpaceEventHandler.setInputAction(function onMouseMove(movement) {
+    if (Cesium.defined(highlighted.feature)) {
+      highlighted.feature.color = highlighted.originalColor;
+      highlighted.feature = undefined;
+    }
+
+    const pickedFeature = viewer.scene.pick(movement.endPosition);
+
+    if (!Cesium.defined(pickedFeature)) {
+      return;
+    }
+
+    if (pickedFeature !== selected.feature) {
+      highlighted.feature = pickedFeature;
+      Cesium.Color.clone(pickedFeature.color, highlighted.originalColor);
+      pickedFeature.color = Cesium.Color.YELLOW;
+    }
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
+    if (Cesium.defined(selected.feature)) {
+      selected.feature.color = selected.originalColor;
+      selected.feature = undefined;
+    }
+
+    const pickedFeature = viewer.scene.pick(movement.position);
+    if (!Cesium.defined(pickedFeature)) {
+      clickHandler(movement);
+      return;
+    }
+
+    if (selected.feature === pickedFeature) {
+      return;
+    }
+
+    selected.feature = pickedFeature;
+
+    if (pickedFeature === highlighted.feature) {
+      Cesium.Color.clone(highlighted.originalColor, selected.originalColor);
+      highlighted.feature = undefined;
+    } else {
+      Cesium.Color.clone(pickedFeature.color, selected.originalColor);
+    }
+
+    pickedFeature.color = Cesium.Color.LIME;
+
+    viewer.selectedEntity = selectedEntity;
+    selectedEntity.description = createPickedFeatureDescription(pickedFeature);
+  }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+}
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {
@@ -424,7 +588,7 @@ $("#zoomToSiolaLegal_1all").on('click', function () {
     "legal_01HM6EM7QX80R8CH3JDZ097JX3",
     "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK"
   ]);
-  zoomToLocation(siolaBuildingL1, -5, 90, 150);
+  zoomToTileset(siolaBuildingL1, -5, 90, 150);
 });
 $("#zoomToSiolaLegal_2all").on('click', function () {
   setTransparentBylegal_id(siolaLegal, [
@@ -436,7 +600,7 @@ $("#zoomToSiolaLegal_2all").on('click', function () {
     "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W",
     "legal_01HM6EM7V04AZ1NWE2VJ7T6T89"
   ]);
-  zoomToLocation(siolaBuildingL2, -10, 90, 150);
+  zoomToTileset(siolaBuildingL2, -10, 90, 150);
 });
 $("#zoomToSiolaLegal_3all").on('click', function () {
   setTransparentBylegal_id(siolaLegal, [
@@ -448,7 +612,7 @@ $("#zoomToSiolaLegal_3all").on('click', function () {
     "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P",
     "legal_01HM6EM7X6FYFJW3PN5TQV1DAR"
   ]);
-  zoomToLocation(siolaBuildingL3, -15, 90, 150);
+  zoomToTileset(siolaBuildingL3, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_4all").on('click', function () {
   setTransparentBylegal_id(siolaLegal, [
@@ -456,143 +620,143 @@ $("#zoomToSiolaLegal_4all").on('click', function () {
     "legal_01HM6EM7YS0BMJZNXP9YB1MSA2",
     "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3"
   ]);
-  zoomToLocation(siolaBuildingL4, -15, 90, 150);
+  zoomToTileset(siolaBuildingL4, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_5all").on('click', function () {
   setTransparentBylegal_id(siolaLegal, [
     "legal_01HM6EM7ZH14YX6V6Y963TEKXQ",
   ]);
-  zoomToLocation(siolaBuildingL5, -20, 90, 150);
+  zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
 $("#zoomToSiolaLegal_gsb").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7CQ6NV0TGV2RNKNM1GX", $(this).prop("checked"));
-  zoomToLocation(siolaLegalGSB, -20, 90, 150);
+  zoomToLocation(60, 65, 112.7364636251925, -7.257092539825164, -20, 0);
 });
 $("#zoomToSiolaLegal_bt").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
-  zoomToLocation(siolaLegalBT, -20, 90, 150);
+  zoomToLocation(60, 200, 112.7343253773387, -7.258348227236101, -20, 0);
 });
 $("#zoomToSiolaLegal_bb").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7D40JE8AAFPK0SK06HE", $(this).prop("checked"));
-  zoomToLocation(siolaLegalBB, 15, 90, 150);
+  zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
 });
 
 $("#zoomToSiolaLegal_1a1").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7P6DEEDQH6QTE0Z68B8");
-  zoomToLocation(siolaLegalL1a1, -10, 90, 100);
+  zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
 });
 $("#zoomToSiolaLegal_1a2").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RRR7HCZP94ETRJK757");
-  zoomToLocation(siolaLegalL1a2, -10, 90, 100);
+  zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
 });
 $("#zoomToSiolaLegal_1a3").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Q59K0S7NYA9DQ5DAFX");
-  zoomToLocation(siolaLegalL1a3, -10, 90, 100);
+  zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
 });
 $("#zoomToSiolaLegal_1a4").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7PTPYH074Q5ZJDGV3Z7");
-  zoomToLocation(siolaLegalL1a4, -10, 90, 100);
+  zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
 });
 $("#zoomToSiolaLegal_1a5").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RZXAKK47WMJVV9YSKB");
-  zoomToLocation(siolaLegal, -10, 160, 100);
+  zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
 });
 $("#zoomToSiolaLegal_1a6").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7PHEQA5SX964M063XQK");
-  zoomToLocation(siolaLegalL1a6, -10, 140, 100);
+  zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -20, 0);
 });
 $("#zoomToSiolaLegal_1a7").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7QNNM61J5YDVQQ23TB2");
-  zoomToLocation(siolaLegalL1a7, -10, 150, 100);
+  zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
 });
 $("#zoomToSiolaLegal_1a8").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7R5TWKKPSEM6Q95T28R");
-  zoomToLocation(siolaLegalL1a8, -10, 90, 100);
+  zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
 });
 $("#zoomToSiolaLegal_1a9").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7QX80R8CH3JDZ097JX3");
-  zoomToLocation(siolaLegalL1a9, -10, 90, 100);
+  zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
 });
 $("#zoomToSiolaLegal_1a10").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK");
-  zoomToLocation(siolaLegalL1a10, -10, 0, 100);
+  zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
 });
 
 $("#zoomToSiolaLegal_2a1").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7VAYDZ2BHP9Y7TVMYWQ");
-  zoomToLocation(siolaLegalL2a1, -15, 80, 100);
+  zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
 });
 $("#zoomToSiolaLegal_2a2").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7VT5ARB2YC0C7PXKCDY");
-  zoomToLocation(siolaLegalL2a2, -15, 100, 100);
+  zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
 });
 $("#zoomToSiolaLegal_2a3").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7TN104KHG9ZEHJVSAX5");
-  zoomToLocation(siolaLegalL2a3, -15, 90, 100);
+  zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
 $("#zoomToSiolaLegal_2a4").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7SFH37VQ3NC3JQ6PRXE");
-  zoomToLocation(siolaLegalL2a4, -15, 10, 100);
+  zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
 $("#zoomToSiolaLegal_2a5").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7S8KJJGYKK6GDD7BBTN");
-  zoomToLocation(siolaLegalL2a5, -15, 140, 100);
+  zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
 });
 $("#zoomToSiolaLegal_2a6").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W");
-  zoomToLocation(siolaLegalL2a6, -15, 90, 100);
+  zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
 $("#zoomToSiolaLegal_2a7").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7V04AZ1NWE2VJ7T6T89");
-  zoomToLocation(siolaLegalL2a7, -15, -30, 100);
+  zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
 });
 
 $("#zoomToSiolaLegal_3a1").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7XR27P0H1C69A7TPGZ0");
-  zoomToLocation(siolaLegalL3a1, -20, 90, 100);
+  zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
 });
 $("#zoomToSiolaLegal_3a2").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Y68R892D1XNRBV2RPN");
-  zoomToLocation(siolaLegalL3a2, -20, 90, 100);
+  zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
 });
 $("#zoomToSiolaLegal_3a3").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7WZ79J0N5VRS8HQWJXX");
-  zoomToLocation(siolaLegalL3a3, -20, 90, 100);
+  zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
 $("#zoomToSiolaLegal_3a4").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7W331GHVRF0QTNJXGRW");
-  zoomToLocation(siolaLegalL3a4, -20, 90, 100);
+  zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
 $("#zoomToSiolaLegal_3a5").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7WCQA085HKSMFMBE8Z0");
-  zoomToLocation(siolaLegalL3a5, -20, 90, 100);
+  zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
 });
 $("#zoomToSiolaLegal_3a6").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P");
-  zoomToLocation(siolaLegalL3a6, -20, 90, 100);
+  zoomToLocation(180, 350, 112.73779026382113, -7.255632571893392, -15, 0);
 });
 $("#zoomToSiolaLegal_3a7").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7X6FYFJW3PN5TQV1DAR");
-  zoomToLocation(siolaLegalL3a7, -20, 90, 100);
+  zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
 
 $("#zoomToSiolaLegal_4a1").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7YFWXFTR05G47KJJMJ9");
-  zoomToLocation(siolaLegalL4a1, -25, 80, 100);
+  zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
 });
 $("#zoomToSiolaLegal_4a2").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7YS0BMJZNXP9YB1MSA2");
-  zoomToLocation(siolaLegalL4a2, -25, -10, 100);
+  zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
 });
 $("#zoomToSiolaLegal_4a3").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3");
-  zoomToLocation(siolaLegalL4a3, -25, 150, 100);
+  zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
 });
 
 $("#zoomToSiolaLegal_5a1").on('click', function () {
   setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7ZH14YX6V6Y963TEKXQ");
-  zoomToLocation(siolaLegalL5a1, -25, 90, 100);
+  zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
 
@@ -689,88 +853,88 @@ $("#balaiLegal_BT").change(function () {
 });
 
 $("#zoomToBalaiLegal_0all").on('click', function () {
-  zoomToLocation(balaiBuildingL1, -25, 180, 100);
+  zoomToTileset(balaiBuildingL1, -25, 180, 100);
 });
 $("#zoomToBalaiLegal_1all").on('click', function () {
-  zoomToLocation(balaiBuildingL1, -25, 0, 100);
+  zoomToTileset(balaiBuildingL1, -25, 0, 100);
 });
 
 $("#zoomToBalaiLegal_gsb").on('click', function () {
-  zoomToLocation(balaiLegalGSB, -20, 25, 300);
+  zoomToTileset(balaiLegalGSB, -20, 25, 300);
 });
 $("#zoomToBalaiLegal_bt").on('click', function () {
-  zoomToLocation(balaiLegalBT, -20, 25, 300);
+  zoomToTileset(balaiLegalBT, -20, 25, 300);
 });
 $("#zoomToBalaiLegal_bb").on('click', function () {
-  zoomToLocation(balaiLegalBB, 15, 25, 300);
+  zoomToTileset(balaiLegalBB, 15, 25, 300);
 });
 
 $("#zoomToBalaiLegal_1a1").on('click', function () {
-  zoomToLocation(balaiLegalL1a1, -45, 20, 100);
+  zoomToTileset(balaiLegalL1a1, -45, 20, 100);
 });
 $("#zoomToBalaiLegal_1a2").on('click', function () {
-  zoomToLocation(balaiLegalL1a2, -25, 20, 100);
+  zoomToTileset(balaiLegalL1a2, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_1a3").on('click', function () {
-  zoomToLocation(balaiLegalL1a3, -25, 20, 100);
+  zoomToTileset(balaiLegalL1a3, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_1a4").on('click', function () {
-  zoomToLocation(balaiLegalL1a4, -25, 20, 100);
+  zoomToTileset(balaiLegalL1a4, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_1a5").on('click', function () {
-  zoomToLocation(balaiLegalL1a5, -25, 20, 100);
+  zoomToTileset(balaiLegalL1a5, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_1a6").on('click', function () {
-  zoomToLocation(balaiLegalL1a6, -25, 80, 100);
+  zoomToTileset(balaiLegalL1a6, -25, 80, 100);
 });
 $("#zoomToBalaiLegal_1a7").on('click', function () {
-  zoomToLocation(balaiLegalL1a7, -25, 80, 100);
+  zoomToTileset(balaiLegalL1a7, -25, 80, 100);
 });
 $("#zoomToBalaiLegal_1a8").on('click', function () {
-  zoomToLocation(balaiLegalL1a8, -25, 80, 100);
+  zoomToTileset(balaiLegalL1a8, -25, 80, 100);
 });
 $("#zoomToBalaiLegal_1a9").on('click', function () {
-  zoomToLocation(balaiLegalL1a9, -25, 80, 100);
+  zoomToTileset(balaiLegalL1a9, -25, 80, 100);
 });
 $("#zoomToBalaiLegal_1a10").on('click', function () {
-  zoomToLocation(balaiLegalL1a10, -25, 0, 100);
+  zoomToTileset(balaiLegalL1a10, -25, 0, 100);
 });
 $("#zoomToBalaiLegal_1a11").on('click', function () {
-  zoomToLocation(balaiLegalL1a10, -25, 210, 100);
+  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
 });
 $("#zoomToBalaiLegal_1a12").on('click', function () {
-  zoomToLocation(balaiLegalL1a10, -25, 210, 100);
+  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
 });
 $("#zoomToBalaiLegal_1a13").on('click', function () {
-  zoomToLocation(balaiLegalL1a10, -25, 210, 100);
+  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
 });
 
 $("#zoomToBalaiLegal_0a1").on('click', function () {
-  zoomToLocation(balaiLegalL0a1, -45, 25, 100);
+  zoomToTileset(balaiLegalL0a1, -45, 25, 100);
 });
 $("#zoomToBalaiLegal_0a2").on('click', function () {
-  zoomToLocation(balaiLegalL0a2, -25, 25, 100);
+  zoomToTileset(balaiLegalL0a2, -25, 25, 100);
 });
 $("#zoomToBalaiLegal_0a3").on('click', function () {
-  zoomToLocation(balaiLegalL0a3, -25, 25, 100);
+  zoomToTileset(balaiLegalL0a3, -25, 25, 100);
 });
 $("#zoomToBalaiLegal_0a4").on('click', function () {
-  zoomToLocation(balaiLegalL0a4, -25, 25, 100);
+  zoomToTileset(balaiLegalL0a4, -25, 25, 100);
 });
 $("#zoomToBalaiLegal_0a5").on('click', function () {
-  zoomToLocation(balaiLegalL0a5, -25, 25, 100);
+  zoomToTileset(balaiLegalL0a5, -25, 25, 100);
 });
 $("#zoomToBalaiLegal_0a6").on('click', function () {
-  zoomToLocation(balaiLegalL0a6, -25, 25, 100);
+  zoomToTileset(balaiLegalL0a6, -25, 25, 100);
 });
 $("#zoomToBalaiLegal_0a7").on('click', function () {
-  zoomToLocation(balaiLegalL0a7, -25, 20, 100);
+  zoomToTileset(balaiLegalL0a7, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_0a8").on('click', function () {
-  zoomToLocation(balaiLegalL0a8, -25, 20, 100);
+  zoomToTileset(balaiLegalL0a8, -25, 20, 100);
 });
 $("#zoomToBalaiLegal_0a9").on('click', function () {
-  zoomToLocation(balaiLegalL0a9, -25, 20, 100);
+  zoomToTileset(balaiLegalL0a9, -25, 20, 100);
 });
 
 // Layering button Rusunawa   #############################################################################
@@ -1224,7 +1388,7 @@ $("#zoomToRusunawaLegal_1all").on('click', function () {
     "legal_01HM6EW9C8FC97YYPFMHZSJJCG",
     "legal_01HM6EW9BXA4XSZ8029S3J260F",
   ]);
-  zoomToLocation(rusunawaBuildingL1, -25, 180, 100);
+  zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_2all").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, [
@@ -1256,7 +1420,7 @@ $("#zoomToRusunawaLegal_2all").on('click', function () {
     "legal_01HM6EW9EN8FQ0XDK68F1VXMN1",
     "legal_01HM6EW9E0KJESXY4H2BNBE7VM",
   ]);
-  zoomToLocation(rusunawaBuildingL2, -25, 180, 100);
+  zoomToTileset(rusunawaBuildingL2, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_3all").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, [
@@ -1288,7 +1452,7 @@ $("#zoomToRusunawaLegal_3all").on('click', function () {
     "legal_01HM6EW9JXP8418XRP007M283B",
     "legal_01HM6EW9Q6K2F6KR3AENXDFWWF",
   ]);
-  zoomToLocation(rusunawaBuildingL3, -25, 180, 100);
+  zoomToTileset(rusunawaBuildingL3, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_4all").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, [
@@ -1320,7 +1484,7 @@ $("#zoomToRusunawaLegal_4all").on('click', function () {
     "legal_01HM6EW9R3NP14ARFTQNV13BEW",
     "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV",
   ]);
-  zoomToLocation(rusunawaBuildingL4, -25, 180, 100);
+  zoomToTileset(rusunawaBuildingL4, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_5all").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, [
@@ -1352,414 +1516,538 @@ $("#zoomToRusunawaLegal_5all").on('click', function () {
     "legal_01HM6EW9X4WWVMEB76J2P1XP7D",
     "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2",
   ]);
-  zoomToLocation(rusunawaBuildingL5, -25, 180, 100);
+  zoomToTileset(rusunawaBuildingL5, -25, 180, 100);
 });
 
 $("#zoomToRusunawaLegal_gsb").on('click', function () {
-  zoomToLocation(rusunawaLegalGSB, -20, 0, 250);
+  zoomToLocation(200, 55, 112.64532688605156, -8.0095746475103, -20, 0);
 });
 $("#zoomToRusunawaLegal_bt").on('click', function () {
-  zoomToLocation(balaiLegalBT, -20, 0, 250);
+  zoomToLocation(195, 80, 112.64557670743565, -8.009150136716535, -15, 0);
 });
 $("#zoomToRusunawaLegal_bb").on('click', function () {
-  zoomToLocation(balaiLegalBB, 15, 0, 250);
+  zoomToLocation(205, -15, 112.645600600889, -8.009171410209218, 2, 0);
 });
 
 $("#zoomToRusunawaLegal_1a1").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW996G1Z61WBQY1XP3QAK");
-  zoomToLocation(rusunawaLegalL1a1, -45, 180, 100);
+  zoomToLocation(265, 50, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_1a2").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AC1QPP7KW6J343B848");
+  zoomToLocation(180, 15, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a3").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CJ26GJS4A4JP9JQ4W2");
+  zoomToLocation(180, 15, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a4").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CP9GS5QSGGTTV7GMC2");
+  zoomToLocation(180, 15, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a5").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CDDCR0RAMWWSX1KHMN");
+  zoomToLocation(180, 15, 112.64500479106304, -8.010318705620248, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a6").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CV1M82CGYX5SPVBSFA");
+  zoomToLocation(180, 15, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a7").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DBK9J1MN5WFHB9B16J");
+  zoomToLocation(180, 15, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a8").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9D52TK6QTBQC832RBNQ");
+  zoomToLocation(180, 15, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a9").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DGEFA023Q9HD9WY5EB");
+  zoomToLocation(180, 15, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a10").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BS01J71V6KXND1BV4T");
+  zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a11").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9C3DV3KDRH8EHRK9FVF");
+  zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a12").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BJ60VSCFTXEQJ1TY5D");
+  zoomToLocation(0, 15, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a13").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BBR6W6WTB8ZP65B2WW");
+  zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a14").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9B610G13NHKJT44S509");
+  zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a15").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9B1JJFM7H4E8MZDSDDS");
+  zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a16").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AS7JFA6MMEHMX0MWS1");
+  zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a17").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AK2ADTV3A79B2A6ZWX");
+  zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a18").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9A95Q8QTDWZ0Q7YYN89");
+  zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a19").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9A41HNVDGF7VT7QWE8F");
+  zoomToLocation(0, 15, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a20").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9C8FC97YYPFMHZSJJCG");
+  zoomToLocation(0, 15, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a21").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BXA4XSZ8029S3J260F");
+  zoomToLocation(0, 15, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_2a1").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DTF7VED1JMZYE5GSYE");
-  zoomToLocation(rusunawaLegalL2a1, -45, 180, 100);
+  zoomToLocation(265, 52, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_2a2").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JF1A9Q205ZXXM3JA7Y");
+  zoomToLocation(180, 17, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a3").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GRAHX1RCKBGNEM3B2T");
+  zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a4").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9J91BB3TS79QJ3FYNH6");
+  zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a5").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9J20S66D2T0VVCKKAX5");
+  zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a6").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HVS15HHSSCTJE5QP3S");
+  zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a7").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HPCF5JN81YKW88P57J");
+  zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a8").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HJAXG353YRWQK707TW");
+  zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a9").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HEGVC91YVDTMN82QFB");
+  zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a10").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9H9S0NZ0S40Y38NWWN2");
+  zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a11").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9H293QC7RP34NHPNX1A");
+  zoomToLocation(180, 17, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a12").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GK7RQPJPPD6ZTG34HP");
+  zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a13").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GX4SPW03PXM9F35HTE");
+  zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a14").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9E61D378B64K62B28EK");
+  zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a15").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EE5WASSX5XJV38AZ6H");
+  zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a16").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GB4EA4ZFYAN4VCRV0K");
+  zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a17").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9G76Z0JMNVH6KTTAPK7");
+  zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a18").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9G0FDEXXV7ZSD2MJNGG");
+  zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a19").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FSYXR41VAA2452CAR4");
+  zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a20").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FK4DYRSKVNV6BB7B2A");
+  zoomToLocation(0, 17, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a21").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FFCKQA7V1Z45X8JTCS");
+  zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a22").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FA312J5704SNJ6PYJ3");
+  zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a23").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9F5ZHB9G3B71ZZAJPWS");
+  zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a24").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EZ18RKZYJKHS2Z53R7");
+  zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a25").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ET2QPK43G2QTXRE4HC");
+  zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a26").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EN8FQ0XDK68F1VXMN1");
+  zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a27").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9E0KJESXY4H2BNBE7VM");
+  zoomToLocation(0, 17, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_3a1").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9MVW5ZGH9QXR49J570K");
-  zoomToLocation(rusunawaLegalL3a1, -45, 180, 100);
+  zoomToLocation(265, 54, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_3a2").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Q07D1QQW0A81T6A3W9");
+  zoomToLocation(180, 19, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a3").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9N9DADE0PTZWVZ0FZJ0");
+  zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a4").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PTZ0A2AJXXMBRP22YJ");
+  zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a5").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PN986VDPJXJC6EK9JV");
+  zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a6").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PGYR5T30KRSHCPZWAK");
+  zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a7").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9P93F9RHT1J5NZXSYFN");
+  zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a8").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9P3N98X9TX7VNRBJ15X");
+  zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a9").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NZDR7PV98W970T5PRX");
+  zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a10").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NSC24K5FPDZEP7XG25");
+  zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a11").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NKCN16ZY3MV0T9GWF4");
+  zoomToLocation(180, 19, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a12").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9N4PHV678XHXKETX2EH");
+  zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a13").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NFBP8DPD8X5P03E3TW");
+  zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a14").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QBPGW27WGDG51XKR3X");
+  zoomToLocation(100, 14, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a15").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JRNGDQ0NPCYT2BC9XM");
+  zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a16").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9MJRB0A8TY333RE1QFZ");
+  zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a17").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ME30WEZRRXDPQA190J");
+  zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a18").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9M70652KB4774BW89EC");
+  zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a19").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9M100TA6VY3FM35D5R6");
+  zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a20").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KXFWG38WNR24HWCPJK");
+  zoomToLocation(0, 19, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a21").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KQ954KPSACVC6D6CE0");
+  zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a22").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KKDNMQZ8FRB96RCHCC");
+  zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a23").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KFXPTCSYEJY3YYJP1Y");
+  zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a24").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9K91WCB1AD66JYY3FFS");
+  zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a25").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9K28V03M20MSEPV7QCD");
+  zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a26").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JXP8418XRP007M283B");
+  zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a27").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Q6K2F6KR3AENXDFWWF");
+  zoomToLocation(0, 19, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_4a1").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9T0W8VBTZ25HCXBGQPS");
-  zoomToLocation(rusunawaLegalL4a1, -45, 180, 100);
+  zoomToLocation(265, 56, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_4a2").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WAGXHBWAAK6QNDA2MH");
+  zoomToLocation(180, 21, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a3").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TH737NRNVP2WJJP0S0");
+  zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a4").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9W5J48VXG0AXKHV30D6");
+  zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a5").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9W0HX6WBFYMVC7JQ802");
+  zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a6").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VVFNDWX99Q10DNPRC5");
+  zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a7").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VNV42MDP0DJXTDQQ31");
+  zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a8").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VDYT36E93WPXKN0V21");
+  zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a9").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9V7F3QSSW9S0PZ2S4XN");
+  zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a10").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9V2DJBF05DRHF42171K");
+  zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a11").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TYY1DHDJ12T9WGP98K");
+  zoomToLocation(180, 21, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a12").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TBRKRKG84NZMK8XSDY");
+  zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a13").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TSRMXJBXXC8FPW0MP0");
+  zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a14").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QPWE75DMGH3ZRP2ED4");
+  zoomToLocation(100, 16, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a15").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QYSC6XF9HPFBW17TCJ");
+  zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a16").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SRS0BKZ4ZRADS2CRXJ");
+  zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a17").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SJ874QGQMERHQX4R8D");
+  zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a18").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SBTCFP7MF8HMNE1VYQ");
+  zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a19").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9S743XNK211CH82N31G");
+  zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a20").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9S3D2FG186H849WPBD0");
+  zoomToLocation(0, 21, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a21").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RY7Z9V7C40F0XBR2M4");
+  zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a22").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RS0Z4J8DY4RQNZ08SM");
+  zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a23").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RK19R68AXV9YP9HTY8");
+  zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a24").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RBT4M3NX3YH6EMW2E1");
+  zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a25").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9R7M4KK7A45YWR1FAG8");
+  zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a26").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9R3NP14ARFTQNV13BEW");
+  zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a27").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV");
+  zoomToLocation(0, 21, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_5a1").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Z2GR1BZENX99V8SD6F");
-  zoomToLocation(rusunawaLegalL5a1, -45, 180, 100);
+  zoomToLocation(265, 58, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_5a2").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA1DXZJ1FG2R8KJBSMXK");
+  zoomToLocation(180, 23, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a3").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZK0V03298BB5X130WY");
+  zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a4").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA16RNAX53BA0R1PTXJ6");
+  zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a5").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA12ZB7TYZJNHAHPY7WW");
+  zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a6").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0XYNJRXAY0B63N5BBV");
+  zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a7").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0NGNZCR80RNDCXMH5M");
+  zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a8").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0G6XMNZHKP9KN1BBT4");
+  zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a9").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0B8MQSKPHR04CJKNP4");
+  zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a10").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA05B4C592FR7Z3CRX8B");
+  zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a11").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZZP9YD2N3BSGFK7V5D");
+  zoomToLocation(180, 23, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a12").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZDPFQYCG9Y6K9F771W");
+  zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a13").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZSR8817RCJG52R8WDP");
+  zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a14").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WPJPS0THQYCNXRXP6D");
+  zoomToLocation(100, 18, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a15").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WZRP309VTB8P8YQKBQ");
+  zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a16").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YT7MKD01KC38EX2WQP");
+  zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a17").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YKDPC8XACE4HQWVJ9Y");
+  zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a18").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YD78PQ60W3B1P7C3J7");
+  zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a19").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Y9G9K73HXMFXZS05BK");
+  zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a20").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Y4Q2R6WQGXXYQR2ZXH");
+  zoomToLocation(0, 23, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a21").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XZFE0FB81H22C1BJC5");
+  zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a22").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XVME2NBE8PHXHX9Q2J");
+  zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a23").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XMAR7XJ0CG8P17GTAS");
+  zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a24").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XFYBGNR5ZSEE6YP5EW");
+  zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a25").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XAKH8N3MA9GXBEYJ7M");
+  zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a26").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9X4WWVMEB76J2P1XP7D");
+  zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a27").on('click', function () {
   setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2");
+  zoomToLocation(0, 23, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 
@@ -2034,6 +2322,7 @@ const colorMap = {
   "Brown": new Cesium.Color(165 / 255, 42 / 255, 42 / 255, 1.0), // Brown
   "Coral": new Cesium.Color(255 / 255, 127 / 255, 80 / 255, 1.0), // Coral
   "Green": new Cesium.Color(0.0, 1.0, 0.0, 1.0), // Green
+  "Green bright": new Cesium.Color(0.0, 1.0, 0.5, 1.0), // Green bright
   "Grey": new Cesium.Color(128 / 255, 128 / 255, 128 / 255, 1.0), // Grey
   "Lumut": new Cesium.Color(25, 133, 54, 1.0),
   "Light Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Light Blue
@@ -2043,6 +2332,7 @@ const colorMap = {
   "Neon Green": new Cesium.Color(57 / 255, 255 / 255, 20 / 255, 1.0), // Neon Green
   "Orange": new Cesium.Color(255 / 255, 165 / 255, 0 / 255, 1.0), // Orange
   "Pink": new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
+  "pink baby": new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
   "Purple": new Cesium.Color(128 / 255, 0 / 255, 128 / 255, 1.0), // Purple
   "Red": new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Red
   "Red Pastel": new Cesium.Color(255 / 255, 105 / 255, 97 / 255, 1.0), // Red Pastel
@@ -2052,10 +2342,14 @@ const colorMap = {
 };
 
 function getColorFromProperty(inputProperties) {
-  const splitString = inputProperties.split('-').map(function (item) {
-    return item.trim();
-  });
-  return splitString[1];
+  if (inputProperties.includes("-") || inputProperties.includes(" - ")) {
+    const splitString = inputProperties.split('-').map(function (item) {
+      return item.trim();
+    });
+    return splitString[1];
+  } else {
+    return inputProperties;
+  }
 }
 
 // Define a color style
@@ -2264,7 +2558,7 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
 );
 
 const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2422351)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2423897)
 );
 
 balaiLegal.style = setColorStyle;
@@ -2397,7 +2691,7 @@ $("#reset-clip").click(function (e) {
 
 // handle autocomplete seacrh
 $(document).ready(function () {
-  const suggestions = ["L0", "L1", "L2", "L3", "L4", "L5", "L1.1", "L1.2", "L1.3", "L1.4", "L1.5", "L1.6", "L1.7", "L1.8", "L1.9", "L1.10", "L2.1", "L2.2", "L2.3", "L2.4", "L2.5", "L2.6", "L2.7", "L3.1", "L3.2", "L3.3", "L3.4", "L3.5", "L3.6", "L3.7", "L4.1", "L4.2", "L4.3", "L5.1", "Siola"];
+  const suggestions = ["Siola L0", "Siola L1", "Siola L2", "Siola L3", "Siola L4", "Siola L5", "Siola L1.1", "Siola L1.2", "Siola L1.3", "Siola L1.4", "Siola L1.5", "Siola L1.6", "Siola L1.7", "Siola L1.8", "Siola L1.9", "Siola L1.10", "Siola L2.1", "Siola L2.2", "Siola L2.3", "Siola L2.4", "Siola L2.5", "Siola L2.6", "Siola L2.7", "Siola L3.1", "Siola L3.2", "Siola L3.3", "Siola L3.4", "Siola L3.5", "Siola L3.6", "Siola L3.7", "Siola L4.1", "Siola L4.2", "Siola L4.3", "Siola L5.1", "Siola"];
   $("#searchInput").keyup(function (e) {
     const inputValue = $("#searchInput").val().toLowerCase();
     // Hide autocomplete results if input empty
@@ -2434,110 +2728,110 @@ $(document).ready(function () {
   function getSearchResult(value) {
     // Call specific function based on selected suggestion
     switch (value.toLowerCase()) {
-      case "l0":
-        zoomToLocation(siolaBuildingL0, 15, 90, 150); //tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300
-        break;
-      case "l1":
-        zoomToLocation(siolaBuildingL1, -5, 90, 150);
-        break;
-      case "l2":
-        zoomToLocation(siolaBuildingL2, -10, 90, 150);
-        break;
-      case "l3":
-        zoomToLocation(siolaBuildingL3, -15, 90, 150);
-        break;
-      case "l4":
-        zoomToLocation(siolaBuildingL4, -20, 90, 150);
-        break;
-      case "l5":
-        zoomToLocation(siolaBuildingL5, -25, 90, 150);
-        break;
-      case "l1.1":
-        zoomToLocation(siolaLegalL1a1, -10, 90, 100);
-        break;
-      case "l1.2":
-        zoomToLocation(siolaLegalL1a2, -10, 90, 100);
-        break;
-      case "l1.3":
-        zoomToLocation(siolaLegalL1a3, -10, 90, 100);
-        break;
-      case "l1.4":
-        zoomToLocation(siolaLegalL1a4, -10, 90, 100);
-        break;
-      case "l1.5":
-        zoomToLocation(siolaLegalL1a5, -10, 160, 100);
-        break;
-      case "l1.6":
-        zoomToLocation(siolaLegalL1a6, -10, 140, 100);
-        break;
-      case "l1.7":
-        zoomToLocation(siolaLegalL1a7, -10, 150, 100);
-        break;
-      case "l1.8":
-        zoomToLocation(siolaLegalL1a8, -10, 90, 100);
-        break;
-      case "l1.9":
-        zoomToLocation(siolaLegalL1a9, -10, 90, 100);
-        break;
-      case "l1.10":
-        zoomToLocation(siolaLegalL1a10, -10, 0, 100);
-        break;
-      case "l2.1":
-        zoomToLocation(siolaLegalL2a1, -15, 80, 100);
-        break;
-      case "l2.2":
-        zoomToLocation(siolaLegalL2a2, -15, 100, 100);
-        break;
-      case "l2.3":
-        zoomToLocation(siolaLegalL2a3, -15, 90, 100);
-        break;
-      case "l2.4":
-        zoomToLocation(siolaLegalL2a4, -15, 10, 100);
-        break;
-      case "l2.5":
-        zoomToLocation(siolaLegalL2a5, -15, 140, 100);
-        break;
-      case "l2.6":
-        zoomToLocation(siolaLegalL2a6, -15, 90, 100);
-        break;
-      case "l2.7":
-        zoomToLocation(siolaLegalL2a7, -15, -30, 100);
-        break;
-      case "l3.1":
-        zoomToLocation(siolaLegalL3a1, -20, 90, 100);
-        break;
-      case "l3.2":
-        zoomToLocation(siolaLegalL3a2, -20, 90, 100);
-        break;
-      case "l3.3":
-        zoomToLocation(siolaLegalL3a3, -20, 90, 100);
-        break;
-      case "l3.4":
-        zoomToLocation(siolaLegalL3a4, -20, 90, 100);
-        break;
-      case "l3.5":
-        zoomToLocation(siolaLegalL3a5, -20, 90, 100);
-        break;
-      case "l3.6":
-        zoomToLocation(siolaLegalL3a6, -20, 90, 100);
-        break;
-      case "l3.7":
-        zoomToLocation(siolaLegalL3a7, -20, 90, 100);
-        break;
-      case "l4.1":
-        zoomToLocation(siolaLegalL4a1, -25, 80, 100);
-        break;
-      case "l4.2":
-        zoomToLocation(siolaLegalL4a2, -25, -10, 100);
-        break;
-      case "l4.3":
-        zoomToLocation(siolaLegalL4a3, -25, 150, 100);
-        break;
-      case "l5.1":
-        zoomToLocation(siolaLegalL5a1, -25, 90, 100);
-        break;
       case "siola":
         firstCamera()
+        break;
+      case "siola l0":
+        zoomToTileset(siolaBuildingL0, 15, 90, 150); //tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300
+        break;
+      case "siola l1":
+        zoomToTileset(siolaBuildingL1, -5, 90, 150);
+        break;
+      case "siola l2":
+        zoomToTileset(siolaBuildingL2, -10, 90, 150);
+        break;
+      case "siola l3":
+        zoomToTileset(siolaBuildingL3, -15, 90, 150);
+        break;
+      case "siola l4":
+        zoomToTileset(siolaBuildingL4, -20, 90, 150);
+        break;
+      case "siola l5":
+        zoomToTileset(siolaBuildingL5, -25, 90, 150);
+        break;
+      case "siola l1.1":
+        zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
+        break;
+      case "siola l1.2":
+        zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
+        break;
+      case "siola l1.3":
+        zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
+        break;
+      case "siola l1.4":
+        zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
+        break;
+      case "siola l1.5":
+        zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
+        break;
+      case "siola l1.6":
+        zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -20, 0);
+        break;
+      case "siola l1.7":
+        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
+        break;
+      case "siola l1.8":
+        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
+        break;
+      case "siola l1.9":
+        zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
+        break;
+      case "siola l1.10":
+        zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
+        break;
+      case "siola l2.1":
+        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
+        break;
+      case "siola l2.2":
+        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
+        break;
+      case "siola l2.3":
+        zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
+        break;
+      case "siola l2.4":
+        zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
+        break;
+      case "siola l2.5":
+        zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
+        break;
+      case "siola l2.6":
+        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
+        break;
+      case "siola l2.7":
+        zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
+        break;
+      case "siola l3.1":
+        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
+        break;
+      case "siola l3.2":
+        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
+        break;
+      case "siola l3.3":
+        zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
+        break;
+      case "siola l3.4":
+        zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
+        break;
+      case "siola l3.5":
+        zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
+        break;
+      case "siola l3.6":
+        zoomToLocation(180, 350, 112.73779026382113, -7.255632571893392, -15, 0);
+        break;
+      case "siola l3.7":
+        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
+        break;
+      case "siola l4.1":
+        zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
+        break;
+      case "siola l4.2":
+        zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
+        break;
+      case "siola l4.3":
+        zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
+        break;
+      case "siola l5.1":
+        zoomToTileset(siolaBuildingL5, -20, 90, 150);
         break;
       default:
         // Default case if no specific function is defined for the suggestion
