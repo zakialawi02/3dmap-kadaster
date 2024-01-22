@@ -8,6 +8,11 @@
   scroll-behavior: smooth;
 }
 
+.btn-primary {
+  background-color: #013880;
+  border-color: #013880;
+}
+
 .preload {
   position: absolute;
   display: block;

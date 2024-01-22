@@ -325,7 +325,7 @@ function createPickedFeatureDescription(pickedFeature) {
   const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
-    `<tr><th>parcel_id ID</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
+    `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
     `<tr><th>Longitude</th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
     `<tr><th>Latitude</th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
@@ -393,13 +393,47 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
 
     silhouetteGreen.selected = [pickedFeature];
-
     viewer.selectedEntity = selectedEntity;
     selectedEntity.description = createPickedFeatureDescription(pickedFeature);
+
+    const parcel = pickedFeature.getProperty("parcel_id");
+    console.log(parcel);
+    // ajax request with sucses and error
+    $.ajax({
+      type: "Get",
+      url: `../../action/get-parcel.php`,
+      data: {
+        parcel
+      },
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        console.log(response['id']);
+        console.log(response['parcel_name']);
+        // Update nilai "Occupant" dengan nilai dari response['id']
+        pickedFeature.setProperty("Occupant", response['id']);
+
+        // Ensure selectedEntity.description is treated as a string
+        const currentDescription = String(selectedEntity.description);
+
+        // Update deskripsi dengan nilai "Occupant" yang baru
+        const updatedDescription = currentDescription.replace(
+          /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
+          `<tr><th>Occupant</th><td>${response['id']}</td></tr>`
+        );
+
+        // Set deskripsi yang diperbarui
+        selectedEntity.description = updatedDescription;
+      },
+      error: function (error) {
+        console.log("error");
+        console.log(error);
+      }
+    });
+
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 } else {
   // Jika siluet tidak didukung, atur warna fitur
-
   const highlighted = {
     feature: undefined,
     originalColor: new Cesium.Color(),
@@ -2339,6 +2373,8 @@ const colorMap = {
   "Sienna": new Cesium.Color(160 / 255, 82 / 255, 45 / 255, 1.0), // Sienna
   "Violet": new Cesium.Color(238 / 255, 130 / 255, 238 / 255, 1.0), // Violet
   "Yellow": new Cesium.Color(1.0, 1.0, 0.0, 1.0), // Yellow
+  "Sage": new Cesium.Color(188 / 255, 206 / 255, 172 / 255, 1.0), // Sage
+  "Dark Purple": new Cesium.Color(72 / 255, 61 / 255, 139 / 255, 1.0), // Dark Purple
 };
 
 function getColorFromProperty(inputProperties) {
@@ -2518,7 +2554,7 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2422061)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2426318)
 );
 
 siolaLegal.style = setColorStyle;

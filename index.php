@@ -36,6 +36,9 @@
   </style>
 </head>
 
+<?php include_once 'action/get-parcel.php' ?>
+<?php include_once 'action/get-uri.php' ?>
+
 <body>
   <header>
     <nav>
@@ -1394,6 +1397,14 @@
   <!-- <script type="module" src="assets/js/cesiumScript_2.js"></script> -->
 
   <script type="module" src="assets/js/cesiumScript.js"></script>
+
+  <script>
+    const parcel_data = <?= json_encode($parcel_table) ?>;
+    const uri_data = <?= json_encode($uri_table) ?>;
+    console.log(parcel_data);
+    console.log(uri_data);
+  </script>
+
 </body>
 
 </html>

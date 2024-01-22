@@ -1,0 +1,31 @@
+<?php
+// Include the database connection file
+include 'db_connect.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (!empty($_GET['uri'])) {
+        $slug = $_GET['uri'];
+        // get data uri_table where slug = $slug
+        $sql = "SELECT * FROM uri_table WHERE slug = '$slug'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $uri_table = $result->fetch_assoc();
+        }
+    } else {
+        // get data uri_table
+        $sql = "SELECT * FROM uri_table";
+        $result = $conn->query($sql);
+        $uri_table = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $uri_table[] = $row;
+            }
+        }
+    }
+}
+
+// echo "<pre>";
+// print_r($uri_table);
+
+
+mysqli_close($conn);
