@@ -325,7 +325,7 @@ function createPickedFeatureDescription(pickedFeature) {
   const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
-    `<tr><th>parcel_id ID</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
+    `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
     `<tr><th>Longitude</th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
     `<tr><th>Latitude</th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
@@ -393,13 +393,65 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
 
     silhouetteGreen.selected = [pickedFeature];
-
     viewer.selectedEntity = selectedEntity;
     selectedEntity.description = createPickedFeatureDescription(pickedFeature);
+
+    const parcel = pickedFeature.getProperty("parcel_id");
+    // console.log(parcel);
+    // ajax request with sucses and error
+    $.ajax({
+      type: "Get",
+      url: `../../action/get-parcel.php`,
+      data: {
+        parcel
+      },
+      dataType: "json",
+      success: function (response) {
+        const data = response;
+        console.log(data);
+        const tags = JSON.parse(data.tag);
+        console.log("DATA TAG");
+        console.log(tags);
+
+        // Ensure selectedEntity.description is treated as a string
+        let currentProperty = String(selectedEntity.description);
+        // Update deskripsi dengan nilai yang baru
+        const updatedOccupant = currentProperty.replace(
+          /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
+          `<tr><th>Occupant</th><td>${data.parcel_occupant}</td></tr>`
+        );
+        selectedEntity.description = updatedOccupant;
+        if (data.parcel_name !== undefined || null) {
+          currentProperty = String(selectedEntity.description);
+          const updatedName = currentProperty.replace(
+            /<tr><th>Name<\/th><td>[^<]*<\/td><\/tr>/,
+            `<tr><th>Name</th><td>${data.parcel_name}</td></tr>`
+          );
+          selectedEntity.description = updatedName;
+        }
+
+        if (Array.isArray(tags)) {
+          let tagsHtml = "";
+          // Loop through the array and create links
+          tags.forEach(tag => {
+            tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="http://3dmap-kadaster.test/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+          });
+          // Append the tags to the existing description
+          selectedEntity.description += tagsHtml;
+        }
+
+        currentProperty = String(selectedEntity.description);
+        console.log(currentProperty);
+      },
+      error: function (error) {
+        console.log("error");
+        console.log(error);
+      }
+    });
+
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 } else {
   // Jika siluet tidak didukung, atur warna fitur
-
   const highlighted = {
     feature: undefined,
     originalColor: new Cesium.Color(),
@@ -477,13 +529,13 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
-});
-$("#siolaLegal_BT").change(function () {
   setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7D40JE8AAFPK0SK06HE", $(this).prop("checked"));
 });
-$("#siolaLegal_BB").change(function () {
+$("#siolaLegal_BT").change(function () {
   setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7CQ6NV0TGV2RNKNM1GX", $(this).prop("checked"));
+});
+$("#siolaLegal_BB").change(function () {
+  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
 });
 
 $("#siolaLegal_1a1").change(function () {
@@ -2339,6 +2391,8 @@ const colorMap = {
   "Sienna": new Cesium.Color(160 / 255, 82 / 255, 45 / 255, 1.0), // Sienna
   "Violet": new Cesium.Color(238 / 255, 130 / 255, 238 / 255, 1.0), // Violet
   "Yellow": new Cesium.Color(1.0, 1.0, 0.0, 1.0), // Yellow
+  "Sage": new Cesium.Color(188 / 255, 206 / 255, 172 / 255, 1.0), // Sage
+  "Dark Purple": new Cesium.Color(72 / 255, 61 / 255, 139 / 255, 1.0), // Dark Purple
 };
 
 function getColorFromProperty(inputProperties) {
@@ -2518,7 +2572,7 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2422061)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2426318)
 );
 
 siolaLegal.style = setColorStyle;
