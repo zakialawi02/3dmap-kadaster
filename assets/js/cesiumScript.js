@@ -397,7 +397,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     selectedEntity.description = createPickedFeatureDescription(pickedFeature);
 
     const parcel = pickedFeature.getProperty("parcel_id");
-    console.log(parcel);
+    // console.log(parcel);
     // ajax request with sucses and error
     $.ajax({
       type: "Get",
@@ -407,23 +407,41 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       },
       dataType: "json",
       success: function (response) {
-        console.log(response);
-        console.log(response['id']);
-        console.log(response['parcel_name']);
-        // Update nilai "Occupant" dengan nilai dari response['id']
-        pickedFeature.setProperty("Occupant", response['id']);
+        const data = response;
+        console.log(data);
+        const tags = JSON.parse(data.tag);
+        console.log("DATA TAG");
+        console.log(tags);
 
         // Ensure selectedEntity.description is treated as a string
-        const currentDescription = String(selectedEntity.description);
-
-        // Update deskripsi dengan nilai "Occupant" yang baru
-        const updatedDescription = currentDescription.replace(
+        let currentProperty = String(selectedEntity.description);
+        // Update deskripsi dengan nilai yang baru
+        const updatedOccupant = currentProperty.replace(
           /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
-          `<tr><th>Occupant</th><td>${response['id']}</td></tr>`
+          `<tr><th>Occupant</th><td>${data.parcel_occupant}</td></tr>`
         );
+        selectedEntity.description = updatedOccupant;
+        if (data.parcel_name !== undefined || null) {
+          currentProperty = String(selectedEntity.description);
+          const updatedName = currentProperty.replace(
+            /<tr><th>Name<\/th><td>[^<]*<\/td><\/tr>/,
+            `<tr><th>Name</th><td>${data.parcel_name}</td></tr>`
+          );
+          selectedEntity.description = updatedName;
+        }
 
-        // Set deskripsi yang diperbarui
-        selectedEntity.description = updatedDescription;
+        if (Array.isArray(tags)) {
+          let tagsHtml = "";
+          // Loop through the array and create links
+          tags.forEach(tag => {
+            tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="http://3dmap-kadaster.test/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+          });
+          // Append the tags to the existing description
+          selectedEntity.description += tagsHtml;
+        }
+
+        currentProperty = String(selectedEntity.description);
+        console.log(currentProperty);
       },
       error: function (error) {
         console.log("error");
@@ -511,13 +529,13 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
-});
-$("#siolaLegal_BT").change(function () {
   setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7D40JE8AAFPK0SK06HE", $(this).prop("checked"));
 });
-$("#siolaLegal_BB").change(function () {
+$("#siolaLegal_BT").change(function () {
   setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7CQ6NV0TGV2RNKNM1GX", $(this).prop("checked"));
+});
+$("#siolaLegal_BB").change(function () {
+  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
 });
 
 $("#siolaLegal_1a1").change(function () {

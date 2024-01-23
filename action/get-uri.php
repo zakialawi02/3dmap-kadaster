@@ -3,7 +3,7 @@
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (!empty($_GET['uri'])) {
+    if (isset($_GET['uri']) && !empty($_GET['uri'])) {
         $slug = $_GET['uri'];
         // get data uri_table where slug = $slug
         $sql = "SELECT * FROM uri_table WHERE slug = '$slug'";
@@ -27,5 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // echo "<pre>";
 // print_r($uri_table);
 
-
 mysqli_close($conn);
+
+if (!isset($uri_table)) {
+    header("Location: /404.php");
+    exit();
+}

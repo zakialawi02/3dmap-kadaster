@@ -5,29 +5,52 @@ session_start();
 include 'db_connect.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    print_r($_POST);
+    if (isset($_GET['uri']) && !empty($_GET['uri'])) {
+        print_r($_POST);
+        $slug = $_GET['uri'];
+        $slug = $conn->real_escape_string($slug);
+        // Perform a database query
+        $query = "SELECT * FROM uri_table WHERE slug = '$slug'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            $uri_table = $result->fetch_assoc();
+        }
+        $uriId = $uri_table['id_keyword'];
 
-    // Get the form data
-    $URIname = $_POST['URIname'];
-    $isUrl = $_POST['isUrl'];
-    $URIcontent = $_POST['URIcontent'];
+        $URIname = $_POST['URIname'];
+        $slug = $_POST['uri-slug'];
+        $isUrl = $_POST['isUrl'];
+        $URIcontent = ($isUrl == "true") ? $_POST['URIurl'] : $_POST['URIeditor'];
 
-    echo $URIname . "<br>";
-    echo $isUrl . "<br>";
-    echo $URIcontent . "<br>";
-
-    // Prepare and execute the SQL query
-    $sql = "INSERT INTO uri_table (word_name, uri_content, isUrl) VALUES ('$URIname', '$URIcontent', '$isUrl')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Data saved successfully";
+        // Prepare and execute the SQL query
+        $sqlInsertUri = "UPDATE uri_table SET word_name = '$URIname', slug = '$slug' , isUrl = '$isUrl', uri_content = '$URIcontent' WHERE id_keyword = $uriId";
+        $resultSql = mysqli_query($conn, $sqlInsertUri);
+        if ($resultSql) {
+            echo "Data berhasil diupdate";
+        } else {
+            echo "Error updating data: " . $conn->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Get the form data
+        $URIname = $_POST['URIname'];
+        $slug = $_POST['uri-slug'];
+        $isUrl = $_POST['isUrl'];
+        $URIcontent = ($isUrl == "true") ? $_POST['URIurl'] : $_POST['URIeditor'];
+
+        // Prepare and execute the SQL query
+        $sqlInsertUri = "INSERT INTO uri_table (word_name, slug, isUrl,uri_content) VALUES ('$URIname', '$slug','$isUrl', '$URIcontent')";
+        $resultSql = mysqli_query($conn, $sqlInsertUri);
+        if ($resultSql) {
+            echo "Data saved successfully";
+        } else {
+            echo "error";
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
-
-    // Close the database connection
-    $conn->close();
-
-    // header("Location: /data/uri.php");
-    // exit();
 }
+
+// Close the database connection
+$conn->close();
+
+header("Location: /data/uri");
+exit();

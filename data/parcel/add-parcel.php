@@ -48,16 +48,16 @@ if (isset($_SESSION['message'])) {
             <div class="row justify-content-center  m-2 p-3">
                 <form action="/action/save-parcel.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="parcelId" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcelId" name="parcelId" required>
+                        <label for="parcel_id" class="form-label">Parcel ID</label>
+                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" required>
+                        <input type="text" class="form-control" id="parcelName" name="parcelName">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" required>
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>

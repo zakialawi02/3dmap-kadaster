@@ -60,7 +60,6 @@
             <a href="#" id="layer-toggle" title="Show layer panel"><i class="bi bi-stack"></i> Layer</a>
           </li>
           <li><a href="#" title="">A</a></li>
-          <li><a href="#" title="">B</a></li>
           <li><a href="#" id="clip-toggle" title="Clip">Clip</a></li>
           <li>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Camera</a>
@@ -79,6 +78,7 @@
           <li>
             <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
           </li>
+          <li><a href="/dashboard" title="">Log in/out</a></li>
         </ul>
         <div id="hamb"><i class="bi bi-list"></i></div>
       </div>

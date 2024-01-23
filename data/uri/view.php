@@ -22,13 +22,26 @@ session_start();
     <link rel="stylesheet" href="/assets/css/style.css" />
 
     <style>
+        p {
+            font-weight: 400;
+        }
 
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 
     <title>URI Data</title>
 </head>
 
+<?php require_once '../../lib/HTMLPurifier/HTMLPurifier.auto.php'; ?>
 <?php include_once '../../action/get-uri.php' ?>
+<?php
+
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+?>
 
 <body>
     <!-- HEADER -->
@@ -38,13 +51,14 @@ session_start();
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
                 <div class="row gap-2 ">
-                    <?php if ($uri_table['isUrl'] === true) : ?>
-                        <h1>TTT</h1>
-                    <?php else : ?>
+                    <?php if ($uri_table['isUrl'] === "true") : ?>
                         <?php
-                        echo '<script>window.open("https://soundcloud.com/", "_blank");</script>';
+                        $url = $uri_table['uri_content'];
+                        header("Location: $url");
                         exit();
                         ?>
+                    <?php else : ?>
+                        <?= $purifier->purify($uri_table['uri_content']); ?>
                     <?php endif ?>
                 </div>
             </div>

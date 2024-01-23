@@ -38,30 +38,35 @@ if (isset($_SESSION['message'])) {
 </head>
 
 <?php include_once '../../action/get-parcel.php' ?>
+<?php include_once '../../action/get-uri.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-
+    <!-- <?php echo "<pre>" ?>
+    <?php print_r($parcel_table) ?>
+    <?php $tags = json_decode($parcel_table['tag'], true) ?>
+    <?php print_r($tags) ?> -->
+    <?php $tag = implode(", ", array_map(fn ($value) => $value['id_keyword'], $tags)); ?>
     <main>
         <div class="container ">
             <div class="row justify-content-center  m-2 py-3">
-                <form action="/action/save-parcel.php" method="POST" enctype="multipart/form-data">
+                <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="parcelId" class="form-label">Parcel ID</label>
                         <input type="text" class="form-control" id="parcelId" name="parcelId" value="<?= $parcel_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= $parcel_table['parcel_name']; ?>" required>
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= $parcel_table['parcel_name']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" value="<?= $parcel_table['parcel_occupant']; ?>" required>
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" value="<?= $parcel_table['parcel_occupant']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>
-                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="" />
+                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="[<?= $tag; ?>]" />
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -81,9 +86,17 @@ if (isset($_SESSION['message'])) {
 
     <script>
         $(document).ready(function() {
-            const tagData = ['Zzsas', 'Option 1', 'Option 2', 'Option 3', 'Option 4']
+            const tagData = [
+                <?php foreach ($uri_table as $row) : ?> {
+                        id: <?= $row['id_keyword']; ?>,
+                        name: '<?= $row['word_name']; ?>'
+                    },
+                <?php endforeach ?>
+            ];
             $('#multiSelectTag').magicSuggest({
                 data: tagData,
+                valueField: 'id',
+                displayField: 'name',
                 allowFreeEntries: false, // Set true if you want to allow free text entries
                 maxSelection: null, // Set to null to remove the limit
                 noSuggestionText: 'No suggestions',

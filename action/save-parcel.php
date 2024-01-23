@@ -5,36 +5,57 @@ session_start();
 include 'db_connect.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-    $parcelId = $_POST['parcelId'];
-    $parcelName = $_POST['parcelName'];
-    $parcelOccupant = $_POST['parcelOccupant'];
-    $tag = $_POST['multiSelectTag'];
+    if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
+        $parcel_id = $_GET['parcel'];
+        // Perform a database query
+        $query = "SELECT * FROM parcel_table WHERE parcel_id = '$parcel_id'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            $parcel_table = $result->fetch_assoc();
+        }
+        $parcelId = $parcel_table['id'];
+        $parcelName = $_POST['parcelName'];
+        $parcelOccupant = $_POST['parcelOccupant'];
 
-    if (!empty($tag)) {
-        $tag = implode(', ', $tag);
+        // Prepare and execute the SQL query
+        $sqlDeleteLinkedUri = "DELETE FROM linked_uri WHERE parcel_id = '$parcel_id'";
+        $resultSql = mysqli_query($conn, $sqlDeleteLinkedUri);
+        foreach ($_POST['multiSelectTag'] as $tagId) {
+            $sqlInsert = "INSERT INTO linked_uri (parcel_id, id_keyword) VALUES ('$parcel_id', '$tagId')";
+            $resultSql = mysqli_query($conn, $sqlInsert);
+        }
+        $sqlUpdateParcel = "UPDATE parcel_table SET parcel_id = '$parcel_id', parcel_name = '$parcelName', parcel_occupant = '$parcelOccupant' WHERE id = $parcelId";
+        $resultSql = mysqli_query($conn, $sqlUpdateParcel);
+        if ($resultSql) {
+            echo "Data saved successfully";
+            // Set success message
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     } else {
-        $tag = "";
+        // Get the form data
+        $parcel_id = $_POST['parcel_id'];
+        $parcelName = $_POST['parcelName'];
+        $parcelOccupant = $_POST['parcelOccupant'];
+
+        // Prepare and execute the SQL query
+        $sqlInsertParcel = "INSERT INTO parcel_table (parcel_id, parcel_name, parcel_occupant) VALUES ('$parcel_id', '$parcelName', '$parcelOccupant')";
+        $resultSql = mysqli_query($conn, $sqlInsertParcel);
+        foreach ($_POST['multiSelectTag'] as $tagId) {
+            $sqlInsert = "INSERT INTO linked_uri (parcel_id, id_keyword) VALUES ('$parcel_id', '$tagId')";
+            $resultSql = mysqli_query($conn, $sqlInsert);
+        }
+        if ($resultSql) {
+            echo "Data saved successfully";
+            // Set success message
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
-
-    echo $parcelId . "<br>";
-    echo $parcelName . "<br>";
-    echo $parcelOccupant . "<br>";
-    echo $tag . "<br>";
-
-    // Prepare and execute the SQL query
-    $sql = "INSERT INTO parcel_table (parcel_id, parcel_name, parcel_occupant, tag) VALUES ('$parcelId', '$parcelName', '$parcelOccupant', '$tag')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Data saved successfully";
-        // Set success message
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close the database connection
-    $conn->close();
-
-    header("Location: /data/add-parcel.php");
-    exit();
 }
+
+// Close the database connection
+$conn->close();
+
+header("Location: /data/parcel");
+exit();

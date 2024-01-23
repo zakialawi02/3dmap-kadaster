@@ -18,6 +18,8 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css " rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -50,6 +52,7 @@ session_start();
                                         <th scope="col">#</th>
                                         <th scope="col">Keyword</th>
                                         <th scope="col">Type</th>
+                                        <th scope="col">Slug</th>
                                         <th scope="col">Content</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -60,12 +63,18 @@ session_start();
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
                                             <td><?= $row['word_name']; ?></td>
-                                            <td><?= ($row['isUrl'] === true) ? "Page" : "Redirect url" ?></td>
-                                            <td><?= $row['uri_content']; ?></td>
+                                            <td><?= ($row['isUrl'] === "true") ? "Redirect url" : "Page" ?></td>
+                                            <td><?= $row['slug']; ?></td>
+                                            <td><?= ($row['isUrl'] === "true") ? '<a href="/data/uri/view.php?uri=' . $row['slug'] . '"class="" target="_blank"><i class="bi bi-box-arrow-up-right"></i> ' . $row['uri_content'] . '</a>' : '<a href="/data/uri/view.php?uri=' . $row['slug'] . '"class="" target="_blank"><i class="bi bi-box-arrow-up-right"></i>click to view</a>' ?></td>
                                             <td>
-                                                <a href="/data/uri/view.php?uri=<?= $row['slug']; ?>" class="btn xs-btn btn-primary">View</a>
-                                                <a href="/data/uri/edit-uri.php?uri=<?= $row['slug']; ?>" class="btn xs-btn btn-secondary">Edit</a>
-                                                <a href="https://chat.openai.com/" class="btn xs-btn btn-danger">Delete</a>
+                                                <div class="d-flex flex-row gap-1">
+                                                    <a href="/data/uri/edit-uri.php?uri=<?= $row['slug']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id_keyword']; ?>" action="/action/delete-uri.php" method="post">
+                                                        <input type="hidden" name="uri_id" value="<?= $row['id_keyword']; ?>">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id_keyword']; ?>"></button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
@@ -83,10 +92,28 @@ session_start();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js "></script>
 
     <script src="/assets/js/script.js"></script>
 
-
+    <script>
+        $('.delete-btn').on('click', function() {
+            const userId = $(this).data('id');
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin menghapus data ini?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan! Data yang terkait dengan URI ini akan terdampak.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus data!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#delete-' + userId).submit();
+                }
+            });
+        });
+    </script>
 
 </body>
 
