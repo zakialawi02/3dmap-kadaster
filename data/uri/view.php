@@ -35,10 +35,8 @@ session_start();
     <title>URI Data</title>
 </head>
 
-<?php require_once '../../lib/HTMLPurifier/HTMLPurifier.auto.php'; ?>
 <?php include_once '../../action/get-uri.php' ?>
 <?php
-
 $config = HTMLPurifier_Config::createDefault();
 $purifier = new HTMLPurifier($config);
 ?>

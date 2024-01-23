@@ -2,6 +2,8 @@
 // Include the database connection file
 include 'db_connect.php';
 
+use HTMLPurifier\HTMLPurifier;
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['uri']) && !empty($_GET['uri'])) {
         $slug = $_GET['uri'];

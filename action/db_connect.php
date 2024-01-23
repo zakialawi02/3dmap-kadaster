@@ -1,6 +1,7 @@
 <?php
+// autoload composer
+require_once __DIR__ . '../../vendor/autoload.php';
 // db_connect.php
-
 $servername = "localhost";
 $username = "root";
 $password = "";

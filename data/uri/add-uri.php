@@ -153,6 +153,21 @@ if (isset($_SESSION['message'])) {
                 $("#URIlink").removeClass("d-none");
             }
         });
+        $("#URIname").change(function(e) {
+            const uriname = $("#URIname").val();
+            $.ajax({
+                type: "GET",
+                url: `/action/generateSlug.php?uriname=${uriname}`,
+                dataType: "json",
+                success: function(response) {
+                    // console.log(response);
+                    $("#uri-slug").val(response);
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        });
     </script>
 
 
