@@ -1,11 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -30,6 +22,7 @@ session_start();
     <title>URI Data</title>
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php include_once '../../action/get-uri.php' ?>
 
 <body>

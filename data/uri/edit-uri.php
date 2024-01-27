@@ -1,19 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    // Display message based on status
-    if ($message['status'] == "success") {
-        echo '<div class="alert alert-success">' . $message['text'] . '</div>';
-    } elseif ($message['status'] == "error") {
-        echo '<div class="alert alert-danger">' . $message['text'] . '</div>';
-    }
-}
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -42,6 +26,7 @@ if (isset($_SESSION['message'])) {
     <title>Add parcel data</title>
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php include_once '../../action/get-uri.php' ?>
 
 <body>

@@ -27,7 +27,7 @@
     <title>Add parcel data</title>
 </head>
 
-<?php session_start(); ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 
 <body>
     <!-- HEADER -->
