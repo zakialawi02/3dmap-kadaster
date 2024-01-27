@@ -4,13 +4,11 @@ include 'db_connect.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    print_r($_POST);
+    // Get the user from the POST request
+    $userid = $_POST['user'];
 
-    // Get the parcel_id from the POST request
-    $UriId = $_POST['uri_id'];
-    echo $UriId;
     // SQL query to delete the parcel
-    $sql = "DELETE FROM uri_table WHERE id_keyword = $UriId";
+    $sql = "DELETE FROM users WHERE id = $userid";
 
     if ($conn->query($sql) === TRUE) {
         echo "Data deleted successfully";
@@ -23,5 +21,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 $conn->close();
 
-header("Location: /data/uri");
+header("Location: /data/user/add-user.php");
 exit();

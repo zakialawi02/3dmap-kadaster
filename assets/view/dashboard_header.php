@@ -1,3 +1,17 @@
+<style>
+    @media (max-width: 1184px) {
+        header nav .nav-menu {
+            display: flex;
+        }
+    }
+
+    @media (max-width: 994px) {
+        .nav-menu-group.show {
+            top: 2rem !important;
+        }
+    }
+</style>
+
 <header>
     <nav>
         <div class="nav-logo">
@@ -12,7 +26,11 @@
                 <li><a href="/dashboard" title="">Dashboard</a></li>
                 <li><a href="/data/uri" title="">URI Data</a></li>
                 <li><a href="/data/parcel" title="">Parcel Data</a></li>
-                <li><a href="#" title="">lOGIN/OUT</a></li>
+                <?php if (isset($_SESSION['islogin'])) : ?>
+                    <li><a href="/action/auth/process_logout.php" title="">Logout</a></li>
+                <?php else : ?>
+                    <li><a href="/auth/login.php" title="">Login</a></li>
+                <?php endif ?>
             </ul>
             <div id="hamb"><i class="bi bi-list"></i></div>
         </div>

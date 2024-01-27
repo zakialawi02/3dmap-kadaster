@@ -1,11 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -28,6 +20,8 @@ session_start();
     <title>Dashboard</title>
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+
 <body>
     <!-- HEADER -->
     <?php include '../assets/view/dashboard_header.php' ?>
@@ -36,6 +30,7 @@ session_start();
         <div class="container m-2 p-3">
             <a href="/data/parcel" class="btn btn-primary">Parcel</a>
             <a href="/data/uri" class="btn btn-primary">URI</a>
+            <a href="/data/user/add-user.php" class="btn btn-primary">Add User</a>
         </div>
     </main>
 

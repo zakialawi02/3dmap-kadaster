@@ -1,11 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -30,13 +22,13 @@ session_start();
     <title>Parcel Data</title>
 </head>
 
+<?php session_start(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-    <!-- <?php echo "<pre>" ?>
-    <?php print_r($parcel_table) ?> -->
+
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">

@@ -434,7 +434,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           let tagsHtml = "";
           // Loop through the array and create links
           tags.forEach(tag => {
-            tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="http://3dmap-kadaster.test/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+            tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
           });
           // Append the tags to the existing description
           selectedEntity.description += tagsHtml;

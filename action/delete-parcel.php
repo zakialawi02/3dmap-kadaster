@@ -20,9 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// echo "<pre>";
-// print_r($parcel_table);
-
 // Close the database connection
 $conn->close();
 

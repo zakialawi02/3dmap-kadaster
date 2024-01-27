@@ -1,19 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    // Display message based on status
-    if ($message['status'] == "success") {
-        echo '<div class="alert alert-success">' . $message['text'] . '</div>';
-    } elseif ($message['status'] == "error") {
-        echo '<div class="alert alert-danger">' . $message['text'] . '</div>';
-    }
-}
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -37,6 +21,7 @@ if (isset($_SESSION['message'])) {
     <title>Add parcel data</title>
 </head>
 
+<?php session_start(); ?>
 <?php include_once '../../action/get-uri.php' ?>
 
 <body>
@@ -49,15 +34,15 @@ if (isset($_SESSION['message'])) {
                 <form action="/action/save-parcel.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="parcel_id" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" required>
+                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName">
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant">
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>

@@ -18,7 +18,6 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         $resultSlug = $resultSlug . "-" . rand(1, 100);
     }
 
-
     header('Content-Type: application/json');
     echo json_encode($resultSlug);
 }

@@ -33,11 +33,17 @@
       bottom: 0;
       width: 100%;
     }
+
+    .divider {
+      border-right: 1px solid white;
+      padding-right: 10px;
+      margin-right: 10px;
+    }
   </style>
 </head>
 
-<?php include_once 'action/get-parcel.php' ?>
-<?php include_once 'action/get-uri.php' ?>
+<?php session_start(); ?>
+<?php include 'action/get-parcel.php' ?>
 
 <body>
   <header>
@@ -78,7 +84,13 @@
           <li>
             <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
           </li>
-          <li><a href="/dashboard" title="">Log in/out</a></li>
+          <?php if (isset($_SESSION['islogin'])) : ?>
+            <span class="divider"></span>
+            <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
+            <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
+          <?php else : ?>
+            <li><a href="/auth/login.php" title="Login"><i class="bi bi-box-arrow-in-right"></i></a></li>
+          <?php endif ?>
         </ul>
         <div id="hamb"><i class="bi bi-list"></i></div>
       </div>
@@ -1397,13 +1409,6 @@
   <!-- <script type="module" src="assets/js/cesiumScript_2.js"></script> -->
 
   <script type="module" src="assets/js/cesiumScript.js"></script>
-
-  <script>
-    const parcel_data = <?= json_encode($parcel_table) ?>;
-    const uri_data = <?= json_encode($uri_table) ?>;
-    console.log(parcel_data);
-    console.log(uri_data);
-  </script>
 
 </body>
 

@@ -1,19 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    // Display message based on status
-    if ($message['status'] == "success") {
-        echo '<div class="alert alert-success">' . $message['text'] . '</div>';
-    } elseif ($message['status'] == "error") {
-        echo '<div class="alert alert-danger">' . $message['text'] . '</div>';
-    }
-}
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -37,16 +21,14 @@ if (isset($_SESSION['message'])) {
     <title>Add parcel data</title>
 </head>
 
+<?php session_start(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 <?php include_once '../../action/get-uri.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-    <!-- <?php echo "<pre>" ?>
-    <?php print_r($parcel_table) ?>
     <?php $tags = json_decode($parcel_table['tag'], true) ?>
-    <?php print_r($tags) ?> -->
     <?php $tag = implode(", ", array_map(fn ($value) => $value['id_keyword'], $tags)); ?>
     <main>
         <div class="container ">
@@ -54,15 +36,15 @@ if (isset($_SESSION['message'])) {
                 <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="parcelId" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcelId" name="parcelId" value="<?= $parcel_table['parcel_id']; ?>" required>
+                        <input type="text" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= $parcel_table['parcel_name']; ?>">
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= $parcel_table['parcel_name']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" value="<?= $parcel_table['parcel_occupant']; ?>">
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off" value="<?= $parcel_table['parcel_occupant']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>

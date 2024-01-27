@@ -1,11 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -18,6 +10,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -35,6 +28,7 @@ session_start();
     <title>URI Data</title>
 </head>
 
+<?php session_start(); ?>
 <?php include_once '../../action/get-uri.php' ?>
 <?php
 $config = HTMLPurifier_Config::createDefault();
@@ -43,7 +37,7 @@ $purifier = new HTMLPurifier($config);
 
 <body>
     <!-- HEADER -->
-    <?php include '../../assets/view/dashboard_header.php' ?>
+    <?php include '../../assets/view/viewer_header.php' ?>
 
     <main>
         <div class="container">

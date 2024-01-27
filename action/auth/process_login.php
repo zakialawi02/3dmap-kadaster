@@ -1,0 +1,45 @@
+<?php
+// Start or resume the session
+session_start();
+// Include the database connection file
+include '../db_connect.php';
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the form data
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    echo $email;
+    echo $password;
+
+    $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // User found, check if the password is correct
+        $user = mysqli_fetch_assoc($result);
+        $hashedPassword = $user['password'];
+        if (password_verify($password, $hashedPassword)) {
+            // Password is correct, login successful, set session
+            $_SESSION['islogin']['status'] = true;
+            $_SESSION['islogin']['userid'] = $user['id'];
+            echo "Login successful!";
+            header("Location: /dashboard");
+            exit();
+        } else {
+            // Password is incorrect
+            echo "Incorrect password!";
+            header("Location: /auth/login.php");
+            exit();
+        }
+    } else {
+        // User not found
+        echo "User not found!";
+        header("Location: /auth/login.php");
+        exit();
+    }
+}
+
+$conn->close();
+
+die;
