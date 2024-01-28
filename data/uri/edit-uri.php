@@ -1,19 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    // Display message based on status
-    if ($message['status'] == "success") {
-        echo '<div class="alert alert-success">' . $message['text'] . '</div>';
-    } elseif ($message['status'] == "error") {
-        echo '<div class="alert alert-danger">' . $message['text'] . '</div>';
-    }
-}
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -42,6 +26,8 @@ if (isset($_SESSION['message'])) {
     <title>Add parcel data</title>
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-uri.php' ?>
 
 <body>
@@ -55,11 +41,11 @@ if (isset($_SESSION['message'])) {
                     <form id="URIForm" action="/action/save-uri.php?uri=<?= $uri_table['slug']; ?>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="URIname" class="form-label">URI Text</label>
-                            <input type="text" class="form-control" id="URIname" name="URIname" value="<?= $uri_table['word_name']; ?>" required>
+                            <input type="text" class="form-control" id="URIname" name="URIname" autocomplete="off" value="<?= $uri_table['word_name']; ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="uri-slug" class="form-label">slug</label>
-                            <input type="text" class="form-control" id="uri-slug" name="uri-slug" value="<?= $uri_table['slug']; ?>" required>
+                            <input type="text" class="form-control" id="uri-slug" name="uri-slug" autocomplete="off" value="<?= $uri_table['slug']; ?>" required>
                         </div>
                         <div class=" form-check">
                             <input class="form-check-input" type="radio" name="isUrl" value="true" id="url" <?= ($uri_table['isUrl'] == "true" ? "checked" : ""); ?>>
@@ -76,7 +62,7 @@ if (isset($_SESSION['message'])) {
                         <div class="mb-3 py-3">
                             <label for="URIcontent" class="form-label">URI Content</label>
                             <div id="URIlink">
-                                <input type="text" class="form-control" id="URIurl" name="URIurl" placeholder="https://....." value="<?= ($uri_table['isUrl'] == "true" ? $uri_table['uri_content'] : ""); ?>">
+                                <input type="text" class="form-control" id="URIurl" name="URIurl" placeholder="https://....." autocomplete="off" value="<?= ($uri_table['isUrl'] == "true" ? $uri_table['uri_content'] : ""); ?>">
                             </div>
                             <div id="URIparagraf">
                                 <textarea name="URIeditor" id="URIeditor" cols="30" rows="10"><?= ($uri_table['isUrl'] == "true" ? "" : $uri_table['uri_content']); ?></textarea>

@@ -3,6 +3,7 @@
 session_start();
 // Include the database connection file
 include 'db_connect.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/action/fucntion.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['uri']) && !empty($_GET['uri'])) {
@@ -21,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $slug = $_POST['uri-slug'];
         $isUrl = $_POST['isUrl'];
         $URIcontent = ($isUrl == "true") ? $_POST['URIurl'] : $_POST['URIeditor'];
-
         // Prepare and execute the SQL query
         $sqlInsertUri = "UPDATE uri_table SET word_name = '$URIname', slug = '$slug' , isUrl = '$isUrl', uri_content = '$URIcontent' WHERE id_keyword = $uriId";
         $resultSql = mysqli_query($conn, $sqlInsertUri);
         if ($resultSql) {
-            echo "Data berhasil diupdate";
+            setFlashMessage('success', 'Data updated successfully');
         } else {
+            setFlashMessage('error', 'Data update failed');
             echo "Error updating data: " . $conn->error;
         }
     } else {
@@ -36,14 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $slug = $_POST['uri-slug'];
         $isUrl = $_POST['isUrl'];
         $URIcontent = ($isUrl == "true") ? $_POST['URIurl'] : $_POST['URIeditor'];
-
         // Prepare and execute the SQL query
         $sqlInsertUri = "INSERT INTO uri_table (word_name, slug, isUrl,uri_content) VALUES ('$URIname', '$slug','$isUrl', '$URIcontent')";
         $resultSql = mysqli_query($conn, $sqlInsertUri);
         if ($resultSql) {
-            echo "Data saved successfully";
+            setFlashMessage('success', 'Data saved successfully');
         } else {
-            echo "error";
+            setFlashMessage('error', 'Data save failed');
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }

@@ -370,6 +370,7 @@ ul,
 
   .nav-menu-group.show {
     top: 4rem !important;
+    z-index: 1;
   }
 
   #hamb {

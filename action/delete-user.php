@@ -5,11 +5,11 @@ include 'db_connect.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the parcel_id from the POST request
-    $parcelId = $_POST['parcel_id'];
+    // Get the user from the POST request
+    $userid = $_POST['user'];
 
     // SQL query to delete the parcel
-    $sql = "DELETE FROM parcel_table WHERE id = $parcelId";
+    $sql = "DELETE FROM users WHERE id = $userid";
     $conn->query($sql);
     if (mysqli_affected_rows($conn) > 0) {
         setFlashMessage('success', 'Data deleted successfully');
@@ -22,5 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 $conn->close();
 
-header("Location: /data/parcel");
+header("Location: /data/user/add-user.php");
 exit();

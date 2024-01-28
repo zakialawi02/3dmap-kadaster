@@ -1,5 +1,4 @@
 <?php
-// Include the database connection file
 include 'db_connect.php';
 
 // jika request method get biasa

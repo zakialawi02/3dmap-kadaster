@@ -1,11 +1,3 @@
-<?php
-// Start or resume the session
-session_start();
-// print_r($_SESSION);
-// Retrieve the message object from the session
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -30,17 +22,24 @@ session_start();
     <title>Parcel Data</title>
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-    <!-- <?php echo "<pre>" ?>
-    <?php print_r($parcel_table) ?> -->
+
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
                 <div class="row gap-2 ">
+                    <?php if (isset($flashMessage)) : ?>
+                        <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                            <span><?= $flashMessage['message']; ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
                     <div class="col-md-6">
                         <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Tambah Parcel Data</a>
                     </div>
