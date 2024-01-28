@@ -28,7 +28,8 @@
     <title>URI Data</title>
 </head>
 
-<?php session_start(); ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-uri.php' ?>
 <?php
 $config = HTMLPurifier_Config::createDefault();

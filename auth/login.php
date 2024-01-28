@@ -17,10 +17,11 @@
 
 </head>
 
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php
-session_start();
 if (isset($_SESSION['islogin'])) {
     header("Location: /dashboard");
+    exit;
 }
 ?>
 
@@ -31,8 +32,15 @@ if (isset($_SESSION['islogin'])) {
     <main>
         <div class="container my-3 p-3 ">
             <div class="row justify-content-center">
+
                 <div class="col-md-6">
                     <h2>Login</h2>
+                    <?php if (isset($flashMessage)) : ?>
+                        <div class="mt-2 alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                            <span><?= $flashMessage['message']; ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
                     <form action="/action/auth/process_login.php" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>

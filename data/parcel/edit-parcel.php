@@ -22,6 +22,7 @@
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 <?php include_once '../../action/get-uri.php' ?>
 
@@ -33,10 +34,16 @@
     <main>
         <div class="container ">
             <div class="row justify-content-center  m-2 py-3">
+                <?php if (isset($flashMessage)) : ?>
+                    <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                        <span><?= $flashMessage['message']; ?></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
                 <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="parcelId" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
+                        <label for="parcelIdNew" class="form-label">Parcel ID</label>
+                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>

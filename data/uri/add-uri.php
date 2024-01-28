@@ -28,6 +28,7 @@
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 
 <body>
     <!-- HEADER -->

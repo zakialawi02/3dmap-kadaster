@@ -20,6 +20,7 @@
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-users.php' ?>
 
 <body>
@@ -29,6 +30,14 @@
     <main>
         <div class="container my-3 p-3 ">
             <div class="row justify-content-center">
+
+                <?php if (isset($flashMessage)) : ?>
+                    <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                        <span><?= $flashMessage['message']; ?></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
+
                 <div class="col-md-6">
                     <h2>Add Admin</h2>
                     <form action="/action/auth/process_register.php" method="POST">
@@ -54,7 +63,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Email</th>
                             <th scope="col">Created_at</th>
-                            <th scope="col">Aksi</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,12 +75,16 @@
                                 <td><?= $row['created_at']; ?></td>
                                 <td>
                                     <div class="d-flex flex-row gap-1">
-                                        <a href="/data/user/edit-user.php?user=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                        <form id="delete-<?= $row['id']; ?>" action="/action/delete-user.php" method="post">
-                                            <input type="hidden" name="user" value="<?= $row['id']; ?>">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
-                                        </form>
+                                        <!-- <a href="/data/user/edit-user.php?user=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a> -->
+                                        <?php if ($row['id'] == 1) : ?>
+                                            <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" disabled></button>
+                                        <?php else : ?>
+                                            <form id="delete-<?= $row['id']; ?>" action="/action/delete-user.php" method="post">
+                                                <input type="hidden" name="user" value="<?= $row['id']; ?>">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
+                                            </form>
+                                        <?php endif ?>
                                     </div>
                                 </td>
                             </tr>
@@ -84,6 +97,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js "></script>
 
     <script src="/assets/js/script.js"></script>
 </body>

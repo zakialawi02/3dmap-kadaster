@@ -20,6 +20,7 @@
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-users.php' ?>
 
 <body>

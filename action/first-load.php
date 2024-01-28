@@ -1,5 +1,3 @@
 <?php
 session_start();
-if (!isset($_SESSION['islogin'])) {
-    header("Location: /auth/login.php");
-}
+include_once $_SERVER['DOCUMENT_ROOT'] . '/action/fucntion.php';

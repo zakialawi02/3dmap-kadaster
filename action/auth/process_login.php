@@ -3,6 +3,7 @@
 session_start();
 // Include the database connection file
 include '../db_connect.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/action/fucntion.php';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the form data
@@ -14,7 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $query);
-
+    if (mysqli_num_rows($result) < 1) {
+        setFlashMessage('error', 'Email or Password is incorrect');
+        header("Location: /auth/login.php");
+        exit();
+    }
     if ($result) {
         // User found, check if the password is correct
         $user = mysqli_fetch_assoc($result);
@@ -28,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Password is incorrect
-            echo "Incorrect password!";
+            setFlashMessage('error', 'Email or Password is incorrect');
             header("Location: /auth/login.php");
             exit();
         }

@@ -42,7 +42,7 @@
   </style>
 </head>
 
-<?php session_start(); ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php include 'action/get-parcel.php' ?>
 
 <body>
@@ -84,8 +84,8 @@
           <li>
             <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
           </li>
+          <span class="divider"></span>
           <?php if (isset($_SESSION['islogin'])) : ?>
-            <span class="divider"></span>
             <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
             <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
           <?php else : ?>

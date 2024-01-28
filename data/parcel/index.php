@@ -23,6 +23,7 @@
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php checkIsLogin(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 
 <body>
@@ -33,6 +34,12 @@
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
                 <div class="row gap-2 ">
+                    <?php if (isset($flashMessage)) : ?>
+                        <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                            <span><?= $flashMessage['message']; ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
                     <div class="col-md-6">
                         <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Tambah Parcel Data</a>
                     </div>
