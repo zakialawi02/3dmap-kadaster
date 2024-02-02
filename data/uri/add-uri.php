@@ -33,19 +33,25 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-
+    <?php print_r($_SESSION) ?>
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 py-3">
+                <?php if (isset($flashMessage)) : ?>
+                    <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                        <span><?= $flashMessage['message']; ?></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
                 <div class="col-md-12">
                     <form id="URIForm" action="/action/save-uri.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="URIname" class="form-label">URI Text</label>
-                            <input type="text" class="form-control" id="URIname" name="URIname" autocomplete="off" required>
+                            <input type="text" class="form-control" id="URIname" name="URIname" autocomplete="off" value="<?= old('word_name'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="uri-slug" class="form-label">slug</label>
-                            <input type="text" class="form-control" id="uri-slug" name="uri-slug" autocomplete="off" required>
+                            <input type="text" class="form-control" id="uri-slug" name="uri-slug" autocomplete="off" value="<?= old('slug'); ?>" required>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="isUrl" value="true" id="url">
@@ -161,3 +167,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['oldForm']); ?>

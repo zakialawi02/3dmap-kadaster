@@ -324,6 +324,7 @@ const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
 function createPickedFeatureDescription(pickedFeature) {
   const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
+    `<tr><th>ObjectID</th><td>${pickedFeature.getProperty("Tag")}</td></tr>` +
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
     `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
@@ -331,9 +332,9 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th>Latitude</th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
     `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
     `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
-    `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")}</td></tr>` +
-    `<tr><th>Area</th><td>${pickedFeature.getProperty("area")}</td></tr>` +
-    `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")}</td></tr>` +
+    `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")} m</td></tr>` +
+    `<tr><th>Area</th><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
+    `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
     `</tbody></table>`;
   return description;
 }
@@ -396,14 +397,22 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     viewer.selectedEntity = selectedEntity;
     selectedEntity.description = createPickedFeatureDescription(pickedFeature);
 
-    const parcel = pickedFeature.getProperty("parcel_id");
-    // console.log(parcel);
+    // const propertyIds = pickedFeature.getPropertyIds();
+    // const length = propertyIds.length;
+    // for (let i = 0; i < length; ++i) {
+    //   const propertyId = propertyIds[i];
+    //   console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
+    // }
+
+
+    const objectId = pickedFeature.getProperty("Tag");
+    // console.log(objectId);
     // ajax request with sucses and error
     $.ajax({
       type: "Get",
       url: `../../action/get-parcel.php`,
       data: {
-        parcel
+        objectId
       },
       dataType: "json",
       success: function (response) {
@@ -415,13 +424,27 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
 
         // Ensure selectedEntity.description is treated as a string
         let currentProperty = String(selectedEntity.description);
-        // Update deskripsi dengan nilai yang baru
-        const updatedOccupant = currentProperty.replace(
-          /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
-          `<tr><th>Occupant</th><td>${data.parcel_occupant}</td></tr>`
+        const updatedParcelID = currentProperty.replace(
+          /<tr><th>parcel_id<\/th><td>[^<]*<\/td><\/tr>/,
+          `<tr><th>parcel_id</th><td>${data.parcel_id}</td></tr>`
         );
-        selectedEntity.description = updatedOccupant;
-        if (data.parcel_name !== undefined || null) {
+        selectedEntity.description = updatedParcelID;
+        // Update deskripsi dengan nilai yang baru
+        if (data.parcel_occupant != undefined && data.parcel_occupant != null && data.parcel_occupant != "") {
+          currentProperty = String(selectedEntity.description);
+          const updatedOccupant = currentProperty.replace(
+            /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
+            `<tr><th>Occupant</th><td>${data.parcel_occupant}</td></tr>`
+          );
+          selectedEntity.description = updatedOccupant;
+        } else {
+          const updatedOccupant = currentProperty.replace(
+            /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
+            ``
+          );
+          selectedEntity.description = updatedOccupant;
+        }
+        if (data.parcel_name != undefined && data.parcel_name != null && data.parcel_name != "") {
           currentProperty = String(selectedEntity.description);
           const updatedName = currentProperty.replace(
             /<tr><th>Name<\/th><td>[^<]*<\/td><\/tr>/,
@@ -429,16 +452,20 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           );
           selectedEntity.description = updatedName;
         }
-
         if (Array.isArray(tags)) {
-          let tagsHtml = "";
+          let tagsHtml = "<div><span>URI tag:</span>";
           // Loop through the array and create links
           tags.forEach(tag => {
-            tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+            // Check if tag.id_keyword is not null or empty
+            if (tag.id_keyword !== null) {
+              tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+            }
           });
+          tagsHtml += "</div>";
           // Append the tags to the existing description
           selectedEntity.description += tagsHtml;
         }
+
 
         currentProperty = String(selectedEntity.description);
         console.log(currentProperty);
@@ -529,285 +556,285 @@ $("#siolaLevel_5").change(function () {
 });
 
 $("#siolaLegal_GSB").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7D40JE8AAFPK0SK06HE", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "921704", $(this).prop("checked"));
 });
 $("#siolaLegal_BT").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7CQ6NV0TGV2RNKNM1GX", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "910222", $(this).prop("checked"));
 });
 $("#siolaLegal_BB").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "915961", $(this).prop("checked"));
 });
 
 $("#siolaLegal_1a1").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7P6DEEDQH6QTE0Z68B8", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "817240", $(this).prop("checked"));
 });
 $("#siolaLegal_1a2").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RRR7HCZP94ETRJK757", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "825386", $(this).prop("checked"));
 });
 $("#siolaLegal_1a3").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Q59K0S7NYA9DQ5DAFX", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "820896", $(this).prop("checked"));
 });
 $("#siolaLegal_1a4").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7PTPYH074Q5ZJDGV3Z7", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "820815", $(this).prop("checked"));
 });
 $("#siolaLegal_1a5").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RZXAKK47WMJVV9YSKB", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "919493", $(this).prop("checked"));
 });
 $("#siolaLegal_1a6").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7PHEQA5SX964M063XQK", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "820143", $(this).prop("checked"));
 });
 $("#siolaLegal_1a7").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7QNNM61J5YDVQQ23TB2", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "821077", $(this).prop("checked"));
 });
 $("#siolaLegal_1a8").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7R5TWKKPSEM6Q95T28R", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "823865", $(this).prop("checked"));
 });
 $("#siolaLegal_1a9").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7QX80R8CH3JDZ097JX3", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "821964", $(this).prop("checked"));
 });
 $("#siolaLegal_1a10").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "826868", $(this).prop("checked"));
 });
 
 $("#siolaLegal_2a1").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7VAYDZ2BHP9Y7TVMYWQ", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "841116", $(this).prop("checked"));
 });
 $("#siolaLegal_2a2").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7VT5ARB2YC0C7PXKCDY", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "838147", $(this).prop("checked"));
 });
 $("#siolaLegal_2a3").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7TN104KHG9ZEHJVSAX5", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "840850", $(this).prop("checked"));
 });
 $("#siolaLegal_2a4").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7SFH37VQ3NC3JQ6PRXE", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "829358", $(this).prop("checked"));
 });
 $("#siolaLegal_2a5").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7S8KJJGYKK6GDD7BBTN", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "829098", $(this).prop("checked"));
 });
 $("#siolaLegal_2a6").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "839609", $(this).prop("checked"));
 });
 $("#siolaLegal_2a7").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7V04AZ1NWE2VJ7T6T89", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "913870", $(this).prop("checked"));
 });
 
 $("#siolaLegal_3a1").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7XR27P0H1C69A7TPGZ0", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "914699", $(this).prop("checked"));
 });
 $("#siolaLegal_3a2").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Y68R892D1XNRBV2RPN", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "831440", $(this).prop("checked"));
 });
 $("#siolaLegal_3a3").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7WZ79J0N5VRS8HQWJXX", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "843868", $(this).prop("checked"));
 });
 $("#siolaLegal_3a4").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7W331GHVRF0QTNJXGRW", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "830288", $(this).prop("checked"));
 });
 $("#siolaLegal_3a5").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7WCQA085HKSMFMBE8Z0", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "831096", $(this).prop("checked"));
 });
 $("#siolaLegal_3a6").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "848368", $(this).prop("checked"));
 });
 $("#siolaLegal_3a7").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7X6FYFJW3PN5TQV1DAR", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "847875", $(this).prop("checked"));
 });
 
 $("#siolaLegal_4a1").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7YFWXFTR05G47KJJMJ9", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "849039", $(this).prop("checked"));
 });
 $("#siolaLegal_4a2").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7YS0BMJZNXP9YB1MSA2", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "886033", $(this).prop("checked"));
 });
 $("#siolaLegal_4a3").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "849276", $(this).prop("checked"));
 });
 
 $("#siolaLegal_5a1").change(function () {
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7ZH14YX6V6Y963TEKXQ", $(this).prop("checked"));
+  setVisibilityByobject_id(siolaLegal, "850924", $(this).prop("checked"));
 });
 
 $("#zoomToSiolaLegal_1all").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, [
-    "legal_01HM6EM7P6DEEDQH6QTE0Z68B8",
-    "legal_01HM6EM7RRR7HCZP94ETRJK757",
-    "legal_01HM6EM7Q59K0S7NYA9DQ5DAFX",
-    "legal_01HM6EM7PTPYH074Q5ZJDGV3Z7",
-    "legal_01HM6EM7RZXAKK47WMJVV9YSKB",
-    "legal_01HM6EM7PHEQA5SX964M063XQK",
-    "legal_01HM6EM7QNNM61J5YDVQQ23TB2",
-    "legal_01HM6EM7R5TWKKPSEM6Q95T28R",
-    "legal_01HM6EM7QX80R8CH3JDZ097JX3",
-    "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK"
+  setTransparentByobject_id(siolaLegal, [
+    "817240",
+    "825386",
+    "820896",
+    "820815",
+    "919493",
+    "820143",
+    "821077",
+    "823865",
+    "821964",
+    "826868"
   ]);
   zoomToTileset(siolaBuildingL1, -5, 90, 150);
 });
 $("#zoomToSiolaLegal_2all").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, [
-    "legal_01HM6EM7VAYDZ2BHP9Y7TVMYWQ",
-    "legal_01HM6EM7VT5ARB2YC0C7PXKCDY",
-    "legal_01HM6EM7TN104KHG9ZEHJVSAX5",
-    "legal_01HM6EM7SFH37VQ3NC3JQ6PRXE",
-    "legal_01HM6EM7S8KJJGYKK6GDD7BBTN",
-    "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W",
-    "legal_01HM6EM7V04AZ1NWE2VJ7T6T89"
+  setTransparentByobject_id(siolaLegal, [
+    "841116",
+    "838147",
+    "840850",
+    "829358",
+    "829098",
+    "839609",
+    "913870"
   ]);
   zoomToTileset(siolaBuildingL2, -10, 90, 150);
 });
 $("#zoomToSiolaLegal_3all").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, [
-    "legal_01HM6EM7XR27P0H1C69A7TPGZ0",
-    "legal_01HM6EM7Y68R892D1XNRBV2RPN",
-    "legal_01HM6EM7WZ79J0N5VRS8HQWJXX",
-    "legal_01HM6EM7W331GHVRF0QTNJXGRW",
-    "legal_01HM6EM7WCQA085HKSMFMBE8Z0",
-    "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P",
-    "legal_01HM6EM7X6FYFJW3PN5TQV1DAR"
+  setTransparentByobject_id(siolaLegal, [
+    "914699",
+    "831440",
+    "843868",
+    "830288",
+    "831096",
+    "848368",
+    "847875"
   ]);
   zoomToTileset(siolaBuildingL3, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_4all").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, [
-    "legal_01HM6EM7YFWXFTR05G47KJJMJ9",
-    "legal_01HM6EM7YS0BMJZNXP9YB1MSA2",
-    "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3"
+  setTransparentByobject_id(siolaLegal, [
+    "849039",
+    "886033",
+    "849276"
   ]);
   zoomToTileset(siolaBuildingL4, -15, 90, 150);
 });
 $("#zoomToSiolaLegal_5all").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, [
-    "legal_01HM6EM7ZH14YX6V6Y963TEKXQ",
+  setTransparentByobject_id(siolaLegal, [
+    "850924",
   ]);
   zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
 $("#zoomToSiolaLegal_gsb").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7CQ6NV0TGV2RNKNM1GX", $(this).prop("checked"));
+  setTransparentByobject_id(siolaLegal, "910222");
   zoomToLocation(60, 65, 112.7364636251925, -7.257092539825164, -20, 0);
 });
 $("#zoomToSiolaLegal_bt").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM", $(this).prop("checked"));
+  setTransparentByobject_id(siolaLegal, "915961");
   zoomToLocation(60, 200, 112.7343253773387, -7.258348227236101, -20, 0);
 });
 $("#zoomToSiolaLegal_bb").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7D40JE8AAFPK0SK06HE", $(this).prop("checked"));
+  setTransparentByobject_id(siolaLegal, "921704");
   zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
 });
 
 $("#zoomToSiolaLegal_1a1").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7P6DEEDQH6QTE0Z68B8");
+  setTransparentByobject_id(siolaLegal, "817240");
   zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
 });
 $("#zoomToSiolaLegal_1a2").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RRR7HCZP94ETRJK757");
+  setTransparentByobject_id(siolaLegal, "825386");
   zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
 });
 $("#zoomToSiolaLegal_1a3").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Q59K0S7NYA9DQ5DAFX");
+  setTransparentByobject_id(siolaLegal, "820896");
   zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
 });
 $("#zoomToSiolaLegal_1a4").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7PTPYH074Q5ZJDGV3Z7");
+  setTransparentByobject_id(siolaLegal, "820815");
   zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
 });
 $("#zoomToSiolaLegal_1a5").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RZXAKK47WMJVV9YSKB");
+  setTransparentByobject_id(siolaLegal, "919493");
   zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
 });
 $("#zoomToSiolaLegal_1a6").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7PHEQA5SX964M063XQK");
-  zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -20, 0);
+  setTransparentByobject_id(siolaLegal, "820143");
+  zoomToLocation(180, 20, 112.73774879316747, -7.255707084659419, -20, 0);
 });
 $("#zoomToSiolaLegal_1a7").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7QNNM61J5YDVQQ23TB2");
+  setTransparentByobject_id(siolaLegal, "821077");
   zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
 });
 $("#zoomToSiolaLegal_1a8").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7R5TWKKPSEM6Q95T28R");
+  setTransparentByobject_id(siolaLegal, "823865");
   zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
 });
 $("#zoomToSiolaLegal_1a9").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7QX80R8CH3JDZ097JX3");
+  setTransparentByobject_id(siolaLegal, "821964");
   zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
 });
 $("#zoomToSiolaLegal_1a10").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK");
+  setTransparentByobject_id(siolaLegal, "826868");
   zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
 });
 
 $("#zoomToSiolaLegal_2a1").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7VAYDZ2BHP9Y7TVMYWQ");
+  setTransparentByobject_id(siolaLegal, "841116");
   zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
 });
 $("#zoomToSiolaLegal_2a2").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7VT5ARB2YC0C7PXKCDY");
+  setTransparentByobject_id(siolaLegal, "838147");
   zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
 });
 $("#zoomToSiolaLegal_2a3").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7TN104KHG9ZEHJVSAX5");
+  setTransparentByobject_id(siolaLegal, "840850");
   zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
 $("#zoomToSiolaLegal_2a4").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7SFH37VQ3NC3JQ6PRXE");
+  setTransparentByobject_id(siolaLegal, "829358");
   zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
 $("#zoomToSiolaLegal_2a5").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7S8KJJGYKK6GDD7BBTN");
+  setTransparentByobject_id(siolaLegal, "829098");
   zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
 });
 $("#zoomToSiolaLegal_2a6").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W");
+  setTransparentByobject_id(siolaLegal, "839609");
   zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
 $("#zoomToSiolaLegal_2a7").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7V04AZ1NWE2VJ7T6T89");
+  setTransparentByobject_id(siolaLegal, "913870");
   zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
 });
 
 $("#zoomToSiolaLegal_3a1").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7XR27P0H1C69A7TPGZ0");
+  setTransparentByobject_id(siolaLegal, "914699");
   zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
 });
 $("#zoomToSiolaLegal_3a2").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Y68R892D1XNRBV2RPN");
+  setTransparentByobject_id(siolaLegal, "831440");
   zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
 });
 $("#zoomToSiolaLegal_3a3").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7WZ79J0N5VRS8HQWJXX");
+  setTransparentByobject_id(siolaLegal, "843868");
   zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
 $("#zoomToSiolaLegal_3a4").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7W331GHVRF0QTNJXGRW");
+  setTransparentByobject_id(siolaLegal, "830288");
   zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
 $("#zoomToSiolaLegal_3a5").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7WCQA085HKSMFMBE8Z0");
+  setTransparentByobject_id(siolaLegal, "831096");
   zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
 });
 $("#zoomToSiolaLegal_3a6").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P");
+  setTransparentByobject_id(siolaLegal, "848368");
   zoomToLocation(180, 350, 112.73779026382113, -7.255632571893392, -15, 0);
 });
 $("#zoomToSiolaLegal_3a7").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7X6FYFJW3PN5TQV1DAR");
+  setTransparentByobject_id(siolaLegal, "847875");
   zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
 
 $("#zoomToSiolaLegal_4a1").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7YFWXFTR05G47KJJMJ9");
+  setTransparentByobject_id(siolaLegal, "849039");
   zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
 });
 $("#zoomToSiolaLegal_4a2").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7YS0BMJZNXP9YB1MSA2");
+  setTransparentByobject_id(siolaLegal, "886033");
   zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
 });
 $("#zoomToSiolaLegal_4a3").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3");
+  setTransparentByobject_id(siolaLegal, "849276");
   zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
 });
 
 $("#zoomToSiolaLegal_5a1").on('click', function () {
-  setTransparentBylegal_id(siolaLegal, "legal_01HM6EM7ZH14YX6V6Y963TEKXQ");
+  setTransparentByobject_id(siolaLegal, "850924");
   zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
@@ -826,167 +853,206 @@ $("#balaiLevel_2").on('click', function () {
   balaiBuildingL2.show = $(this).prop("checked");
 });
 
-$("#balaiLegal_1a1").change(function () {
+$("#balaiLegal_GSB").change(function () {
+  setVisibilityByobject_id(balaiLegal, "701720", $(this).prop("checked"));
+});
+$("#balaiLegal_BB").change(function () {
+  setVisibilityByobject_id(balaiLegal, "670768", $(this).prop("checked"));
+});
+$("#balaiLegal_BT").change(function () {
+  setVisibilityByobject_id(balaiLegal, "671122", $(this).prop("checked"));
+});
 
+$("#balaiLegal_1a1").change(function () {
+  setVisibilityByobject_id(balaiLegal, "550615", $(this).prop("checked"));
 });
 $("#balaiLegal_1a2").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "558371", $(this).prop("checked"));
 });
 $("#balaiLegal_1a3").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "559588", $(this).prop("checked"));
 });
 $("#balaiLegal_1a4").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "600819", $(this).prop("checked"));
 });
 $("#balaiLegal_1a5").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "560626", $(this).prop("checked"));
 });
 $("#balaiLegal_1a6").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "592037", $(this).prop("checked"));
 });
 $("#balaiLegal_1a7").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "639829", $(this).prop("checked"));
 });
 $("#balaiLegal_1a8").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "595885", $(this).prop("checked"));
 });
 $("#balaiLegal_1a9").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "596362", $(this).prop("checked"));
 });
 $("#balaiLegal_1a10").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "596892", $(this).prop("checked"));
 });
 $("#balaiLegal_1a11").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "598132", $(this).prop("checked"));
 });
 $("#balaiLegal_1a12").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "599448", $(this).prop("checked"));
 });
 $("#balaiLegal_1a13").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "601254", $(this).prop("checked"));
 });
 
 $("#balaiLegal_0a1").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "612619", $(this).prop("checked"));
 });
 $("#balaiLegal_0a2").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "612232", $(this).prop("checked"));
 });
 $("#balaiLegal_0a3").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "613040", $(this).prop("checked"));
 });
 $("#balaiLegal_0a4").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "613441", $(this).prop("checked"));
 });
 $("#balaiLegal_0a5").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "610552", $(this).prop("checked"));
 });
 $("#balaiLegal_0a6").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "611250", $(this).prop("checked"));
 });
 $("#balaiLegal_0a7").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "611746", $(this).prop("checked"));
 });
 $("#balaiLegal_0a8").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "610016", $(this).prop("checked"));
 });
 $("#balaiLegal_0a9").change(function () {
-
-});
-
-$("#balaiLegal_GSB").change(function () {
-
-});
-$("#balaiLegal_BB").change(function () {
-
-});
-$("#balaiLegal_BT").change(function () {
-
+  setVisibilityByobject_id(balaiLegal, "609329", $(this).prop("checked"));
 });
 
 $("#zoomToBalaiLegal_0all").on('click', function () {
+  setTransparentByobject_id(balaiLegal, [
+    "612619",
+    "612232",
+    "613040",
+    "613441",
+    "610552",
+    "611250",
+    "611746",
+    "610016",
+    "609329"
+  ]);
   zoomToTileset(balaiBuildingL1, -25, 180, 100);
 });
 $("#zoomToBalaiLegal_1all").on('click', function () {
+  setTransparentByobject_id(balaiLegal, [
+    "550615",
+    "558371",
+    "559588",
+    "600819",
+    "560626",
+    "592037",
+    "639829",
+    "595885",
+    "596362",
+    "596892",
+    "598132",
+    "599448",
+    "601254"
+  ]);
   zoomToTileset(balaiBuildingL1, -25, 0, 100);
 });
 
 $("#zoomToBalaiLegal_gsb").on('click', function () {
-  zoomToTileset(balaiLegalGSB, -20, 25, 300);
+  zoomToLocation(20, 120, 112.74437101987753, -7.265618497548999, -25, 0);
 });
 $("#zoomToBalaiLegal_bt").on('click', function () {
-  zoomToTileset(balaiLegalBT, -20, 25, 300);
+  zoomToLocation(20, 250, 112.7432787543901, -7.267368495006733, -25, 0);
 });
 $("#zoomToBalaiLegal_bb").on('click', function () {
-  zoomToTileset(balaiLegalBB, 15, 25, 300);
+  zoomToLocation(20, -35, 112.74455852005875, -7.266254249795577, 11, 0);
 });
 
 $("#zoomToBalaiLegal_1a1").on('click', function () {
-  zoomToTileset(balaiLegalL1a1, -45, 20, 100);
+  setTransparentByobject_id(balaiLegal, "550615");
+  zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
 });
 $("#zoomToBalaiLegal_1a2").on('click', function () {
-  zoomToTileset(balaiLegalL1a2, -25, 20, 100);
+  setTransparentByobject_id(balaiLegal, "558371");
+  zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
 });
 $("#zoomToBalaiLegal_1a3").on('click', function () {
-  zoomToTileset(balaiLegalL1a3, -25, 20, 100);
+  setTransparentByobject_id(balaiLegal, "559588");
+  zoomToLocation(20, 25, 112.74514755642848, -7.2642758111076615, -25, 0);
 });
 $("#zoomToBalaiLegal_1a4").on('click', function () {
-  zoomToTileset(balaiLegalL1a4, -25, 20, 100);
+  setTransparentByobject_id(balaiLegal, "600819");
+  zoomToLocation(20, 25, 112.74526629406043, -7.264316162622997, -25, 0);
 });
 $("#zoomToBalaiLegal_1a5").on('click', function () {
-  zoomToTileset(balaiLegalL1a5, -25, 20, 100);
+  setTransparentByobject_id(balaiLegal, "560626");
+  zoomToLocation(20, 25, 112.74521826029621, -7.264175080955373, -25, 0);
 });
 $("#zoomToBalaiLegal_1a6").on('click', function () {
-  zoomToTileset(balaiLegalL1a6, -25, 80, 100);
+  setTransparentByobject_id(balaiLegal, "592037");
+  zoomToLocation(20, 25, 112.74521802863246, -7.264175001191377, -25, 0);
 });
 $("#zoomToBalaiLegal_1a7").on('click', function () {
-  zoomToTileset(balaiLegalL1a7, -25, 80, 100);
+  setTransparentByobject_id(balaiLegal, "639829");
+  zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
 $("#zoomToBalaiLegal_1a8").on('click', function () {
-  zoomToTileset(balaiLegalL1a8, -25, 80, 100);
+  setTransparentByobject_id(balaiLegal, "595885");
+  zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
 $("#zoomToBalaiLegal_1a9").on('click', function () {
-  zoomToTileset(balaiLegalL1a9, -25, 80, 100);
+  setTransparentByobject_id(balaiLegal, "596362");
+  zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
 $("#zoomToBalaiLegal_1a10").on('click', function () {
-  zoomToTileset(balaiLegalL1a10, -25, 0, 100);
+  setTransparentByobject_id(balaiLegal, "596892");
+  zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
 $("#zoomToBalaiLegal_1a11").on('click', function () {
-  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
+  setTransparentByobject_id(balaiLegal, "598132");
+  zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
 });
 $("#zoomToBalaiLegal_1a12").on('click', function () {
-  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
+  setTransparentByobject_id(balaiLegal, "599448");
+  zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
 });
 $("#zoomToBalaiLegal_1a13").on('click', function () {
-  zoomToTileset(balaiLegalL1a10, -25, 210, 100);
+  setTransparentByobject_id(balaiLegal, "601254");
+  zoomToLocation(20, 30, 112.74534520728557, -7.264096743894646, -45, 0);
 });
 
 $("#zoomToBalaiLegal_0a1").on('click', function () {
-  zoomToTileset(balaiLegalL0a1, -45, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "612619");
 });
 $("#zoomToBalaiLegal_0a2").on('click', function () {
-  zoomToTileset(balaiLegalL0a2, -25, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "612232");
 });
 $("#zoomToBalaiLegal_0a3").on('click', function () {
-  zoomToTileset(balaiLegalL0a3, -25, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "613040");
 });
 $("#zoomToBalaiLegal_0a4").on('click', function () {
-  zoomToTileset(balaiLegalL0a4, -25, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "613441");
 });
 $("#zoomToBalaiLegal_0a5").on('click', function () {
-  zoomToTileset(balaiLegalL0a5, -25, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "610552");
 });
 $("#zoomToBalaiLegal_0a6").on('click', function () {
-  zoomToTileset(balaiLegalL0a6, -25, 25, 100);
+  setVisibilityByobject_id(balaiLegal, "611250");
 });
 $("#zoomToBalaiLegal_0a7").on('click', function () {
-  zoomToTileset(balaiLegalL0a7, -25, 20, 100);
+  setVisibilityByobject_id(balaiLegal, "611746");
 });
 $("#zoomToBalaiLegal_0a8").on('click', function () {
-  zoomToTileset(balaiLegalL0a8, -25, 20, 100);
+  setVisibilityByobject_id(balaiLegal, "610016");
 });
 $("#zoomToBalaiLegal_0a9").on('click', function () {
-  zoomToTileset(balaiLegalL0a9, -25, 20, 100);
+  setVisibilityByobject_id(balaiLegal, "609329");
 });
 
 // Layering button Rusunawa   #############################################################################
@@ -1013,560 +1079,527 @@ $("#rusunawaLevel_r").change(function () {
 });
 
 $("#rusunawaLegal_GSB").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW920GYWHNG3MC1SR7VE4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "615229", $(this).prop("checked"));
 });
 $("#rusunawaLegal_BB").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW91SR64FJ7F0YVCJK4GS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "598698", $(this).prop("checked"));
 });
 $("#rusunawaLegal_BT").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW7TPS55AHCPWVXSGEPQE", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "598583", $(this).prop("checked"));
 });
 
 $("#rusunawaLegal_1a1").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW996G1Z61WBQY1XP3QAK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "599276", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a2").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AC1QPP7KW6J343B848", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "599642", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a3").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CJ26GJS4A4JP9JQ4W2", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619195", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a4").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CP9GS5QSGGTTV7GMC2", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619194", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a5").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CDDCR0RAMWWSX1KHMN", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619196", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a6").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CV1M82CGYX5SPVBSFA", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "601694", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a7").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DBK9J1MN5WFHB9B16J", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "601835", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a8").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9D52TK6QTBQC832RBNQ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "601952", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a9").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DGEFA023Q9HD9WY5EB", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600414", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a10").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BS01J71V6KXND1BV4T", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600975", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a11").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9C3DV3KDRH8EHRK9FVF", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600292", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a12").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BJ60VSCFTXEQJ1TY5D", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600222", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a13").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BBR6W6WTB8ZP65B2WW", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600145", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a14").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9B610G13NHKJT44S509", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "600045", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a15").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9B1JJFM7H4E8MZDSDDS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "599963", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a16").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AS7JFA6MMEHMX0MWS1", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "599868", $(this).prop("checked"));
 });
 $("#rusunawaLegal_1a17").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AK2ADTV3A79B2A6ZWX", $(this).prop("checked"));
-});
-$("#rusunawaLegal_1a18").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9A95Q8QTDWZ0Q7YYN89", $(this).prop("checked"));
-});
-$("#rusunawaLegal_1a19").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9A41HNVDGF7VT7QWE8F", $(this).prop("checked"));
-});
-$("#rusunawaLegal_1a20").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9C8FC97YYPFMHZSJJCG", $(this).prop("checked"));
-});
-$("#rusunawaLegal_1a21").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BXA4XSZ8029S3J260F", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "599584", $(this).prop("checked"));
 });
 
 $("#rusunawaLegal_2a1").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DTF7VED1JMZYE5GSYE", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "602333", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a2").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JF1A9Q205ZXXM3JA7Y", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619134", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a3").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GRAHX1RCKBGNEM3B2T", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619144", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a4").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9J91BB3TS79QJ3FYNH6", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619135", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a5").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9J20S66D2T0VVCKKAX5", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619136", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a6").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HVS15HHSSCTJE5QP3S", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619137", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a7").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HPCF5JN81YKW88P57J", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619138", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a8").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HJAXG353YRWQK707TW", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619139", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a9").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HEGVC91YVDTMN82QFB", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619140", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a10").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9H9S0NZ0S40Y38NWWN2", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619141", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a11").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9H293QC7RP34NHPNX1A", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619142", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a12").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GK7RQPJPPD6ZTG34HP", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619145", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a13").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GX4SPW03PXM9F35HTE", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "619143", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a14").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9E61D378B64K62B28EK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "602474", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a15").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EE5WASSX5XJV38AZ6H", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618566", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a16").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GB4EA4ZFYAN4VCRV0K", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618555", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a17").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9G76Z0JMNVH6KTTAPK7", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618556", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a18").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9G0FDEXXV7ZSD2MJNGG", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618557", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a19").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FSYXR41VAA2452CAR4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618558", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a20").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FK4DYRSKVNV6BB7B2A", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618559", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a21").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FFCKQA7V1Z45X8JTCS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618560", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a22").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FA312J5704SNJ6PYJ3", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618561", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a23").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9F5ZHB9G3B71ZZAJPWS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618562", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a24").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EZ18RKZYJKHS2Z53R7", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618563", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a25").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ET2QPK43G2QTXRE4HC", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618564", $(this).prop("checked"));
 });
 $("#rusunawaLegal_2a26").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EN8FQ0XDK68F1VXMN1", $(this).prop("checked"));
-});
-$("#rusunawaLegal_2a27").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9E0KJESXY4H2BNBE7VM", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618565", $(this).prop("checked"));
 });
 
 $("#rusunawaLegal_3a1").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9MVW5ZGH9QXR49J570K", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "606558", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a2").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Q07D1QQW0A81T6A3W9", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618912", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a3").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9N9DADE0PTZWVZ0FZJ0", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618922", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a4").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PTZ0A2AJXXMBRP22YJ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618913", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a5").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PN986VDPJXJC6EK9JV", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618914", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a6").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PGYR5T30KRSHCPZWAK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618915", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a7").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9P93F9RHT1J5NZXSYFN", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618916", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a8").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9P3N98X9TX7VNRBJ15X", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618917", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a9").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NZDR7PV98W970T5PRX", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618918", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a10").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NSC24K5FPDZEP7XG25", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618919", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a11").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NKCN16ZY3MV0T9GWF4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618920", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a12").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9N4PHV678XHXKETX2EH", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618923", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a13").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NFBP8DPD8X5P03E3TW", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618921", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a14").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QBPGW27WGDG51XKR3X", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "606910", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a15").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JRNGDQ0NPCYT2BC9XM", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618455", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a16").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9MJRB0A8TY333RE1QFZ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618444", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a17").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ME30WEZRRXDPQA190J", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618445", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a18").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9M70652KB4774BW89EC", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618446", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a19").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9M100TA6VY3FM35D5R6", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618447", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a20").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KXFWG38WNR24HWCPJK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618448", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a21").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KQ954KPSACVC6D6CE0", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618449", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a22").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KKDNMQZ8FRB96RCHCC", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618450", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a23").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KFXPTCSYEJY3YYJP1Y", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618451", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a24").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9K91WCB1AD66JYY3FFS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618452", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a25").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9K28V03M20MSEPV7QCD", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618453", $(this).prop("checked"));
 });
 $("#rusunawaLegal_3a26").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JXP8418XRP007M283B", $(this).prop("checked"));
-});
-$("#rusunawaLegal_3a27").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Q6K2F6KR3AENXDFWWF", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618454", $(this).prop("checked"));
 });
 
 $("#rusunawaLegal_4a1").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9T0W8VBTZ25HCXBGQPS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "607296", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a2").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WAGXHBWAAK6QNDA2MH", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618801", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a3").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TH737NRNVP2WJJP0S0", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618811", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a4").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9W5J48VXG0AXKHV30D6", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618802", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a5").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9W0HX6WBFYMVC7JQ802", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618803", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a6").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VVFNDWX99Q10DNPRC5", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618804", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a7").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VNV42MDP0DJXTDQQ31", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618805", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a8").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VDYT36E93WPXKN0V21", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618806", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a9").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9V7F3QSSW9S0PZ2S4XN", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618807", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a10").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9V2DJBF05DRHF42171K", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618808", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a11").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TYY1DHDJ12T9WGP98K", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618809", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a12").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TBRKRKG84NZMK8XSDY", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618812", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a13").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TSRMXJBXXC8FPW0MP0", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618810", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a14").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QPWE75DMGH3ZRP2ED4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "606926", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a15").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QYSC6XF9HPFBW17TCJ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618344", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a16").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SRS0BKZ4ZRADS2CRXJ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618333", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a17").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SJ874QGQMERHQX4R8D", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618334", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a18").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SBTCFP7MF8HMNE1VYQ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618335", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a19").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9S743XNK211CH82N31G", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618336", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a20").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9S3D2FG186H849WPBD0", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618337", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a21").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RY7Z9V7C40F0XBR2M4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618338", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a22").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RS0Z4J8DY4RQNZ08SM", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618339", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a23").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RK19R68AXV9YP9HTY8", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618340", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a24").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RBT4M3NX3YH6EMW2E1", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618341", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a25").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9R7M4KK7A45YWR1FAG8", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618342", $(this).prop("checked"));
 });
 $("#rusunawaLegal_4a26").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9R3NP14ARFTQNV13BEW", $(this).prop("checked"));
-});
-$("#rusunawaLegal_4a27").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618343", $(this).prop("checked"));
 });
 
 $("#rusunawaLegal_5a1").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Z2GR1BZENX99V8SD6F", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "607326", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a2").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA1DXZJ1FG2R8KJBSMXK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618690", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a3").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZK0V03298BB5X130WY", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618700", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a4").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA16RNAX53BA0R1PTXJ6", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618691", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a5").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA12ZB7TYZJNHAHPY7WW", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618692", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a6").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0XYNJRXAY0B63N5BBV", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618693", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a7").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0NGNZCR80RNDCXMH5M", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618694", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a8").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0G6XMNZHKP9KN1BBT4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618695", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a9").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0B8MQSKPHR04CJKNP4", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618696", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a10").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA05B4C592FR7Z3CRX8B", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618697", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a11").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZZP9YD2N3BSGFK7V5D", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618698", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a12").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZDPFQYCG9Y6K9F771W", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618701", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a13").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZSR8817RCJG52R8WDP", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618699", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a14").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WPJPS0THQYCNXRXP6D", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "606942", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a15").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WZRP309VTB8P8YQKBQ", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618233", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a16").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YT7MKD01KC38EX2WQP", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618222", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a17").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YKDPC8XACE4HQWVJ9Y", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618223", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a18").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YD78PQ60W3B1P7C3J7", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618224", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a19").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Y9G9K73HXMFXZS05BK", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618225", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a20").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Y4Q2R6WQGXXYQR2ZXH", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618226", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a21").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XZFE0FB81H22C1BJC5", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618227", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a22").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XVME2NBE8PHXHX9Q2J", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618228", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a23").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XMAR7XJ0CG8P17GTAS", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618229", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a24").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XFYBGNR5ZSEE6YP5EW", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618230", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a25").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XAKH8N3MA9GXBEYJ7M", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618231", $(this).prop("checked"));
 });
 $("#rusunawaLegal_5a26").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9X4WWVMEB76J2P1XP7D", $(this).prop("checked"));
+  setVisibilityByobject_id(rusunawaLegal, "618232", $(this).prop("checked"));
 });
-$("#rusunawaLegal_5a27").change(function () {
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2", $(this).prop("checked"));
-});
-
 
 
 $("#zoomToRusunawaLegal_1all").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, [
-    "legal_01HM6EW996G1Z61WBQY1XP3QAK",
-    "legal_01HM6EW9AC1QPP7KW6J343B848",
-    "legal_01HM6EW9CJ26GJS4A4JP9JQ4W2",
-    "legal_01HM6EW9CP9GS5QSGGTTV7GMC2",
-    "legal_01HM6EW9CDDCR0RAMWWSX1KHMN",
-    "legal_01HM6EW9CV1M82CGYX5SPVBSFA",
-    "legal_01HM6EW9DBK9J1MN5WFHB9B16J",
-    "legal_01HM6EW9D52TK6QTBQC832RBNQ",
-    "legal_01HM6EW9DGEFA023Q9HD9WY5EB",
-    "legal_01HM6EW9BS01J71V6KXND1BV4T",
-    "legal_01HM6EW9C3DV3KDRH8EHRK9FVF",
-    "legal_01HM6EW9BJ60VSCFTXEQJ1TY5D",
-    "legal_01HM6EW9BBR6W6WTB8ZP65B2WW",
-    "legal_01HM6EW9B610G13NHKJT44S509",
-    "legal_01HM6EW9B1JJFM7H4E8MZDSDDS",
-    "legal_01HM6EW9AS7JFA6MMEHMX0MWS1",
-    "legal_01HM6EW9AK2ADTV3A79B2A6ZWX",
-    "legal_01HM6EW9A95Q8QTDWZ0Q7YYN89",
-    "legal_01HM6EW9A41HNVDGF7VT7QWE8F",
-    "legal_01HM6EW9C8FC97YYPFMHZSJJCG",
-    "legal_01HM6EW9BXA4XSZ8029S3J260F",
+  setTransparentByobject_id(rusunawaLegal, [
+    "599276",
+    "599642",
+    "619195",
+    "619194",
+    "619196",
+    "601694",
+    "601835",
+    "601952",
+    "600414",
+    "600975",
+    "600292",
+    "600222",
+    "600145",
+    "600045",
+    "599963",
+    "599868",
+    "599584",
   ]);
   zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_2all").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, [
-    "legal_01HM6EW9DTF7VED1JMZYE5GSYE",
-    "legal_01HM6EW9JF1A9Q205ZXXM3JA7Y",
-    "legal_01HM6EW9GRAHX1RCKBGNEM3B2T",
-    "legal_01HM6EW9J91BB3TS79QJ3FYNH6",
-    "legal_01HM6EW9J20S66D2T0VVCKKAX5",
-    "legal_01HM6EW9HVS15HHSSCTJE5QP3S",
-    "legal_01HM6EW9HPCF5JN81YKW88P57J",
-    "legal_01HM6EW9HJAXG353YRWQK707TW",
-    "legal_01HM6EW9HEGVC91YVDTMN82QFB",
-    "legal_01HM6EW9H9S0NZ0S40Y38NWWN2",
-    "legal_01HM6EW9H293QC7RP34NHPNX1A",
-    "legal_01HM6EW9GK7RQPJPPD6ZTG34HP",
-    "legal_01HM6EW9GX4SPW03PXM9F35HTE",
-    "legal_01HM6EW9E61D378B64K62B28EK",
-    "legal_01HM6EW9EE5WASSX5XJV38AZ6H",
-    "legal_01HM6EW9GB4EA4ZFYAN4VCRV0K",
-    "legal_01HM6EW9G76Z0JMNVH6KTTAPK7",
-    "legal_01HM6EW9G0FDEXXV7ZSD2MJNGG",
-    "legal_01HM6EW9FSYXR41VAA2452CAR4",
-    "legal_01HM6EW9FK4DYRSKVNV6BB7B2A",
-    "legal_01HM6EW9FFCKQA7V1Z45X8JTCS",
-    "legal_01HM6EW9FA312J5704SNJ6PYJ3",
-    "legal_01HM6EW9F5ZHB9G3B71ZZAJPWS",
-    "legal_01HM6EW9EZ18RKZYJKHS2Z53R7",
-    "legal_01HM6EW9ET2QPK43G2QTXRE4HC",
-    "legal_01HM6EW9EN8FQ0XDK68F1VXMN1",
-    "legal_01HM6EW9E0KJESXY4H2BNBE7VM",
+  setTransparentByobject_id(rusunawaLegal, [
+    "602333",
+    "619134",
+    "619144",
+    "619135",
+    "619136",
+    "619137",
+    "619138",
+    "619139",
+    "619140",
+    "619141",
+    "619142",
+    "619145",
+    "619143",
+    "602474",
+    "618566",
+    "618555",
+    "618556",
+    "618557",
+    "618558",
+    "618559",
+    "618560",
+    "618561",
+    "618562",
+    "618563",
+    "618564",
+    "618565",
   ]);
   zoomToTileset(rusunawaBuildingL2, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_3all").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, [
-    "legal_01HM6EW9MVW5ZGH9QXR49J570K",
-    "legal_01HM6EW9Q07D1QQW0A81T6A3W9",
-    "legal_01HM6EW9N9DADE0PTZWVZ0FZJ0",
-    "legal_01HM6EW9PTZ0A2AJXXMBRP22YJ",
-    "legal_01HM6EW9PN986VDPJXJC6EK9JV",
-    "legal_01HM6EW9PGYR5T30KRSHCPZWAK",
-    "legal_01HM6EW9P93F9RHT1J5NZXSYFN",
-    "legal_01HM6EW9P3N98X9TX7VNRBJ15X",
-    "legal_01HM6EW9NZDR7PV98W970T5PRX",
-    "legal_01HM6EW9NSC24K5FPDZEP7XG25",
-    "legal_01HM6EW9NKCN16ZY3MV0T9GWF4",
-    "legal_01HM6EW9N4PHV678XHXKETX2EH",
-    "legal_01HM6EW9NFBP8DPD8X5P03E3TW",
-    "legal_01HM6EW9QBPGW27WGDG51XKR3X",
-    "legal_01HM6EW9JRNGDQ0NPCYT2BC9XM",
-    "legal_01HM6EW9MJRB0A8TY333RE1QFZ",
-    "legal_01HM6EW9ME30WEZRRXDPQA190J",
-    "legal_01HM6EW9M70652KB4774BW89EC",
-    "legal_01HM6EW9M100TA6VY3FM35D5R6",
-    "legal_01HM6EW9KXFWG38WNR24HWCPJK",
-    "legal_01HM6EW9KQ954KPSACVC6D6CE0",
-    "legal_01HM6EW9KKDNMQZ8FRB96RCHCC",
-    "legal_01HM6EW9KFXPTCSYEJY3YYJP1Y",
-    "legal_01HM6EW9K91WCB1AD66JYY3FFS",
-    "legal_01HM6EW9K28V03M20MSEPV7QCD",
-    "legal_01HM6EW9JXP8418XRP007M283B",
-    "legal_01HM6EW9Q6K2F6KR3AENXDFWWF",
+  setTransparentByobject_id(rusunawaLegal, [
+    "606558",
+    "618912",
+    "618922",
+    "618913",
+    "618914",
+    "618915",
+    "618916",
+    "618917",
+    "618918",
+    "618919",
+    "618920",
+    "618923",
+    "618921",
+    "606910",
+    "618455",
+    "618444",
+    "618445",
+    "618446",
+    "618447",
+    "618448",
+    "618449",
+    "618450",
+    "618451",
+    "618452",
+    "618453",
+    "618454",
   ]);
   zoomToTileset(rusunawaBuildingL3, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_4all").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, [
-    "legal_01HM6EW9T0W8VBTZ25HCXBGQPS",
-    "legal_01HM6EW9WAGXHBWAAK6QNDA2MH",
-    "legal_01HM6EW9TH737NRNVP2WJJP0S0",
-    "legal_01HM6EW9W5J48VXG0AXKHV30D6",
-    "legal_01HM6EW9W0HX6WBFYMVC7JQ802",
-    "legal_01HM6EW9VVFNDWX99Q10DNPRC5",
-    "legal_01HM6EW9VNV42MDP0DJXTDQQ31",
-    "legal_01HM6EW9VDYT36E93WPXKN0V21",
-    "legal_01HM6EW9V7F3QSSW9S0PZ2S4XN",
-    "legal_01HM6EW9V2DJBF05DRHF42171K",
-    "legal_01HM6EW9TYY1DHDJ12T9WGP98K",
-    "legal_01HM6EW9TBRKRKG84NZMK8XSDY",
-    "legal_01HM6EW9TSRMXJBXXC8FPW0MP0",
-    "legal_01HM6EW9QPWE75DMGH3ZRP2ED4",
-    "legal_01HM6EW9QYSC6XF9HPFBW17TCJ",
-    "legal_01HM6EW9SRS0BKZ4ZRADS2CRXJ",
-    "legal_01HM6EW9SJ874QGQMERHQX4R8D",
-    "legal_01HM6EW9SBTCFP7MF8HMNE1VYQ",
-    "legal_01HM6EW9S743XNK211CH82N31G",
-    "legal_01HM6EW9S3D2FG186H849WPBD0",
-    "legal_01HM6EW9RY7Z9V7C40F0XBR2M4",
-    "legal_01HM6EW9RS0Z4J8DY4RQNZ08SM",
-    "legal_01HM6EW9RK19R68AXV9YP9HTY8",
-    "legal_01HM6EW9RBT4M3NX3YH6EMW2E1",
-    "legal_01HM6EW9R7M4KK7A45YWR1FAG8",
-    "legal_01HM6EW9R3NP14ARFTQNV13BEW",
-    "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV",
+  setTransparentByobject_id(rusunawaLegal, [
+    "607296",
+    "618801",
+    "618811",
+    "618802",
+    "618803",
+    "618804",
+    "618805",
+    "618806",
+    "618807",
+    "618808",
+    "618809",
+    "618812",
+    "618810",
+    "606926",
+    "618344",
+    "618333",
+    "618334",
+    "618335",
+    "618336",
+    "618337",
+    "618338",
+    "618339",
+    "618340",
+    "618341",
+    "618342",
+    "618343",
   ]);
   zoomToTileset(rusunawaBuildingL4, -25, 180, 100);
 });
 $("#zoomToRusunawaLegal_5all").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, [
-    "legal_01HM6EW9Z2GR1BZENX99V8SD6F",
-    "legal_01HM6EWA1DXZJ1FG2R8KJBSMXK",
-    "legal_01HM6EW9ZK0V03298BB5X130WY",
-    "legal_01HM6EWA16RNAX53BA0R1PTXJ6",
-    "legal_01HM6EWA12ZB7TYZJNHAHPY7WW",
-    "legal_01HM6EWA0XYNJRXAY0B63N5BBV",
-    "legal_01HM6EWA0NGNZCR80RNDCXMH5M",
-    "legal_01HM6EWA0G6XMNZHKP9KN1BBT4",
-    "legal_01HM6EWA0B8MQSKPHR04CJKNP4",
-    "legal_01HM6EWA05B4C592FR7Z3CRX8B",
-    "legal_01HM6EW9ZZP9YD2N3BSGFK7V5D",
-    "legal_01HM6EW9ZDPFQYCG9Y6K9F771W",
-    "legal_01HM6EW9ZSR8817RCJG52R8WDP",
-    "legal_01HM6EW9WPJPS0THQYCNXRXP6D",
-    "legal_01HM6EW9WZRP309VTB8P8YQKBQ",
-    "legal_01HM6EW9YT7MKD01KC38EX2WQP",
-    "legal_01HM6EW9YKDPC8XACE4HQWVJ9Y",
-    "legal_01HM6EW9YD78PQ60W3B1P7C3J7",
-    "legal_01HM6EW9Y9G9K73HXMFXZS05BK",
-    "legal_01HM6EW9Y4Q2R6WQGXXYQR2ZXH",
-    "legal_01HM6EW9XZFE0FB81H22C1BJC5",
-    "legal_01HM6EW9XVME2NBE8PHXHX9Q2J",
-    "legal_01HM6EW9XMAR7XJ0CG8P17GTAS",
-    "legal_01HM6EW9XFYBGNR5ZSEE6YP5EW",
-    "legal_01HM6EW9XAKH8N3MA9GXBEYJ7M",
-    "legal_01HM6EW9X4WWVMEB76J2P1XP7D",
-    "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2",
+  setTransparentByobject_id(rusunawaLegal, [
+    "607326",
+    "618690",
+    "618700",
+    "618691",
+    "618692",
+    "618693",
+    "618694",
+    "618695",
+    "618696",
+    "618697",
+    "618698",
+    "618701",
+    "618699",
+    "606942",
+    "618233",
+    "618222",
+    "618223",
+    "618224",
+    "618225",
+    "618226",
+    "618227",
+    "618228",
+    "618229",
+    "618230",
+    "618231",
+    "618232",
   ]);
   zoomToTileset(rusunawaBuildingL5, -25, 180, 100);
 });
@@ -1582,524 +1615,492 @@ $("#zoomToRusunawaLegal_bb").on('click', function () {
 });
 
 $("#zoomToRusunawaLegal_1a1").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW996G1Z61WBQY1XP3QAK");
+  setTransparentByobject_id(rusunawaLegal, "599276");
   zoomToLocation(265, 50, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_1a2").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AC1QPP7KW6J343B848");
+  setTransparentByobject_id(rusunawaLegal, "599642");
   zoomToLocation(180, 15, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a3").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CJ26GJS4A4JP9JQ4W2");
+  setTransparentByobject_id(rusunawaLegal, "619195");
   zoomToLocation(180, 15, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a4").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CP9GS5QSGGTTV7GMC2");
+  setTransparentByobject_id(rusunawaLegal, "619194");
   zoomToLocation(180, 15, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a5").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CDDCR0RAMWWSX1KHMN");
+  setTransparentByobject_id(rusunawaLegal, "619196");
   zoomToLocation(180, 15, 112.64500479106304, -8.010318705620248, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a6").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9CV1M82CGYX5SPVBSFA");
+  setTransparentByobject_id(rusunawaLegal, "601694");
   zoomToLocation(180, 15, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a7").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DBK9J1MN5WFHB9B16J");
+  setTransparentByobject_id(rusunawaLegal, "601835");
   zoomToLocation(180, 15, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a8").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9D52TK6QTBQC832RBNQ");
-  zoomToLocation(180, 15, 112.64479519186604, -8.010297620811423, -15, 0);
+  setTransparentByobject_id(rusunawaLegal, "601952");
+  zoomToLocation(180, 15, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a9").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DGEFA023Q9HD9WY5EB");
+  setTransparentByobject_id(rusunawaLegal, "600414");
   zoomToLocation(180, 15, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a10").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BS01J71V6KXND1BV4T");
+  setTransparentByobject_id(rusunawaLegal, "600975");
   zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a11").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9C3DV3KDRH8EHRK9FVF");
-  zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
-});
-$("#zoomToRusunawaLegal_1a12").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BJ60VSCFTXEQJ1TY5D");
+  setTransparentByobject_id(rusunawaLegal, "600292");
   zoomToLocation(0, 15, 112.6447275664712, -8.011221986832947, -15, 0);
 });
+$("#zoomToRusunawaLegal_1a12").on('click', function () {
+  setTransparentByobject_id(rusunawaLegal, "600222");
+  zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
+});
 $("#zoomToRusunawaLegal_1a13").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BBR6W6WTB8ZP65B2WW");
+  setTransparentByobject_id(rusunawaLegal, "600145");
   zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a14").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9B610G13NHKJT44S509");
-  zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
+  setTransparentByobject_id(rusunawaLegal, "600045");
+  zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a15").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9B1JJFM7H4E8MZDSDDS");
+  setTransparentByobject_id(rusunawaLegal, "599963");
   zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a16").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AS7JFA6MMEHMX0MWS1");
-  zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
+  setTransparentByobject_id(rusunawaLegal, "599868");
+  zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_1a17").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9AK2ADTV3A79B2A6ZWX");
+  setTransparentByobject_id(rusunawaLegal, "599584");
   zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
-});
-$("#zoomToRusunawaLegal_1a18").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9A95Q8QTDWZ0Q7YYN89");
-  zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
-});
-$("#zoomToRusunawaLegal_1a19").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9A41HNVDGF7VT7QWE8F");
-  zoomToLocation(0, 15, 112.64510790597768, -8.011194667555896, -15, 0);
-});
-$("#zoomToRusunawaLegal_1a20").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9C8FC97YYPFMHZSJJCG");
-  zoomToLocation(0, 15, 112.64516418338256, -8.011135952579131, -15, 0);
-});
-$("#zoomToRusunawaLegal_1a21").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9BXA4XSZ8029S3J260F");
-  zoomToLocation(0, 15, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_2a1").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9DTF7VED1JMZYE5GSYE");
+  setTransparentByobject_id(rusunawaLegal, "602333");
   zoomToLocation(265, 52, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_2a2").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JF1A9Q205ZXXM3JA7Y");
+  setTransparentByobject_id(rusunawaLegal, "619134");
   zoomToLocation(180, 17, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a3").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GRAHX1RCKBGNEM3B2T");
+  setTransparentByobject_id(rusunawaLegal, "619144");
   zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a4").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9J91BB3TS79QJ3FYNH6");
+  setTransparentByobject_id(rusunawaLegal, "619135");
   zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a5").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9J20S66D2T0VVCKKAX5");
+  setTransparentByobject_id(rusunawaLegal, "619136");
   zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a6").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HVS15HHSSCTJE5QP3S");
+  setTransparentByobject_id(rusunawaLegal, "619137");
   zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a7").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HPCF5JN81YKW88P57J");
+  setTransparentByobject_id(rusunawaLegal, "619138");
   zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a8").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HJAXG353YRWQK707TW");
+  setTransparentByobject_id(rusunawaLegal, "619139");
   zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a9").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9HEGVC91YVDTMN82QFB");
+  setTransparentByobject_id(rusunawaLegal, "619140");
   zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a10").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9H9S0NZ0S40Y38NWWN2");
+  setTransparentByobject_id(rusunawaLegal, "619141");
   zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a11").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9H293QC7RP34NHPNX1A");
+  setTransparentByobject_id(rusunawaLegal, "619142");
   zoomToLocation(180, 17, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a12").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GK7RQPJPPD6ZTG34HP");
+  setTransparentByobject_id(rusunawaLegal, "619145");
   zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a13").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GX4SPW03PXM9F35HTE");
+  setTransparentByobject_id(rusunawaLegal, "619143");
   zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a14").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9E61D378B64K62B28EK");
+  setTransparentByobject_id(rusunawaLegal, "602474");
   zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a15").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EE5WASSX5XJV38AZ6H");
+  setTransparentByobject_id(rusunawaLegal, "618566");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a16").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9GB4EA4ZFYAN4VCRV0K");
+  setTransparentByobject_id(rusunawaLegal, "618555");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a17").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9G76Z0JMNVH6KTTAPK7");
+  setTransparentByobject_id(rusunawaLegal, "618556");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a18").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9G0FDEXXV7ZSD2MJNGG");
+  setTransparentByobject_id(rusunawaLegal, "618557");
   zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a19").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FSYXR41VAA2452CAR4");
+  setTransparentByobject_id(rusunawaLegal, "618558");
   zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a20").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FK4DYRSKVNV6BB7B2A");
+  setTransparentByobject_id(rusunawaLegal, "618559");
   zoomToLocation(0, 17, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a21").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FFCKQA7V1Z45X8JTCS");
+  setTransparentByobject_id(rusunawaLegal, "618560");
   zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a22").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9FA312J5704SNJ6PYJ3");
+  setTransparentByobject_id(rusunawaLegal, "618561");
   zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a23").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9F5ZHB9G3B71ZZAJPWS");
+  setTransparentByobject_id(rusunawaLegal, "618562");
   zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a24").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EZ18RKZYJKHS2Z53R7");
+  setTransparentByobject_id(rusunawaLegal, "618563");
   zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a25").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ET2QPK43G2QTXRE4HC");
+  setTransparentByobject_id(rusunawaLegal, "618564");
   zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_2a26").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9EN8FQ0XDK68F1VXMN1");
+  setTransparentByobject_id(rusunawaLegal, "618565");
   zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
-});
-$("#zoomToRusunawaLegal_2a27").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9E0KJESXY4H2BNBE7VM");
-  zoomToLocation(0, 17, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_3a1").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9MVW5ZGH9QXR49J570K");
+  setTransparentByobject_id(rusunawaLegal, "606558");
   zoomToLocation(265, 54, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_3a2").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Q07D1QQW0A81T6A3W9");
+  setTransparentByobject_id(rusunawaLegal, "618912");
   zoomToLocation(180, 19, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a3").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9N9DADE0PTZWVZ0FZJ0");
+  setTransparentByobject_id(rusunawaLegal, "618922");
   zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a4").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PTZ0A2AJXXMBRP22YJ");
+  setTransparentByobject_id(rusunawaLegal, "618913");
   zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a5").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PN986VDPJXJC6EK9JV");
+  setTransparentByobject_id(rusunawaLegal, "618914");
   zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a6").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9PGYR5T30KRSHCPZWAK");
+  setTransparentByobject_id(rusunawaLegal, "618915");
   zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a7").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9P93F9RHT1J5NZXSYFN");
+  setTransparentByobject_id(rusunawaLegal, "618916");
   zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a8").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9P3N98X9TX7VNRBJ15X");
+  setTransparentByobject_id(rusunawaLegal, "618917");
   zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a9").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NZDR7PV98W970T5PRX");
+  setTransparentByobject_id(rusunawaLegal, "618918");
   zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a10").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NSC24K5FPDZEP7XG25");
+  setTransparentByobject_id(rusunawaLegal, "618919");
   zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a11").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NKCN16ZY3MV0T9GWF4");
+  setTransparentByobject_id(rusunawaLegal, "618920");
   zoomToLocation(180, 19, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a12").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9N4PHV678XHXKETX2EH");
+  setTransparentByobject_id(rusunawaLegal, "618923");
   zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a13").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9NFBP8DPD8X5P03E3TW");
+  setTransparentByobject_id(rusunawaLegal, "618921");
   zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a14").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QBPGW27WGDG51XKR3X");
+  setTransparentByobject_id(rusunawaLegal, "606910");
   zoomToLocation(100, 14, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a15").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JRNGDQ0NPCYT2BC9XM");
+  setTransparentByobject_id(rusunawaLegal, "618455");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a16").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9MJRB0A8TY333RE1QFZ");
+  setTransparentByobject_id(rusunawaLegal, "618444");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a17").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ME30WEZRRXDPQA190J");
+  setTransparentByobject_id(rusunawaLegal, "618445");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a18").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9M70652KB4774BW89EC");
+  setTransparentByobject_id(rusunawaLegal, "618446");
   zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a19").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9M100TA6VY3FM35D5R6");
+  setTransparentByobject_id(rusunawaLegal, "618447");
   zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a20").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KXFWG38WNR24HWCPJK");
+  setTransparentByobject_id(rusunawaLegal, "618448");
   zoomToLocation(0, 19, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a21").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KQ954KPSACVC6D6CE0");
+  setTransparentByobject_id(rusunawaLegal, "618449");
   zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a22").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KKDNMQZ8FRB96RCHCC");
+  setTransparentByobject_id(rusunawaLegal, "618450");
   zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a23").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9KFXPTCSYEJY3YYJP1Y");
+  setTransparentByobject_id(rusunawaLegal, "618451");
   zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a24").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9K91WCB1AD66JYY3FFS");
+  setTransparentByobject_id(rusunawaLegal, "618452");
   zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a25").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9K28V03M20MSEPV7QCD");
+  setTransparentByobject_id(rusunawaLegal, "618453");
   zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_3a26").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9JXP8418XRP007M283B");
+  setTransparentByobject_id(rusunawaLegal, "618454");
   zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
-});
-$("#zoomToRusunawaLegal_3a27").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Q6K2F6KR3AENXDFWWF");
-  zoomToLocation(0, 19, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_4a1").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9T0W8VBTZ25HCXBGQPS");
+  setTransparentByobject_id(rusunawaLegal, "607296");
   zoomToLocation(265, 56, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_4a2").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WAGXHBWAAK6QNDA2MH");
+  setTransparentByobject_id(rusunawaLegal, "618801");
   zoomToLocation(180, 21, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a3").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TH737NRNVP2WJJP0S0");
+  setTransparentByobject_id(rusunawaLegal, "618811");
   zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a4").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9W5J48VXG0AXKHV30D6");
+  setTransparentByobject_id(rusunawaLegal, "618802");
   zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a5").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9W0HX6WBFYMVC7JQ802");
+  setTransparentByobject_id(rusunawaLegal, "618803");
   zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a6").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VVFNDWX99Q10DNPRC5");
+  setTransparentByobject_id(rusunawaLegal, "618804");
   zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a7").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VNV42MDP0DJXTDQQ31");
+  setTransparentByobject_id(rusunawaLegal, "618805");
   zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a8").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9VDYT36E93WPXKN0V21");
+  setTransparentByobject_id(rusunawaLegal, "618806");
   zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a9").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9V7F3QSSW9S0PZ2S4XN");
+  setTransparentByobject_id(rusunawaLegal, "618807");
   zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a10").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9V2DJBF05DRHF42171K");
+  setTransparentByobject_id(rusunawaLegal, "618808");
   zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a11").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TYY1DHDJ12T9WGP98K");
+  setTransparentByobject_id(rusunawaLegal, "618809");
   zoomToLocation(180, 21, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a12").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TBRKRKG84NZMK8XSDY");
+  setTransparentByobject_id(rusunawaLegal, "618812");
   zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a13").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9TSRMXJBXXC8FPW0MP0");
+  setTransparentByobject_id(rusunawaLegal, "618810");
   zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a14").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QPWE75DMGH3ZRP2ED4");
+  setTransparentByobject_id(rusunawaLegal, "606926");
   zoomToLocation(100, 16, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a15").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QYSC6XF9HPFBW17TCJ");
+  setTransparentByobject_id(rusunawaLegal, "618344");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a16").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SRS0BKZ4ZRADS2CRXJ");
+  setTransparentByobject_id(rusunawaLegal, "618333");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a17").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SJ874QGQMERHQX4R8D");
+  setTransparentByobject_id(rusunawaLegal, "618334");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a18").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9SBTCFP7MF8HMNE1VYQ");
+  setTransparentByobject_id(rusunawaLegal, "618335");
   zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a19").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9S743XNK211CH82N31G");
+  setTransparentByobject_id(rusunawaLegal, "618336");
   zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a20").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9S3D2FG186H849WPBD0");
+  setTransparentByobject_id(rusunawaLegal, "618337");
   zoomToLocation(0, 21, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a21").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RY7Z9V7C40F0XBR2M4");
+  setTransparentByobject_id(rusunawaLegal, "618338");
   zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a22").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RS0Z4J8DY4RQNZ08SM");
+  setTransparentByobject_id(rusunawaLegal, "618339");
   zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a23").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RK19R68AXV9YP9HTY8");
+  setTransparentByobject_id(rusunawaLegal, "618340");
   zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a24").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9RBT4M3NX3YH6EMW2E1");
+  setTransparentByobject_id(rusunawaLegal, "618341");
   zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a25").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9R7M4KK7A45YWR1FAG8");
+  setTransparentByobject_id(rusunawaLegal, "618342");
   zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_4a26").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9R3NP14ARFTQNV13BEW");
+  setTransparentByobject_id(rusunawaLegal, "618343");
   zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
-});
-$("#zoomToRusunawaLegal_4a27").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV");
-  zoomToLocation(0, 21, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 $("#zoomToRusunawaLegal_5a1").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Z2GR1BZENX99V8SD6F");
+  setTransparentByobject_id(rusunawaLegal, "607326");
   zoomToLocation(265, 58, 112.64589105170866, -8.010688873163765, -25, 0);
 });
 $("#zoomToRusunawaLegal_5a2").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA1DXZJ1FG2R8KJBSMXK");
+  setTransparentByobject_id(rusunawaLegal, "618690");
   zoomToLocation(180, 23, 112.64514967384268, -8.01029641222483, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a3").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZK0V03298BB5X130WY");
+  setTransparentByobject_id(rusunawaLegal, "618700");
   zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a4").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA16RNAX53BA0R1PTXJ6");
+  setTransparentByobject_id(rusunawaLegal, "618691");
   zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a5").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA12ZB7TYZJNHAHPY7WW");
+  setTransparentByobject_id(rusunawaLegal, "618692");
   zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a6").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0XYNJRXAY0B63N5BBV");
+  setTransparentByobject_id(rusunawaLegal, "618693");
   zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a7").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0NGNZCR80RNDCXMH5M");
+  setTransparentByobject_id(rusunawaLegal, "618694");
   zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a8").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0G6XMNZHKP9KN1BBT4");
+  setTransparentByobject_id(rusunawaLegal, "618695");
   zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a9").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA0B8MQSKPHR04CJKNP4");
+  setTransparentByobject_id(rusunawaLegal, "618696");
   zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a10").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EWA05B4C592FR7Z3CRX8B");
+  setTransparentByobject_id(rusunawaLegal, "618697");
   zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a11").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZZP9YD2N3BSGFK7V5D");
+  setTransparentByobject_id(rusunawaLegal, "618698");
   zoomToLocation(180, 23, 112.64479519186604, -8.010297620811423, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a12").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZDPFQYCG9Y6K9F771W");
+  setTransparentByobject_id(rusunawaLegal, "618701");
   zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a13").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9ZSR8817RCJG52R8WDP");
+  setTransparentByobject_id(rusunawaLegal, "618699");
   zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a14").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WPJPS0THQYCNXRXP6D");
+  setTransparentByobject_id(rusunawaLegal, "606942");
   zoomToLocation(100, 18, 112.64432403935837, -8.010743169218108, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a15").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WZRP309VTB8P8YQKBQ");
+  setTransparentByobject_id(rusunawaLegal, "618233");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a16").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YT7MKD01KC38EX2WQP");
+  setTransparentByobject_id(rusunawaLegal, "618222");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a17").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YKDPC8XACE4HQWVJ9Y");
+  setTransparentByobject_id(rusunawaLegal, "618223");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a18").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9YD78PQ60W3B1P7C3J7");
+  setTransparentByobject_id(rusunawaLegal, "618224");
   zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a19").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Y9G9K73HXMFXZS05BK");
+  setTransparentByobject_id(rusunawaLegal, "618225");
   zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a20").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9Y4Q2R6WQGXXYQR2ZXH");
+  setTransparentByobject_id(rusunawaLegal, "618226");
   zoomToLocation(0, 23, 112.64489976543433, -8.011227147063853, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a21").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XZFE0FB81H22C1BJC5");
+  setTransparentByobject_id(rusunawaLegal, "618227");
   zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a22").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XVME2NBE8PHXHX9Q2J");
+  setTransparentByobject_id(rusunawaLegal, "618228");
   zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a23").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XMAR7XJ0CG8P17GTAS");
+  setTransparentByobject_id(rusunawaLegal, "618229");
   zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a24").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XFYBGNR5ZSEE6YP5EW");
+  setTransparentByobject_id(rusunawaLegal, "618230");
   zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a25").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9XAKH8N3MA9GXBEYJ7M");
+  setTransparentByobject_id(rusunawaLegal, "618231");
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 $("#zoomToRusunawaLegal_5a26").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9X4WWVMEB76J2P1XP7D");
+  setTransparentByobject_id(rusunawaLegal, "618232");
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
-});
-$("#zoomToRusunawaLegal_5a27").on('click', function () {
-  setTransparentBylegal_id(rusunawaLegal, "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2");
-  zoomToLocation(0, 23, 112.64516418338256, -8.011135952579131, -15, 0);
 });
 
 
@@ -2126,57 +2127,59 @@ $('#siolaLevelAllShow').click(function () {
 
 $("#siolaLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7P6DEEDQH6QTE0Z68B8", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RRR7HCZP94ETRJK757", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Q59K0S7NYA9DQ5DAFX", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7PTPYH074Q5ZJDGV3Z7", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RZXAKK47WMJVV9YSKB", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7PHEQA5SX964M063XQK", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7QNNM61J5YDVQQ23TB2", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7R5TWKKPSEM6Q95T28R", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7QX80R8CH3JDZ097JX3", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7RGJQ3F0CYEX3NJM7HK", isChecked);
+  setVisibilityByobject_id(siolaLegal, "817240", isChecked);
+  setVisibilityByobject_id(siolaLegal, "825386", isChecked);
+  setVisibilityByobject_id(siolaLegal, "820896", isChecked);
+  setVisibilityByobject_id(siolaLegal, "820815", isChecked);
+  setVisibilityByobject_id(siolaLegal, "919493", isChecked);
+  setVisibilityByobject_id(siolaLegal, "820143", isChecked);
+  setVisibilityByobject_id(siolaLegal, "821077", isChecked);
+  setVisibilityByobject_id(siolaLegal, "823865", isChecked);
+  setVisibilityByobject_id(siolaLegal, "821964", isChecked);
+  setVisibilityByobject_id(siolaLegal, "826868", isChecked);
 });
 $("#siolaLegal_2all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7VAYDZ2BHP9Y7TVMYWQ", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7VT5ARB2YC0C7PXKCDY", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7TN104KHG9ZEHJVSAX5", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7SFH37VQ3NC3JQ6PRXE", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7S8KJJGYKK6GDD7BBTN", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7T1RPZKGCBDXAJXRJ4W", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7V04AZ1NWE2VJ7T6T89", isChecked);
+  setVisibilityByobject_id(siolaLegal, "841116", isChecked);
+  setVisibilityByobject_id(siolaLegal, "838147", isChecked);
+  setVisibilityByobject_id(siolaLegal, "840850", isChecked);
+  setVisibilityByobject_id(siolaLegal, "829358", isChecked);
+  setVisibilityByobject_id(siolaLegal, "829098", isChecked);
+  setVisibilityByobject_id(siolaLegal, "839609", isChecked);
+  setVisibilityByobject_id(siolaLegal, "913870", isChecked);
 });
 $("#siolaLegal_3all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7XR27P0H1C69A7TPGZ0", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Y68R892D1XNRBV2RPN", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7WZ79J0N5VRS8HQWJXX", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7W331GHVRF0QTNJXGRW", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7WCQA085HKSMFMBE8Z0", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7XGYZB3Z6BKJQSVDH9P", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7X6FYFJW3PN5TQV1DAR", isChecked);
+  setVisibilityByobject_id(siolaLegal, "914699", isChecked);
+  setVisibilityByobject_id(siolaLegal, "831440", isChecked);
+  setVisibilityByobject_id(siolaLegal, "843868", isChecked);
+  setVisibilityByobject_id(siolaLegal, "830288", isChecked);
+  setVisibilityByobject_id(siolaLegal, "831096", isChecked);
+  setVisibilityByobject_id(siolaLegal, "848368", isChecked);
+  setVisibilityByobject_id(siolaLegal, "847875", isChecked);
 });
 $("#siolaLegal_4all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7YFWXFTR05G47KJJMJ9", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7YS0BMJZNXP9YB1MSA2", isChecked);
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3", isChecked);
+  setVisibilityByobject_id(siolaLegal, "849039", isChecked);
+  setVisibilityByobject_id(siolaLegal, "886033", isChecked);
+  setVisibilityByobject_id(siolaLegal, "849276", isChecked);
 });
 $("#siolaLegal_5all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM7ZH14YX6V6Y963TEKXQ", isChecked);
+  setVisibilityByobject_id(siolaLegal, "850924", isChecked);
 });
 
 // balai pemuda
 $('#balaiLevelAllHide').click(function () {
   balaiBuildingL0.show = false;
+  balaiBuildingBasement.show = false;
   balaiBuildingL1.show = false;
   balaiBuildingL2.show = false;
   $('.balai-building-layer-panel .set_level').prop('checked', false);
 });
 $('#balaiLevelAllShow').click(function () {
   balaiBuildingL0.show = true;
+  balaiBuildingBasement.show = true;
   balaiBuildingL1.show = true;
   balaiBuildingL2.show = true;
   $('.balai-building-layer-panel .set_level').prop('checked', true);
@@ -2185,17 +2188,61 @@ $('#balaiLevelAllShow').click(function () {
 $("#balaiLegal_0all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-
+    setVisibilityByobject_id(balaiLegal, "612619", isChecked);
+    setVisibilityByobject_id(balaiLegal, "612232", isChecked);
+    setVisibilityByobject_id(balaiLegal, "613040", isChecked);
+    setVisibilityByobject_id(balaiLegal, "613441", isChecked);
+    setVisibilityByobject_id(balaiLegal, "610552", isChecked);
+    setVisibilityByobject_id(balaiLegal, "611250", isChecked);
+    setVisibilityByobject_id(balaiLegal, "611746", isChecked);
+    setVisibilityByobject_id(balaiLegal, "610016", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609329", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609123", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609456", isChecked);
   } else {
-
+    setVisibilityByobject_id(balaiLegal, "612619", isChecked);
+    setVisibilityByobject_id(balaiLegal, "612232", isChecked);
+    setVisibilityByobject_id(balaiLegal, "613040", isChecked);
+    setVisibilityByobject_id(balaiLegal, "613441", isChecked);
+    setVisibilityByobject_id(balaiLegal, "610552", isChecked);
+    setVisibilityByobject_id(balaiLegal, "611250", isChecked);
+    setVisibilityByobject_id(balaiLegal, "611746", isChecked);
+    setVisibilityByobject_id(balaiLegal, "610016", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609329", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609123", isChecked);
+    setVisibilityByobject_id(balaiLegal, "609456", isChecked);
   }
 });
 $("#balaiLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
   if (isChecked) {
-
+    setVisibilityByobject_id(balaiLegal, "550615", isChecked);
+    setVisibilityByobject_id(balaiLegal, "558371", isChecked);
+    setVisibilityByobject_id(balaiLegal, "559588", isChecked);
+    setVisibilityByobject_id(balaiLegal, "600819", isChecked);
+    setVisibilityByobject_id(balaiLegal, "560626", isChecked);
+    setVisibilityByobject_id(balaiLegal, "592037", isChecked);
+    setVisibilityByobject_id(balaiLegal, "639829", isChecked);
+    setVisibilityByobject_id(balaiLegal, "595885", isChecked);
+    setVisibilityByobject_id(balaiLegal, "596362", isChecked);
+    setVisibilityByobject_id(balaiLegal, "596892", isChecked);
+    setVisibilityByobject_id(balaiLegal, "598132", isChecked);
+    setVisibilityByobject_id(balaiLegal, "599448", isChecked);
+    setVisibilityByobject_id(balaiLegal, "601254", isChecked);
   } else {
-
+    setVisibilityByobject_id(balaiLegal, "550615", isChecked);
+    setVisibilityByobject_id(balaiLegal, "558371", isChecked);
+    setVisibilityByobject_id(balaiLegal, "559588", isChecked);
+    setVisibilityByobject_id(balaiLegal, "600819", isChecked);
+    setVisibilityByobject_id(balaiLegal, "560626", isChecked);
+    setVisibilityByobject_id(balaiLegal, "592037", isChecked);
+    setVisibilityByobject_id(balaiLegal, "639829", isChecked);
+    setVisibilityByobject_id(balaiLegal, "595885", isChecked);
+    setVisibilityByobject_id(balaiLegal, "596362", isChecked);
+    setVisibilityByobject_id(balaiLegal, "596892", isChecked);
+    setVisibilityByobject_id(balaiLegal, "598132", isChecked);
+    setVisibilityByobject_id(balaiLegal, "599448", isChecked);
+    setVisibilityByobject_id(balaiLegal, "601254", isChecked);
   }
 });
 
@@ -2223,147 +2270,139 @@ $('#rusunawaLevelAllShow').click(function () {
 
 $("#rusunawaLegal_1all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW996G1Z61WBQY1XP3QAK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AC1QPP7KW6J343B848", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CJ26GJS4A4JP9JQ4W2", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CP9GS5QSGGTTV7GMC2", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CDDCR0RAMWWSX1KHMN", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9CV1M82CGYX5SPVBSFA", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DBK9J1MN5WFHB9B16J", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9D52TK6QTBQC832RBNQ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DGEFA023Q9HD9WY5EB", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BS01J71V6KXND1BV4T", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9C3DV3KDRH8EHRK9FVF", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BJ60VSCFTXEQJ1TY5D", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BBR6W6WTB8ZP65B2WW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9B610G13NHKJT44S509", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9B1JJFM7H4E8MZDSDDS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AS7JFA6MMEHMX0MWS1", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9AK2ADTV3A79B2A6ZWX", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9A95Q8QTDWZ0Q7YYN89", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9A41HNVDGF7VT7QWE8F", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9C8FC97YYPFMHZSJJCG", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9BXA4XSZ8029S3J260F", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "599276", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "599642", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619195", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619194", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619196", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "601694", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "601835", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "601952", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600414", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600975", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600292", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600222", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600145", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "600045", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "599963", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "599868", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "599584", isChecked);
 });
 $("#rusunawaLegal_2all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9DTF7VED1JMZYE5GSYE", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JF1A9Q205ZXXM3JA7Y", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GRAHX1RCKBGNEM3B2T", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9J91BB3TS79QJ3FYNH6", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9J20S66D2T0VVCKKAX5", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HVS15HHSSCTJE5QP3S", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HPCF5JN81YKW88P57J", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HJAXG353YRWQK707TW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9HEGVC91YVDTMN82QFB", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9H9S0NZ0S40Y38NWWN2", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9H293QC7RP34NHPNX1A", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GK7RQPJPPD6ZTG34HP", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GX4SPW03PXM9F35HTE", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9E61D378B64K62B28EK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EE5WASSX5XJV38AZ6H", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9GB4EA4ZFYAN4VCRV0K", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9G76Z0JMNVH6KTTAPK7", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9G0FDEXXV7ZSD2MJNGG", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FSYXR41VAA2452CAR4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FK4DYRSKVNV6BB7B2A", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FFCKQA7V1Z45X8JTCS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9FA312J5704SNJ6PYJ3", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9F5ZHB9G3B71ZZAJPWS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EZ18RKZYJKHS2Z53R7", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ET2QPK43G2QTXRE4HC", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9EN8FQ0XDK68F1VXMN1", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9E0KJESXY4H2BNBE7VM", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "602333", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619134", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619144", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619135", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619136", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619137", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619138", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619139", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619140", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619141", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619142", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619145", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "619143", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "602474", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618566", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618555", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618556", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618557", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618558", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618559", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618560", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618561", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618562", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618563", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618564", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618565", isChecked);
 });
 $("#rusunawaLegal_3all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9MVW5ZGH9QXR49J570K", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Q07D1QQW0A81T6A3W9", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9N9DADE0PTZWVZ0FZJ0", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PTZ0A2AJXXMBRP22YJ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PN986VDPJXJC6EK9JV", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9PGYR5T30KRSHCPZWAK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9P93F9RHT1J5NZXSYFN", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9P3N98X9TX7VNRBJ15X", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NZDR7PV98W970T5PRX", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NSC24K5FPDZEP7XG25", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NKCN16ZY3MV0T9GWF4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9N4PHV678XHXKETX2EH", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9NFBP8DPD8X5P03E3TW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QBPGW27WGDG51XKR3X", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JRNGDQ0NPCYT2BC9XM", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9MJRB0A8TY333RE1QFZ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ME30WEZRRXDPQA190J", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9M70652KB4774BW89EC", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9M100TA6VY3FM35D5R6", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KXFWG38WNR24HWCPJK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KQ954KPSACVC6D6CE0", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KKDNMQZ8FRB96RCHCC", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9KFXPTCSYEJY3YYJP1Y", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9K91WCB1AD66JYY3FFS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9K28V03M20MSEPV7QCD", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9JXP8418XRP007M283B", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Q6K2F6KR3AENXDFWWF", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "606558", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618912", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618922", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618913", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618914", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618915", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618916", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618917", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618918", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618919", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618920", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618923", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618921", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "606910", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618455", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618444", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618445", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618446", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618447", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618448", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618449", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618450", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618451", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618452", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618453", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618454", isChecked);
 });
 $("#rusunawaLegal_4all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9T0W8VBTZ25HCXBGQPS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WAGXHBWAAK6QNDA2MH", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TH737NRNVP2WJJP0S0", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9W5J48VXG0AXKHV30D6", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9W0HX6WBFYMVC7JQ802", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VVFNDWX99Q10DNPRC5", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VNV42MDP0DJXTDQQ31", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9VDYT36E93WPXKN0V21", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9V7F3QSSW9S0PZ2S4XN", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9V2DJBF05DRHF42171K", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TYY1DHDJ12T9WGP98K", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TBRKRKG84NZMK8XSDY", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9TSRMXJBXXC8FPW0MP0", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QPWE75DMGH3ZRP2ED4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QYSC6XF9HPFBW17TCJ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SRS0BKZ4ZRADS2CRXJ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SJ874QGQMERHQX4R8D", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9SBTCFP7MF8HMNE1VYQ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9S743XNK211CH82N31G", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9S3D2FG186H849WPBD0", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RY7Z9V7C40F0XBR2M4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RS0Z4J8DY4RQNZ08SM", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RK19R68AXV9YP9HTY8", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9RBT4M3NX3YH6EMW2E1", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9R7M4KK7A45YWR1FAG8", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9R3NP14ARFTQNV13BEW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9QJFQDZ0HFHTNAGBPFV", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "607296", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618801", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618811", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618802", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618803", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618804", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618805", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618806", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618807", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618808", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618809", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618812", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618810", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "606926", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618344", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618333", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618334", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618335", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618336", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618337", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618338", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618339", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618340", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618341", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618342", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618343", isChecked);
 });
 $("#rusunawaLegal_5all").change(function () {
   let isChecked = $(this).prop("checked");
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Z2GR1BZENX99V8SD6F", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA1DXZJ1FG2R8KJBSMXK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZK0V03298BB5X130WY", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA16RNAX53BA0R1PTXJ6", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA12ZB7TYZJNHAHPY7WW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0XYNJRXAY0B63N5BBV", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0NGNZCR80RNDCXMH5M", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0G6XMNZHKP9KN1BBT4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA0B8MQSKPHR04CJKNP4", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EWA05B4C592FR7Z3CRX8B", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZZP9YD2N3BSGFK7V5D", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZDPFQYCG9Y6K9F771W", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9ZSR8817RCJG52R8WDP", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WPJPS0THQYCNXRXP6D", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WZRP309VTB8P8YQKBQ", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YT7MKD01KC38EX2WQP", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YKDPC8XACE4HQWVJ9Y", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9YD78PQ60W3B1P7C3J7", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Y9G9K73HXMFXZS05BK", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9Y4Q2R6WQGXXYQR2ZXH", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XZFE0FB81H22C1BJC5", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XVME2NBE8PHXHX9Q2J", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XMAR7XJ0CG8P17GTAS", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XFYBGNR5ZSEE6YP5EW", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9XAKH8N3MA9GXBEYJ7M", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9X4WWVMEB76J2P1XP7D", isChecked);
-  setVisibilityBylegal_id(rusunawaLegal, "legal_01HM6EW9WGQFJWZ7B6CY7YCSN2", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "607326", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618690", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618700", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618691", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618692", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618693", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618694", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618695", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618696", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618697", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618698", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618701", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618699", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "606942", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618233", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618222", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618223", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618224", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618225", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618226", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618227", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618228", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618229", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618230", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618231", isChecked);
+  setVisibilityByobject_id(rusunawaLegal, "618232", isChecked);
 });
 
 // set style tileset [gml]
@@ -2427,12 +2466,12 @@ let setColorStyle = new Cesium.Cesium3DTileStyle({
 let MappingHideTileset = [];
 let MappingTransparentTileset = [];
 
-function mappingHide(legal_id, isChecked) {
+function mappingHide(Tag, isChecked) {
   if (isChecked) {
-    MappingHideTileset = MappingHideTileset.filter(data => data !== legal_id);
+    MappingHideTileset = MappingHideTileset.filter(data => data !== Tag);
   } else {
     if (!undefined) {
-      MappingHideTileset.push(legal_id);
+      MappingHideTileset.push(Tag);
     }
     return
   }
@@ -2440,12 +2479,12 @@ function mappingHide(legal_id, isChecked) {
   console.log(MappingHideTileset);
 }
 
-function setVisibilityBylegal_id(tileset, legal_id, isChecked) {
-  mappingHide(legal_id, isChecked);
+function setVisibilityByobject_id(tileset, Tag, isChecked) {
+  mappingHide(Tag, isChecked);
   tileset.style = new Cesium.Cesium3DTileStyle({
     show: {
       evaluate: function (feature) {
-        return !MappingHideTileset.includes(feature.getProperty("legal_id"));
+        return !MappingHideTileset.includes(feature.getProperty("Tag"));
       },
     },
     color: {
@@ -2457,7 +2496,7 @@ function setVisibilityBylegal_id(tileset, legal_id, isChecked) {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
         }
         // MappingTransparentTileset
-        if (MappingTransparentTileset.includes(feature.getProperty("legal_id"))) {
+        if (MappingTransparentTileset.includes(feature.getProperty("Tag"))) {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 1.0);
         } else {
           if (MappingTransparentTileset.length > 0) {
@@ -2472,21 +2511,21 @@ function setVisibilityBylegal_id(tileset, legal_id, isChecked) {
     },
   });
 }
-// setVisibilityBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM");
+// setVisibilityByobject_id(siolaLegal, "915961");
 
-function mappingTransparent(legal_id) {
-  if (Array.isArray(legal_id)) {
-    MappingTransparentTileset = legal_id
+function mappingTransparent(Tag) {
+  if (Array.isArray(Tag)) {
+    MappingTransparentTileset = Tag
   } else {
-    MappingTransparentTileset.push(legal_id);
+    MappingTransparentTileset.push(Tag);
   }
   console.log("transparent");
   console.log(MappingTransparentTileset);
 }
 
-function setTransparentBylegal_id(tileset, legal_id) {
+function setTransparentByobject_id(tileset, Tag) {
   MappingTransparentTileset = [];
-  mappingTransparent(legal_id);
+  mappingTransparent(Tag);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       evaluateColor: function (feature, result) {
@@ -2497,7 +2536,7 @@ function setTransparentBylegal_id(tileset, legal_id) {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.4);
         }
         // MappingTransparentTileset
-        if (MappingTransparentTileset.includes(feature.getProperty("legal_id"))) {
+        if (MappingTransparentTileset.includes(feature.getProperty("Tag"))) {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 1.0);
         } else {
           return Cesium.Color.fromAlpha(colorMap[styleName] || new Cesium.Color(0.5, 0.5, 0.5, 1.0), 0.2);
@@ -2506,18 +2545,18 @@ function setTransparentBylegal_id(tileset, legal_id) {
     },
     show: {
       evaluate: function (feature) {
-        return !MappingHideTileset.includes(feature.getProperty("legal_id"));
+        return !MappingHideTileset.includes(feature.getProperty("Tag"));
       },
     },
   });
 }
-// setTransparentBylegal_id(siolaLegal, "legal_01HM6EM65YF59D5W766TETFSKM");
-// setTransparentBylegal_id(siolaLegal, ["legal_01HM6EM7YFWXFTR05G47KJJMJ9", "legal_01HM6EM7YS0BMJZNXP9YB1MSA2", "legal_01HM6EM7Z3RDFRDC7RKB5XDFB3"]);
+// setTransparentByobject_id(siolaLegal, "915961");
+// setTransparentByobject_id(siolaLegal, ["849039", "886033", "849276"]);
 
 // reset Transparency
 function resetTransparent(tileset) {
   MappingTransparentTileset = [];
-  setVisibilityBylegal_id(tileset)
+  setVisibilityByobject_id(tileset)
 }
 
 // underground view   ###################################################################################
@@ -2572,7 +2611,7 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2426318)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2443947)
 );
 
 siolaLegal.style = setColorStyle;
@@ -2612,7 +2651,7 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
 );
 
 const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2423897)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2444120)
 );
 
 balaiLegal.style = setColorStyle;
@@ -2662,7 +2701,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2422063)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2443669)
 );
 
 rusunawaLegal.style = setColorStyle;

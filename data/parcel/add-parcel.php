@@ -32,22 +32,28 @@
     <main>
         <div class="container ">
             <div class="row justify-content-center  m-2 p-3">
+                <?php if (isset($flashMessage)) : ?>
+                    <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                        <span><?= $flashMessage['message']; ?></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
                 <form action="/action/save-parcel.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="parcel_id" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" autocomplete="off" required>
+                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" value="<?= old('parcel_id'); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off">
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= old('parcel_name'); ?>">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off">
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" value="<?= old('parcel_occupant'); ?>">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>
-                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="" />
+                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="[<?= old('tag'); ?>]" />
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -89,3 +95,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['oldForm']); ?>

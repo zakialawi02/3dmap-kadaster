@@ -37,6 +37,12 @@
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 py-3">
+                <?php if (isset($flashMessage)) : ?>
+                    <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
+                        <span><?= $flashMessage['message']; ?></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
                 <div class="col-md-12">
                     <form id="URIForm" action="/action/save-uri.php?uri=<?= $uri_table['slug']; ?>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">

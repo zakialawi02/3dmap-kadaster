@@ -49,6 +49,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">ObjectID</th>
                                         <th scope="col">Parcel id</th>
                                         <th scope="col">Parcel Name</th>
                                         <th scope="col">Parcel Occupant</th>
@@ -62,6 +63,7 @@
                                         <?php $tags = json_decode($row['tag'], true); ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
+                                            <td><?= $row['id']; ?></td>
                                             <td><?= $row['parcel_id']; ?></td>
                                             <td><?= $row['parcel_name'] ?></td>
                                             <td><?= $row['parcel_occupant']; ?></td>
