@@ -42,20 +42,25 @@
                 <?php endif ?>
                 <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
+                        <label for="ObjectID" class="form-label">Object ID</label>
+                        <input type="text" class="form-control" id="ObjectID" name="ObjectID" autocomplete="off" value="<?= $parcel_table['id']; ?>" disabled required>
+                    </div>
+                    <div class="mb-3">
                         <label for="parcelIdNew" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
+                        <input type="hidden" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
+                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= old('parcel_id') ?? $parcel_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= $parcel_table['parcel_name']; ?>">
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= old('parcel_name') ?? $parcel_table['parcel_name']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off" value="<?= $parcel_table['parcel_occupant']; ?>">
+                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off" value="<?= old('parcel_occupant') ?? $parcel_table['parcel_occupant']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>
-                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="[<?= $tag; ?>]" />
+                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="[<?= old('tag') ?? $tag; ?>]" />
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -98,3 +103,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['oldForm']); ?>

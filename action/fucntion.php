@@ -25,3 +25,11 @@ function getFlashMessage()
     return null;
 }
 $flashMessage = getFlashMessage();
+
+function old($name)
+{
+    if (isset($_SESSION['oldForm'][$name])) {
+        return $_SESSION['oldForm'][$name];
+    }
+    return null;
+}

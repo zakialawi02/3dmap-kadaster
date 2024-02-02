@@ -42,8 +42,8 @@
   </style>
 </head>
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
-<?php include 'action/get-parcel.php' ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+
 
 <body>
   <header>
@@ -691,26 +691,6 @@
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1a17" id="rusunawaLegal_1a17">
                             L1.17 <a href="#" id="zoomToRusunawaLegal_1a17"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1a18" id="rusunawaLegal_1a18">
-                            L1.18 <a href="#" id="zoomToRusunawaLegal_1a18"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1a19" id="rusunawaLegal_1a19">
-                            L1.19 <a href="#" id="zoomToRusunawaLegal_1a19"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1a20" id="rusunawaLegal_1a20">
-                            L1.20 <a href="#" id="zoomToRusunawaLegal_1a20"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1a21" id="rusunawaLegal_1a21">
-                            L1.21 <a href="#" id="zoomToRusunawaLegal_1a21"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -851,11 +831,6 @@
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_2a26" id="rusunawaLegal_2a26">
                             L2.26 <a href="#" id="zoomToRusunawaLegal_2a26"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_2a27" id="rusunawaLegal_2a27">
-                            L2.27 <a href="#" id="zoomToRusunawaLegal_2a27"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -998,11 +973,6 @@
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_3a26" id="rusunawaLegal_3a26">
                             L3.26 <a href="#" id="zoomToRusunawaLegal_3a26"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_3a27" id="rusunawaLegal_3a27">
-                            L3.27 <a href="#" id="zoomToRusunawaLegal_3a27"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -1144,11 +1114,6 @@
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_4a26" id="rusunawaLegal_4a26">
                             L4.26 <a href="#" id="zoomToRusunawaLegal_4a26"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_4a27" id="rusunawaLegal_4a27">
-                            L4.27 <a href="#" id="zoomToRusunawaLegal_4a27"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -1289,11 +1254,6 @@
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_5a26" id="rusunawaLegal_5a26">
                             L5.26 <a href="#" id="zoomToRusunawaLegal_5a26"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_5a27" id="rusunawaLegal_5a27">
-                            L5.27 <a href="#" id="zoomToRusunawaLegal_5a27"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
