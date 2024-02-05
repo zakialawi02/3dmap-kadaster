@@ -33,7 +33,7 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-    <?php print_r($_SESSION) ?>
+
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 py-3">

@@ -118,3 +118,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['oldForm']); ?>

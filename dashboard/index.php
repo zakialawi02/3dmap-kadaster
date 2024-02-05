@@ -30,6 +30,7 @@
     <main>
         <div class="container m-2 p-3">
             <a href="/data/parcel" class="btn btn-primary">Parcel</a>
+            <a href="/data/residents" class="btn btn-primary">Residents</a>
             <a href="/data/uri" class="btn btn-primary">URI</a>
             <a href="/data/user/add-user.php" class="btn btn-primary">Add User</a>
         </div>

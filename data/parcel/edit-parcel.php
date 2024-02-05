@@ -25,6 +25,7 @@
 <?php checkIsLogin(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 <?php include_once '../../action/get-uri.php' ?>
+<?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -56,7 +57,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <input type="text" class="form-control" id="parcelOccupant" name="parcelOccupant" autocomplete="off" value="<?= old('parcel_occupant') ?? $parcel_table['parcel_occupant']; ?>">
+                        <select class="form-select form-select" id="parcelOccupant" name="parcelOccupant" placeholder="select">
+                            <option value=""></option>
+                            <?php foreach ($residents_table as $val) : ?>
+                                <option value="<?= $val['id_resident']; ?>" <?= ($val['id_resident'] == $parcel_table['parcel_occupant'] ? "selected" : ""); ?>><?= $val['resident_name']; ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>

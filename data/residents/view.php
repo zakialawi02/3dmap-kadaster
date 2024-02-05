@@ -30,11 +30,7 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 
-<?php include_once '../../action/get-uri.php' ?>
-<?php
-$config = HTMLPurifier_Config::createDefault();
-$purifier = new HTMLPurifier($config);
-?>
+<?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -44,15 +40,7 @@ $purifier = new HTMLPurifier($config);
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
                 <div class="row gap-2 ">
-                    <?php if ($uri_table['isUrl'] === "true") : ?>
-                        <?php
-                        $url = $uri_table['uri_content'];
-                        header("Location: $url");
-                        exit();
-                        ?>
-                    <?php else : ?>
-                        <?= $purifier->purify($uri_table['uri_content']); ?>
-                    <?php endif ?>
+                    <?= $residents_table['residents_name']; ?>
                 </div>
             </div>
         </div>

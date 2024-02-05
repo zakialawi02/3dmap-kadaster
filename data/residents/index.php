@@ -24,7 +24,7 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-parcel.php' ?>
+<?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -41,7 +41,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Tambah Parcel Data</a>
+                        <a href="/data/residents/add-resident.php" class="btn btn-primary">Tambah Residents</a>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -49,36 +49,31 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">ObjectID</th>
-                                        <th scope="col">Parcel id</th>
-                                        <th scope="col">Parcel Name</th>
-                                        <th scope="col">Parcel Occupant</th>
-                                        <th scope="col">Tag</th>
+                                        <th scope="col">Code/Identification number</th>
+                                        <th scope="col">Name of occupant/institution</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Contract started</th>
+                                        <th scope="col">Contract finished</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($parcel_table as $row) : ?>
-                                        <?php $tags = json_decode($row['tag'], true); ?>
+                                    <?php foreach ($residents_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
-                                            <td><?= $row['id']; ?></td>
-                                            <td><?= $row['parcel_id']; ?></td>
-                                            <td><?= $row['parcel_name'] ?></td>
-                                            <td><?= $row['resident_name'] ?? "-"; ?></td>
-                                            <td>
-                                                <?php foreach ($tags as $tag) : ?>
-                                                    <span class="badge rounded-pill bg-secondary"> <?= $tag['word_name']; ?></span>
-                                                <?php endforeach ?>
-                                            </td>
+                                            <td><?= $row['resident_code']; ?></td>
+                                            <td><?= $row['resident_name'] ?></td>
+                                            <td><?= $row['phone_number']; ?></td>
+                                            <td><?= $row['started']; ?></td>
+                                            <td><?= $row['finished']; ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/parcel/edit-parcel.php?parcel=<?= $row['parcel_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['parcel_id']; ?>" action="/action/delete-parcel.php" method="post">
-                                                        <input type="hidden" name="parcel_id" value="<?= $row['id']; ?>">
+                                                    <a href="/data/residents/edit-residents.php?residents=<?= $row['id_resident']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id_resident']; ?>" action="/action/delete-residents.php" method="post">
+                                                        <input type="hidden" name="id_resident" value="<?= $row['id_resident']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['parcel_id']; ?>"></button>
+                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id_resident']; ?>"></button>
                                                     </form>
                                                 </div>
                                             </td>
