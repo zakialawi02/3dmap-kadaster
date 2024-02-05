@@ -33,17 +33,6 @@ viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarSca
   1.0
 );
 
-// var measureWidget = new Cesium.Measure({
-//   container: 'cesiumContainer',
-//   scene: viewer.scene,
-//   units: new Cesium.MeasureUnits({
-//     distanceUnits: Cesium.DistanceUnits.METERS,
-//     areaUnits: Cesium.AreaUnits.SQUARE_METERS,
-//     volumeUnits: Cesium.VolumeUnits.CUBIC_FEET,
-//     angleUnits: Cesium.AngleUnits.DEGREES,
-//     slopeUnits: Cesium.AngleUnits.GRADE
-//   })
-// });
 
 viewer.camera.flyTo({
   destination: Cesium.Cartesian3.fromDegrees(
@@ -328,8 +317,8 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
     `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
-    `<tr><th>Longitude</th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
-    `<tr><th>Latitude</th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude</a></th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude</a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
     `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
     `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
     `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")} m</td></tr>` +
@@ -434,7 +423,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           currentProperty = String(selectedEntity.description);
           const updatedOccupant = currentProperty.replace(
             /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
-            `<tr><th>Occupant</th><td>${data.parcel_occupant}</td></tr>`
+            `<tr><th>Occupant</th><td>${data.resident_name}</td></tr>`
           );
           selectedEntity.description = updatedOccupant;
         } else {
@@ -813,7 +802,7 @@ $("#zoomToSiolaLegal_3a5").on('click', function () {
 });
 $("#zoomToSiolaLegal_3a6").on('click', function () {
   setTransparentByobject_id(siolaLegal, "848368");
-  zoomToLocation(180, 350, 112.73779026382113, -7.255632571893392, -15, 0);
+  zoomToLocation(180, 35, 112.73779026382113, -7.255632571893392, -15, 0);
 });
 $("#zoomToSiolaLegal_3a7").on('click', function () {
   setTransparentByobject_id(siolaLegal, "847875");

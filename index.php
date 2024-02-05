@@ -65,7 +65,6 @@
           <li>
             <a href="#" id="layer-toggle" title="Show layer panel"><i class="bi bi-stack"></i> Layer</a>
           </li>
-          <li><a href="#" title="">A</a></li>
           <li><a href="#" id="clip-toggle" title="Clip">Clip</a></li>
           <li>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Camera</a>
@@ -109,6 +108,14 @@
   </div>
 
   <main>
+    <!-- <div class="" style="position: absolute; top:4rem; z-index:10000000;">
+      <button id="distance" type="button" class="cesium-button">Distance</button>
+      <button id="component-Distance" type="button" class="cesium-button">Distance</button>
+      <button id="polyline-Distance" type="button" class="cesium-button">Distance</button>
+      <button id="horizontal-Distance" type="button" class="cesium-button">Distance</button>
+      <button id="vertical-Distance" type="button" class="cesium-button">Distance</button>
+    </div> -->
+
     <div class="layer-panel card">
       <div class="card-body p-2">
 
@@ -1363,10 +1370,7 @@
   </script>
 
   <script src="assets/js/script.js"></script>
-  <script src="assets/js/propertiesData.js"></script>
 
-  <!-- <script type="module" src="assets/js/cesiumScript_.js"></script> -->
-  <!-- <script type="module" src="assets/js/cesiumScript_2.js"></script> -->
 
   <script type="module" src="assets/js/cesiumScript.js"></script>
 
