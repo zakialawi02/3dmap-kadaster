@@ -317,8 +317,8 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
     `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude</a></th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude</a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
     `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
     `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
     `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")} m</td></tr>` +
@@ -370,9 +370,12 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     const pickedFeature = viewer.scene.pick(movement.position);
     if (!Cesium.defined(pickedFeature)) {
       clickHandler(movement);
+      $(".property-panel").removeClass("property-panel-show");
       return;
+    } else {
+      $(".property-panel").addClass("property-panel-show");
     }
-
+    $("#property-content").html(createPickedFeatureDescription(pickedFeature));
     if (silhouetteGreen.selected[0] === pickedFeature) {
       return;
     }
@@ -381,10 +384,9 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     if (pickedFeature === highlightedFeature) {
       silhouetteBlue.selected = [];
     }
-
     silhouetteGreen.selected = [pickedFeature];
-    viewer.selectedEntity = selectedEntity;
-    selectedEntity.description = createPickedFeatureDescription(pickedFeature);
+    // viewer.selectedEntity = selectedEntity;
+    // selectedEntity.description = createPickedFeatureDescription(pickedFeature);
 
     // const propertyIds = pickedFeature.getPropertyIds();
     // const length = propertyIds.length;
@@ -395,7 +397,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
 
 
     const objectId = pickedFeature.getProperty("Tag");
-    // console.log(objectId);
+    console.log(objectId);
     // ajax request with sucses and error
     $.ajax({
       type: "Get",
@@ -411,53 +413,36 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         console.log("DATA TAG");
         console.log(tags);
 
-        // Ensure selectedEntity.description is treated as a string
-        let currentProperty = String(selectedEntity.description);
-        const updatedParcelID = currentProperty.replace(
-          /<tr><th>parcel_id<\/th><td>[^<]*<\/td><\/tr>/,
-          `<tr><th>parcel_id</th><td>${data.parcel_id}</td></tr>`
-        );
-        selectedEntity.description = updatedParcelID;
-        // Update deskripsi dengan nilai yang baru
+        $("#card-title-property").html(`${data.id}`);
+        const updatedParcelID = $('th:contains("parcel_id") + td');
+        updatedParcelID.text(`${data.parcel_id}`);
+
+        // Update parcel_occupant & name dengan nilai yang baru
         if (data.parcel_occupant != undefined && data.parcel_occupant != null && data.parcel_occupant != "") {
-          currentProperty = String(selectedEntity.description);
-          const updatedOccupant = currentProperty.replace(
-            /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
-            `<tr><th>Occupant</th><td>${data.resident_name}</td></tr>`
-          );
-          selectedEntity.description = updatedOccupant;
+          const updatedOccupant = $('th:contains("Occupant") + td');
+          updatedOccupant.html(`${data.resident_name} <button type="button" id="btnDetailOccupant" class="btn asbn cesium-button" data-occupant="${data.parcel_occupant}" data-bs-toggle="modal" data-bs-target="#detailOccupant">View <i class="bi bi-zoom-in"></i></button>`);
         } else {
-          const updatedOccupant = currentProperty.replace(
-            /<tr><th>Occupant<\/th><td>[^<]*<\/td><\/tr>/,
-            ``
-          );
-          selectedEntity.description = updatedOccupant;
+          const updatedOccupant = $('th:contains("Occupant") + td');
+          updatedOccupant.closest('tr').remove();
         }
         if (data.parcel_name != undefined && data.parcel_name != null && data.parcel_name != "") {
-          currentProperty = String(selectedEntity.description);
-          const updatedName = currentProperty.replace(
-            /<tr><th>Name<\/th><td>[^<]*<\/td><\/tr>/,
-            `<tr><th>Name</th><td>${data.parcel_name}</td></tr>`
-          );
-          selectedEntity.description = updatedName;
+          const updatedName = $('th:contains("Name") + td');
+          updatedName.text(`${data.parcel_name}`);
         }
+        // add URI
         if (Array.isArray(tags)) {
-          let tagsHtml = "<div><span>URI tag:</span>";
+          let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
           // Loop through the array and create links
           tags.forEach(tag => {
             // Check if tag.id_keyword is not null or empty
             if (tag.id_keyword !== null) {
-              tagsHtml += `<div class="p-5" style="font-size: 1rem;"><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name}</a></div>`;
+              tagsHtml += `<div><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name} <i class="bi bi-box-arrow-up-right"></i></a></div>`;
             }
           });
           tagsHtml += "</div>";
           // Append the tags to the existing description
-          selectedEntity.description += tagsHtml;
+          $(".cesium-infoBox-defaultTable").after(tagsHtml);
         }
-
-
-        currentProperty = String(selectedEntity.description);
-        console.log(currentProperty);
       },
       error: function (error) {
         console.log("error");
@@ -523,6 +508,26 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     selectedEntity.description = createPickedFeatureDescription(pickedFeature);
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
+
+// Menangani klik pada tombol "View (occupant)" NOT WORK
+// $("#btnDetailOccupant").click(function (e) {
+//   // Mendapatkan nilai ID dari atribut data
+//   const occupant = $(this).data('occupant');
+//   console.log(occupant);
+//   // Lakukan AJAX GET request dengan menggunakan ID
+//   $.ajax({
+//     url: 'url_tujuan_data?id=' + occupant,
+//     type: 'GET',
+//     success: function (data) {
+//       $('#detailOccupant .modal-body').html(data);
+
+//     },
+//     error: function (error) {
+//       $('#detailOccupant .modal-body').html("occupant");
+//       console.error('Error:', error);
+//     }
+//   });
+// });
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {

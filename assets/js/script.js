@@ -104,4 +104,8 @@ $(document).ready(function () {
       $(this).prev().find(".set_legal").prop("checked", hasCheckedChild);
     });
   });
+
+  $("#closeProperty").click(function (e) {
+    $(".property-panel").removeClass("property-panel-show");
+  });
 });

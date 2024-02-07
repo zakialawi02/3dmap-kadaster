@@ -27,7 +27,10 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-
+    <?php
+    $address = old('address');
+    $address = (!empty($address) && is_array($address)) ? $address : "";
+    ?>
     <main>
         <div class="container ">
             <div class="row justify-content-center  m-2 p-3">
@@ -39,16 +42,55 @@
                 <?php endif ?>
                 <form action="/action/save-resident.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="resident_code" class="form-label">Code/Identification resident number</label>
-                        <input type="text" class="form-control" id="resident_code" name="resident_code" value="<?= old('resident_code'); ?>" required>
+                        <div class="mb-2">
+                            <label class="form-label">Resident Type</label>
+                        </div>
+                        <div class="d-flex gap-4 px-3 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="resident_type" value="Individual" id="Individual" checked>
+                                <label class="form-check-label" for="Individual">individual</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="resident_type" value="Entity" id="Entity">
+                                <label class="form-check-label" for="Entity">Group/Institution</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" id="entitySegment">
+                        <label for="resident_entity" class="form-label">Name of occupant/institution</label>
+                        <input type="text" class="form-control" id="resident_entity" name="resident_entity" value="<?= old('resident_entity'); ?>" required>
                     </div>
                     <div class="mb-3">
-                        <label for="resident_name" class="form-label">Name of occupant/institution</label>
-                        <input type="text" class="form-control" id="resident_name" name="resident_name" value="<?= old('resident_name'); ?>">
+                        <label for="resident_name" class="form-label">Name of Person</label>
+                        <input type="text" class="form-control" id="resident_name" name="resident_name" value="<?= old('resident_name'); ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resident_code" class="form-label">Code/Identification resident number (NIK)</label>
+                        <input type="text" class="form-control" id="resident_code" name="resident_code" value="<?= old('resident_code'); ?>" required>
+                    </div>
+                    <div class="mb-3" id="titleSegment">
+                        <label for="job_title" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="job_title" name="job_title" value="<?= old('job_title'); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">Phone</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?= old('phone_number'); ?>">
+                    </div>
+                    <div class="row mb-3">
+                        <label for="resident_address" class="form-label">Address</label>
+                        <div class="mb-3 col-md-4">
+                            <label for="resident_address" class="form-label">District</label>
+                            <input type="text" class="form-control" id="resident_address" name="district_address" value="<?= (!empty($address['district']) ? $address['district'] : ""); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="resident_address" class="form-label">City</label>
+                            <input type="text" class="form-control" id="resident_address" name="city_address" value="<?= (!empty($address['city']) ? $address['city'] : ""); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="resident_address" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="resident_address" name="province_address" value="<?= (!empty($address['province']) ? $address['province'] : ""); ?>" required>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="started" class="form-label">Contract started</label>
@@ -78,22 +120,39 @@
 
     <script>
         $(document).ready(function() {
-            const tagData = [
-                <?php foreach ($uri_table as $row) : ?> {
-                        id: <?= $row['id_keyword']; ?>,
-                        name: '<?= $row['word_name']; ?>'
-                    },
-                <?php endforeach ?>
-            ];
-            $('#multiSelectTag').magicSuggest({
-                data: tagData,
-                allowFreeEntries: false, // Set true if you want to allow free text entries
-                maxSelection: null, // Set to null to remove the limit
-                noSuggestionText: 'No suggestions',
-                placeholder: 'Type or click here',
+            const selectedValue = $('input[name="resident_type"]:checked').val();
+            // Menampilkan nilai di konsol
+            if (selectedValue === "Individual") {
+                individual();
+            } else if (selectedValue === "Entity") {
+                groupEntity();
+            }
+            $('input[name="resident_type"]').change(function() {
+                const selectedValue = $('input[name="resident_type"]:checked').val();
+                if (selectedValue === "Individual") {
+                    individual();
+                } else if (selectedValue === "Entity") {
+                    groupEntity();
+                }
             });
+
+            function individual() {
+                $("#entitySegment").addClass("d-none");
+                $('#resident_entity').attr('type', 'hidden');
+                $("#titleSegment").addClass("d-none");
+                $('#job_title').attr('type', 'hidden');
+            }
+
+            function groupEntity() {
+                $("#entitySegment").removeClass("d-none");
+                $('#resident_entity').attr('type', 'text');
+                $("#titleSegment").removeClass("d-none");
+                $('#job_title').attr('type', 'text');
+
+            }
         });
     </script>
+
 
 
 </body>

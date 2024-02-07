@@ -13,7 +13,7 @@
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
@@ -27,7 +27,7 @@
   <style>
     #cesiumMap {
       position: absolute;
-      height: 91vh;
+      height: 100%;
       margin-top: auto;
       padding: 0;
       bottom: 0;
@@ -115,6 +115,21 @@
       <button id="horizontal-Distance" type="button" class="cesium-button">Distance</button>
       <button id="vertical-Distance" type="button" class="cesium-button">Distance</button>
     </div> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailOccupant" tabindex="-1" aria-labelledby="detailOccupantLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailOccupantLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="layer-panel card">
       <div class="card-body p-2">
@@ -1323,13 +1338,13 @@
       <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card">
-      <div class="card-body p-2">
-        <div class="property-content" id="property-content">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, nesciunt.</p>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
+    <div class="property-panel card ">
+      <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
+        <span class="card-title" id="card-title-property"></span>
+        <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
+      </div>
+      <div class="property-content cesium-infoBox-description" id="property-content">
+
       </div>
     </div>
 

@@ -49,9 +49,13 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Code/Identification number</th>
-                                        <th scope="col">Name of occupant/institution</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Name of Group/Institution</th>
+                                        <th scope="col">Identification number</th>
+                                        <th scope="col">Name of person</th>
+                                        <th scope="col">Title</th>
                                         <th scope="col">Phone</th>
+                                        <th scope="col">Address</th>
                                         <th scope="col">Contract started</th>
                                         <th scope="col">Contract finished</th>
                                         <th scope="col">Action</th>
@@ -62,11 +66,15 @@
                                     <?php foreach ($residents_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
+                                            <td><?= $row['resident_type']; ?></td>
+                                            <td><?= (!empty($row['resident_entity']) ? $row['resident_entity'] : "-") ?></td>
                                             <td><?= $row['resident_code']; ?></td>
                                             <td><?= $row['resident_name'] ?></td>
+                                            <td><?= (!empty($row['job_title']) ? $row['job_title'] : "-") ?></td>
                                             <td><?= $row['phone_number']; ?></td>
-                                            <td><?= $row['started']; ?></td>
-                                            <td><?= $row['finished']; ?></td>
+                                            <td><?= (!empty($row['resident_address']) ? json_decode($row['resident_address'], true)['city'] . ', ' . json_decode($row['resident_address'], true)['district'] . ', ' . json_decode($row['resident_address'], true)['province'] : "-"); ?></td>
+                                            <td><?= (!empty($row['started']) ? $row['started'] : "-"); ?></td>
+                                            <td><?= (!empty($row['finished']) ? $row['finished'] : "-"); ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
                                                     <a href="/data/residents/edit-residents.php?residents=<?= $row['id_resident']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
