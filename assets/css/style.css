@@ -148,6 +148,18 @@ header .nav-menu .hamb {
   color: black !important;
 }
 
+a:link,
+a:visited {
+  color: #fff89b !important;
+  text-decoration: underline !important;
+}
+
+a:hover,
+a:active {
+  color: #9bc6ff !important;
+}
+
+/* Layer Panel */
 .layer-panel {
   position: absolute;
   margin-top: 4rem;
@@ -176,6 +188,7 @@ header .nav-menu .hamb {
   overflow-y: scroll;
 }
 
+/* clip panel */
 .clip-panel {
   position: absolute;
   margin-top: 4rem;
@@ -186,11 +199,7 @@ header .nav-menu .hamb {
 }
 
 .clip-panel-show {
-  position: absolute;
-  margin-top: 4rem;
   top: 0;
-  right: 0;
-  width: 15rem;
 }
 
 .clip-item {
@@ -207,13 +216,16 @@ header .nav-menu .hamb {
 /* property panel */
 .property-panel {
   position: fixed;
-  margin-top: 20rem;
-  top: 5px;
-  right: -22rem;
+  top: 13rem;
+  right: -30rem;
   z-index: 10;
-  width: 22rem;
-  max-height: 22rem;
+  max-height: 470px;
+  height: 25rem;
+  width: 100%;
+  max-width: 25rem;
   overflow-y: scroll;
+  background-color: #2e2a29f1;
+  color: #edffff;
   transition: right 0.3s ease;
 }
 
@@ -221,9 +233,19 @@ header .nav-menu .hamb {
   right: 10px;
 }
 
+.property-header {
+  margin: 0;
+  padding: 4px;
+  background-color: rgba(47, 47, 47, 0.945);
+  position: absolute;
+  width: calc(100% - 5px);
+}
+
 .property-content {
   font-size: 14px;
-  font-weight: 400;
+  padding: 4px 10px;
+  margin-right: 4px;
+  color: #edffff;
 }
 
 .property-content p {
@@ -231,11 +253,14 @@ header .nav-menu .hamb {
   padding: 2px 4px;
 }
 
+.cesium-infoBox-defaultTable th:first-child {
+  width: 120px;
+}
+
 /* minimap */
 .minimap-panel {
   position: fixed;
-  margin-top: 20rem;
-  bottom: 30px;
+  bottom: 1rem;
   right: -22rem;
   width: 18rem;
   height: 12rem;
