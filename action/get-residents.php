@@ -43,26 +43,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // jika request ajax
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-    $objectID = $_GET['objectId'];
+    $id_resident = $_GET['idr'];
+    $parcel_id = $_GET['parcel_id'] ?? null;
     // get data residents_table where
-    $sql = "SELECT p.*,
-            JSON_ARRAYAGG(
-            JSON_OBJECT(
-                'id_keyword', u.id_keyword,
-                'word_name', u.word_name,
-                'slug', u.slug,
-                'isUrl', u.isUrl
-                )
-            ) AS tag
-            FROM residents_table p
-            LEFT JOIN linked_uri lu ON p.parcel_id = lu.parcel_id
-            LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
-            WHERE p.id = $objectID
-            GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM residents_table WHERE id_resident = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_resident); // "i" menunjukkan tipe data integer, sesuaikan sesuai kebutuhan
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $residents_table = $result->fetch_assoc();
     }
+    $residents_table['parcel_id'] = $parcel_id;
     $residents_table = json_encode($residents_table);
     header('Content-Type: application/json');
     echo $residents_table;

@@ -420,7 +420,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         // Update parcel_occupant & name dengan nilai yang baru
         if (data.parcel_occupant != undefined && data.parcel_occupant != null && data.parcel_occupant != "") {
           const updatedOccupant = $('th:contains("Occupant") + td');
-          updatedOccupant.html(`${data.resident_name} <button type="button" id="btnDetailOccupant" class="btn asbn cesium-button" data-occupant="${data.parcel_occupant}" data-bs-toggle="modal" data-bs-target="#detailOccupant">View <i class="bi bi-zoom-in"></i></button>`);
+          updatedOccupant.html(`${data.resident_name} <button type="button" id="btnDetailOccupant" class="btn asbn cesium-button" data-occupant="${data.parcel_occupant}" data-parcel="${data.parcel_id}" data-bs-toggle="modal" data-bs-target="#detailOccupant">View <i class="bi bi-zoom-in"></i></button>`);
         } else {
           const updatedOccupant = $('th:contains("Occupant") + td');
           updatedOccupant.closest('tr').remove();
@@ -510,24 +510,58 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
 }
 
 // Menangani klik pada tombol "View (occupant)" NOT WORK
-// $("#btnDetailOccupant").click(function (e) {
-//   // Mendapatkan nilai ID dari atribut data
-//   const occupant = $(this).data('occupant');
-//   console.log(occupant);
-//   // Lakukan AJAX GET request dengan menggunakan ID
-//   $.ajax({
-//     url: 'url_tujuan_data?id=' + occupant,
-//     type: 'GET',
-//     success: function (data) {
-//       $('#detailOccupant .modal-body').html(data);
+$(document).on('click', '#btnDetailOccupant', function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $('#detailOccupant .modal-body').html(loader);
+  // Mendapatkan nilai ID dari atribut data
+  const occupant = $(this).data('occupant');
+  const parcel_id = $(this).data('parcel');
+  console.log(occupant);
+  console.log(parcel_id);
 
-//     },
-//     error: function (error) {
-//       $('#detailOccupant .modal-body').html("occupant");
-//       console.error('Error:', error);
-//     }
-//   });
-// });
+  // Lakukan AJAX GET request dengan menggunakan ID
+  $.ajax({
+    url: `../../action/get-residents.php?idr=${occupant}&parcel_id=${parcel_id}`,
+    type: 'GET',
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      const address = JSON.parse(data.resident_address);
+      const city = address ? (address.city ? address.city : '-') : '-';
+      const district = address ? (address.district ? address.district : '-') : '-';
+      const province = address ? (address.province ? address.province : '-') : '-';
+      const table =
+        `<table class="table"><tbody>` +
+        `<tr><th>Name of Group/Institution</th><td style="width: 1%;">:</td><td>${data.resident_entity ?? "-"}</td></tr>` +
+        `<tr><th>Name of Person</th><td style="width: 1%;">:</td><td>${data.resident_name}</td></tr>` +
+        `<tr><th>Job Title</th><td style="width: 1%;">:</td><td>${data.job_title ?? "-"}</td></tr>` +
+        `<tr><th>Identicifation Number (NIK)</th><td style="width: 1%;">:</td><td>${data.resident_code}</td></tr>` +
+        `<tr><th>Phone Number</th><td style="width: 1%;">:</td><td>${data.phone_number ?? "-"}</td></tr>` +
+        `<tr><th>Address</th><td style="width: 1%;">:</td><td>${city ?? "-"}, ${district ?? "-"}, ${province ?? "-"}</td></tr>` +
+        `<tr><th>started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.started) ?? "-"}</td></tr>` +
+        `<tr><th>finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.finished) ?? "-"}</td></tr>` +
+        `</tbody></table>`;
+      $('#detailOccupant .modal-body').html(table);
+      const detailOccupantPDF = $(`<button type="button" id="detailOccupantPDF" class="btn asbn btn-primary" data-occupant="${data.id_resident}" data-parcel="${data.parcel_id}" >PDF file <i class="bi bi-file-earmark-person-fill"></i></button>`);
+      $('#detailOccupant .modal-body').append(detailOccupantPDF);
+    },
+    error: function (error) {
+      $('#detailOccupant .modal-body').html("Error!!");
+      console.error('Error:', error);
+    }
+  });
+});
+
+$(document).on('click', '#detailOccupantPDF', function (e) {
+  // Mendapatkan nilai ID dari atribut data
+  const occupant = $(this).data('occupant');
+  const parcel_id = $(this).data('parcel');
+  console.log(occupant);
+  console.log(parcel_id);
+
+
+});
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {
