@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $address = json_encode($address);
         $started = $_POST['started'];
         $finished = $_POST['finished'];
-        var_dump($started);
         // Prepare and execute the SQL query
         $sqlInsertResident = "INSERT INTO residents_table (resident_type, resident_entity, resident_code, resident_name, phone_number, job_title, resident_address, started, finished) VALUES ('$resident_type', '$resident_entity', '$resident_code', '$resident_name', '$phone_number', '$job_title', '$address', " . (!empty($started) ? "'$started'" : "NULL") . " , " . (!empty($finished) ? "'$finished'" : "NULL") . ")";
         $resultSql = mysqli_query($conn, $sqlInsertResident);

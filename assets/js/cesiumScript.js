@@ -321,7 +321,6 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
     `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
     `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
-    `<tr><th>Lenght</th><td>${pickedFeature.getProperty("lenght")} m</td></tr>` +
     `<tr><th>Area</th><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
     `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
     `</tbody></table>`;

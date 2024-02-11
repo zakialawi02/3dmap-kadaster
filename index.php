@@ -107,6 +107,30 @@
     <div class="loader"></div>
   </div>
 
+  <!-- kritik dan saran -->
+  <div class="saran" style="position: absolute; bottom:20px; z-index:100;">
+    <button type="button" class="cesium-button" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="critics" tabindex="-1" aria-labelledby="criticsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header p-2">
+          <h1 class="modal-title fs-5" id="criticsLabel">critics and suggestions</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="mycritics" action="/critics/_critics.php" method="post" target="_blank">
+            <div class="mb-3 p-1">
+              <textarea name="critics" rows="10" placeholder="Typing Here..." style="width: 100%;" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <main>
     <!-- <div class="" style="position: absolute; top:4rem; z-index:10000000;">
       <button id="distance" type="button" class="cesium-button">Distance</button>
@@ -115,6 +139,7 @@
       <button id="horizontal-Distance" type="button" class="cesium-button">Distance</button>
       <button id="vertical-Distance" type="button" class="cesium-button">Distance</button>
     </div> -->
+
 
     <!-- Modal -->
     <div class="modal fade" id="detailOccupant" tabindex="-1" aria-labelledby="detailOccupantLabel" aria-hidden="true">
