@@ -53,7 +53,9 @@
                                         <th scope="col">Name of Group/Institution</th>
                                         <th scope="col">Identification number</th>
                                         <th scope="col">Name of person</th>
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Job</th>
+                                        <th scope="col">Job Title</th>
+                                        <th scope="col">Religion</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">Contract started</th>
@@ -70,7 +72,9 @@
                                             <td><?= !empty($row['resident_entity']) ? $row['resident_entity'] : "-" ?></td>
                                             <td><?= $row['resident_code']; ?></td>
                                             <td><?= $row['resident_name'] ?></td>
+                                            <td><?= !empty($row['resident_job']) ? $row['resident_job'] : "-" ?></td>
                                             <td><?= !empty($row['job_title']) ? $row['job_title'] : "-" ?></td>
+                                            <td><?= $row['resident_religion']; ?></td>
                                             <td><?= $row['phone_number']; ?></td>
                                             <td><?= !empty($row['resident_address']) ? json_decode($row['resident_address'], true)['city'] . ', ' . json_decode($row['resident_address'], true)['district'] . ', ' . json_decode($row['resident_address'], true)['province'] : "-"; ?></td>
                                             <td><?= !empty($row['started']) ? (new DateTime($row['started']))->format('j-M-Y') : "-"; ?></td>

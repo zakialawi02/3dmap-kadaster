@@ -112,7 +112,7 @@
     <button type="button" class="cesium-button" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="critics" tabindex="-1" aria-labelledby="criticsLabel" aria-hidden="true">
+  <div class="modal fade welcomemodal" id="critics" tabindex="-1" aria-labelledby="criticsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header p-2">
@@ -122,7 +122,7 @@
         <div class="modal-body">
           <form id="mycritics" action="/critics/_critics.php" method="post" target="_blank">
             <div class="mb-3 p-1">
-              <textarea name="critics" rows="10" placeholder="Typing Here..." style="width: 100%;" required></textarea>
+              <textarea name="critics" rows="10" placeholder="Typing Here..." style="width: 100%;" autofocus="on" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

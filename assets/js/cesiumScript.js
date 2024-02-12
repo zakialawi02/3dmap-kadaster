@@ -508,7 +508,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 
-// Menangani klik pada tombol "View (occupant)" NOT WORK
+// Menangani klik pada tombol "View (occupant)"
 $(document).on('click', '#btnDetailOccupant', function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -516,8 +516,6 @@ $(document).on('click', '#btnDetailOccupant', function (e) {
   // Mendapatkan nilai ID dari atribut data
   const occupant = $(this).data('occupant');
   const parcel_id = $(this).data('parcel');
-  console.log(occupant);
-  console.log(parcel_id);
 
   // Lakukan AJAX GET request dengan menggunakan ID
   $.ajax({
@@ -532,17 +530,19 @@ $(document).on('click', '#btnDetailOccupant', function (e) {
       const province = address ? (address.province ? address.province : '-') : '-';
       const table =
         `<table class="table"><tbody>` +
-        `<tr><th>Name of Group/Institution</th><td style="width: 1%;">:</td><td>${data.resident_entity ?? "-"}</td></tr>` +
+        `<tr> <th>${data.resident_type === "Individual" ? 'Individual' : data.resident_type === "Entity" ? 'Institution/Group' : ''}</th> </tr>` +
+        `${data.resident_type === "Entity" ? `<tr><th>Name of Group/Institution</th><td style="width: 1%;">:</td><td>${data.resident_entity ?? "-"}</td></tr>` : ''}` +
         `<tr><th>Name of Person</th><td style="width: 1%;">:</td><td>${data.resident_name}</td></tr>` +
-        `<tr><th>Job Title</th><td style="width: 1%;">:</td><td>${data.job_title ?? "-"}</td></tr>` +
         `<tr><th>Identicifation Number (NIK)</th><td style="width: 1%;">:</td><td>${data.resident_code}</td></tr>` +
+        `<tr><th>Job</th><td style="width: 1%;">:</td><td>${data.resident_job ? data.resident_job : '-'}</td></tr>` +
+        `${data.resident_type === "Entity" ? `<tr><th>Job Title</th><td style="width: 1%;">:</td><td>${data.job_title ? data.job_title : '-'}</td></tr>` : ''}` +
         `<tr><th>Phone Number</th><td style="width: 1%;">:</td><td>${data.phone_number ?? "-"}</td></tr>` +
         `<tr><th>Address</th><td style="width: 1%;">:</td><td>${city ?? "-"}, ${district ?? "-"}, ${province ?? "-"}</td></tr>` +
         `<tr><th>started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.started) ?? "-"}</td></tr>` +
         `<tr><th>finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.finished) ?? "-"}</td></tr>` +
         `</tbody></table>`;
       $('#detailOccupant .modal-body').html(table);
-      const detailOccupantPDF = $(`<button type="button" id="detailOccupantPDF" class="btn asbn btn-primary" data-occupant="${data.id_resident}" data-parcel="${data.parcel_id}" >PDF file <i class="bi bi-file-earmark-person-fill"></i></button>`);
+      const detailOccupantPDF = $(`<button type="button" id="detailOccupantPDF" class="btn asbn btn-primary" data-occupant="${data.id_resident}" data-parcel="${data.parcel_id}">PDF file <i class="bi bi-file-earmark-person-fill"></i></button>`);
       $('#detailOccupant .modal-body').append(detailOccupantPDF);
     },
     error: function (error) {
@@ -556,10 +556,8 @@ $(document).on('click', '#detailOccupantPDF', function (e) {
   // Mendapatkan nilai ID dari atribut data
   const occupant = $(this).data('occupant');
   const parcel_id = $(this).data('parcel');
-  console.log(occupant);
-  console.log(parcel_id);
-
-
+  const url = `/action/sertifikat_occupant.php?idr=${occupant}&objectId=${parcel_id}`;
+  window.open(url, '_blank').focus();
 });
 
 // Layering button Siola  ################################################################################

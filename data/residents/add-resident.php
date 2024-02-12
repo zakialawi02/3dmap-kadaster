@@ -69,13 +69,21 @@
                         <label for="resident_code" class="form-label">Code/Identification resident number (NIK)</label>
                         <input type="text" class="form-control" id="resident_code" name="resident_code" value="<?= old('resident_code'); ?>" required>
                     </div>
+                    <div class="mb-3" id="jobSegment">
+                        <label for="job" class="form-label">Job</label>
+                        <input type="text" class="form-control" id="job" name="job" value="<?= old('job'); ?>" required>
+                    </div>
                     <div class="mb-3" id="titleSegment">
-                        <label for="job_title" class="form-label">Job Title</label>
+                        <label for="job_title" class="form-label">Job Title/Position</label>
                         <input type="text" class="form-control" id="job_title" name="job_title" value="<?= old('job_title'); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">Phone</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?= old('phone_number'); ?>">
+                    </div>
+                    <div class="mb-3" id="religionSegment">
+                        <label for="religion" class="form-label">Religion</label>
+                        <input type="text" class="form-control" id="religion" name="religion" value="<?= old('religion'); ?>" required>
                     </div>
                     <div class="row mb-3">
                         <label for="resident_address" class="form-label">Address</label>

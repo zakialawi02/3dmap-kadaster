@@ -13,6 +13,7 @@
     ],
     "require": {
         "ezyang/htmlpurifier": "^4.17",
-        "ausi/slug-generator": "^1.1"
+        "ausi/slug-generator": "^1.1",
+        "mpdf/mpdf": "8.1"
     }
 }
