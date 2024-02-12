@@ -36,5 +36,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 
 
-header("Location: /data/user/add-user.php");
+header("Location: /data/user/");
 exit();

@@ -24,8 +24,8 @@
             <ul class="nav-menu-group">
                 <li><a href="/" title="">Home</a></li>
                 <li><a href="/dashboard" title="">Dashboard</a></li>
-                <li><a href="/data/uri" title="">URI Data</a></li>
-                <li><a href="/data/parcel" title="">Parcel Data</a></li>
+                <!-- <li><a href="/data/uri" title="">URI Data</a></li>
+                <li><a href="/data/parcel" title="">Parcel Data</a></li> -->
                 <?php if (isset($_SESSION['islogin'])) : ?>
                     <li><a href="/action/auth/process_logout.php" title="">Logout</a></li>
                 <?php else : ?>

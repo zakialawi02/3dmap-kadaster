@@ -21,7 +21,6 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-users.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -52,45 +51,6 @@
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
-            </div>
-
-            <hr>
-
-            <div class="m-3 p-5">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Created_at</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1; ?>
-                        <?php foreach ($users_table as $row) : ?>
-                            <tr>
-                                <th scope="row"><?= $no++; ?></th>
-                                <td><?= $row['email']; ?></td>
-                                <td><?= $row['created_at']; ?></td>
-                                <td>
-                                    <div class="d-flex flex-row gap-1">
-                                        <!-- <a href="/data/user/edit-user.php?user=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a> -->
-                                        <?php if ($row['id'] == 1) : ?>
-                                            <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" disabled></button>
-                                        <?php else : ?>
-                                            <form id="delete-<?= $row['id']; ?>" action="/action/delete-user.php" method="post">
-                                                <input type="hidden" name="user" value="<?= $row['id']; ?>">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
-                                            </form>
-                                        <?php endif ?>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
             </div>
 
         </div>
