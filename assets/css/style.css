@@ -148,14 +148,14 @@ header .nav-menu .hamb {
   color: black !important;
 }
 
-a:link,
-a:visited {
+.property-panel a:link,
+.property-panel a:visited {
   color: #fff89b !important;
   text-decoration: underline !important;
 }
 
-a:hover,
-a:active {
+.property-panel a:hover,
+.property-panel a:active {
   color: #9bc6ff !important;
 }
 
@@ -223,7 +223,6 @@ a:active {
   height: 25rem;
   width: 100%;
   max-width: 25rem;
-  overflow-y: scroll;
   background-color: #2e2a29f1;
   color: #edffff;
   transition: right 0.3s ease;
@@ -238,14 +237,17 @@ a:active {
   padding: 4px;
   background-color: rgba(47, 47, 47, 0.945);
   position: absolute;
-  width: calc(100% - 5px);
+  width: 100%;
+  max-width: 25rem;
 }
 
 .property-content {
   font-size: 14px;
   padding: 4px 10px;
   margin-right: 4px;
+  margin-top: 2.6rem;
   color: #edffff;
+  overflow-y: scroll;
 }
 
 .property-content p {

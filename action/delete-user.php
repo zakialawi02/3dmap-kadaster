@@ -22,5 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 $conn->close();
 
-header("Location: /data/user/add-user.php");
+header("Location: /data/user/");
 exit();

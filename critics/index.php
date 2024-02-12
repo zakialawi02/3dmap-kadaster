@@ -11,9 +11,7 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css " rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -21,17 +19,20 @@
 
     </style>
 
-    <title>URI Data</title>
+    <title>Critics Data</title>
 </head>
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
-<?php checkIsLogin(); ?>
-<?php include_once '../../action/get-uri.php' ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '../action/first-load.php'; ?>
+
 
 <body>
     <!-- HEADER -->
-    <?php include '../../assets/view/dashboard_header.php' ?>
-
+    <?php include '../assets/view/dashboard_header.php' ?>
+    <?php include './_critics.php' ?>
+    <?php
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+    ?>
 
     <main>
         <div class="container">
@@ -44,40 +45,25 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/uri/add-uri.php" class="btn btn-primary">Tambah URI Data</a>
                     </div>
-                    <div class="row  p-3 m-2">
+                    <div class="row">
                         <div class="col-md-12">
-                            <table id="datatable" class="table table-bordered table-striped table-hover" style="width:100%">
+                            <table class="table table-bordered table-striped table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Keyword</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Slug</th>
-                                        <th scope="col">Content</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" width="10px">#</th>
+                                        <th scope="col">critics</th>
+                                        <th scope="col">date</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($uri_table as $row) : ?>
+                                    <?php foreach ($critics_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
-                                            <td><?= $row['word_name']; ?></td>
-                                            <td><?= ($row['isUrl'] === "true") ? "Redirect url" : "Page" ?></td>
-                                            <td><?= $row['slug']; ?></td>
-                                            <td><?= ($row['isUrl'] === "true") ? '<a href="/data/uri/view.php?uri=' . $row['slug'] . '"class="" target="_blank"><i class="bi bi-box-arrow-up-right"></i> ' . $row['uri_content'] . '</a>' : '<a href="/data/uri/view.php?uri=' . $row['slug'] . '"class="" target="_blank"><i class="bi bi-box-arrow-up-right"></i>click to view</a>' ?></td>
-                                            <td>
-                                                <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/uri/edit-uri.php?uri=<?= $row['slug']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['id_keyword']; ?>" action="/action/delete-uri.php" method="post">
-                                                        <input type="hidden" name="uri_id" value="<?= $row['id_keyword']; ?>">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id_keyword']; ?>"></button>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                            <td><?= $purifier->purify($row['critics']); ?></td>
+                                            <td><?= !empty($row['created_at']) ? (new DateTime($row['created_at']))->format('j-M-Y') : "-"; ?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
@@ -95,8 +81,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js "></script>
-    <script src=" https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js "></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="/assets/js/script.js"></script>
 
@@ -117,8 +101,6 @@
                 }
             });
         });
-
-        const datatable = new DataTable('#datatable');
     </script>
 
 </body>

@@ -1,3 +1,5 @@
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -10,29 +12,51 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
     <style>
+        main {
+            display: table;
+            width: 100%;
+            height: 90vh;
+            text-align: center;
+            color: #888;
+        }
 
+        .fof {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .fof h1 {
+            font-size: 50px;
+            display: inline-block;
+            padding-right: 12px;
+            animation: type .5s alternate infinite;
+        }
+
+        @keyframes type {
+            from {
+                box-shadow: inset -3px 0px 0px #888;
+            }
+
+            to {
+                box-shadow: inset -3px 0px 0px transparent;
+            }
+        }
     </style>
 
-    <title>Dashboard</title>
+    <title>Fail Page</title>
 </head>
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
-<?php checkIsLogin(); ?>
-
 <body>
-    <!-- HEADER -->
-    <?php include '../assets/view/dashboard_header.php' ?>
 
     <main>
-        <div class="container m-2 p-3">
-            <a href="/data/parcel" class="btn btn-primary">Parcel</a>
-            <a href="/data/residents" class="btn btn-primary">Residents</a>
-            <a href="/data/uri" class="btn btn-primary">URI</a>
-            <a href="/data/user" class="btn btn-primary">Admin Data</a>
+        <div class="mt-3 pt-3">
+            <h1>Thanks</h1>
+            <p class="py-1">Thanks for your submit</p>
         </div>
     </main>
 
@@ -44,7 +68,8 @@
 
     <script src="/assets/js/script.js"></script>
 
-
+    <script>
+    </script>
 
 </body>
 
