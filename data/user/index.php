@@ -73,7 +73,7 @@
                                                         <form id="delete-<?= $row['id']; ?>" action="/action/delete-user.php" method="post">
                                                             <input type="hidden" name="user" value="<?= $row['id']; ?>">
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
+                                                            <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
                                                         </form>
                                                     <?php endif ?>
                                                 </div>
@@ -105,7 +105,7 @@
             const userId = $(this).data('id');
             Swal.fire({
                 title: 'Apakah Anda yakin ingin menghapus data ini?',
-                text: "Data yang sudah dihapus tidak dapat dikembalikan! Data yang terkait dengan URI ini akan terdampak.",
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -117,9 +117,8 @@
                 }
             });
         });
-
-        const datatable = new DataTable('#datatable');
     </script>
+    <?php unset($_SESSION['oldForm']); ?>
 
 </body>
 

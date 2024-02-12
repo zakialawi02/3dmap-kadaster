@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -28,12 +29,31 @@
     <?php include '../assets/view/dashboard_header.php' ?>
 
     <main>
-        <div class="container m-2 p-3">
-            <a href="/data/parcel" class="btn btn-primary">Parcel</a>
-            <a href="/data/residents" class="btn btn-primary">Residents</a>
-            <a href="/data/uri" class="btn btn-primary">URI</a>
-            <a href="/data/user" class="btn btn-primary">Admin Data</a>
+        <div class="container-fluid d-flex flex-column justify-content-center align-items-center my-3 py-3">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold">Welcome</h1>
+            </div>
+            <h3 class="fw-bold">Menu:</h3>
+            <div class="row justify-content-center">
+                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                    <i class="bi bi-building-fill-gear"></i>
+                    Parcel Data
+                </a>
+                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                    <i class="bi bi-file-person"></i>
+                    Resident Data
+                </a>
+                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                    <i class="bi bi-link-45deg"></i>
+                    URI Data
+                </a>
+                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                    <i class="bi bi-people-fill"></i>
+                    Admin Data
+                </a>
+            </div>
         </div>
+
     </main>
 
     <footer>
