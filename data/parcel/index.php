@@ -43,7 +43,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Tambah Parcel Data</a>
+                        <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Add Parcel Data</a>
                     </div>
                     <div class="row p-3 m-2">
                         <div class="col-md-12">

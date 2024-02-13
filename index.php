@@ -108,7 +108,7 @@
   </div>
 
   <!-- kritik dan saran -->
-  <div class="saran" style="position: absolute; bottom:20px; z-index:100;">
+  <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
     <button type="button" class="cesium-button" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
   </div>
   <!-- Modal -->
@@ -1375,20 +1375,24 @@
 
     <div class="clip-panel card">
       <div class="card-body p-2">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="b1" checked>
         <label class="form-check-label" for="flexRadioDefault2">Siola</label>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="b2">
+        <label class="form-check-label" for="flexRadioDefault3">Balai Pemuda</label>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="b3">
+        <label class="form-check-label" for="flexRadioDefault4">Rusunawa Buring</label>
         <div class="clip-item m-1 p-1">
           <div>
             <label for="sliderX">Slider X:</label>
-            <input type="range" id="sliderX" min="-90" max="90" step="0.01" value="90">
+            <input type="range" id="sliderX" min="-90" max="90" step="0.05" value="90">
           </div>
           <div>
             <label for="sliderY">Slider Y:</label>
-            <input type="range" id="sliderY" min="-90" max="90" step="0.01" value="90">
+            <input type="range" id="sliderY" min="-90" max="90" step="0.05" value="90">
           </div>
           <div>
             <label for="sliderZ">Slider Z:</label>
-            <input type="range" id="sliderZ" min="-90" max="90" step="0.01" value="90">
+            <input type="range" id="sliderZ" min="-90" max="90" step="0.05" value="90">
           </div>
           <button id="reset-clip">Reset</button>
         </div>

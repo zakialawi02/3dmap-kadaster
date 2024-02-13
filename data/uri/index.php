@@ -44,7 +44,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/uri/add-uri.php" class="btn btn-primary">Tambah URI Data</a>
+                        <a href="/data/uri/add-uri.php" class="btn btn-primary">Add URI Data</a>
                     </div>
                     <div class="row  p-3 m-2">
                         <div class="col-md-12">

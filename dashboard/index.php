@@ -35,19 +35,19 @@
             </div>
             <h3 class="fw-bold">Menu:</h3>
             <div class="row justify-content-center">
-                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                <a href="/data/parcel/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
                     <i class="bi bi-building-fill-gear"></i>
                     Parcel Data
                 </a>
-                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                <a href="/data/residents/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
                     <i class="bi bi-file-person"></i>
                     Resident Data
                 </a>
-                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                <a href="/data/uri/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
                     <i class="bi bi-link-45deg"></i>
                     URI Data
                 </a>
-                <a href="#" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
+                <a href="/data/user/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
                     <i class="bi bi-people-fill"></i>
                     Admin Data
                 </a>

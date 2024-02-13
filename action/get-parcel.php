@@ -25,29 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if ($result->num_rows > 0) {
             $parcel_table = $result->fetch_assoc();
         }
-    } elseif (isset($_GET['idr']) && !empty($_GET['idr']) && isset($_GET['objectId']) && !empty($_GET['objectId'])) {
-        $objectID = $_GET['objectId'];
-        $residentID = $_GET['idr'];
-        // get data parcel_table where
-        $sql = "SELECT p.*, r.*,
-                JSON_ARRAYAGG(
-                JSON_OBJECT(
-                    'id_keyword', u.id_keyword,
-                    'word_name', u.word_name,
-                    'slug', u.slug,
-                    'isUrl', u.isUrl
-                    )
-                ) AS tag
-                FROM parcel_table p
-                LEFT JOIN linked_uri lu ON p.parcel_id = lu.parcel_id
-                LEFT JOIN residents_table r ON p.parcel_occupant = r.id_resident
-                LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
-                WHERE r.id_resident = $residentID AND p.parcel_id = '$objectID'
-                GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            $parcel_table = $result->fetch_assoc();
-        }
     } else {
         // get data parcel_table
         $sql = "SELECT p.*, r.*,
@@ -97,7 +74,8 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                 LEFT JOIN residents_table r ON p.parcel_occupant = r.id_resident
                 LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
                 WHERE p.id = $objectID
-                GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant";
+                GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant
+                ORDER BY p.parcel_id";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $parcel_table = $result->fetch_assoc();
@@ -105,6 +83,30 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         $parcel_table = json_encode($parcel_table);
         header('Content-Type: application/json');
         echo $parcel_table;
+    } elseif (isset($_GET['get']) && !empty($_GET['get'])) {
+        $sql = "SELECT p.*, r.*,
+                JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    'id_keyword', u.id_keyword,
+                    'word_name', u.word_name,
+                    'slug', u.slug,
+                    'isUrl', u.isUrl
+                    )
+                ) AS tag
+                FROM parcel_table p
+                LEFT JOIN linked_uri lu ON p.parcel_id = lu.parcel_id
+                LEFT JOIN residents_table r ON p.parcel_occupant = r.id_resident
+                LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
+                GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant
+                ORDER BY p.parcel_id";
+        $result = $conn->query($sql);
+        $parcel_table = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $parcel_table[] = $row;
+            }
+        }
+        echo json_encode($parcel_table);
     }
 }
 

@@ -43,7 +43,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/residents/add-resident.php" class="btn btn-primary">Tambah Residents</a>
+                        <a href="/data/residents/add-resident.php" class="btn btn-primary">Add Residents</a>
                     </div>
                     <div class="row  p-3 m-2">
                         <div class="col-md-12">

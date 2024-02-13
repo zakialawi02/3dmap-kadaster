@@ -1,8 +1,8 @@
 // inisiasi cesium token
-Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 // Cesium.Ion.defaultAccessToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+Cesium.Ion.defaultAccessToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
@@ -2599,44 +2599,44 @@ $("#resetTransparent").click(function () {
 
 // Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
     show: true,
     featureIdLabel: "siolaBuildingL0",
   })
 );
 const siolaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
     show: true,
     featureIdLabel: "siolaBuildingL1",
   })
 );
 const siolaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
     show: true,
     featureIdLabel: "siolaBuildingL2",
   })
 );
 const siolaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
     show: true,
     featureIdLabel: "siolaBuildingL3",
   })
 );
 const siolaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
     show: true,
     featureIdLabel: "siolaBuildingL4",
   })
 );
 const siolaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
-  }, )
+  })
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2458530)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2426318)
 );
 
 siolaLegal.style = setColorStyle;
@@ -2651,82 +2651,82 @@ firstCamera();
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376891, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376896, {
     show: true,
     featureIdLabel: "balaiBuildingL0",
   })
 );
 const balaiBuildingBasement = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376892, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376894, {
     show: true,
     featureIdLabel: "balaiBuildingBasement",
   })
 );
 const balaiBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376888, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376898, {
     show: true,
     featureIdLabel: "balaiBuildingL1",
   })
 );
 const balaiBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376890, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376900, {
     show: true,
     featureIdLabel: "balaiBuildingL2",
   })
 );
 
 const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2458532)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2423897)
 );
 
 balaiLegal.style = setColorStyle;
 
 // Get Rusunawa   #########################################################################################
 const rusunawaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376563, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376598, {
     show: true,
     featureIdLabel: "rusunawaBuildingL0",
   })
 );
 const rusunawaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376564, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376599, {
     show: true,
     featureIdLabel: "rusunawaBuildingL1",
   })
 );
 const rusunawaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376565, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376600, {
     show: true,
     featureIdLabel: "rusunawaBuildingL2",
   })
 );
 const rusunawaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376566, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376601, {
     show: true,
     featureIdLabel: "rusunawaBuildingL3",
   })
 );
 const rusunawaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376567, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376602, {
     show: true,
     featureIdLabel: "rusunawaBuildingL4",
   })
 );
 const rusunawaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376603, {
     show: true,
     featureIdLabel: "rusunawaBuildingL5",
   }, )
 );
 const rusunawaBuildingL6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376604, {
     show: true,
     featureIdLabel: "rusunawaBuildingL6",
   }, )
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2458533)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2422063)
 );
 
 rusunawaLegal.style = setColorStyle;
@@ -2737,6 +2737,7 @@ rusunawaLegal.style = setColorStyle;
 $(function () {
   $(".loader-container").removeClass("d-none");
 });
+
 
 
 // Buat koleksi bidang pemotongan (clipping plane collection) SIOLA
@@ -2805,6 +2806,8 @@ $("#reset-clip").click(function (e) {
   $("#sliderY").val(90);
   $("#sliderZ").val(90);
 });
+
+
 
 // handle autocomplete seacrh
 $(document).ready(function () {

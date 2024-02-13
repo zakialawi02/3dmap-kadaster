@@ -2806,6 +2806,7 @@ $("#reset-clip").click(function (e) {
   $("#sliderZ").val(90);
 });
 
+
 // handle autocomplete seacrh
 $(document).ready(function () {
   const suggestions = ["Siola L0", "Siola L1", "Siola L2", "Siola L3", "Siola L4", "Siola L5", "Siola L1.1", "Siola L1.2", "Siola L1.3", "Siola L1.4", "Siola L1.5", "Siola L1.6", "Siola L1.7", "Siola L1.8", "Siola L1.9", "Siola L1.10", "Siola L2.1", "Siola L2.2", "Siola L2.3", "Siola L2.4", "Siola L2.5", "Siola L2.6", "Siola L2.7", "Siola L3.1", "Siola L3.2", "Siola L3.3", "Siola L3.4", "Siola L3.5", "Siola L3.6", "Siola L3.7", "Siola L4.1", "Siola L4.2", "Siola L4.3", "Siola L5.1", "Siola"];

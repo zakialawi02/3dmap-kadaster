@@ -14,6 +14,16 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table rrrcadastre.critics
+CREATE TABLE IF NOT EXISTS `critics` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `critics` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table rrrcadastre.critics: ~0 rows (approximately)
+
 -- Dumping structure for table rrrcadastre.linked_uri
 CREATE TABLE IF NOT EXISTS `linked_uri` (
   `parcel_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -24,14 +34,14 @@ CREATE TABLE IF NOT EXISTS `linked_uri` (
   CONSTRAINT `FK_linked_uri_uri_table` FOREIGN KEY (`id_keyword`) REFERENCES `uri_table` (`id_keyword`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre.linked_uri: ~0 rows (approximately)
+-- Dumping data for table rrrcadastre.linked_uri: ~6 rows (approximately)
 REPLACE INTO `linked_uri` (`parcel_id`, `id_keyword`) VALUES
 	('3578071002010101', 20),
 	('3578071002010102', 20),
 	('3578071002010102', 9),
-	('357807100201BT', 20),
 	('357807100201GSB', 20),
-	('357807100201GSB', 9);
+	('357807100201GSB', 9),
+	('357807100201BT', 20);
 
 -- Dumping structure for table rrrcadastre.parcel_table
 CREATE TABLE IF NOT EXISTS `parcel_table` (
@@ -40,8 +50,10 @@ CREATE TABLE IF NOT EXISTS `parcel_table` (
   `parcel_name` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `parcel_occupant` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `parcel_id` (`parcel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=921708 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `parcel_id` (`parcel_id`),
+  KEY `FK_parcel_table_residents_table` (`parcel_occupant`),
+  CONSTRAINT `FK_parcel_table_residents_table` FOREIGN KEY (`parcel_occupant`) REFERENCES `residents_table` (`id_resident`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=921709 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table rrrcadastre.parcel_table: ~181 rows (approximately)
 REPLACE INTO `parcel_table` (`id`, `parcel_id`, `parcel_name`, `parcel_occupant`) VALUES
@@ -220,7 +232,7 @@ REPLACE INTO `parcel_table` (`id`, `parcel_id`, `parcel_name`, `parcel_occupant`
 	(849276, '3578071002010403', 'L4.3 Dispusip', NULL),
 	(850924, '3578071002010501', 'L5.1 Parking', NULL),
 	(886033, '3578071002010402', 'L4.2 Shared Space', NULL),
-	(910222, '357807100201BT', 'Upperground space', 5),
+	(910222, '357807100201BT', 'Upperground space', 15),
 	(913870, '3578071002010207', 'L2.7 Ramp', NULL),
 	(914699, '3578071002010301', 'L3.1 Jembatan', NULL),
 	(915961, '357807100201BB', 'Underground space', NULL),
@@ -230,20 +242,26 @@ REPLACE INTO `parcel_table` (`id`, `parcel_id`, `parcel_name`, `parcel_occupant`
 -- Dumping structure for table rrrcadastre.residents_table
 CREATE TABLE IF NOT EXISTS `residents_table` (
   `id_resident` int NOT NULL AUTO_INCREMENT,
-  `resident_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `resident_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `resident_type` enum('Individual','Entity') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resident_entity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resident_code` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `resident_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `job_title` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resident_job` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resident_religion` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `phone_number` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resident_address` json DEFAULT NULL,
   `started` date DEFAULT NULL,
   `finished` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_resident`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre.residents_table: ~0 rows (approximately)
-REPLACE INTO `residents_table` (`id_resident`, `resident_code`, `resident_name`, `phone_number`, `started`, `finished`, `created_at`, `updated_at`) VALUES
-	(4, '3453245235', 'Ahmad Zaki Alawi', '085707625406', '2024-02-01', '2025-02-01', NULL, '2024-02-05 15:49:39'),
-	(5, '35345335387', 'Im User 2', '08254867856', '2024-02-03', '2024-02-23', NULL, '2024-02-05 16:07:29');
+-- Dumping data for table rrrcadastre.residents_table: ~2 rows (approximately)
+REPLACE INTO `residents_table` (`id_resident`, `resident_type`, `resident_entity`, `resident_code`, `resident_name`, `job_title`, `resident_job`, `resident_religion`, `phone_number`, `resident_address`, `started`, `finished`, `created_at`, `updated_at`) VALUES
+	(4, 'Individual', '', '3453245235', 'Ahmad', NULL, NULL, NULL, '085707625406', NULL, NULL, '2025-02-01', NULL, '2024-02-05 15:49:39'),
+	(15, 'Entity', 'ASASDA', 'B', 'Ahmad Zaki Alawi', '', NULL, NULL, '085707625406', '{"city": "E", "district": "D", "province": "F"}', '2024-02-08', '2024-02-16', NULL, '2024-02-09 13:35:31');
 
 -- Dumping structure for table rrrcadastre.uri_table
 CREATE TABLE IF NOT EXISTS `uri_table` (
@@ -254,9 +272,9 @@ CREATE TABLE IF NOT EXISTS `uri_table` (
   `uri_content` varchar(5000) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_keyword`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre.uri_table: ~0 rows (approximately)
+-- Dumping data for table rrrcadastre.uri_table: ~4 rows (approximately)
 REPLACE INTO `uri_table` (`id_keyword`, `word_name`, `slug`, `isUrl`, `uri_content`) VALUES
 	(9, 'Tanah Kosong', 'tanah-kosong', 'true', 'http://my.its.ac.id/'),
 	(20, 'Tes Lorem', 'altest', 'false', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><figure class="image"><img style="aspect-ratio:1742/1062;" src="/assets/img/uploads/1705933264_rtaImage3.png" width="1742" height="1062"></figure><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>&nbsp;</p><p>alert("??")</p><p>&lt;script&gt;alert("?")&lt;/script&gt;</p><p>alert("?")</p>'),
@@ -272,11 +290,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre.users: ~0 rows (approximately)
+-- Dumping data for table rrrcadastre.users: ~2 rows (approximately)
 REPLACE INTO `users` (`id`, `email`, `password`, `created_at`, `updated_at`) VALUES
-	(1, 'admin@mail.com', '$2y$10$bG4QsXup/sKlS0tD8Jv5l.NcgoUYP0ZH3S7B4X1LDIFA1ZhOE9sOu', '2024-01-27 14:11:39', '2024-01-28 01:45:41');
+	(1, 'admin@mail.com', '$2y$10$bG4QsXup/sKlS0tD8Jv5l.NcgoUYP0ZH3S7B4X1LDIFA1ZhOE9sOu', '2024-01-27 14:11:39', '2024-01-28 01:45:41'),
+	(47, 'yantobudisusanto@gmail.com', '$2y$10$syLTNdl/hH288qSb9WqzCOjscBT1hLWPJN3R5ikH4P2g6FJDjNhXK', '2024-02-06 02:55:44', '2024-02-06 02:55:44');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -53,7 +53,7 @@
 
 <body>
     <!-- HEADER -->
-    <?php include 'assets/view/dashboard_header.php' ?>
+    <?php include 'assets/view/viewer_header.php' ?>
 
     <main>
         <div class="fof">

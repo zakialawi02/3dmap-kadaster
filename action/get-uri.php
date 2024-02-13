@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     } else {
         // get data uri_table
-        $sql = "SELECT * FROM uri_table";
+        $sql = "SELECT * FROM uri_table ORDER BY word_name";
         $result = $conn->query($sql);
         $uri_table = [];
         if ($result->num_rows > 0) {
