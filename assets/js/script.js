@@ -76,12 +76,24 @@ $(document).ready(function () {
   $("#clip-toggle").click(function (e) {
     $(".clip-panel").toggleClass('clip-panel-show');
     $("#clip-toggle").toggleClass('selected');
-    $("#sliderX").val(90);
-    $("#sliderY").val(90);
-    $("#sliderZ").val(90);
+    $(".clip-item input[type='range']").val(90);
   });
 });
 
+// clip toggle
+toggleSliderClipGroup();
+$("input[name='flexRadioDefault']").change(function () {
+  toggleSliderClipGroup();
+});
+
+function toggleSliderClipGroup() {
+  // Sembunyikan semua grup slider
+  $(".clip-item > div").hide();
+  // Tampilkan grup slider yang sesuai dengan radio box yang terchecked
+  $("." + $("input[name='flexRadioDefault']:checked").val()).show();
+}
+
+// Minimap toggle
 $("#minimap").click(function (e) {
   $(".minimap-panel").toggleClass('minimap-panel-show');
   $("#minimap").toggleClass('selected');

@@ -1387,24 +1387,54 @@
 
     <div class="clip-panel card">
       <div class="card-body p-2">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="b1" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="clsiola" checked>
         <label class="form-check-label" for="flexRadioDefault2">Siola</label>
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="b2">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="clbalai">
         <label class="form-check-label" for="flexRadioDefault3">Balai Pemuda</label>
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="b3">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="clrusunawa">
         <label class="form-check-label" for="flexRadioDefault4">Rusunawa Buring</label>
         <div class="clip-item m-1 p-1">
-          <div>
-            <label for="sliderX">Slider X:</label>
-            <input type="range" id="sliderX" min="-90" max="90" step="0.05" value="90">
+          <div class="slider-group clsiola">
+            <div>
+              <label for="sliderX">Slider X:</label>
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderY">Slider Y:</label>
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderZ">Slider Z:</label>
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="90">
+            </div>
           </div>
-          <div>
-            <label for="sliderY">Slider Y:</label>
-            <input type="range" id="sliderY" min="-90" max="90" step="0.05" value="90">
+          <div class="slider-group clbalai" style="display:none;">
+            <div>
+              <label for="sliderX">Slider X:</label>
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderY">Slider Y:</label>
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderZ">Slider Z:</label>
+              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="90">
+            </div>
           </div>
-          <div>
-            <label for="sliderZ">Slider Z:</label>
-            <input type="range" id="sliderZ" min="-90" max="90" step="0.05" value="90">
+          <div class="slider-group clrusunawa" style="display:none;">
+            <div>
+              <label for="sliderX">Slider X:</label>
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderY">Slider Y:</label>
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+            </div>
+            <div>
+              <label for="sliderZ">Slider Z:</label>
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="90">
+            </div>
           </div>
           <button id="reset-clip">Reset</button>
         </div>

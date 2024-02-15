@@ -2771,7 +2771,7 @@ $(function () {
 
 
 // Buat koleksi bidang pemotongan (clipping plane collection) SIOLA
-var clippingPlanes = new Cesium.ClippingPlaneCollection({
+let siolaClippingPlanes = new Cesium.ClippingPlaneCollection({
   planes: [
     new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
@@ -2780,62 +2780,116 @@ var clippingPlanes = new Cesium.ClippingPlaneCollection({
   edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
   edgeColor: Cesium.Color.RED
 });
-// Terapkan koleksi bidang pemotongan pada objek 3D Tileset
-updateClip2Model();
+let balaiClippingPlanes = new Cesium.ClippingPlaneCollection({
+  planes: [
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+  ],
+  edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
+  edgeColor: Cesium.Color.RED
+});
+let rusunawaClippingPlanes = new Cesium.ClippingPlaneCollection({
+  planes: [
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+  ],
+  edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
+  edgeColor: Cesium.Color.RED
+});
 
-function updateClip2Model() {
-  siolaBuildingL0.clippingPlanes = clippingPlanes;
-  siolaBuildingL1.clippingPlanes = clippingPlanes;
-  siolaBuildingL2.clippingPlanes = clippingPlanes;
-  siolaBuildingL3.clippingPlanes = clippingPlanes;
-  siolaBuildingL4.clippingPlanes = clippingPlanes;
-  siolaBuildingL5.clippingPlanes = clippingPlanes;
+// Daftar tileset dan pemotongan untuk setiap jenis bangunan
+let tilesetsList = {
+  "clsiola": {
+    tileset: [siolaBuildingL0, siolaBuildingL1, siolaBuildingL2, siolaBuildingL3, siolaBuildingL4, siolaBuildingL5],
+    clippingPlanes: siolaClippingPlanes
+  },
+  "clbalai": {
+    tileset: [balaiBuildingL0, balaiBuildingBasement, balaiBuildingL1, balaiBuildingL2],
+    clippingPlanes: balaiClippingPlanes
+  },
+  "clrusunawa": {
+    tileset: [rusunawaBuildingL0, rusunawaBuildingL1, rusunawaBuildingL2, rusunawaBuildingL3, rusunawaBuildingL4, rusunawaBuildingL5, rusunawaBuildingL6],
+    clippingPlanes: rusunawaClippingPlanes
+  },
+};
+
+// Fungsi untuk membuat ClippingPlaneCollection dengan nilai slider tertentu
+function createClippingPlanes(sliderX, sliderY, sliderZ) {
+  return new Cesium.ClippingPlaneCollection({
+    planes: [
+      new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), sliderX),
+      new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), sliderY),
+      new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, 1.0), sliderZ)
+    ],
+    edgeWidth: 0.0,
+    edgeColor: Cesium.Color.RED
+  });
 }
-// Event listener for slider X using jQuery
-$('#sliderX').on('input', function () {
-  var xValue = parseFloat($(this).val());
-  clippingPlanes.get(0).distance = xValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(1).distance = -50; // Y-plane
-  clippingPlanes.get(2).distance = -50; // Z-plane
-  $('#sliderY').val(90);
-  $('#sliderZ').val(90);
-  updateClip2Model();
+
+// Fungsi untuk memperbarui pemotongan pada tileset berdasarkan nilai slider
+function updateClippingPlanes(tilesetInfo, sliderX, sliderY, sliderZ) {
+  const clippingPlanes = tilesetInfo.clippingPlanes;
+  clippingPlanes.get(0).distance = sliderX;
+  clippingPlanes.get(1).distance = sliderY;
+  clippingPlanes.get(2).distance = sliderZ;
+}
+$(".clip-item input[type='range']").on("input", function () {
+  // Dapatkan tileset yang sesuai berdasarkan jenis bangunan terpilih
+  let selectedRadioValue = $("input[name='flexRadioDefault']:checked").val();
+  let tilesetInfo = tilesetsList[selectedRadioValue];
+  // Perbarui pemotongan pada setiap tileset dengan nilai slider yang sesuai
+  let sliderGroup = $("." + selectedRadioValue);
+  let sliderXVal = sliderGroup.find('.sliderX').val();
+  let sliderYVal = sliderGroup.find('.sliderY').val();
+  let sliderZVal = sliderGroup.find('.sliderZ').val();
+  // Perbarui pemotongan pada setiap tileset yang terkait
+  updateClippingPlanes(tilesetInfo, sliderXVal, sliderYVal, sliderZVal);
 });
 
-// Event listener for slider Y using jQuery
-$('#sliderY').on('input', function () {
-  var yValue = parseFloat($(this).val());
-  clippingPlanes.get(1).distance = yValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(0).distance = -50; // X-plane
-  clippingPlanes.get(2).distance = -50; // Z-plane
-  $('#sliderX').val(90);
-  $('#sliderZ').val(90);
-  updateClip2Model();
-});
-
-// Event listener for slider Z using jQuery
-$('#sliderZ').on('input', function () {
-  var zValue = parseFloat($(this).val());
-  clippingPlanes.get(2).distance = zValue;
-  // Reset the other planes to a distance that allows visibility
-  clippingPlanes.get(0).distance = -50; // X-plane
-  clippingPlanes.get(1).distance = -50; // Y-plane
-  $('#sliderX').val(90);
-  $('#sliderY').val(90);
-  updateClip2Model();
-});
+function toggleSliderClipGroup() {
+  // Sembunyikan semua grup slider
+  $(".clip-item > div").hide();
+  // Tampilkan grup slider yang sesuai dengan radio box yang terchecked
+  let selectedRadioValue = $("input[name='flexRadioDefault']:checked").val();
+  $("." + selectedRadioValue).show();
+}
 
 $("#reset-clip").click(function (e) {
-  clippingPlanes.get(0).distance = 50; // X-plane
-  clippingPlanes.get(1).distance = 50; // Y-plane
-  clippingPlanes.get(2).distance = 50; // Z-plane
-  updateClip2Model();
-  $("#sliderX").val(90);
-  $("#sliderY").val(90);
-  $("#sliderZ").val(90);
+  resetClipTilesets();
 });
+
+function resetClipTilesets(first = false) {
+  console.log("LOG");
+  // Iterasi melalui semua jenis bangunan
+  Object.keys(tilesetsList).forEach(function (buildingType) {
+    let tilesetInfo = tilesetsList[buildingType];
+    // Dapatkan nilai maksimum dan minimum dari elemen input
+    let defaultSliderX = parseFloat($("." + buildingType).find('.sliderX').attr('max'));
+    let defaultSliderY = parseFloat($("." + buildingType).find('.sliderY').attr('min'));
+    let defaultSliderZ = parseFloat($("." + buildingType).find('.sliderZ').attr('min'));
+    if (first == 1) {
+      console.log("FIRST");
+      // init nilai default dari clippingtileset
+      tilesetInfo.tileset.forEach(function (tileset) {
+        tileset.clippingPlanes = tilesetInfo.clippingPlanes;
+      });
+    } else {
+      console.log("TES");
+      const clippingPlanes = tilesetInfo.clippingPlanes;
+      clippingPlanes.get(0).distance = defaultSliderX;
+      clippingPlanes.get(1).distance = defaultSliderY;
+      clippingPlanes.get(2).distance = defaultSliderZ;
+    }
+    // Setel nilai slider pada tampilan ke nilai default
+    $("." + buildingType).find('.sliderX').val(defaultSliderX);
+    $("." + buildingType).find('.sliderY').val(defaultSliderY);
+    $("." + buildingType).find('.sliderZ').val(defaultSliderZ);
+  });
+}
+
+
 
 // handle autocomplete seacrh
 $(document).ready(function () {
@@ -2992,4 +3046,5 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $(".loader-container").addClass("d-none");
+  resetClipTilesets(1);
 });
