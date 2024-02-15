@@ -189,17 +189,19 @@ header .nav-menu .hamb {
 }
 
 /* clip panel */
-.clip-panel {
+.clip-panel,
+.measure-panel {
   position: absolute;
   margin-top: 4rem;
   top: -15rem;
-  right: 0;
+  right: 10px;
   z-index: 1;
   transition: left 0.5s ease;
 }
 
-.clip-panel-show {
-  top: 0;
+.clip-panel-show,
+.measure-panel-show {
+  top: 10px;
 }
 
 .clip-item {

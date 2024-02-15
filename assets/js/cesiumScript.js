@@ -371,9 +371,13 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       clickHandler(movement);
       $(".property-panel").removeClass("property-panel-show");
       return;
-    } else {
-      $(".property-panel").addClass("property-panel-show");
     }
+
+    if (typeof pickedFeature.getPropertyIds !== 'function') {
+      console.error("Error: pickedFeature doesn't have a getPropertyIds function.");
+      return;
+    }
+    $(".property-panel").addClass("property-panel-show");
     $("#property-content").html(createPickedFeatureDescription(pickedFeature));
     if (silhouetteGreen.selected[0] === pickedFeature) {
       return;
@@ -387,12 +391,12 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     // viewer.selectedEntity = selectedEntity;
     // selectedEntity.description = createPickedFeatureDescription(pickedFeature);
 
-    // const propertyIds = pickedFeature.getPropertyIds();
-    // const length = propertyIds.length;
-    // for (let i = 0; i < length; ++i) {
-    //   const propertyId = propertyIds[i];
-    //   console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
-    // }
+    const propertyIds = pickedFeature.getPropertyIds();
+    const length = propertyIds.length;
+    for (let i = 0; i < length; ++i) {
+      const propertyId = propertyIds[i];
+      console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
+    }
 
 
     const objectId = pickedFeature.getProperty("Tag");
@@ -543,7 +547,7 @@ $(document).on('click', '#btnDetailOccupant', function (e) {
         `</tbody></table>`;
       $('#detailOccupant .modal-body').html(table);
       const detailOccupantPDF = $(`<button type="button" id="detailOccupantPDF" class="btn asbn btn-primary" data-occupant="${data.id_resident}" data-parcel="${data.parcel_id}">PDF file <i class="bi bi-file-earmark-person-fill"></i></button>`);
-      $('#detailOccupant .modal-body').append(detailOccupantPDF);
+      // $('#detailOccupant .modal-body').append(detailOccupantPDF);
     },
     error: function (error) {
       $('#detailOccupant .modal-body').html("Error!!");
@@ -2126,6 +2130,33 @@ $("#zoomToRusunawaLegal_5a25").on('click', function () {
 $("#zoomToRusunawaLegal_5a26").on('click', function () {
   setTransparentByobject_id(rusunawaLegal, "618232");
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
+});
+
+
+// Measure Toggle Tool
+var measure = false;
+const tool = new MeasureTool(viewer, {})
+$("#meassure").click(function (e) {
+  $(".measure-panel").toggleClass('measure-panel-show');
+  $("#meassure").toggleClass('selected');
+  if ($(".measure-panel").hasClass('measure-panel-show')) {
+    measure = true;
+  } else {
+    measure = false;
+    tool.clearAll();
+  }
+});
+$("#mdistance").click(function (e) {
+  measure = true;
+  measure ? tool.activate('distance') : null;
+});
+$("#marea").click(function (e) {
+  measure = true;
+  measure ? tool.activate('area') : null;
+});
+$("#mclear").click(function (e) {
+  tool.clearAll()
+  measure = false;
 });
 
 

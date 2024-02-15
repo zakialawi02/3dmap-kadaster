@@ -1373,6 +1373,18 @@
       </div>
     </div>
 
+    <div class="measure-panel card">
+      <div class="card-body p-2">
+        <button id="mdistance" type="button" class="asbn cesium-button">distance (horizontal)</button>
+        <button id="marea" type="button" class="asbn cesium-button">area (horizontal)</button>
+        <button id="mclear" type="button" class="asbn cesium-button">clear</button>
+        <div class="">
+          <span>Left-click to measure.</span><br>
+          <span>Right-click to stop measuring.</span>
+        </div>
+      </div>
+    </div>
+
     <div class="clip-panel card">
       <div class="card-body p-2">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="b1" checked>
@@ -1413,6 +1425,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
 
+  <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>
 
 
