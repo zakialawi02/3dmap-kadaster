@@ -2636,9 +2636,8 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2426318)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2455326)
 );
-
 siolaLegal.style = setColorStyle;
 
 
@@ -2676,9 +2675,8 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
 );
 
 const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2423897)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2444120)
 );
-
 balaiLegal.style = setColorStyle;
 
 // Get Rusunawa   #########################################################################################
@@ -2726,9 +2724,8 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2422063)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2443669)
 );
-
 rusunawaLegal.style = setColorStyle;
 
 

@@ -109,7 +109,7 @@
 
   <!-- kritik dan saran -->
   <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
-    <button type="button" class="cesium-button" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
+    <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
   </div>
   <!-- Modal -->
   <div class="modal fade welcomemodal" id="critics" tabindex="-1" aria-labelledby="criticsLabel" aria-hidden="true">
@@ -122,7 +122,7 @@
         <div class="modal-body">
           <form id="mycritics" action="/critics/_critics.php" method="post" target="_blank">
             <div class="mb-3 p-1">
-              <textarea name="critics" rows="10" placeholder="Typing Here..." style="width: 100%;" autofocus="on" required></textarea>
+              <textarea name="critics" rows="10" placeholder="Typing Here..." style="width: 100%;" autofocus required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
@@ -132,15 +132,6 @@
   </div>
 
   <main>
-    <!-- <div class="" style="position: absolute; top:4rem; z-index:10000000;">
-      <button id="distance" type="button" class="cesium-button">Distance</button>
-      <button id="component-Distance" type="button" class="cesium-button">Distance</button>
-      <button id="polyline-Distance" type="button" class="cesium-button">Distance</button>
-      <button id="horizontal-Distance" type="button" class="cesium-button">Distance</button>
-      <button id="vertical-Distance" type="button" class="cesium-button">Distance</button>
-    </div> -->
-
-
     <!-- Modal -->
     <div class="modal fade" id="detailOccupant" tabindex="-1" aria-labelledby="detailOccupantLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -1401,11 +1392,11 @@
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
             </div>
           </div>
           <div class="slider-group clbalai" style="display:none;">
@@ -1415,11 +1406,11 @@
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="90">
+              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90">
             </div>
           </div>
           <div class="slider-group clrusunawa" style="display:none;">
@@ -1429,11 +1420,11 @@
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
             </div>
           </div>
           <button id="reset-clip">Reset</button>

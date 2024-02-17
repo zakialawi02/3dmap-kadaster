@@ -134,3 +134,43 @@ function formatCustomDate(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', options);
 }
+
+$(document).ready(function () {
+  // Cari modal element
+  const modalCritics = new bootstrap.Modal(document.getElementById('critics'), {
+    keyboard: true
+  });
+  // Event listener untuk saat modal ditampilkan
+  modalCritics._element.addEventListener('shown.bs.modal', function () {
+    // Tambahkan parameter ke URL jika tidak ada
+    if (!window.location.search.includes('showCritics&Suggestions=true')) {
+      history.pushState(null, null, window.location.pathname + '?showCritics&Suggestions=true');
+    }
+  });
+  // Event listener untuk saat modal ditutup
+  modalCritics._element.addEventListener('hidden.bs.modal', function () {
+    // Hapus parameter dari URL jika ada
+    if (window.location.search.includes('showCritics&Suggestions=true')) {
+      const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+      window.history.pushState({
+        path: newurl
+      }, '', newurl);
+    }
+  });
+  // Event listener untuk memantau perubahan pada riwayat perambanan
+  window.addEventListener('popstate', function (event) {
+    // Periksa apakah parameter showCritics&Suggestions=true ada di URL
+    if (window.location.search.includes('showCritics&Suggestions=true')) {
+      // Tampilkan modal secara manual jika parameter ada
+      modalCritics.show();
+    } else {
+      // Sembunyikan modal secara manual jika parameter tidak ada
+      modalCritics.hide();
+    }
+  });
+  // Periksa apakah parameter showCritics&Suggestions=true ada di URL saat halaman dimuat
+  if (window.location.search.includes('showCritics&Suggestions=true')) {
+    // Tampilkan modal secara manual jika parameter ada
+    modalCritics.show();
+  }
+});
