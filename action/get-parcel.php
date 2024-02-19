@@ -25,6 +25,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if ($result->num_rows > 0) {
             $parcel_table = $result->fetch_assoc();
         }
+    } elseif (isset($_GET['get']) && !empty($_GET['get'])) {
+        $sql = "SELECT p.*, r.*,
+                JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    'id_keyword', u.id_keyword,
+                    'word_name', u.word_name,
+                    'slug', u.slug,
+                    'isUrl', u.isUrl
+                    )
+                ) AS tag
+                FROM parcel_table p
+                LEFT JOIN linked_uri lu ON p.parcel_id = lu.parcel_id
+                LEFT JOIN residents_table r ON p.parcel_occupant = r.id_resident
+                LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
+                GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant";
+        $result = $conn->query($sql);
+        $parcel_table = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $parcel_table[] = $row;
+            }
+        }
+        $parcel_table = json_encode($parcel_table);
+        header('Content-Type: application/json');
+        echo $parcel_table;
     } else {
         // get data parcel_table
         $sql = "SELECT p.*, r.*,

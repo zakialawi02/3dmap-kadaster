@@ -1,8 +1,8 @@
 // inisiasi cesium token
-// Cesium.Ion.defaultAccessToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+// Cesium.Ion.defaultAccessToken =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
@@ -527,14 +527,14 @@ $(document).on('click', '#btnDetailOccupant', function (e) {
     type: 'GET',
     dataType: "json",
     success: function (data) {
-      // console.log(data);
+      console.log(data);
       const address = JSON.parse(data.resident_address);
       const city = address ? (address.city ? address.city : '-') : '-';
       const district = address ? (address.district ? address.district : '-') : '-';
       const province = address ? (address.province ? address.province : '-') : '-';
       const table =
         `<table class="table"><tbody>` +
-        `<tr> <th>${data.resident_type === "Individual" ? 'Individual' : data.resident_type === "Entity" ? 'Institution/Group' : ''}</th> </tr>` +
+        `<tr> <th>${data.resident_type == "Individual" ? "Individual" : data.resident_type == "Entity" ? "Institution/Group" : ''}</th> </tr>` +
         `${data.resident_type === "Entity" ? `<tr><th>Name of Group/Institution</th><td style="width: 1%;">:</td><td>${data.resident_entity ?? "-"}</td></tr>` : ''}` +
         `<tr><th>Name of Person</th><td style="width: 1%;">:</td><td>${data.resident_name}</td></tr>` +
         `<tr><th>Identicifation Number (NIK)</th><td style="width: 1%;">:</td><td>${data.resident_code}</td></tr>` +
@@ -738,16 +738,16 @@ $("#zoomToSiolaLegal_5all").on('click', function () {
 });
 
 $("#zoomToSiolaLegal_gsb").on('click', function () {
+  setTransparentByobject_id(siolaLegal, "921704");
+  zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
+});
+$("#zoomToSiolaLegal_bt").on('click', function () {
   setTransparentByobject_id(siolaLegal, "910222");
   zoomToLocation(60, 65, 112.7364636251925, -7.257092539825164, -20, 0);
 });
-$("#zoomToSiolaLegal_bt").on('click', function () {
+$("#zoomToSiolaLegal_bb").on('click', function () {
   setTransparentByobject_id(siolaLegal, "915961");
   zoomToLocation(60, 200, 112.7343253773387, -7.258348227236101, -20, 0);
-});
-$("#zoomToSiolaLegal_bb").on('click', function () {
-  setTransparentByobject_id(siolaLegal, "921704");
-  zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
 });
 
 $("#zoomToSiolaLegal_1a1").on('click', function () {
@@ -2630,45 +2630,46 @@ $("#resetTransparent").click(function () {
 
 // Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
     show: true,
     featureIdLabel: "siolaBuildingL0",
   })
 );
 const siolaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
     show: true,
     featureIdLabel: "siolaBuildingL1",
   })
 );
 const siolaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
     show: true,
     featureIdLabel: "siolaBuildingL2",
   })
 );
 const siolaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
     show: true,
     featureIdLabel: "siolaBuildingL3",
   })
 );
 const siolaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
     show: true,
     featureIdLabel: "siolaBuildingL4",
   })
 );
 const siolaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
-  })
+  }, )
 );
 
 const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2455326)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2465320)
 );
+
 siolaLegal.style = setColorStyle;
 
 
@@ -2681,82 +2682,84 @@ firstCamera();
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376896, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376891, {
     show: true,
     featureIdLabel: "balaiBuildingL0",
   })
 );
 const balaiBuildingBasement = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376894, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376892, {
     show: true,
     featureIdLabel: "balaiBuildingBasement",
   })
 );
 const balaiBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376898, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376888, {
     show: true,
     featureIdLabel: "balaiBuildingL1",
   })
 );
 const balaiBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376900, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376890, {
     show: true,
     featureIdLabel: "balaiBuildingL2",
   })
 );
 
 const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2444120)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2465321)
 );
+
 balaiLegal.style = setColorStyle;
 
 // Get Rusunawa   #########################################################################################
 const rusunawaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376598, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376563, {
     show: true,
     featureIdLabel: "rusunawaBuildingL0",
   })
 );
 const rusunawaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376599, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376564, {
     show: true,
     featureIdLabel: "rusunawaBuildingL1",
   })
 );
 const rusunawaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376600, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376565, {
     show: true,
     featureIdLabel: "rusunawaBuildingL2",
   })
 );
 const rusunawaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376601, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376566, {
     show: true,
     featureIdLabel: "rusunawaBuildingL3",
   })
 );
 const rusunawaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376602, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376567, {
     show: true,
     featureIdLabel: "rusunawaBuildingL4",
   })
 );
 const rusunawaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376603, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
     show: true,
     featureIdLabel: "rusunawaBuildingL5",
   }, )
 );
 const rusunawaBuildingL6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376604, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
     show: true,
     featureIdLabel: "rusunawaBuildingL6",
   }, )
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2443669)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2465322)
 );
+
 rusunawaLegal.style = setColorStyle;
 
 
@@ -2887,153 +2890,764 @@ function resetClipTilesets(first = false) {
 
 // handle autocomplete seacrh
 $(document).ready(function () {
-  const suggestions = ["Siola L0", "Siola L1", "Siola L2", "Siola L3", "Siola L4", "Siola L5", "Siola L1.1", "Siola L1.2", "Siola L1.3", "Siola L1.4", "Siola L1.5", "Siola L1.6", "Siola L1.7", "Siola L1.8", "Siola L1.9", "Siola L1.10", "Siola L2.1", "Siola L2.2", "Siola L2.3", "Siola L2.4", "Siola L2.5", "Siola L2.6", "Siola L2.7", "Siola L3.1", "Siola L3.2", "Siola L3.3", "Siola L3.4", "Siola L3.5", "Siola L3.6", "Siola L3.7", "Siola L4.1", "Siola L4.2", "Siola L4.3", "Siola L5.1", "Siola"];
-  $("#searchInput").keyup(function (e) {
-    const inputValue = $("#searchInput").val().toLowerCase();
-    // Hide autocomplete results if input empty
-    if (!inputValue.trim()) {
-      $("#autocompleteResults").html("");
-      return;
+  async function fetchSuggestionsFromDatabase() {
+    try {
+      const response = await fetch(`/action/get-parcel.php?get=get`); // Replace with your actual API endpoint
+      if (!response.ok) {
+        throw new Error('Error fetching suggestions');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+      throw error; // You may want to handle this error further depending on your needs
     }
-    const filteredSuggestions = suggestions.filter(suggestion =>
-      suggestion.toLowerCase().includes(inputValue)
-    );
-    // Generate HTML for autocomplete results
-    const resultsHTML = filteredSuggestions.map(suggestion =>
-      `<div class="autocomplete-item">${suggestion}</div>`
-    ).join("");
-    $("#autocompleteResults").html(resultsHTML);
-    // Attach click event to each autocomplete item
-    $(".autocomplete-item").on("click", function () {
-      selectSuggestion($(this).text());
-    });
-  });
-
-  function selectSuggestion(value) {
-    $("#searchInput").val(value);
-    $("#autocompleteResults").html("");
-
-    // Call specific function based on selected suggestion
-    getSearchResult(value);
   }
 
-  $("#searchButton").click(function (e) {
-    selectSuggestion($("#searchInput").val())
-  });
+  const suggestionsData = [{
+    id: "1",
+    data: "Siola"
+  }, {
+    id: "2",
+    data: "Balai Pemuda"
+  }, {
+    id: "3",
+    data: "Rusunawa Buring"
+  }, {
+    id: "siola0floor",
+    data: "Siola underground floor"
+  }, {
+    id: "siola1floor",
+    data: "Siola 1st floor"
+  }, {
+    id: "siola2floor",
+    data: "Siola 2nd floor"
+  }, {
+    id: "siola3floor",
+    data: "Siola 3rd floor"
+  }, {
+    id: "siola4floor",
+    data: "Siola 4th floor"
+  }, {
+    id: "siola5floor",
+    data: "Siola 5th floor"
+  }, {
+    id: "balai0floor",
+    data: "Balai Pemuda underground floor"
+  }, {
+    id: "balai1floor",
+    data: "Balai Pemuda 1st floor"
+  }, {
+    id: "rusun1floor",
+    data: "Rusunawa Buring 1st floor"
+  }, {
+    id: "rusun2floor",
+    data: "Rusunawa Buring 2nd floor"
+  }, {
+    id: "rusun3floor",
+    data: "Rusunawa Buring 3rd floor"
+  }, {
+    id: "rusun4floor",
+    data: "Rusunawa Buring 4th floor"
+  }, {
+    id: "rusun5floor",
+    data: "Rusunawa Buring 5th floor"
+  }, {
+    id: "rusun6floor",
+    data: "Rusunawa Buring Roof"
+  }, ];
+  console.log(suggestionsData);
 
-  function getSearchResult(value) {
-    // Call specific function based on selected suggestion
-    switch (value.toLowerCase()) {
-      case "siola":
-        firstCamera()
+  (async function () {
+    try {
+      const data = await fetchSuggestionsFromDatabase();
+
+      data.forEach(item => {
+        // Push separate objects for data with the same ID
+        suggestionsData.push({
+          id: item.id,
+          data: item.parcel_id
+        });
+        suggestionsData.push({
+          id: item.id,
+          data: item.parcel_name
+        });
+      });
+
+      $("#searchInput").on('input', function (e) {
+        const inputValue = $("#searchInput").val().toLowerCase();
+        // Hide autocomplete results if input empty
+        if (!inputValue.trim() || inputValue == "") {
+          $("#autocompleteResults").html("");
+          return;
+        }
+        const filteredSuggestions = suggestionsData.filter(suggestion =>
+          suggestion.data.toLowerCase().includes(inputValue)
+        );
+        // Generate HTML for autocomplete results
+        const resultsHTML = filteredSuggestions.map(suggestion =>
+          `<div class="autocomplete-item" data-id="${suggestion.id}">${suggestion.data}</div>`
+        ).join("");
+        $("#autocompleteResults").html(resultsHTML);
+        // Attach click event to each autocomplete item
+        $(".autocomplete-item").on("click", function () {
+          const selectedId = $(this).data("id");
+          const selectedText = $(this).text();
+          selectSuggestion(selectedId, selectedText);
+        });
+      });
+
+    } catch (error) {
+      console.log(error);
+      // Handle error if needed
+    }
+  })();
+
+  function selectSuggestion(id, text) {
+    $("#searchInput").val(text);
+    $("#autocompleteResults").html("");
+    console.log("seelct: " + id);
+    switch (String(id)) {
+      case "1":
+        firstCamera();
         break;
-      case "siola l0":
+      case "2":
+        secondCamera();
+        break;
+      case "3":
+        thirdCamera();
+        break;
+      case "siola0floor":
         zoomToTileset(siolaBuildingL0, 15, 90, 150); //tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300
         break;
-      case "siola l1":
+      case "siola1floor":
         zoomToTileset(siolaBuildingL1, -5, 90, 150);
         break;
-      case "siola l2":
+      case "siola2floor":
         zoomToTileset(siolaBuildingL2, -10, 90, 150);
         break;
-      case "siola l3":
+      case "siola3floor":
         zoomToTileset(siolaBuildingL3, -15, 90, 150);
         break;
-      case "siola l4":
+      case "siola4floor":
         zoomToTileset(siolaBuildingL4, -20, 90, 150);
         break;
-      case "siola l5":
+      case "siola5floor":
         zoomToTileset(siolaBuildingL5, -25, 90, 150);
         break;
-      case "siola l1.1":
-        zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
+      case "balai0floor":
+        zoomToTileset(balaiBuildingBasement, -25, 180, 100);
         break;
-      case "siola l1.2":
-        zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
+      case "balai1floor":
+        zoomToTileset(balaiBuildingL1, -25, 180, 100);
         break;
-      case "siola l1.3":
-        zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
+      case "rusun1floor":
+        zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
         break;
-      case "siola l1.4":
-        zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
+      case "rusun2floor":
+        zoomToTileset(rusunawaBuildingL2, -25, 180, 100);
         break;
-      case "siola l1.5":
-        zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
+      case "rusun3floor":
+        zoomToTileset(rusunawaBuildingL3, -25, 180, 100);
         break;
-      case "siola l1.6":
-        zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -20, 0);
+      case "rusun4floor":
+        zoomToTileset(rusunawaBuildingL4, -25, 180, 100);
         break;
-      case "siola l1.7":
-        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
+      case "rusun5floor":
+        zoomToTileset(rusunawaBuildingL5, -25, 180, 100);
         break;
-      case "siola l1.8":
-        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
+      case "rusun6floor":
+        zoomToTileset(rusunawaBuildingL6, -25, 180, 100);
         break;
-      case "siola l1.9":
-        zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
+      case "921704":
+        setTransparentByobject_id(siolaLegal, "921704");
+        zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
         break;
-      case "siola l1.10":
-        zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
+      case "910222":
+        setTransparentByobject_id(siolaLegal, "910222");
+        zoomToLocation(60, 65, 112.7364636251925, -7.257092539825164, -20, 0);
         break;
-      case "siola l2.1":
-        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
+      case "915961":
+        setTransparentByobject_id(siolaLegal, "915961");
+        zoomToLocation(60, 200, 112.7343253773387, -7.258348227236101, -20, 0);
         break;
-      case "siola l2.2":
-        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
-        break;
-      case "siola l2.3":
-        zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
-        break;
-      case "siola l2.4":
-        zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
-        break;
-      case "siola l2.5":
-        zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
-        break;
-      case "siola l2.6":
-        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
-        break;
-      case "siola l2.7":
-        zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
-        break;
-      case "siola l3.1":
-        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
-        break;
-      case "siola l3.2":
-        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
-        break;
-      case "siola l3.3":
-        zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
-        break;
-      case "siola l3.4":
-        zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
-        break;
-      case "siola l3.5":
-        zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
-        break;
-      case "siola l3.6":
-        zoomToLocation(180, 350, 112.73779026382113, -7.255632571893392, -15, 0);
-        break;
-      case "siola l3.7":
-        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
-        break;
-      case "siola l4.1":
-        zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
-        break;
-      case "siola l4.2":
-        zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
-        break;
-      case "siola l4.3":
-        zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
-        break;
-      case "siola l5.1":
+      case "850924":
+        setTransparentByobject_id(siolaLegal, "850924");
         zoomToTileset(siolaBuildingL5, -20, 90, 150);
         break;
+      case "849276":
+        setTransparentByobject_id(siolaLegal, "849276");
+        zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
+        break;
+      case "886033":
+        setTransparentByobject_id(siolaLegal, "886033");
+        zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
+        break;
+      case "849039":
+        setTransparentByobject_id(siolaLegal, "849039");
+        zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
+        break;
+      case "847875":
+        setTransparentByobject_id(siolaLegal, "847875");
+        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
+        break;
+      case "848368":
+        setTransparentByobject_id(siolaLegal, "848368");
+        zoomToLocation(180, 35, 112.73779026382113, -7.255632571893392, -15, 0);
+        break;
+      case "831096":
+        setTransparentByobject_id(siolaLegal, "831096");
+        zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
+        break;
+      case "830288":
+        setTransparentByobject_id(siolaLegal, "848368");
+        zoomToLocation(180, 35, 112.73779026382113, -7.255632571893392, -15, 0);
+        break;
+      case "843868":
+        setTransparentByobject_id(siolaLegal, "843868");
+        zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
+        break;
+      case "831440":
+        setTransparentByobject_id(siolaLegal, "831440");
+        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
+        break;
+      case "914699":
+        setTransparentByobject_id(siolaLegal, "914699");
+        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
+        break;
+      case "913870":
+        setTransparentByobject_id(siolaLegal, "913870");
+        zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
+        break;
+      case "839609":
+        setTransparentByobject_id(siolaLegal, "839609");
+        zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
+        break;
+      case "829098":
+        setTransparentByobject_id(siolaLegal, "829098");
+        zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
+        break;
+      case "829358":
+        setTransparentByobject_id(siolaLegal, "829358");
+        zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
+        break;
+      case "840850":
+        setTransparentByobject_id(siolaLegal, "840850");
+        zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
+        break;
+      case "838147":
+        setTransparentByobject_id(siolaLegal, "838147");
+        zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
+        break;
+      case "841116":
+        setTransparentByobject_id(siolaLegal, "841116");
+        zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
+        break;
+      case "821964":
+        setTransparentByobject_id(siolaLegal, "821964");
+        zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
+        break;
+      case "823865":
+        setTransparentByobject_id(siolaLegal, "823865");
+        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
+        break;
+      case "821077":
+        setTransparentByobject_id(siolaLegal, "821077");
+        zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
+        break;
+      case "820143":
+        setTransparentByobject_id(siolaLegal, "820143");
+        zoomToLocation(180, 20, 112.73774879316747, -7.255707084659419, -20, 0);
+        break;
+      case "919493":
+        setTransparentByobject_id(siolaLegal, "919493");
+        zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
+        break;
+      case "820815":
+        setTransparentByobject_id(siolaLegal, "820815");
+        zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
+        break;
+      case "820896":
+        setTransparentByobject_id(siolaLegal, "820896");
+        zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
+        break;
+      case "825386":
+        setTransparentByobject_id(siolaLegal, "825386");
+        zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
+        break;
+      case "826868":
+        setTransparentByobject_id(siolaLegal, "826868");
+        zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
+        break;
+      case "817240":
+        setTransparentByobject_id(siolaLegal, "817240");
+        zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
+        break;
+      case "701720":
+        zoomToLocation(20, 120, 112.74437101987753, -7.265618497548999, -25, 0);
+        break;
+      case "671122":
+        zoomToLocation(20, 250, 112.7432787543901, -7.267368495006733, -25, 0);
+        break;
+      case "670768":
+        zoomToLocation(20, -35, 112.74455852005875, -7.266254249795577, 11, 0);
+        break;
+      case "601254":
+        setTransparentByobject_id(balaiLegal, "601254");
+        zoomToLocation(20, 30, 112.74534520728557, -7.264096743894646, -45, 0);
+        break;
+      case "599448":
+        setTransparentByobject_id(balaiLegal, "599448");
+        zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
+        break;
+      case "598132":
+        setTransparentByobject_id(balaiLegal, "598132");
+        zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
+        break;
+      case "596892":
+        setTransparentByobject_id(balaiLegal, "596892");
+        zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
+        break;
+      case "596362":
+        setTransparentByobject_id(balaiLegal, "596362");
+        zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
+        break;
+      case "595885":
+        setTransparentByobject_id(balaiLegal, "595885");
+        zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
+        break;
+      case "639829":
+        setTransparentByobject_id(balaiLegal, "639829");
+        zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
+        break;
+      case "592037":
+        setTransparentByobject_id(balaiLegal, "592037");
+        zoomToLocation(20, 25, 112.74521802863246, -7.264175001191377, -25, 0);
+        break;
+      case "560626":
+        setTransparentByobject_id(balaiLegal, "560626");
+        zoomToLocation(20, 25, 112.74521826029621, -7.264175080955373, -25, 0);
+        break;
+      case "600819":
+        setTransparentByobject_id(balaiLegal, "600819");
+        zoomToLocation(20, 25, 112.74526629406043, -7.264316162622997, -25, 0);
+        break;
+      case "559588":
+        setTransparentByobject_id(balaiLegal, "559588");
+        zoomToLocation(20, 25, 112.74514755642848, -7.2642758111076615, -25, 0);
+        break;
+      case "558371":
+        setTransparentByobject_id(balaiLegal, "558371");
+        zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
+        break;
+      case "550615":
+        setTransparentByobject_id(balaiLegal, "550615");
+        zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
+        break;
+      case "609329":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "610016":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "611746":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "611250":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "610552":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "613441":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "613040":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "612232":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "612619":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618232":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618231":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618230":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618229":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618228":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618227":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618226":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618225":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618224":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618223":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618222":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618233":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "606942":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618699":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618701":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618698":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618697":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618696":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618695":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618694":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618693":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618692":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618691":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618700":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618690":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "607326":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618343":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618342":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618341":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618340":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618339":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618338":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618337":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618336":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618335":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618334":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618333":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618344":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "606926":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618810":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618812":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618809":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618808":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618807":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618806":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618805":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618804":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618803":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618802":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618811":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618801":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "607296":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618454":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618453":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618452":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618451":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618450":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618449":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618448":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618447":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618446":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618445":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618444":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618455":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "606910":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618921":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618923":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618920":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618919":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618918":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618917":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618916":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618915":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618914":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618913":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618922":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618912":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "606558":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618565":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618564":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618563":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618562":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618561":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618560":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618559":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618558":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618557":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618556":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618555":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "618566":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "602474":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619145":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619143":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619142":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619141":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619140":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619139":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619138":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619137":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619136":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619135":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619134":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "602333":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "615229":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "598583":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "598698":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "599584":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "599868":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "599963":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600045":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600145":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600222":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600292":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600975":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "600414":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "601952":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "601835":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "601694":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619196":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619194":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "619195":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "599642":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "599276":
+        // Implementasi logika untuk kasus ini
+        break;
+      case "700690":
+        // Implementasi logika untuk kasus ini
+        break;
+
       default:
-        // Default case if no specific function is defined for the suggestion
+        console.error("NOT FOUND");
         break;
     }
-
   }
 
 });

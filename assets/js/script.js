@@ -122,6 +122,12 @@ $(document).ready(function () {
   });
 });
 
+
+$("#searchForm").submit(function (e) {
+  e.preventDefault();
+});
+
+
 function formatCustomDate(dateString) {
   if (!dateString) {
     return '-';
