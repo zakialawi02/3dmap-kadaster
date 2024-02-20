@@ -23,6 +23,10 @@
             max-width: 100%;
             height: auto;
         }
+
+        main ul li {
+            list-style-type: disc;
+        }
     </style>
 
     <title>URI Data</title>

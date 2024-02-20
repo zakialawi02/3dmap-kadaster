@@ -42,7 +42,7 @@
   </style>
 </head>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 
 
 <body>
@@ -112,7 +112,7 @@
     <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
   </div>
   <!-- Modal -->
-  <div class="modal fade welcomemodal" id="critics" tabindex="-1" aria-labelledby="criticsLabel" aria-hidden="true">
+  <div class="modal fade welcomemodal" id="critics" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="criticsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header p-2">

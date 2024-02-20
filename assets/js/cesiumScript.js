@@ -972,7 +972,7 @@ $("#zoomToBalaiLegal_0all").on('click', function () {
     "610016",
     "609329"
   ]);
-  zoomToTileset(balaiBuildingL1, -25, 180, 100);
+  zoomToTileset(balaiBuildingL1, -25, 355, 150);
 });
 $("#zoomToBalaiLegal_1all").on('click', function () {
   setTransparentByobject_id(balaiLegal, [
@@ -1057,31 +1057,40 @@ $("#zoomToBalaiLegal_1a13").on('click', function () {
 });
 
 $("#zoomToBalaiLegal_0a1").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "612619");
+  setTransparentByobject_id(balaiLegal, "612619");
+  zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
 });
 $("#zoomToBalaiLegal_0a2").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "612232");
+  setTransparentByobject_id(balaiLegal, "612232");
+  zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
 });
 $("#zoomToBalaiLegal_0a3").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "613040");
+  setTransparentByobject_id(balaiLegal, "613040");
+  zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
 });
 $("#zoomToBalaiLegal_0a4").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "613441");
+  setTransparentByobject_id(balaiLegal, "613441");
+  zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
 });
 $("#zoomToBalaiLegal_0a5").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "610552");
+  setTransparentByobject_id(balaiLegal, "610552");
+  zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
 $("#zoomToBalaiLegal_0a6").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "611250");
+  setTransparentByobject_id(balaiLegal, "611250");
+  zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
 $("#zoomToBalaiLegal_0a7").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "611746");
+  setTransparentByobject_id(balaiLegal, "611746");
+  zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
 $("#zoomToBalaiLegal_0a8").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "610016");
+  setTransparentByobject_id(balaiLegal, "610016");
+  zoomToLocation(20, 105, 112.74541372870215, -7.264674661924839, -60, 0);
 });
 $("#zoomToBalaiLegal_0a9").on('click', function () {
-  setVisibilityByobject_id(balaiLegal, "609329");
+  setTransparentByobject_id(balaiLegal, "609329");
+  zoomToLocation(11, 60, 112.74502607249624, -7.264704384970404, -60, 0);
 });
 
 // Layering button Rusunawa   #############################################################################
@@ -2956,22 +2965,34 @@ $(document).ready(function () {
     id: "rusun6floor",
     data: "Rusunawa Buring Roof"
   }, ];
+
+  console.log([...new Set(suggestionsData)]);
   console.log(suggestionsData);
 
   (async function () {
     try {
       const data = await fetchSuggestionsFromDatabase();
-
+      console.log(data);
       data.forEach(item => {
         // Push separate objects for data with the same ID
-        suggestionsData.push({
-          id: item.id,
-          data: item.parcel_id
-        });
-        suggestionsData.push({
-          id: item.id,
-          data: item.parcel_name
-        });
+        if (item.parcel_id != undefined && item.parcel_id != null && item.parcel_id != "") {
+          suggestionsData.push({
+            id: item.id,
+            data: item.parcel_id
+          });
+        }
+        if (item.parcel_name != undefined && item.parcel_name != null && item.parcel_name != "") {
+          suggestionsData.push({
+            id: item.id,
+            data: item.parcel_name
+          });
+        }
+        if (item.resident_name != undefined && item.resident_name != null && item.resident_name != "") {
+          suggestionsData.push({
+            id: item.id,
+            data: item.resident_name
+          });
+        }
       });
 
       $("#searchInput").on('input', function (e) {
@@ -3245,295 +3266,392 @@ $(document).ready(function () {
         zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
         break;
       case "609329":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "609329");
+        zoomToLocation(11, 60, 112.74502607249624, -7.264704384970404, -60, 0);
         break;
       case "610016":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "610016");
+        zoomToLocation(20, 105, 112.74541372870215, -7.264674661924839, -60, 0);
         break;
       case "611746":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "611746");
+        zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
         break;
       case "611250":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "611250");
+        zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
         break;
       case "610552":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "610552");
+        zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
         break;
       case "613441":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "613441");
+        zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
         break;
       case "613040":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "613040");
+        zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
         break;
       case "612232":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "612232");
+        zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
         break;
       case "612619":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(balaiLegal, "612619");
+        zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
         break;
       case "618232":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618232");
+        zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618231":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618231");
+        zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618230":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618230");
+        zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618229":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618229");
+        zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618228":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618228");
+        zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618227":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618227");
+        zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618226":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618226");
+        zoomToLocation(0, 23, 112.64489976543433, -8.011227147063853, -15, 0);
         break;
       case "618225":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618225");
+        zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618224":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618224");
+        zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618223":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618223");
+        zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618222":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618222");
+        zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618233":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618233");
+        zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "606942":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "606942");
+        zoomToLocation(100, 18, 112.64432403935837, -8.010743169218108, -15, 0);
         break;
       case "618699":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618699");
+        zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618701":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618701");
+        zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618698":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618698");
+        zoomToLocation(180, 23, 112.64479519186604, -8.010297620811423, -15, 0);
         break;
       case "618697":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618697");
+        zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618696":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618696");
+        zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618695":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618695");
+        zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618694":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618694");
+        zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618693":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618693");
+        zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618692":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618692");
+        zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618691":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618691");
+        zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618700":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618700");
+        zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618690":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618690");
+        zoomToLocation(180, 23, 112.64514967384268, -8.01029641222483, -15, 0);
         break;
       case "607326":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "607326");
+        zoomToLocation(265, 58, 112.64589105170866, -8.010688873163765, -25, 0);
         break;
       case "618343":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618343");
+        zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618342":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618342");
+        zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618341":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618341");
+        zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618340":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618340");
+        zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618339":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618339");
+        zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618338":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618338");
+        zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618337":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618337");
+        zoomToLocation(0, 21, 112.64489976543433, -8.011227147063853, -15, 0);
         break;
       case "618336":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618336");
+        zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618335":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618335");
+        zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618334":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618334");
+        zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618333":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618333");
+        zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618344":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618344");
+        zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "606926":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "606926");
+        zoomToLocation(100, 16, 112.64432403935837, -8.010743169218108, -15, 0);
         break;
       case "618810":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618810");
+        zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618812":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618812");
+        zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618809":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618809");
+        zoomToLocation(180, 21, 112.64479519186604, -8.010297620811423, -15, 0);
         break;
       case "618808":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618808");
+        zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618807":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618807");
+        zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618806":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618806");
+        zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618805":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618805");
+        zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618804":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618804");
+        zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618803":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618803");
+        zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618802":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618802");
+        zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618811":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618811");
+        zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618801":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618801");
+        zoomToLocation(180, 21, 112.64514967384268, -8.01029641222483, -15, 0);
         break;
       case "607296":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "607296");
+        zoomToLocation(265, 56, 112.64589105170866, -8.010688873163765, -25, 0);
         break;
       case "618454":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618454");
+        zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618453":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618453");
+        zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618452":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618452");
+        zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618451":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618451");
+        zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618450":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618450");
+        zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618449":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618449");
+        zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618448":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618448");
+        zoomToLocation(0, 19, 112.64489976543433, -8.011227147063853, -15, 0);
         break;
       case "618447":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618447");
+        zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618446":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618446");
+        zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618445":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618445");
+        zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618444":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618444");
+        zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618455":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618455");
+        zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "606910":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "606910");
+        zoomToLocation(100, 14, 112.64432403935837, -8.010743169218108, -15, 0);
         break;
       case "618921":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618921");
+        zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618923":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618923");
+        zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
         break;
       case "618920":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618920");
+        zoomToLocation(180, 19, 112.64479519186604, -8.010297620811423, -15, 0);
         break;
       case "618919":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618919");
+        zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618918":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618918");
+        zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
         break;
       case "618917":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618917");
+        zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618916":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618916");
+        zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
         break;
       case "618915":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618915");
+        zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618914":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618914");
+        zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
         break;
       case "618913":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618913");
+        zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618922":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618922");
+        zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
         break;
       case "618912":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618912");
+        zoomToLocation(180, 19, 112.64514967384268, -8.01029641222483, -15, 0);
         break;
       case "606558":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "606558");
+        zoomToLocation(265, 54, 112.64589105170866, -8.010688873163765, -25, 0);
         break;
       case "618565":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618565");
+        zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618564":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618564");
+        zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
         break;
       case "618563":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618563");
+        zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618562":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618562");
+        zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
         break;
       case "618561":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618561");
+        zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618560":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618560");
+        zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
         break;
       case "618559":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618559");
+        zoomToLocation(0, 17, 112.64489976543433, -8.011227147063853, -15, 0);
         break;
       case "618558":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618558");
+        zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618557":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618557");
+        zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
         break;
       case "618556":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618556");
+        zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618555":
         // Implementasi logika untuk kasus ini

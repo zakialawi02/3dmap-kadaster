@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include_once 'db_connect.php';
 
 // jika request method get biasa
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'db_connect.php';
+include_once 'db_connect.php';
 
 use HTMLPurifier\HTMLPurifier;
 

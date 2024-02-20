@@ -1,7 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
 // Include the database connection file
-include 'db_connect.php';
+include_once 'db_connect.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // save old form data

@@ -146,6 +146,12 @@ $(document).ready(function () {
   const modalCritics = new bootstrap.Modal(document.getElementById('critics'), {
     keyboard: true
   });
+  // Periksa apakah parameter showCritics&Suggestions=true ada di URL saat halaman dimuat
+  if (window.location.search.includes('showCritics&Suggestions=true')) {
+    // Tampilkan modal secara manual jika parameter ada
+    modalCritics.show();
+  }
+
   // Event listener untuk saat modal ditampilkan
   modalCritics._element.addEventListener('shown.bs.modal', function () {
     // Tambahkan parameter ke URL jika tidak ada
@@ -174,9 +180,4 @@ $(document).ready(function () {
       modalCritics.hide();
     }
   });
-  // Periksa apakah parameter showCritics&Suggestions=true ada di URL saat halaman dimuat
-  if (window.location.search.includes('showCritics&Suggestions=true')) {
-    // Tampilkan modal secara manual jika parameter ada
-    modalCritics.show();
-  }
 });
