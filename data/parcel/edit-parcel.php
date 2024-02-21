@@ -25,7 +25,6 @@
 <?php checkIsLogin(); ?>
 <?php include_once '../../action/get-parcel.php' ?>
 <?php include_once '../../action/get-uri.php' ?>
-<?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -41,28 +40,18 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
+                <form action="/action/save-parcel.php?parcel=<?= $parcel_table['id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="ObjectID" class="form-label">Object ID</label>
                         <input type="text" class="form-control" id="ObjectID" name="ObjectID" autocomplete="off" value="<?= $parcel_table['id']; ?>" disabled required>
                     </div>
                     <div class="mb-3">
-                        <label for="parcelIdNew" class="form-label">Parcel ID</label>
-                        <input type="hidden" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
-                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= old('parcel_id') ?? $parcel_table['parcel_id']; ?>" required>
+                        <label for="parcel_id" class="form-label">Parcel ID</label>
+                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" autocomplete="off" value="<?= old('parcel_id') ?? $parcel_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
-                        <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= old('parcel_name') ?? $parcel_table['parcel_name']; ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <select class="form-select form-select" id="parcelOccupant" name="parcelOccupant" placeholder="select">
-                            <option value=""></option>
-                            <?php foreach ($residents_table as $val) : ?>
-                                <option value="<?= $val['id_resident']; ?>" <?= ($val['id_resident'] == $parcel_table['parcel_occupant'] ? "selected" : ""); ?>><?= $val['resident_name']; ?></option>
-                            <?php endforeach ?>
-                        </select>
+                        <label for="parcel_name" class="form-label">Parcel Name</label>
+                        <input type="text" class="form-control" id="parcel_name" name="parcel_name" autocomplete="off" value="<?= old('parcel_name') ?? $parcel_table['parcel_name']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>

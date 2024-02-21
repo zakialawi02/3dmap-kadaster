@@ -6,56 +6,29 @@ include 'db_connect.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // save old form data
     $oldForm = [
-        'parcel_id' => $_POST['parcel_id'] ?? $_POST['parcelIdNew'] ?? "",
-        'parcel_name' => $_POST['parcelName'],
-        'parcel_occupant' => $_POST['parcelOccupant'],
+        'object_id' => $_POST['object_id'] ?? "",
+        'parcel_id' => $_POST['parcel_id'],
+        'parcel_name' => $_POST['parcel_name'],
         'tag' => implode(", ", $_POST['multiSelectTag'] ?? [])
     ];
     $_SESSION['oldForm'] = $oldForm;
     if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
         // update data lama
-        $parcel_id = $_GET['parcel']; //old parcel id
-        // Perform a database query
-        $query = "SELECT * FROM parcel_table WHERE parcel_id = '$parcel_id'";
-        $result = $conn->query($query);
-        if ($result->num_rows > 0) {
-            $parcel_table = $result->fetch_assoc();
-        }
-        $parcelId = $parcel_table['id'];
-        $parcelIdNew = $_POST['parcelIdNew'];
-        $parcelName = $_POST['parcelName'];
-        $parcelOccupant = !empty($_POST['parcelOccupant']) ? $_POST['parcelOccupant'] : "null";
-        if ($parcel_id != $parcelIdNew) {
-            // cek duplikat parcel id jika parcel_id lama diubahs
-            $query = "SELECT * FROM parcel_table WHERE parcel_id = '$parcelIdNew'";
-            $result = mysqli_query($conn, $query);
-            if (mysqli_num_rows($result) > 0) {
-                setFlashMessage('error', 'Parcel id already exists');
-                header("Location: " . $_SERVER['HTTP_REFERER']);
-                exit();
-            }
-            $sqlDeleteLinkedUri = "DELETE FROM linked_uri WHERE parcel_id = '$parcel_id'";
-            $resultSql = mysqli_query($conn, $sqlDeleteLinkedUri);
+        $object_id = $_GET['parcel'];
+        $parcel_id = $_POST['parcel_id'];
+        $parcelName = $_POST['parcel_name'];
+
+        $sqlDeleteLinkedUri = "DELETE FROM linked_uri WHERE object_id = '$object_id'";
+        $resultSql = mysqli_query($conn, $sqlDeleteLinkedUri);
+        if (!empty($_POST['multiSelectTag'])) {
             foreach ($_POST['multiSelectTag'] as $tagId) {
-                $sqlInsert = "INSERT INTO linked_uri (parcel_id, id_keyword) VALUES ('$parcel_id', '$tagId')";
+                $sqlInsert = "INSERT INTO linked_uri (object_id, id_keyword) VALUES ('$object_id', '$tagId')";
                 $resultSql = mysqli_query($conn, $sqlInsert);
             }
-            // update data
-            $sqlUpdateParcel = "UPDATE parcel_table SET parcel_id = '$parcelIdNew', parcel_name = '$parcelName', parcel_occupant = $parcelOccupant WHERE id = $parcelId";
-            $resultSql = mysqli_query($conn, $sqlUpdateParcel);
-        } else {
-            $sqlDeleteLinkedUri = "DELETE FROM linked_uri WHERE parcel_id = '$parcel_id'";
-            $resultSql = mysqli_query($conn, $sqlDeleteLinkedUri);
-            if (!empty($_POST['multiSelectTag'])) {
-                foreach ($_POST['multiSelectTag'] as $tagId) {
-                    $sqlInsert = "INSERT INTO linked_uri (parcel_id, id_keyword) VALUES ('$parcel_id', '$tagId')";
-                    $resultSql = mysqli_query($conn, $sqlInsert);
-                }
-            }
-            // update data
-            $sqlUpdateParcel = "UPDATE parcel_table SET parcel_id = '$parcel_id', parcel_name = '$parcelName', parcel_occupant = $parcelOccupant WHERE id = $parcelId";
-            $resultSql = mysqli_query($conn, $sqlUpdateParcel);
         }
+        // update data
+        $sqlUpdateParcel = "UPDATE parcel_table SET id = '$object_id', parcel_id = '$parcel_id', parcel_name = '$parcelName' WHERE id = $object_id";
+        $resultSql = mysqli_query($conn, $sqlUpdateParcel);
         if ($resultSql) {
             setFlashMessage('success', 'Data updated successfully');
         } else {
@@ -64,22 +37,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // save data baru
+        $object_id = $_POST['object_id'];
         $parcel_id = $_POST['parcel_id'];
-        $parcelName = $_POST['parcelName'];
-        $parcelOccupant = !empty($_POST['parcelOccupant']) ? $_POST['parcelOccupant'] : "null";
-        // cek duplikat parcel id
-        $query = "SELECT * FROM parcel_table WHERE parcel_id = '$parcel_id'";
+        $parcelName = $_POST['parcel_name'];
+        // cek duplikat object id
+        $query = "SELECT * FROM parcel_table WHERE id = '$object_id'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             setFlashMessage('error', 'Parcel id already exists');
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
+        // validasi empty
+        if (empty($parcel_id)) {
+            setFlashMessage('error', 'Parcel ID is required');
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
         // Prepare and execute the SQL query
-        $sqlInsertParcel = "INSERT INTO parcel_table (parcel_id, parcel_name, parcel_occupant) VALUES ('$parcel_id', '$parcelName', $parcelOccupant)";
+        $sqlInsertParcel = "INSERT INTO parcel_table (id, parcel_id, parcel_name) VALUES ('$object_id', '$parcel_id', '$parcelName')";
         $resultSql = mysqli_query($conn, $sqlInsertParcel);
         foreach ($_POST['multiSelectTag'] as $tagId) {
-            $sqlInsert = "INSERT INTO linked_uri (parcel_id, id_keyword) VALUES ('$parcel_id', '$tagId')";
+            $sqlInsert = "INSERT INTO linked_uri (object_id, id_keyword) VALUES ('$object_id', '$tagId')";
             $resultSql = mysqli_query($conn, $sqlInsert);
         }
         if ($resultSql) {

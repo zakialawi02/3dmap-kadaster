@@ -26,7 +26,7 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-parcel.php' ?>
+<?php include_once '../../action/get-renters.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -43,43 +43,42 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Add Parcel Data</a>
+                        <a href="/data/room/add-room.php" class="btn btn-primary">Add Room Data</a>
                     </div>
                     <div class="row p-3 m-2">
                         <div class="col-md-12">
-                            <table id="datatable" class="table table-bordered table-striped table-hover" style="width:100%">
+                            <table id="datatable" class="table table-bordered table-striped table-hover display nowrap" style="width:100%">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">ObjectID</th>
-                                        <th scope="col">Parcel id</th>
-                                        <th scope="col">Parcel Name</th>
-                                        <th scope="col">Tag</th>
+                                        <th scope="col">Room ID</th>
+                                        <th scope="col">Room Name</th>
+                                        <th scope="col">Space Usage</th>
+                                        <th scope="col">Tenant Name</th>
+                                        <th scope="col">Started</th>
+                                        <th scope="col">Finished</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($parcel_table as $row) : ?>
-                                        <?php $tags = json_decode($row['tag'], true); ?>
+                                    <?php foreach ($renters_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
-                                            <td><?= $row['id']; ?></td>
-                                            <td><?= $row['parcel_id']; ?></td>
-                                            <td><?= $row['parcel_name'] ?></td>
-                                            <td>
-                                                <?php foreach ($tags as $tag) : ?>
-                                                    <span class="badge rounded-pill bg-secondary"> <?= $tag['word_name']; ?></span>
-                                                <?php endforeach ?>
-                                            </td>
+                                            <td><?= $row['room_id'] ?></td>
+                                            <td><?= $row['room_name'] ?></td>
+                                            <td><?= $row['space_usage'] ?></td>
+                                            <td><?= $row['tenant_name'] ?></td>
+                                            <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
+                                            <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/parcel/edit-parcel.php?parcel=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-parcel.php" method="post">
-                                                        <input type="hidden" name="object_id" value="<?= $row['id']; ?>">
+                                                    <!-- <a href="/data/residents/edit-residents.php?residents=<?= $row['id_resident']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id_resident']; ?>" action="/action/delete-residents.php" method="post">
+                                                        <input type="hidden" name="id_resident" value="<?= $row['id_resident']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
-                                                    </form>
+                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id_resident']; ?>"></button>
+                                                    </form> -->
                                                 </div>
                                             </td>
                                         </tr>
@@ -122,7 +121,9 @@
             });
         });
 
-        const datatable = new DataTable('#datatable');
+        const datatable = new DataTable('#datatable', {
+            scrollX: true,
+        });
     </script>
     <?php unset($_SESSION['oldForm']); ?>
 

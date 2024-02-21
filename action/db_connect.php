@@ -5,7 +5,7 @@ require_once __DIR__ . '../../vendor/autoload.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "rrrcadastre";
+$dbname = "rrrcadastre2";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
