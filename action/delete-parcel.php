@@ -5,11 +5,11 @@ include 'db_connect.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the parcel_id from the POST request
-    $parcelId = $_POST['parcel_id'];
+    // Get the object_id from the POST request
+    $object_id = $_POST['object_id'];
 
     // SQL query to delete the parcel
-    $sql = "DELETE FROM parcel_table WHERE id = $parcelId";
+    $sql = "DELETE FROM parcel_table WHERE id = $object_id";
     $conn->query($sql);
     if (mysqli_affected_rows($conn) > 0) {
         setFlashMessage('success', 'Data deleted successfully');

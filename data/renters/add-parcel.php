@@ -24,6 +24,7 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
 <?php include_once '../../action/get-uri.php' ?>
+<?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -40,18 +41,21 @@
                 <?php endif ?>
                 <form action="/action/save-parcel.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <div class="mb-3">
-                            <label for="object_id" class="form-label">Object ID</label>
-                            <input type="text" class="form-control" id="object_id" name="object_id" value="<?= old('object_id'); ?>" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
                         <label for="parcel_id" class="form-label">Parcel ID</label>
                         <input type="text" class="form-control" id="parcel_id" name="parcel_id" value="<?= old('parcel_id'); ?>" required>
                     </div>
                     <div class="mb-3">
-                        <label for="parcel_name" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcel_name" name="parcel_name" value="<?= old('parcel_name'); ?>">
+                        <label for="parcelName" class="form-label">Parcel Name</label>
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= old('parcel_name'); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
+                        <select class="form-select form-select" id="parcelOccupant" name="parcelOccupant" placeholder="select">
+                            <option value=""></option>
+                            <?php foreach ($residents_table as $val) : ?>
+                                <option value="<?= $val['id_resident']; ?>"><?= $val['resident_name']; ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="keywordTag" class="form-label">Tag</label>
