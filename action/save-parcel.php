@@ -1,7 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
 // Include the database connection file
-include_once 'db_connect.php';
+include 'db_connect.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // save old form data
@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'tag' => implode(", ", $_POST['multiSelectTag'] ?? [])
     ];
     $_SESSION['oldForm'] = $oldForm;
-    var_dump($_POST);
     if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
         // update data lama
         $parcel_id = $_GET['parcel']; //old parcel id

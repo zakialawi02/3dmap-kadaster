@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 15, 2024 at 05:44 PM
--- Server version: 10.6.15-MariaDB-cll-lve
+-- Generation Time: Feb 21, 2024 at 01:43 AM
+-- Server version: 10.11.6-MariaDB-cll-lve
 -- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -33,6 +33,13 @@ CREATE TABLE `critics` (
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `critics`
+--
+
+INSERT INTO `critics` (`id`, `critics`, `created_at`) VALUES
+(4, 'Tes', '2024-02-16 07:20:39');
+
 -- --------------------------------------------------------
 
 --
@@ -49,26 +56,8 @@ CREATE TABLE `linked_uri` (
 --
 
 INSERT INTO `linked_uri` (`parcel_id`, `id_keyword`) VALUES
-('35730310050101BB', 39),
-('35730310050101BT', 39),
-('35730310050101GSB', 39),
-('35730310050101BB', 43),
-('35730310050101BT', 43),
-('35730310050101GSB', 43),
 ('3578071002010207', 42),
-('357807100201BB', 42),
-('357807100201BT', 42),
-('357807100201GSB', 42),
 ('3578071002010207', 40),
-('357807100201BB', 40),
-('357807100201BT', 40),
-('357807100201GSB', 40),
-('35780710010101BB', 42),
-('35780710010101BT', 42),
-('35780710010101GSB', 42),
-('35780710010101BB', 41),
-('35780710010101BT', 41),
-('35780710010101GSB', 41),
 ('3573031005010105', 39),
 ('3573031005010105', 43),
 ('3573031005010104', 39),
@@ -408,7 +397,34 @@ INSERT INTO `linked_uri` (`parcel_id`, `id_keyword`) VALUES
 ('3578071001010004', 42),
 ('3578071001010004', 41),
 ('3578071001010002', 42),
-('3578071001010002', 41);
+('3578071001010002', 41),
+('357807100201BT', 42),
+('357807100201BT', 40),
+('357807100201BT', 45),
+('35780710010101BT', 42),
+('35780710010101BT', 41),
+('35780710010101BT', 45),
+('35730310050101BT', 39),
+('35730310050101BT', 43),
+('35730310050101BT', 45),
+('35730310050101BB', 39),
+('35730310050101BB', 43),
+('35730310050101BB', 45),
+('35780710010101BB', 42),
+('35780710010101BB', 41),
+('35780710010101BB', 45),
+('357807100201BB', 42),
+('357807100201BB', 40),
+('357807100201BB', 45),
+('35730310050101GSB', 39),
+('35730310050101GSB', 43),
+('35730310050101GSB', 45),
+('35780710010101GSB', 42),
+('35780710010101GSB', 41),
+('35780710010101GSB', 45),
+('357807100201GSB', 42),
+('357807100201GSB', 40),
+('357807100201GSB', 45);
 
 -- --------------------------------------------------------
 
@@ -638,106 +654,106 @@ CREATE TABLE `residents_table` (
 --
 
 INSERT INTO `residents_table` (`id_resident`, `resident_type`, `resident_entity`, `resident_code`, `resident_name`, `job_title`, `resident_job`, `resident_religion`, `phone_number`, `resident_address`, `started`, `finished`, `created_at`, `updated_at`) VALUES
-(19, NULL, NULL, '358000000000', 'Mochamad Sholeh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
-(20, NULL, NULL, '358000000000', 'Dewi Andrias', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
-(21, NULL, NULL, '358000000000', 'Leo Sigit Prasetyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
-(22, NULL, NULL, '358000000000', 'Wawan Hermanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:16'),
-(23, NULL, NULL, '358000000000', 'Relman Laia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(24, NULL, NULL, '358000000000', 'Rani Setia Anggraeni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(25, NULL, NULL, '358000000000', 'Fatmawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(26, NULL, NULL, '358000000000', 'Khrisna Budiarta', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(27, NULL, NULL, '358000000000', 'Trio Prayogi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(28, NULL, NULL, '358000000000', 'Suparno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(29, NULL, NULL, '358000000000', 'Deri Rubys Anugerah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(30, NULL, NULL, '358000000000', 'Denny VIcky Kurniawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(31, NULL, NULL, '358000000000', 'Afiful Haq', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(32, NULL, NULL, '358000000000', 'Marwan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(33, NULL, NULL, '358000000000', 'Diah Susanti Udayana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(34, NULL, NULL, '358000000000', 'Agus Suroso', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(35, NULL, NULL, '358000000000', 'Moch. Yusuf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(36, NULL, NULL, '358000000000', 'Sugianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(37, NULL, NULL, '358000000000', 'Umbar Yulianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(38, NULL, NULL, '358000000000', 'Aris Priyanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(39, NULL, NULL, '358000000000', 'Edi Siswantoko', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(40, NULL, NULL, '358000000000', 'Dian Aprilya', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(41, NULL, NULL, '358000000000', 'Eko Budi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(42, NULL, NULL, '358000000000', 'Dedy Widianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(43, NULL, NULL, '358000000000', 'Dany Suharmanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(44, NULL, NULL, '358000000000', 'Krisdianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(45, NULL, NULL, '358000000000', 'Diah Megawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(46, NULL, NULL, '358000000000', 'Joko Waluyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(47, NULL, NULL, '358000000000', 'Yuliana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(48, NULL, NULL, '358000000000', 'Achmad Zam Zam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
-(49, NULL, NULL, '358000000000', 'Suparlan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(50, NULL, NULL, '358000000000', 'Zainoel Answar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(51, NULL, NULL, '358000000000', 'Naser Risky', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(52, NULL, NULL, '358000000000', 'Lucky Tiara Chandra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(53, NULL, NULL, '358000000000', 'Suprapto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(54, NULL, NULL, '358000000000', 'Betha Retanti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(55, NULL, NULL, '358000000000', 'Mustofa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(56, NULL, NULL, '358000000000', 'Aniwati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(57, NULL, NULL, '358000000000', 'Fajar Setiawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(58, NULL, NULL, '358000000000', 'Murniningtijas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(59, NULL, NULL, '358000000000', 'Setyo Christina W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(60, NULL, NULL, '358000000000', 'Maryati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(61, NULL, NULL, '358000000000', 'Nova Eko Prastyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(62, NULL, NULL, '358000000000', 'Triana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(63, NULL, NULL, '358000000000', 'Ridwan Hamsayu Satria Prakoso', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(64, NULL, NULL, '358000000000', 'Lisnawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(65, NULL, NULL, '358000000000', 'Wahyu Sukariyaningsih', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(66, NULL, NULL, '358000000000', 'Mokhamad Ari Setyawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(67, NULL, NULL, '358000000000', 'Danu Siswanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(68, NULL, NULL, '358000000000', 'Hari Budi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(69, NULL, NULL, '358000000000', 'Asih Julia Hendrampuni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(70, NULL, NULL, '358000000000', 'Wiwik Supartinah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(71, NULL, NULL, '358000000000', 'Dian Sujatmiko', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(72, NULL, NULL, '358000000000', 'Relly Pamungkas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(73, NULL, NULL, '358000000000', 'Aynurido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(74, NULL, NULL, '358000000000', 'Titik Margowati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(75, NULL, NULL, '358000000000', 'Soedarmadji', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(76, NULL, NULL, '358000000000', 'Sudjono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(77, NULL, NULL, '358000000000', 'Pancoro Indyanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(78, NULL, NULL, '358000000000', 'Isnawati Indriani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(79, NULL, NULL, '358000000000', 'Anang Kuswandi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(80, NULL, NULL, '358000000000', 'Dwi Indrawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(81, NULL, NULL, '358000000000', 'Rachmad Tabah SUkoco', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(82, NULL, NULL, '358000000000', 'Adi Satria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(83, NULL, NULL, '358000000000', 'Krisman Indra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(84, NULL, NULL, '358000000000', 'Rizal Effendi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(85, NULL, NULL, '358000000000', 'Mochamad Pausi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(86, NULL, NULL, '358000000000', 'Romi Cahyono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(87, NULL, NULL, '358000000000', 'Endro Sudiono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(88, NULL, NULL, '358000000000', 'Prasetijo Adam Marcianus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(89, NULL, NULL, '358000000000', 'Kholidul Azis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(90, NULL, NULL, '358000000000', 'Agus Suharto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(91, NULL, NULL, '358000000000', 'Anastasia Venny J', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(92, NULL, NULL, '358000000000', 'Moch Dzikri Rathomy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(93, NULL, NULL, '358000000000', 'Anwar Tehuayo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(94, NULL, NULL, '358000000000', 'Kartini', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(95, NULL, NULL, '358000000000', 'Resnati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(96, NULL, NULL, '358000000000', 'Aditya Hendrawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(97, NULL, NULL, '358000000000', 'Arris', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(98, NULL, NULL, '358000000000', 'Choirul Soleh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(99, NULL, NULL, '358000000000', 'Kisworo Ari Wibowo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
-(100, NULL, NULL, '358000000000', 'Sukarno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(101, NULL, NULL, '358000000000', 'Budi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(102, NULL, NULL, '358000000000', 'Yanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(103, NULL, NULL, '358000000000', 'Sandi Hadi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(104, NULL, NULL, '358000000000', 'Dwi Yulianto Binawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(105, NULL, NULL, '358000000000', 'Bagus Hendi Christanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(106, NULL, NULL, '358000000000', 'Judha Bagus Prasetyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(107, NULL, NULL, '358000000000', 'Nur Djunaidi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(108, NULL, NULL, '358000000000', 'Nanang Supriono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(109, NULL, NULL, '358000000000', 'Sunardi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(110, NULL, NULL, '358000000000', 'Achmad Fahmi A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(111, NULL, NULL, '358000000000', 'Djodi Surya Pamungkas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(112, NULL, NULL, '358000000000', 'Elus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(113, NULL, NULL, '358000000000', 'Eko Purnomo W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(114, NULL, NULL, '358000000000', 'Yudhi Handoyoputro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(115, NULL, NULL, '358000000000', 'Doni Arianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(116, NULL, NULL, '358000000000', 'Dewi Ratih Ayu Rachmani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(117, NULL, NULL, '358000000000', 'Laga Widya Eka Putera', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
-(118, NULL, NULL, '358000000000', 'Wawan Hermanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25');
+(19, 'Individual', NULL, '358000000000', 'Mochamad Sholeh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
+(20, 'Individual', NULL, '358000000000', 'Dewi Andrias', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
+(21, 'Individual', NULL, '358000000000', 'Leo Sigit Prasetyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 13:31:16'),
+(22, 'Individual', NULL, '358000000000', 'Wawan Hermanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:16'),
+(23, 'Individual', NULL, '358000000000', 'Relman Laia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(24, 'Individual', NULL, '358000000000', 'Rani Setia Anggraeni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(25, 'Individual', NULL, '358000000000', 'Fatmawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(26, 'Individual', NULL, '358000000000', 'Khrisna Budiarta', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(27, 'Individual', NULL, '358000000000', 'Trio Prayogi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(28, 'Individual', NULL, '358000000000', 'Suparno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(29, 'Individual', NULL, '358000000000', 'Deri Rubys Anugerah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(30, 'Individual', NULL, '358000000000', 'Denny VIcky Kurniawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(31, 'Individual', NULL, '358000000000', 'Afiful Haq', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(32, 'Individual', NULL, '358000000000', 'Marwan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(33, 'Individual', NULL, '358000000000', 'Diah Susanti Udayana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(34, 'Individual', NULL, '358000000000', 'Agus Suroso', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(35, 'Individual', NULL, '358000000000', 'Moch. Yusuf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(36, 'Individual', NULL, '358000000000', 'Sugianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(37, 'Individual', NULL, '358000000000', 'Umbar Yulianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(38, 'Individual', NULL, '358000000000', 'Aris Priyanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(39, 'Individual', NULL, '358000000000', 'Edi Siswantoko', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(40, 'Individual', NULL, '358000000000', 'Dian Aprilya', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(41, 'Individual', NULL, '358000000000', 'Eko Budi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(42, 'Individual', NULL, '358000000000', 'Dedy Widianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(43, 'Individual', NULL, '358000000000', 'Dany Suharmanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(44, 'Individual', NULL, '358000000000', 'Krisdianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(45, 'Individual', NULL, '358000000000', 'Diah Megawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(46, 'Individual', NULL, '358000000000', 'Joko Waluyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(47, 'Individual', NULL, '358000000000', 'Yuliana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(48, 'Individual', NULL, '358000000000', 'Achmad Zam Zam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:23'),
+(49, 'Individual', NULL, '358000000000', 'Suparlan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(50, 'Individual', NULL, '358000000000', 'Zainoel Answar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(51, 'Individual', NULL, '358000000000', 'Naser Risky', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(52, 'Individual', NULL, '358000000000', 'Lucky Tiara Chandra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(53, 'Individual', NULL, '358000000000', 'Suprapto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(54, 'Individual', NULL, '358000000000', 'Betha Retanti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(55, 'Individual', NULL, '358000000000', 'Mustofa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(56, 'Individual', NULL, '358000000000', 'Aniwati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(57, 'Individual', NULL, '358000000000', 'Fajar Setiawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(58, 'Individual', NULL, '358000000000', 'Murniningtijas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(59, 'Individual', NULL, '358000000000', 'Setyo Christina W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(60, 'Individual', NULL, '358000000000', 'Maryati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(61, 'Individual', NULL, '358000000000', 'Nova Eko Prastyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(62, 'Individual', NULL, '358000000000', 'Triana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(63, 'Individual', NULL, '358000000000', 'Ridwan Hamsayu Satria Prakoso', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(64, 'Individual', NULL, '358000000000', 'Lisnawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(65, 'Individual', NULL, '358000000000', 'Wahyu Sukariyaningsih', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(66, 'Individual', NULL, '358000000000', 'Mokhamad Ari Setyawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(67, 'Individual', NULL, '358000000000', 'Danu Siswanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(68, 'Individual', NULL, '358000000000', 'Hari Budi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(69, 'Individual', NULL, '358000000000', 'Asih Julia Hendrampuni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(70, 'Individual', NULL, '358000000000', 'Wiwik Supartinah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(71, 'Individual', NULL, '358000000000', 'Dian Sujatmiko', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(72, 'Individual', NULL, '358000000000', 'Relly Pamungkas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(73, 'Individual', NULL, '358000000000', 'Aynurido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(74, 'Individual', NULL, '358000000000', 'Titik Margowati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(75, 'Individual', NULL, '358000000000', 'Soedarmadji', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(76, 'Individual', NULL, '358000000000', 'Sudjono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(77, 'Individual', NULL, '358000000000', 'Pancoro Indyanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(78, 'Individual', NULL, '358000000000', 'Isnawati Indriani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(79, 'Individual', NULL, '358000000000', 'Anang Kuswandi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(80, 'Individual', NULL, '358000000000', 'Dwi Indrawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(81, 'Individual', NULL, '358000000000', 'Rachmad Tabah SUkoco', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(82, 'Individual', NULL, '358000000000', 'Adi Satria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(83, 'Individual', NULL, '358000000000', 'Krisman Indra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(84, 'Individual', NULL, '358000000000', 'Rizal Effendi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(85, 'Individual', NULL, '358000000000', 'Mochamad Pausi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(86, 'Individual', NULL, '358000000000', 'Romi Cahyono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(87, 'Individual', NULL, '358000000000', 'Endro Sudiono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(88, 'Individual', NULL, '358000000000', 'Prasetijo Adam Marcianus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(89, 'Individual', NULL, '358000000000', 'Kholidul Azis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(90, 'Individual', NULL, '358000000000', 'Agus Suharto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(91, 'Individual', NULL, '358000000000', 'Anastasia Venny J', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(92, 'Individual', NULL, '358000000000', 'Moch Dzikri Rathomy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(93, 'Individual', NULL, '358000000000', 'Anwar Tehuayo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(94, 'Individual', NULL, '358000000000', 'Kartini', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(95, 'Individual', NULL, '358000000000', 'Resnati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(96, 'Individual', NULL, '358000000000', 'Aditya Hendrawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(97, 'Individual', NULL, '358000000000', 'Arris', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(98, 'Individual', NULL, '358000000000', 'Choirul Soleh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(99, 'Individual', NULL, '358000000000', 'Kisworo Ari Wibowo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:24'),
+(100, 'Individual', NULL, '358000000000', 'Sukarno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(101, 'Individual', NULL, '358000000000', 'Budi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(102, 'Individual', NULL, '358000000000', 'Yanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(103, 'Individual', NULL, '358000000000', 'Sandi Hadi Susanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(104, 'Individual', NULL, '358000000000', 'Dwi Yulianto Binawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(105, 'Individual', NULL, '358000000000', 'Bagus Hendi Christanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(106, 'Individual', NULL, '358000000000', 'Judha Bagus Prasetyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(107, 'Individual', NULL, '358000000000', 'Nur Djunaidi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(108, 'Individual', NULL, '358000000000', 'Nanang Supriono', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(109, 'Individual', NULL, '358000000000', 'Sunardi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(110, 'Individual', NULL, '358000000000', 'Achmad Fahmi A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(111, 'Individual', NULL, '358000000000', 'Djodi Surya Pamungkas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(112, 'Individual', NULL, '358000000000', 'Elus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(113, 'Individual', NULL, '358000000000', 'Eko Purnomo W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(114, 'Individual', NULL, '358000000000', 'Yudhi Handoyoputro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(115, 'Individual', NULL, '358000000000', 'Doni Arianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(116, 'Individual', NULL, '358000000000', 'Dewi Ratih Ayu Rachmani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(117, 'Individual', NULL, '358000000000', 'Laga Widya Eka Putera', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25'),
+(118, 'Individual', NULL, '358000000000', 'Wawan Hermanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 13:31:16', '2024-02-12 14:38:25');
 
 -- --------------------------------------------------------
 
@@ -764,7 +780,9 @@ INSERT INTO `uri_table` (`id_keyword`, `word_name`, `slug`, `isUrl`, `uri_conten
 (40, 'Siola Building', 'siola-building', 'true', 'https://id.wikipedia.org/wiki/Siola'),
 (41, 'Balai Pemuda Surabaya', 'balai-pemuda-surabaya', 'true', 'https://disbudporapar.surabaya.go.id/adinda/portaldata/cagarbudaya/detail/balai-pemuda-surabaya'),
 (42, 'Surabaya', 'surabaya', 'true', 'https://en.wikipedia.org/wiki/Surabaya'),
-(43, 'Malang', 'malang', 'true', 'https://id.wikipedia.org/wiki/Kota_Malang');
+(43, 'Malang', 'malang', 'true', 'https://id.wikipedia.org/wiki/Kota_Malang'),
+(44, 'what is domain', 'what-is-domain', 'false', '<h2>What is a domain name?</h2><p>A domain name is a string of text that maps to an alphanumeric IP address, used to access a website from client software. In plain English, a domain name is the text that a user types into a browser window to reach a particular website. For instance, the domain name for Google is ‘google.com’.</p><p>The actual address of a website is a complex numerical IP address (e.g. 192.0.2.2), but thanks to DNS, users are able to enter human-friendly domain names and be routed to the websites they are looking for. This process is known as a DNS lookup.</p><figure class=\"image\"><img style=\"aspect-ratio:1024/506;\" src=\"/assets/img/uploads/1708066244_url-structure.jpg\" width=\"1024\" height=\"506\"></figure><h3>Who manages domain names?</h3><p>Domain names are all managed by domain registries, which delegate the reservation of domain names to registrars. Anyone who wants to create a website can register a domain name with a registrar, and there are currently over 300 million registered domain names.</p><h3>What is the difference between a domain name and a URL?</h3><p>A uniform resource locator (URL), sometimes called a web address, contains the domain name of a site as well as other information, including the protocol and the path. For example, in the URL ‘https://cloudflare.com/learning/’, ‘cloudflare.com’ is the domain name, while ‘https’ is the protocol and ‘/learning/’ is the path to a specific page on the website.</p><figure class=\"image\"><img style=\"aspect-ratio:1068/792;\" src=\"/assets/img/uploads/1708066215_how-do-domain-names-work.png\" width=\"1068\" height=\"792\"></figure>'),
+(45, 'Legal space building', 'legal-space-building', 'false', '<h2>Legal space building</h2><p>Before discussing the right to space on land more deeply, one needs to know in advance the definition of the space on the land itself. RAT is the space above the land surface that is used for certain activities whose control, ownership, use and utilization are separate from the control, ownership, use and utilization of land plot. So, if for example we have ownership of right of management or any land rights, with a certain limit, there is also a space on the land separated from its underlying right.</p><p>To make it easier to imagine the meaning and visualization of the RAT and RBT, we can imagine the existence of different layers and dimensions in each segment where each layer has its own rules. The rights on (surface) land have their own provisions, as well as the RAT and RBT. This is different from the previous rule, where we can only have rights to 1 dimension, namely the rights over (surface) land.</p><figure class=\"image\"><img style=\"aspect-ratio:850/576;\" src=\"/assets/img/uploads/1708067401_Building-Legal-Space-3D-including-Premises-3D-Building-Common-Part-3D-and.png\" width=\"850\" height=\"576\"></figure><p>Then how is the granting of land rights/right of management in the upper land space? Is it true that we can have space?</p><p>Provisions regarding the granting of land rights/right of management on space on land are regulated in paragraph (4) of Job Creation Law. Under Article 146 of the Job Creation Law, land or space formed by space on land used for certain activities may be granted several rights, such as:</p><ul><li>right to build;&nbsp;</li><li>right of use; or&nbsp;</li><li>right of management.</li></ul><p>Then what about the limits of ownership of the upper land space? To what extent can the upper ground space be owned? By the holder of the right of management, the land is given in accordance with the basic building coefficient (KDB), building floor coefficient (KLB) and adjusted to the spatial plan. Therefore, this allows for different provisions in each region, province, and region, because of course each region will have different spatial plans.</p><p>Further provisions regarding RAT are regulated in the Government Regulation No. 18 of 2021 (GR 18/2021) which is divided into 4 parts, including:</p><ul><li>Part 1 (Articles 74 and 75 concerning upper space on land objects), regulates:</li></ul><ol><li>The use and utilization of land rights is limited by height limits according to the KDB and KLB;</li><li>The depth limit is regulated in the spatial plan or up to a depth of 30 (thirty) meters from the land surface in the event that it has not been regulated in the spatial plan;</li><li>If there is utilization of oil and gas resources as well as minerals and coal, land rights in the underground space cannot be granted.</li></ol><ul><li>Part 2 (Emergence of right of Management, Right to Build, Right of Use in the upper space on land)<br>These provisions are regulated in the second part of the GR 18/2021, namely, under the Articles 76 until 80;</li><li>Part 3 (Subject, Time Period, Encumbrance, Transfer, Release, Cancellation of Right of Management, Right to Build and Right of Use on upper space on land)</li></ul><p>Provisions regarding the subject, the period, assignment, transfer and release, and cancellation of right of management, right to build, and right of use shall apply <i>mutatis mutandis</i> to the provisions regarding the subject, time period, assignment, transfer and release, and cancellation of right of management, right to build, and the right to use over the RAT;</p><ul><li>Part 4 (Removal of Management Rights, Right to Build and Right of Use in RAT)</li></ul><p>Regarding the details of the provisions and several conditions related to the removal of right of management, right to build, and right of use are regulated in Articles 82 and 83 of GR 18/2021.<br>&nbsp;</p>');
 
 -- --------------------------------------------------------
 
@@ -841,7 +859,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `critics`
 --
 ALTER TABLE `critics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `parcel_table`
@@ -853,13 +871,13 @@ ALTER TABLE `parcel_table`
 -- AUTO_INCREMENT for table `residents_table`
 --
 ALTER TABLE `residents_table`
-  MODIFY `id_resident` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id_resident` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `uri_table`
 --
 ALTER TABLE `uri_table`
-  MODIFY `id_keyword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_keyword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `users`

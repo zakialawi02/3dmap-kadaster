@@ -4,7 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
 use Mpdf\Mpdf;
 
 // Include the database connection file
-include_once 'db_connect.php';
+include 'db_connect.php';
 
 $objectID = $_GET['objectId'];
 $residentID = $_GET['idr'];

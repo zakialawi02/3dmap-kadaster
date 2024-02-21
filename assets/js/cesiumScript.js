@@ -3654,13 +3654,16 @@ $(document).ready(function () {
         zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618555":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618555");
+        zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "618566":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "618566");
+        zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
         break;
       case "602474":
-        // Implementasi logika untuk kasus ini
+        setTransparentByobject_id(rusunawaLegal, "602474");
+        zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
         break;
       case "619145":
         // Implementasi logika untuk kasus ini

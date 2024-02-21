@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include_once 'db_connect.php';
+include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['user']) && !empty($_GET['user'])) {

@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include_once 'db_connect.php';
+include 'db_connect.php';
 
 use Ausi\SlugGenerator\SlugGenerator;
 
