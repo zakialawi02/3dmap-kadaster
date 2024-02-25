@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     } else {
         // ge all data
-        $sql = "SELECT rt.*, rm.*, t.*
+        $sql = "SELECT rt.id as renter2room_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rm.*, t.*
         FROM renters_tenants rt
         LEFT JOIN rooms_table rm ON rt.room_id = rm.room_id
         LEFT JOIN tenants_table t ON rt.tenant_id = t.id

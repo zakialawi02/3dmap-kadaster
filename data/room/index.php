@@ -21,7 +21,7 @@
 
     </style>
 
-    <title>Parcel Data</title>
+    <title>Rooms Data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>

@@ -18,7 +18,7 @@
 
     </style>
 
-    <title>Add parcel data</title>
+    <title>Add legal parcel data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>

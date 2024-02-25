@@ -18,7 +18,7 @@
 
     </style>
 
-    <title>Add parcel data</title>
+    <title>Add renter data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
@@ -39,25 +39,66 @@
                 <?php endif ?>
                 <form action="/action/save-renter.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="parcel_id" class="form-label">Parcel ID</label>
-                        <input type="text" class="form-control" id="parcel_id" name="parcel_id" value="<?= old('parcel_id'); ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" value="<?= old('parcel_name'); ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
-                        <select class="form-select form-select" id="parcelOccupant" name="parcelOccupant" placeholder="select">
-                            <option value=""></option>
-                            <?php foreach ($residents_table as $val) : ?>
-                                <option value="<?= $val['id_resident']; ?>"><?= $val['resident_name']; ?></option>
-                            <?php endforeach ?>
+                        <label for="room_id" class="form-label">Select Room</label>
+                        <select class="form-select" id="room_id" name="room_id" required>
+                            <option value="" disabled selected>Select Rooms</option>
+                            <!-- get with ajax asycn -->
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="keywordTag" class="form-label">Tag</label>
-                        <input type="text" id="multiSelectTag" name="multiSelectTag" value="[<?= old('tag'); ?>]" />
+                        <label for="tenant_name" class="form-label">Name of Person</label>
+                        <input type="text" class="form-control" id="tenant_name" name="tenant_name" value="<?= old('tenant_name'); ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name_number" class="form-label">Code/Identification Resident Number (NIK)</label>
+                        <input type="text" class="form-control" id="name_number" name="name_number" value="<?= old('name_number'); ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tenant_job" class="form-label">Job</label>
+                        <input type="text" class="form-control" id="tenant_job" name="tenant_job" value="<?= old('tenant_job'); ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tenant_religion" class="form-label">Religion</label>
+                        <input type="text" class="form-control" id="tenant_religion" name="tenant_religion" value="<?= old('tenant_religion'); ?>" required>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="tenant_address" class="form-label">Address</label>
+                        <div class="mb-3 col-md-12">
+                            <label for="tenant_address" class="form-label">Address/Street Name</label>
+                            <input type="text" class="form-control" id="tenant_address" name="tenant_address" value="<?= old('tenant_address'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="tenant_village" class="form-label">Village</label>
+                            <input type="text" class="form-control" id="tenant_village" name="tenant_village" value="<?= old('tenant_village'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="tenant_district" class="form-label">District</label>
+                            <input type="text" class="form-control" id="tenant_district" name="tenant_district" value="<?= old('tenant_district'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="tenant_city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="tenant_city" name="tenant_city" value="<?= old('tenant_city'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="tenant_province" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="tenant_province" name="tenant_province" value="<?= old('tenant_province'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-sm-2">
+                            <label for="tenant_rt" class="form-label">RT</label>
+                            <input type="text" class="form-control" id="tenant_rt" name="tenant_rt" value="<?= old('tenant_rt'); ?>" required>
+                        </div>
+                        <div class="mb-3 col-sm-2">
+                            <label for="tenant_rw" class="form-label">RW</label>
+                            <input type="text" class="form-control" id="tenant_rw" name="tenant_rw" value="<?= old('tenant_rw'); ?>" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="due_started" class="form-label">Contract started</label>
+                        <input type="date" class="form-control" id="due_started" name="due_started" value="<?= old('due_started'); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="due_finished" class="form-label">Contract finished</label>
+                        <input type="date" class="form-control" id="due_finished" name="due_finished" value="<?= old('due_finished'); ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -77,22 +118,27 @@
     <script src="/assets/js/script.js"></script>
 
     <script>
-        $(document).ready(function() {
-            const tagData = [
-                <?php foreach ($uri_table as $row) : ?> {
-                        id: <?= $row['id_keyword']; ?>,
-                        name: '<?= $row['word_name']; ?>'
-                    },
-                <?php endforeach ?>
-            ];
-            $('#multiSelectTag').magicSuggest({
-                data: tagData,
-                allowFreeEntries: false, // Set true if you want to allow free text entries
-                maxSelection: null, // Set to null to remove the limit
-                noSuggestionText: 'No suggestions',
-                placeholder: 'Type or click here',
+        getRooms(<?= json_encode(old('room_id')) ?? NULL; ?>);
+
+        function getRooms(selectedRoom) {
+            $.ajax({
+                method: "get",
+                url: "/action/get-room.php",
+                dataType: "json",
+                cache: true,
+                success: function(response) {
+                    console.log(response);
+                    $.each(response, function(index, roomsData) {
+                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + roomsData.parcel_id + " - " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
+                    });
+                    (selectedParcelId ? "" : $("#parcel_id").val(''));
+                },
+                error: function(error) {
+                    console.log("error");
+                    console.log(error);
+                }
             });
-        });
+        }
     </script>
 
 

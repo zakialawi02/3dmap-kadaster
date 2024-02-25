@@ -23,7 +23,7 @@
         }
     </style>
 
-    <title>Add parcel data</title>
+    <title>Edit URI data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
