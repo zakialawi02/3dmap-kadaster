@@ -26,7 +26,7 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-parcel.php' ?>
+<?php include_once '../../action/get-legal-object.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -43,7 +43,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/parcel/add-parcel.php" class="btn btn-primary">Add Parcel Data</a>
+                        <a href="/data/legal/add-legal.php" class="btn btn-primary">Add legal Data</a>
                     </div>
                     <div class="row p-3 m-2">
                         <div class="col-md-12">
@@ -60,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($parcel_table as $row) : ?>
+                                    <?php foreach ($legal_objects_table as $row) : ?>
                                         <?php $tags = json_decode($row['tag'], true); ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
@@ -74,8 +74,8 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/parcel/edit-parcel.php?parcel=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-parcel.php" method="post">
+                                                    <a href="/data/legal/edit-legal.php?parcel=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-legal-object.php" method="post">
                                                         <input type="hidden" name="object_id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>

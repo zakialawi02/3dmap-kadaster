@@ -404,7 +404,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     // ajax request with sucses and error
     $.ajax({
       type: "Get",
-      url: `../../action/get-parcel.php`,
+      url: `../../action/get-legal-object.php`,
       data: {
         objectId
       },
@@ -2901,7 +2901,7 @@ function resetClipTilesets(first = false) {
 $(document).ready(function () {
   async function fetchSuggestionsFromDatabase() {
     try {
-      const response = await fetch(`/action/get-parcel.php?get=get`); // Replace with your actual API endpoint
+      const response = await fetch(`/action/get-legal-object.php?get=get`); // Replace with your actual API endpoint
       if (!response.ok) {
         throw new Error('Error fetching suggestions');
       }

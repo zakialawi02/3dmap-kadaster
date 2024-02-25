@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         // update data
-        $sqlUpdateParcel = "UPDATE parcel_table SET id = '$object_id', parcel_id = '$parcel_id', parcel_name = '$parcelName' WHERE id = $object_id";
-        $resultSql = mysqli_query($conn, $sqlUpdateParcel);
+        $sqlUpdateLegalObject = "UPDATE legal_objects_table SET id = '$object_id', parcel_id = '$parcel_id', parcel_name = '$parcelName' WHERE id = $object_id";
+        $resultSql = mysqli_query($conn, $sqlUpdateLegalObject);
         if ($resultSql) {
             setFlashMessage('success', 'Data updated successfully');
         } else {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $parcel_id = $_POST['parcel_id'];
         $parcelName = $_POST['parcel_name'];
         // cek duplikat object id
-        $query = "SELECT * FROM parcel_table WHERE id = '$object_id'";
+        $query = "SELECT * FROM legal_objects_table WHERE id = '$object_id'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             setFlashMessage('error', 'Parcel id already exists');
@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
         // Prepare and execute the SQL query
-        $sqlInsertParcel = "INSERT INTO parcel_table (id, parcel_id, parcel_name) VALUES ('$object_id', '$parcel_id', '$parcelName')";
-        $resultSql = mysqli_query($conn, $sqlInsertParcel);
+        $sqlInsertLegalObject = "INSERT INTO legal_objects_table (id, parcel_id, parcel_name) VALUES ('$object_id', '$parcel_id', '$parcelName')";
+        $resultSql = mysqli_query($conn, $sqlInsertLegalObject);
         foreach ($_POST['multiSelectTag'] as $tagId) {
             $sqlInsert = "INSERT INTO linked_uri (object_id, id_keyword) VALUES ('$object_id', '$tagId')";
             $resultSql = mysqli_query($conn, $sqlInsert);
@@ -73,5 +73,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 $conn->close();
 
-header("Location: /data/parcel");
+header("Location: /data/legal");
 exit();

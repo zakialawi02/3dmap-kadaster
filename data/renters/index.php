@@ -21,7 +21,7 @@
 
     </style>
 
-    <title>Parcel Data</title>
+    <title>Renters Data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
@@ -43,7 +43,7 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/room/add-room.php" class="btn btn-primary">Add Room Data</a>
+                        <a href="/data/renters/add-renter.php" class="btn btn-primary">Add Renter</a>
                     </div>
                     <div class="row p-3 m-2">
                         <div class="col-md-12">
@@ -55,6 +55,7 @@
                                         <th scope="col">Room Name</th>
                                         <th scope="col">Space Usage</th>
                                         <th scope="col">Tenant Name</th>
+                                        <th scope="col">Tenure Status</th>
                                         <th scope="col">Started</th>
                                         <th scope="col">Finished</th>
                                         <th scope="col">Action</th>
@@ -69,16 +70,17 @@
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['space_usage'] ?></td>
                                             <td><?= $row['tenant_name'] ?></td>
+                                            <td><?= $row['tenure_status'] ?></td>
                                             <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
                                             <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <!-- <a href="/data/residents/edit-residents.php?residents=<?= $row['id_resident']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['id_resident']; ?>" action="/action/delete-residents.php" method="post">
-                                                        <input type="hidden" name="id_resident" value="<?= $row['id_resident']; ?>">
+                                                    <a href="/data/residents/edit-residents.php?residents=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-renters.php" method="post">
+                                                        <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id_resident']; ?>"></button>
-                                                    </form> -->
+                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

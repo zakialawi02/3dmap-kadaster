@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     } else {
         // ge all data
-        $sql = "SELECT rt.*, rm.*, t.*
+        $sql = "SELECT rt.id as renter2room_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rm.*, t.*
         FROM renters_tenants rt
         LEFT JOIN rooms_table rm ON rt.room_id = rm.room_id
         LEFT JOIN tenants_table t ON rt.tenant_id = t.id
@@ -50,24 +50,24 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                     'isUrl', u.isUrl
                     )
                 ) AS tag
-                FROM parcel_table p
+                FROM legal_objects_table p
                 LEFT JOIN linked_uri lu ON p.parcel_id = lu.parcel_id
                 LEFT JOIN residents_table r ON p.parcel_occupant = r.id_resident
                 LEFT JOIN uri_table u ON lu.id_keyword = u.id_keyword
                 GROUP BY p.id, p.parcel_id, p.parcel_name, p.parcel_occupant
                 ORDER BY p.parcel_id";
         $result = $conn->query($sql);
-        $parcel_table = [];
+        $legal_objects_table = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $parcel_table[] = $row;
+                $legal_objects_table[] = $row;
             }
         }
-        echo json_encode($parcel_table);
+        echo json_encode($legal_objects_table);
     }
 }
 
 // echo "<pre>";
-// print_r($parcel_table);
+// print_r($legal_objects_table);
 
 mysqli_close($conn);
