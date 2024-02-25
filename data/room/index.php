@@ -31,7 +31,6 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
@@ -73,7 +72,12 @@
                                             <td><?= $row['organizer_id'] ?? "-" ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-
+                                                    <a href="/data/room/edit-room.php?room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['room_id']; ?>" action="/action/delete-room.php" method="post">
+                                                        <input type="hidden" name="room_id" value="<?= $row['room_id']; ?>">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['room_id']; ?>"></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

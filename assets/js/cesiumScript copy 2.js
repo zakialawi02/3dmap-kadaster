@@ -400,7 +400,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     // ajax request with sucses and error
     $.ajax({
       type: "Get",
-      url: `../../action/get-parcel.php`,
+      url: `../../action/get-legal-object.php`,
       data: {
         objectId
       },

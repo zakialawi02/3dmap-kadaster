@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $object_id = $_POST['object_id'];
 
     // SQL query to delete the parcel
-    $sql = "DELETE FROM parcel_table WHERE id = $object_id";
+    $sql = "DELETE FROM legal_objects_table WHERE id = $object_id";
     $conn->query($sql);
     if (mysqli_affected_rows($conn) > 0) {
         setFlashMessage('success', 'Data deleted successfully');
@@ -22,5 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 $conn->close();
 
-header("Location: /data/parcel");
+header("Location: /data/legal");
 exit();

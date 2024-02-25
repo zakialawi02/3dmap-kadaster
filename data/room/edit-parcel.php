@@ -23,14 +23,14 @@
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-parcel.php' ?>
+<?php include_once '../../action/get-legal-object.php' ?>
 <?php include_once '../../action/get-uri.php' ?>
 <?php include_once '../../action/get-residents.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
-    <?php $tags = json_decode($parcel_table['tag'], true) ?>
+    <?php $tags = json_decode($legal_objects_table['tag'], true) ?>
     <?php $tag = implode(", ", array_map(fn ($value) => $value['id_keyword'], $tags)); ?>
     <main>
         <div class="container ">
@@ -41,26 +41,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <form action="/action/save-parcel.php?parcel=<?= $parcel_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
+                <form action="/action/save-legal-object.php?parcel=<?= $legal_objects_table['parcel_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="ObjectID" class="form-label">Object ID</label>
-                        <input type="text" class="form-control" id="ObjectID" name="ObjectID" autocomplete="off" value="<?= $parcel_table['id']; ?>" disabled required>
+                        <input type="text" class="form-control" id="ObjectID" name="ObjectID" autocomplete="off" value="<?= $legal_objects_table['id']; ?>" disabled required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelIdNew" class="form-label">Parcel ID</label>
-                        <input type="hidden" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $parcel_table['parcel_id']; ?>" required>
-                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= old('parcel_id') ?? $parcel_table['parcel_id']; ?>" required>
+                        <input type="hidden" class="form-control" id="parcelId" name="parcelId" autocomplete="off" value="<?= $legal_objects_table['parcel_id']; ?>" required>
+                        <input type="text" class="form-control" id="parcelIdNew" name="parcelIdNew" autocomplete="off" value="<?= old('parcel_id') ?? $legal_objects_table['parcel_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="parcelName" class="form-label">Parcel Name</label>
-                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= old('parcel_name') ?? $parcel_table['parcel_name']; ?>">
+                        <input type="text" class="form-control" id="parcelName" name="parcelName" autocomplete="off" value="<?= old('parcel_name') ?? $legal_objects_table['parcel_name']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="parcelOccupant" class="form-label">Parcel Occupant</label>
                         <select class="form-select form-select" id="parcelOccupant" name="parcelOccupant" placeholder="select">
                             <option value=""></option>
                             <?php foreach ($residents_table as $val) : ?>
-                                <option value="<?= $val['id_resident']; ?>" <?= ($val['id_resident'] == $parcel_table['parcel_occupant'] ? "selected" : ""); ?>><?= $val['resident_name']; ?></option>
+                                <option value="<?= $val['id_resident']; ?>" <?= ($val['id_resident'] == $legal_objects_table['parcel_occupant'] ? "selected" : ""); ?>><?= $val['resident_name']; ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
