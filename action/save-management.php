@@ -6,7 +6,7 @@ include 'db_connect.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // jika request ajax
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-        if (isset($_GET['source']) && !empty($_GET['source'])) {
+        if (isset($_GET['source']) && !empty($_GET['source']) && $_GET['source'] == "add-room") {
             $organizer_name = $_POST['organizer_name'];
             $organizer_address = $_POST['organizer_address'];
             $organizer_city = $_POST['organizer_city'];
@@ -24,35 +24,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode($status);
         }
     }
-} else {
-    // save old form data
-    $oldForm = [
-        'object_id' => $_POST['object_id'],
-    ];
-    $_SESSION['oldForm'] = $oldForm;
-    if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
-        // update data lama
-
-        if ($resultSql) {
-            setFlashMessage('success', 'Data updated successfully');
-        } else {
-            setFlashMessage('error', 'Data update failed');
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    } else {
-        // save data baru
-
-        if ($resultSql) {
-            setFlashMessage('success', 'Data saved successfully');
-        } else {
-            setFlashMessage('error', 'Failed to save data');
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-
-    // Close the database connection
-    $conn->close();
-
-    header("Location: /data/legal");
-    exit();
 }

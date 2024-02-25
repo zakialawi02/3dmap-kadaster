@@ -160,13 +160,14 @@
 
         $("#newParcelForm").submit(function(e) {
             e.preventDefault();
+            const data = {
+                parcel_id: $("#NEWparcel_id").val(),
+                building: $("#building").val()
+            }
             $.ajax({
-                method: "post",
-                url: `/action/save-land-parcel.php?source=add-room`,
-                data: {
-                    parcel_id: $("#NEWparcel_id").val(),
-                    building: $("#building").val()
-                },
+                method: "POST",
+                url: `/action/save-land-parcel.php?source=add-legal`,
+                data: data,
                 dataType: "json",
                 success: function(response) {
                     if (response.status == "success") {

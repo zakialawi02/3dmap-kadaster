@@ -70,7 +70,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="legal_objectLabel">New Land Parcel</h5>
+                        <h5 class="modal-title" id="legal_objectLabel">New Parcel</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -191,13 +191,11 @@
 
         $("#legal_objectForm").submit(function(e) {
             e.preventDefault();
+            const data = {}
             $.ajax({
                 method: "post",
                 url: `/action/save-land-parcel.php?source=add-room`,
-                data: {
-                    parcel_id: $("#NEWparcel_id").val(),
-                    building: $("#building").val()
-                },
+                data: data,
                 dataType: "json",
                 success: function(response) {
                     if (response.status == "success") {
@@ -270,7 +268,7 @@
 
         $("#newManagementForm").submit(function(e) {
             e.preventDefault();
-            data = {
+            const data = {
                 organizer_name: $("#NEWorganizer_name").val(),
                 organizer_address: $("#NEWorganizer_address").val(),
                 organizer_city: $("#NEWorganizer_city").val(),
