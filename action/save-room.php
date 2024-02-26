@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $query = "SELECT * FROM rooms_table WHERE legal_object_id = '$legal_object_id'";
             $result = mysqli_query($conn, $query);
             if (mysqli_num_rows($result) > 0) {
-                setFlashMessage('error', 'This legal object/parcel or parcel is already assigned to a room.');
+                setFlashMessage('error', 'This legal object or parcel is already assigned to a room.');
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }

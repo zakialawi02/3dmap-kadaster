@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
 // Include the database connection file
 include 'db_connect.php';
 

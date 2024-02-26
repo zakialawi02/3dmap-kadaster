@@ -11,6 +11,9 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magicsuggest/2.1.5/magicsuggest-min.css" integrity="sha512-GSJWiGBeg4y85t66huKij+Oev1gKtVLfi/LKSZSyaSfPrNJORYM1lZkk94kpVtWAmDjYGDsxtLlHuFUtgVKBlQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -75,14 +78,8 @@
                     </div>
                     <div class="modal-body">
                         <form id="legal_objectForm" action="" method="POST" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="NEWparcel_id" class="form-label">Parcel ID</label>
-                                <input type="text" class="form-control" id="NEWparcel_id" name="NEWparcel_id" value="<?= old('NEWparcel_id'); ?>" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="building" class="form-label">Building</label>
-                                <input type="text" class="form-control" id="building" name="building" value="<?= old('building'); ?>">
-                            </div>
+                            <!-- FORM -->
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
@@ -109,7 +106,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="legal_object_id" class="form-label">Legal Object</label>
-                        <select class="form-select" id="legal_object_id" name="legal_object_id" required>
+                        <select class="form-select js-example-basic-single" id="legal_object_id" name="legal_object_id" style="width: 100%" required>
                             <option value="" disabled selected>Pilih Land Parcel</option>
                             <option value="addParcel">Tambah Baru</option>
                             <!-- get with ajax asycn -->
@@ -157,6 +154,10 @@
     <script src="/assets/js/script.js"></script>
 
     <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+
         getLegalObject2Select(<?= json_encode(old('legal_object_id')) ?? NULL; ?>);
         const legal_object = new bootstrap.Modal(document.getElementById('legal_object'), {
             keyboard: true
@@ -185,8 +186,7 @@
                 }, '', newurl);
             }
             getLegalObject2Select();
-            $("#NEWparcel_id").val("");
-            $("#building").val("");
+            $("#legal_objectForm")[0].reset();
         });
 
         $("#legal_objectForm").submit(function(e) {
@@ -262,8 +262,7 @@
                 }, '', newurl);
             }
             getManagement2Select();
-            $("#NEWparcel_id").val("");
-            $("#building").val("");
+            $("#newManagementForm")[0].reset();
         });
 
         $("#newManagementForm").submit(function(e) {

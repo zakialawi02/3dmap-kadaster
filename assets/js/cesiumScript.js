@@ -320,13 +320,14 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
     `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
     `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
-    `<tr><th>Occupant</th><td>${pickedFeature.getProperty("Occupant")}</td></tr>` +
     `<tr><th>Area</th><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
     `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
     `</tbody></table>`;
   return description;
 }
 
+let pickedFeature;
+let dataRoom;
 // Cek apakah siluet didukung
 if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   // Jika siluet didukung, atur warna siluet
@@ -366,14 +367,16 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     silhouetteGreen.selected = [];
 
-    const pickedFeature = viewer.scene.pick(movement.position);
+    pickedFeature = viewer.scene.pick(movement.position);
     if (!Cesium.defined(pickedFeature)) {
       clickHandler(movement);
+      pickedFeature = [];
       $(".property-panel").removeClass("property-panel-show");
       return;
     }
 
     if (typeof pickedFeature.getPropertyIds !== 'function') {
+      pickedFeature = [];
       console.error("Error: pickedFeature doesn't have a getPropertyIds function.");
       return;
     }
@@ -402,35 +405,49 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     const objectId = pickedFeature.getProperty("Tag");
     // console.log(objectId);
     // ajax request with sucses and error
+
     $.ajax({
       type: "Get",
-      url: `../../action/get-legal-object.php`,
-      data: {
-        objectId
-      },
+      url: `../../action/get-legal-object.php?source=map&objectId=${objectId}`,
+      cache: true,
       dataType: "json",
       success: function (response) {
         const data = response;
-        // console.log(data);
+        dataRoom = data;
+        console.log(data);
         const tags = JSON.parse(data.tag);
         // console.log("DATA TAG");
         // console.log(tags);
 
-        $("#card-title-property").html(`${data.id}`);
+        $("#card-title-property").html(`${data.object_id}`);
         const updatedParcelID = $('th:contains("parcel_id") + td');
         updatedParcelID.text(`${data.parcel_id}`);
+        const updatedName = $('th:contains("Name") + td');
+        updatedName.text(`${data.building}`);
+        if (data.room_id != undefined && data.room_id != null && data.room_id != "") {
+          // Hapus baris tabel setelah parcel_id
+          const deletedRows = updatedName.closest('tr').nextAll('tr');
+          deletedRows.remove();
 
-        // Update parcel_occupant & name dengan nilai yang baru
-        if (data.parcel_occupant != undefined && data.parcel_occupant != null && data.parcel_occupant != "") {
-          const updatedOccupant = $('th:contains("Occupant") + td');
-          updatedOccupant.html(`${data.resident_name} <button type="button" id="btnDetailOccupant" class="btn asbn cesium-button" data-occupant="${data.parcel_occupant}" data-parcel="${data.parcel_id}" data-bs-toggle="modal" data-bs-target="#detailOccupant">View <i class="bi bi-zoom-in"></i></button>`);
-        } else {
-          const updatedOccupant = $('th:contains("Occupant") + td');
-          updatedOccupant.closest('tr').remove();
-        }
-        if (data.parcel_name != undefined && data.parcel_name != null && data.parcel_name != "") {
-          const updatedName = $('th:contains("Name") + td');
-          updatedName.text(`${data.parcel_name}`);
+          // Tambahkan baris baru dengan nama "Room Data"
+          const dataRoomROW = `<tr><th>Room Data</th><td>${data.room_id} <button type="button" id="btnDetailRoom" class="btn asbn cesium-button" data-legal="${data.object_id}" data-parcel="${data.parcel_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailRoom">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          updatedName.closest('tr').after(dataRoomROW);
+          // Tambahkan baris baru dengan nama "Organizer Data"
+          const dataOrganizerROW = `<tr><th>Organizer Data</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          updatedName.closest('tr').next('tr').after(dataOrganizerROW);
+          // Tambahkan baris baru dengan nama "Tenant Detail"
+          const dataTenantROW = `<tr><th>Tenant Data</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          updatedName.closest('tr').next('tr').next('tr').after(dataTenantROW);
+
+          // Tambahkan baris baru dengan nama "Right"
+          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">View <i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest('tr').next('tr').next('tr').next('tr').after(dataRightROW);
+          // Tambahkan baris baru dengan nama "Restriction"
+          const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">View <i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').after(dataRestrictionROW);
+          // Tambahkan baris baru dengan nama "Responsibilities"
+          const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">View <i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').next('tr').after(dataResponsibilitiesROW);
         }
         // add URI
         if (Array.isArray(tags)) {
@@ -512,57 +529,100 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 
-// Menangani klik pada tombol "View (occupant)"
-$(document).on('click', '#btnDetailOccupant', function (e) {
+// Menangani klik pada tombol "View (room)"
+$(document).on('click', '#btnDetailRoom', function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
-  $('#detailOccupant .modal-body').html(loader);
+  $('#detailRoom .modal-body').html(loader);
   // Mendapatkan nilai ID dari atribut data
-  const occupant = $(this).data('occupant');
+  const legal = $(this).data('legal');
   const parcel_id = $(this).data('parcel');
+  const room_id = $(this).data('room');
+  const data = dataRoom;
+  const table =
+    `<table class="table"><tbody>` +
+    `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+    `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+    `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+    `<tr><th>Lease Aggrement Number</th><td style="width: 1%;">:</td><td> ## </td></tr>` +
+    `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
+    `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
+    `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
+    `<tr><th>Rent Fee</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
+    `<tr><th>Height</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Height")} m</td></tr>` +
+    `<tr><th>Area</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
+    `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
+    `</tbody></table>`;
+  $('#detailRoom .modal-body').html(table);
+});
 
-  // Lakukan AJAX GET request dengan menggunakan ID
+// Menangani klik pada tombol "View (organizer)"
+$(document).on('click', '#btnDetailOrganizer', function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $('#detailOrganizer .modal-body').html(loader);
+  // Mendapatkan nilai ID dari atribut data
+  const organizer_id = $(this).data('organizer');
+  const room_id = $(this).data('room');
+  const data = dataRoom;
   $.ajax({
-    url: `../../action/get-residents.php?idr=${occupant}&parcel_id=${parcel_id}`,
-    type: 'GET',
+    type: "get",
+    url: `../../action/get-management.php?source=map&organizer=${organizer_id}`,
     dataType: "json",
-    success: function (data) {
-      console.log(data);
-      const address = JSON.parse(data.resident_address);
-      const city = address ? (address.city ? address.city : '-') : '-';
-      const district = address ? (address.district ? address.district : '-') : '-';
-      const province = address ? (address.province ? address.province : '-') : '-';
+    success: function (response) {
+      const data = response;
       const table =
         `<table class="table"><tbody>` +
-        `<tr> <th>${data.resident_type == "Individual" ? "Individual" : data.resident_type == "Entity" ? "Institution/Group" : ''}</th> </tr>` +
-        `${data.resident_type === "Entity" ? `<tr><th>Name of Group/Institution</th><td style="width: 1%;">:</td><td>${data.resident_entity ?? "-"}</td></tr>` : ''}` +
-        `<tr><th>Name of Person</th><td style="width: 1%;">:</td><td>${data.resident_name}</td></tr>` +
-        `<tr><th>Identicifation Number (NIK)</th><td style="width: 1%;">:</td><td>${data.resident_code}</td></tr>` +
-        `<tr><th>Job</th><td style="width: 1%;">:</td><td>${data.resident_job ? data.resident_job : '-'}</td></tr>` +
-        `${data.resident_type === "Entity" ? `<tr><th>Job Title</th><td style="width: 1%;">:</td><td>${data.job_title ? data.job_title : '-'}</td></tr>` : ''}` +
-        `<tr><th>Phone Number</th><td style="width: 1%;">:</td><td>${data.phone_number ?? "-"}</td></tr>` +
-        `<tr><th>Address</th><td style="width: 1%;">:</td><td>${city ?? "-"}, ${district ?? "-"}, ${province ?? "-"}</td></tr>` +
-        `<tr><th>started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.started) ?? "-"}</td></tr>` +
-        `<tr><th>finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.finished) ?? "-"}</td></tr>` +
+        `<tr><th>Organizer Name</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
+        `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
+        `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
+        `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
         `</tbody></table>`;
-      $('#detailOccupant .modal-body').html(table);
-      const detailOccupantPDF = $(`<button type="button" id="detailOccupantPDF" class="btn asbn btn-primary" data-occupant="${data.id_resident}" data-parcel="${data.parcel_id}">PDF file <i class="bi bi-file-earmark-person-fill"></i></button>`);
-      // $('#detailOccupant .modal-body').append(detailOccupantPDF);
+      $('#detailOrganizer .modal-body').html(table);
     },
     error: function (error) {
-      $('#detailOccupant .modal-body').html("Error!!");
-      console.error('Error:', error);
+      console.log("error");
+      console.log(error);
     }
   });
 });
 
-$(document).on('click', '#detailOccupantPDF', function (e) {
+// Menangani klik pada tombol "View (Tenant)"
+$(document).on('click', '#btnDetailTenant', function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $('#detailTenant .modal-body').html(loader);
   // Mendapatkan nilai ID dari atribut data
-  const occupant = $(this).data('occupant');
-  const parcel_id = $(this).data('parcel');
-  const url = `/action/sertifikat_occupant.php?idr=${occupant}&objectId=${parcel_id}`;
-  window.open(url, '_blank').focus();
+  const tenant_id = $(this).data('tenant');
+  const renters_id = $(this).data('renter');
+  const room_id = $(this).data('room');
+  console.log(tenant_id);
+  console.log(renters_id);
+  const data = dataRoom;
+  if (tenant_id && renters_id) {
+    const rtrw = JSON.parse(data.tenant_rt_rw)
+    const table =
+      `<table class="table"><tbody>` +
+      `<tr><th>Name</th><td style="width: 1%;">:</td><td>${data.tenant_name}</td></tr>` +
+      `<tr><th style="width: 55%;">Code/Identification Resident Number (NIK)</th><td style="width: 1%;">:</td><td>${data.name_number}</td></tr>` +
+      `<tr><th>Job</th><td style="width: 1%;">:</td><td>${data.tenant_job}</td></tr>` +
+      `<tr><th>Religion</th><td style="width: 1%;">:</td><td>${data.tenant_religion}</td></tr>` +
+      `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.tenant_address}</td></tr>` +
+      `<tr><th>RT/RW</th><td style="width: 1%;">:</td><td>${rtrw.tenant_rt}/${rtrw.tenant_rw}</td></tr>` +
+      `<tr><th>Village</th><td style="width: 1%;">:</td><td>${data.tenant_village}</td></tr>` +
+      `<tr><th>District</th><td style="width: 1%;">:</td><td>${data.tenant_district}</td></tr>` +
+      `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.tenant_city}</td></tr>` +
+      `<tr><th>Province</th><td style="width: 1%;">:</td><td>${data.tenant_province}</td></tr>` +
+      `</tbody></table>`;
+    $('#detailTenant .modal-body').html(table);
+  } else {
+    const html = `<div><center>There are no tenants right now / No tenant data in Room ID: ${data.room_id}, ${data.building} </center></div>`;
+    $('#detailTenant .modal-body').html(html);
+  }
 });
+
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {

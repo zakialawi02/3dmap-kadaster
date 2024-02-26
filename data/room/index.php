@@ -31,6 +31,7 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
+
     <main>
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
@@ -55,6 +56,7 @@
                                         <th scope="col">Room ID</th>
                                         <th scope="col">Room Name</th>
                                         <th scope="col">Space Usage</th>
+                                        <th scope="col">Rent Fee</th>
                                         <th scope="col">Management</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -69,6 +71,7 @@
                                             <td><?= $row['room_id'] ?></td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['space_usage'] ?></td>
+                                            <td> Rp. <?= $row['rent_fee'] ?></td>
                                             <td><?= $row['organizer_id'] ?? "-" ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
