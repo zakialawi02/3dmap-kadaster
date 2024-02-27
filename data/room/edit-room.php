@@ -21,88 +21,30 @@
 
     </style>
 
-    <title>Add room data</title>
+    <title>Edit room data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
+<?php include_once '../../action/get-room.php' ?>
 
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
 
     <main>
-        <!-- Modal add management -->
-        <div class="modal fade" id="newManagement" tabindex="-1" aria-labelledby="newManagementLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newManagementLabel">New Organizer</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="newManagementForm" action="" method="POST" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="NEWorganizer_name" class="form-label">Organizer Name</label>
-                                <input type="text" class="form-control" id="NEWorganizer_name" name="NEWorganizer_name" value="<?= old('NEWorganizer_name'); ?>" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="NEWorganizer_head" class="form-label">Head of Organizer</label>
-                                <input type="text" class="form-control" id="NEWorganizer_head" name="NEWorganizer_head" value="<?= old('NEWorganizer_head'); ?>" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="NEWorganizer_address" class="form-label">Organizer Address</label>
-                                <input type="text" class="form-control" id="NEWorganizer_address" name="NEWorganizer_address" value="<?= old('NEWorganizer_address'); ?>" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="NEWorganizer_city" class="form-label">Organizer City</label>
-                                <input type="text" class="form-control" id="NEWorganizer_city" name="NEWorganizer_city" value="<?= old('NEWorganizer_city'); ?>" required>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                        <button type="submit" id="saveNewParcel" class="btn btn-primary">Submit</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal add parcel -->
-        <div class="modal fade" id="legal_object" tabindex="-1" aria-labelledby="legal_objectLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="legal_objectLabel">New Parcel</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="legal_objectForm" action="" method="POST" enctype="multipart/form-data">
-                            <!-- FORM -->
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                        <button type="submit" id="saveNewParcel" class="btn btn-primary">Submit</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
         <div class="container ">
-            <div class="row justify-content-center  m-2 p-3">
+            <div class="row justify-content-center  m-2 py-3">
                 <?php if (isset($flashMessage)) : ?>
                     <div class="alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
                         <span><?= $flashMessage['message']; ?></span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <form action="/action/save-room.php" method="POST" enctype="multipart/form-data">
+                <form action="/action/save-room.php?room=<?= $rooms_table['room_id']; ?>&legal=<?= $rooms_table['legal_object_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="room_id" class="form-label">Room ID</label>
-                        <input type="text" class="form-control" id="room_id" name="room_id" value="<?= old('room_id'); ?>" required>
+                        <input type="text" class="form-control" id="room_id" name="room_id" value="<?= old('room_id') ?? $rooms_table['room_id']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="legal_object_id" class="form-label">Legal Object</label>
@@ -114,11 +56,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="room_name" class="form-label">Room Name</label>
-                        <input type="text" class="form-control" id="room_name" name="room_name" value="<?= old('room_name'); ?>" required>
+                        <input type="text" class="form-control" id="room_name" name="room_name" value="<?= old('room_name') ?? $rooms_table['room_name']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="space_usage" class="form-label">Space Usage</label>
-                        <input type="text" class="form-control" id="space_usage" name="space_usage" value="<?= old('room_name'); ?>" required>
+                        <input type="text" class="form-control" id="space_usage" name="space_usage" value="<?= old('space_usage') ?? $rooms_table['space_usage']; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="organizer" class="form-label">Management</label>
@@ -132,14 +74,13 @@
                         <label for="rent_fee" class="form-label">Rent Fee</label>
                         <div class="input-group">
                             <div class="input-group-text">Rp.</div>
-                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee'); ?>" placeholder="200000" required>
+                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee') ?? $rooms_table['rent_fee']; ?>" placeholder="200000" required>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-
         </div>
     </main>
 
@@ -158,7 +99,7 @@
             $('.js-example-basic-single').select2();
         });
 
-        getLegalObject2Select(<?= json_encode(old('legal_object_id')) ?? NULL; ?>);
+        getLegalObject2Select(<?= (old('legal_object_id') != NULL) ? json_encode(old('legal_object_id')) : ($rooms_table['legal_object_id'] ?? NULL); ?>);
         const legal_object = new bootstrap.Modal(document.getElementById('legal_object'), {
             keyboard: true
         });
@@ -234,7 +175,7 @@
         }
     </script>
     <script>
-        getManagement2Select(<?= json_encode(old('organizer')) ?? NULL; ?>);
+        getManagement2Select(<?= (old('organizer') != NULL) ? json_encode(old('organizer')) : ($rooms_table['organizer_id'] ?? NULL); ?>);
         const newManagement = new bootstrap.Modal(document.getElementById('newManagement'), {
             keyboard: true
         });

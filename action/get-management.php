@@ -1,4 +1,6 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
+// Include the database connection file
 include 'db_connect.php';
 
 // jika request method get biasa
@@ -26,8 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // jika request ajax
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-    if (isset($_GET['']) && !empty($_GET[''])) {
-        # code...
+    if (isset($_GET['source']) && !empty($_GET['source']) && $_GET['source'] == "map" && isset($_GET['organizer'])) {
+        $organizer_id = $_GET['organizer'];
+        $sql = "SELECT * FROM managements_table
+                WHERE id = $organizer_id
+                LIMIT 1";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $organizer_table = $result->fetch_assoc();
+        }
+        $organizer_table = json_encode($organizer_table);
+        header('Content-Type: application/json');
+        echo $organizer_table;
     } else {
         // get without parameter
         // get all

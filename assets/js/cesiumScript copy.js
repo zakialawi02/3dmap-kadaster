@@ -2724,7 +2724,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2466906)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2478745)
 );
 rusunawaLegal.style = setColorStyle;
 

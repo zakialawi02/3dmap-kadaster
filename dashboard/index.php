@@ -44,11 +44,11 @@
                     URI Data
                 </a>
                 <a href="/data/room/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
-                    <i class="bi bi-people-fill"></i>
+                    <i class="bi bi-building-gear"></i>
                     Rooms Data
                 </a>
                 <a href="/data/renters/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
-                    <i class="bi bi-people-fill"></i>
+                    <i class="bi bi-person-vcard"></i>
                     Renters Data
                 </a>
                 <a href="/data/user/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">

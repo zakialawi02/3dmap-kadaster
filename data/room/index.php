@@ -31,7 +31,23 @@
 <body>
     <!-- HEADER -->
     <?php include '../../assets/view/dashboard_header.php' ?>
+
     <main>
+        <!-- Modal -->
+        <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="row justify-content-center  m-2 p-3">
                 <div class="row gap-2 ">
@@ -55,6 +71,7 @@
                                         <th scope="col">Room ID</th>
                                         <th scope="col">Room Name</th>
                                         <th scope="col">Space Usage</th>
+                                        <th scope="col">Rent Fee</th>
                                         <th scope="col">Management</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -69,10 +86,13 @@
                                             <td><?= $row['room_id'] ?></td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['space_usage'] ?></td>
-                                            <td><?= $row['organizer_id'] ?? "-" ?></td>
+                                            <td> Rp. <?= $row['rent_fee'] ?></td>
+                                            <td>
+                                                <?= (strlen($row['organizer_name'] ?? "") > 25) ? substr($row['organizer_name'], 0, 25) . '...' . '<button type="button" class="btn asbn btn-info btnDetailOrganizer" data-organizer="' . $row['organizer_id'] . '" data-bs-toggle="modal" data-bs-target="#detailOrganizer"><i class="bi bi-zoom-in"></i></button>' : ($row['organizer_name'] ?? "-"); ?>
+                                            </td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/room/edit-room.php?room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <a href="/data/room/edit-room.php?room=<?= $row['room_id']; ?>&legal=<?= $row['legal_object_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
                                                     <form id="delete-<?= $row['room_id']; ?>" action="/action/delete-room.php" method="post">
                                                         <input type="hidden" name="room_id" value="<?= $row['room_id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -103,25 +123,54 @@
     <script src="/assets/js/script.js"></script>
 
     <script>
-        $('.delete-btn').on('click', function() {
-            const userId = $(this).data('id');
-            Swal.fire({
-                title: 'Apakah Anda yakin ingin menghapus data ini?',
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus data!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#delete-' + userId).submit();
-                }
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                const userId = $(this).data('id');
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin menghapus data ini?',
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#delete-' + userId).submit();
+                    }
+                });
             });
-        });
 
-        const datatable = new DataTable('#datatable', {
-            scrollX: true,
+            const datatable = new DataTable('#datatable', {
+                scrollX: true,
+            });
+
+
+            $(document).on('click', '.btnDetailOrganizer', function(e) {
+                const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+                $('#detailOrganizer .modal-body').html(loader);
+                const organizer_id = $(this).data('organizer');
+                $.ajax({
+                    type: "get",
+                    url: `../../action/get-management.php?source=map&organizer=${organizer_id}`,
+                    dataType: "json",
+                    success: function(response) {
+                        const data = response;
+                        const table =
+                            `<table class="table"><tbody>` +
+                            `<tr><th>Organizer Name</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
+                            `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
+                            `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
+                            `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
+                            `</tbody></table>`;
+                        $('#detailOrganizer .modal-body').html(table);
+                    },
+                    error: function(error) {
+                        console.log("error");
+                        console.log(error);
+                    }
+                });
+            });
         });
     </script>
     <?php unset($_SESSION['oldForm']); ?>

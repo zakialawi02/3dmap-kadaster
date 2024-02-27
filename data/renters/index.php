@@ -51,9 +51,9 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">ObjectID</th>
                                         <th scope="col">Room ID</th>
                                         <th scope="col">Room Name</th>
-                                        <th scope="col">Space Usage</th>
                                         <th scope="col">Tenant Name</th>
                                         <th scope="col">Tenure Status</th>
                                         <th scope="col">Started</th>
@@ -66,16 +66,16 @@
                                     <?php foreach ($renters_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
+                                            <td><?= $row['legal_object_id'] ?></td>
                                             <td><?= $row['room_id'] ?></td>
                                             <td><?= $row['room_name'] ?></td>
-                                            <td><?= $row['space_usage'] ?></td>
                                             <td><?= $row['tenant_name'] ?></td>
                                             <td><?= $row['tenure_status'] ?></td>
                                             <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
                                             <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/residents/edit-residents.php?residents=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <a href="/data/renters/edit-renter.php?Tenant=<?= $row['id']; ?>&Room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
                                                     <form id="delete-<?= $row['id']; ?>" action="/action/delete-renters.php" method="post">
                                                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -125,6 +125,10 @@
 
         const datatable = new DataTable('#datatable', {
             scrollX: true,
+        });
+        datatable.on('click', 'button', function(e) {
+            let data = datatable.row(e.target.closest('tr')).data();
+
         });
     </script>
     <?php unset($_SESSION['oldForm']); ?>

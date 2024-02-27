@@ -133,11 +133,11 @@
 
   <main>
     <!-- Modal -->
-    <div class="modal fade" id="detailOccupant" tabindex="-1" aria-labelledby="detailOccupantLabel" aria-hidden="true">
+    <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailOccupantLabel">Detail Occupant</h1>
+            <h1 class="modal-title fs-5" id="detailRoomLabel">Detail Rooms</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -146,6 +146,38 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="layer-panel card">
       <div class="card-body p-2">

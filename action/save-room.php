@@ -20,9 +20,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'rent_fee' => $_POST['rent_fee'],
         ];
         $_SESSION['oldForm'] = $oldForm;
-        if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
+        if (isset($_GET['room']) && !empty($_GET['room']) && isset($_GET['legal']) && !empty($_GET['legal'])) {
             // update data lama
-
+            $roomId = $_GET['room'];
+            $room_id = $_GET['room'];
+            $room_idNEW = $_POST['room_id'];
+            $legal_object_id = $_GET['legal'];
+            $legal_object_idNEW = $_POST['legal_object_id'];
+            $room_name = $_POST['room_name'];
+            $space_usage = $_POST['space_usage'];
+            $organizer = $_POST['organizer'];
+            $rent_fee = $_POST['rent_fee'];
+            if ($room_id != $room_idNEW) {
+                // jika room_id beda/ganti
+                // cek duplikat room id NEW
+                $query = "SELECT * FROM rooms_table WHERE room_id = '$room_idNEW'";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) > 0) {
+                    setFlashMessage('error', 'Room Id already exists');
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                    exit();
+                }
+                $room_id = $room_idNEW;
+            }
+            if ($legal_object_id != $legal_object_idNEW) {
+                // jika legal_object_id beda/ganti
+                // cek duplikat legal_object_id 
+                $query = "SELECT * FROM rooms_table WHERE legal_object_id = '$legal_object_idNEW'";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) > 0) {
+                    setFlashMessage('error', 'This legal object or parcel is already assigned to a room.');
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                    exit();
+                }
+                $legal_object_id = $legal_object_idNEW;
+            }
+            $sqlUpdateRoom = "UPDATE rooms_table SET room_id = '$room_id', legal_object_id = $legal_object_id, organizer_id = $organizer, room_name = '$room_name', space_usage = '$space_usage', rent_fee = '$rent_fee' WHERE room_id = '$roomId'";
+            $resultSql = mysqli_query($conn, $sqlUpdateRoom);
             if ($resultSql) {
                 setFlashMessage('success', 'Data updated successfully');
             } else {
@@ -49,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $query = "SELECT * FROM rooms_table WHERE legal_object_id = '$legal_object_id'";
             $result = mysqli_query($conn, $query);
             if (mysqli_num_rows($result) > 0) {
-                setFlashMessage('error', 'This legal object/parcel or parcel is already assigned to a room.');
+                setFlashMessage('error', 'This legal object or parcel is already assigned to a room.');
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }
