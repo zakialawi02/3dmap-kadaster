@@ -5,9 +5,21 @@ include 'db_connect.php';
 
 // jika request method get biasa
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['parcel']) && !empty($_GET['parcel'])) {
+    if (isset($_GET['Tenant']) && !empty($_GET['Tenant']) && isset($_GET['Room']) && !empty($_GET['Room'])) {
         // get with param
-
+        $tenantID = $_GET['Tenant'];
+        $roomID = $_GET['Room'];
+        $sql = "SELECT rt.id as renter2room_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rm.*, t.*
+        FROM renters_tenants rt
+        LEFT JOIN rooms_table rm ON rt.room_id = rm.room_id
+        LEFT JOIN tenants_table t ON rt.tenant_id = t.id
+        WHERE rt.id = $tenantID";
+        $result = $conn->query($sql);
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $renters_table = $result->fetch_assoc();
+        }
+        // debugVarDump($renters_table);
     } else {
         // ge all data
         $sql = "SELECT rt.id as renter2room_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rm.*, t.*

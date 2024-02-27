@@ -75,7 +75,7 @@
                                             <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/residents/edit-residents.php?residents=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <a href="/data/renters/edit-renter.php?Tenant=<?= $row['id']; ?>&Room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
                                                     <form id="delete-<?= $row['id']; ?>" action="/action/delete-renters.php" method="post">
                                                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">

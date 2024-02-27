@@ -232,6 +232,22 @@ function thirdCamera() {
   });
 }
 
+function DD2DMS(deg, direct = false) {
+  var direction = "";
+  if (direct == "lat") {
+    direction = deg >= 0 ? "N" : "S";
+  } else if (direct == "lon") {
+    direction = deg >= 0 ? "E" : "W";
+  } else {
+    direction = deg >= 0 ? "N" : "S";
+  }
+  const absoluteDeg = Math.abs(deg);
+  const degrees = Math.floor(absoluteDeg);
+  const minutes = (absoluteDeg - degrees) * 60;
+  const seconds = (minutes - Math.floor(minutes)) * 60;
+  return `${degrees}° ${Math.floor(minutes)}' ${seconds.toFixed(2)}" ${direction}`;
+}
+
 function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
   // Zoom to the tileset
   const heading = Cesium.Math.toRadians(headingDegrees);
@@ -317,11 +333,11 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
     `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
     `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
-    `<tr><th>Height</th><td>${pickedFeature.getProperty("Height")}</td></tr>` +
-    `<tr><th>Area</th><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
-    `<tr><th>Volume</th><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Height</th><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+    `<tr><th>Area</th><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Volume</th><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
   return description;
 }
@@ -440,13 +456,13 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           updatedName.closest('tr').next('tr').next('tr').after(dataTenantROW);
 
           // Tambahkan baris baru dengan nama "Right"
-          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">View <i class="bi bi-eye"></i></button></td></tr>`;
+          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest('tr').next('tr').next('tr').next('tr').after(dataRightROW);
           // Tambahkan baris baru dengan nama "Restriction"
-          const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">View <i class="bi bi-eye"></i></button></td></tr>`;
+          const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').after(dataRestrictionROW);
           // Tambahkan baris baru dengan nama "Responsibilities"
-          const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">View <i class="bi bi-eye"></i></button></td></tr>`;
+          const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').next('tr').after(dataResponsibilitiesROW);
         }
         // add URI
@@ -548,12 +564,12 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
     `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
-    `<tr><th>Rent Fee</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Longitude")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Latitude")}</td></tr>` +
-    `<tr><th>Height</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("Height")} m</td></tr>` +
-    `<tr><th>Area</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("area")} m²</td></tr>` +
-    `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${pickedFeature.getProperty("volume")} m³</td></tr>` +
+    `<tr><th>Rent Fee (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Height</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+    `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
   $('#detailRoom .modal-body').html(table);
 });
@@ -2826,7 +2842,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
 );
 
 const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2465322)
+  await Cesium.Cesium3DTileset.fromIonAssetId(2478741)
 );
 
 rusunawaLegal.style = setColorStyle;

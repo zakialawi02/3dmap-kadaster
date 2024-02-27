@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // jika request ajax
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     if (isset($_GET['source']) && !empty($_GET['source']) && $_GET['source'] == "map" && isset($_GET['objectId'])) {
-
         $objectId = $_GET['objectId'];
         $sql = "SELECT lo.parcel_id, lo.parcel_name, lp.building, 
                rm.room_id, rm.organizer_id, rm.room_name, rm.space_usage, rm.rent_fee,
