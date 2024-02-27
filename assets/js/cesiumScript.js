@@ -465,6 +465,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').next('tr').after(dataResponsibilitiesROW);
         }
+        scan();
         // add URI
         if (Array.isArray(tags)) {
           let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
@@ -572,6 +573,7 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
   $('#detailRoom .modal-body').html(table);
+  scan();
 });
 
 // Menangani klik pada tombol "View (organizer)"
@@ -597,6 +599,7 @@ $(document).on('click', '#btnDetailOrganizer', function (e) {
         `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
         `</tbody></table>`;
       $('#detailOrganizer .modal-body').html(table);
+      scan();
     },
     error: function (error) {
       console.log("error");
@@ -614,8 +617,6 @@ $(document).on('click', '#btnDetailTenant', function (e) {
   const tenant_id = $(this).data('tenant');
   const renters_id = $(this).data('renter');
   const room_id = $(this).data('room');
-  console.log(tenant_id);
-  console.log(renters_id);
   const data = dataRoom;
   if (tenant_id && renters_id) {
     const rtrw = JSON.parse(data.tenant_rt_rw)
@@ -633,11 +634,33 @@ $(document).on('click', '#btnDetailTenant', function (e) {
       `<tr><th>Province</th><td style="width: 1%;">:</td><td>${data.tenant_province}</td></tr>` +
       `</tbody></table>`;
     $('#detailTenant .modal-body').html(table);
+    scan();
   } else {
     const html = `<div><center>There are no tenants right now / No tenant data in Room ID: ${data.room_id}, ${data.building} </center></div>`;
     $('#detailTenant .modal-body').html(html);
   }
 });
+// TARGETSCAN Siola
+function scan() {
+  console.log("SCAN");
+  // Mendapatkan semua elemen <div> dengan kelas "modal"
+  var modals = document.querySelectorAll('.TARGETSCAN');
+  // Iterasi melalui setiap elemen modal
+  modals.forEach(modal => {
+    // Mendapatkan teks dari elemen modal
+    const modalText = modal.textContent || modal.innerText;
+    // Mengecek apakah teks mengandung kata "Height"
+    if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Height)/ig, '<a href="/test" target="_blank">$1</a>');
+    }
+    // Mengecek apakah teks mengandung kata "Height"
+    if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Tenure Status)/ig, '<a href="/tests" target="_blank">$1</a>');
+    }
+  });
+}
 
 
 // Layering button Siola  ################################################################################

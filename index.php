@@ -133,7 +133,7 @@
 
   <main>
     <!-- Modal -->
-    <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
+    <div class="modal fade TARGETSCAN" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
@@ -148,7 +148,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+    <div class="modal fade TARGETSCAN" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
@@ -163,7 +163,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
+    <div class="modal fade TARGETSCAN" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
@@ -1383,7 +1383,7 @@
       <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card ">
+    <div class="property-panel card TARGETSCAN">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
