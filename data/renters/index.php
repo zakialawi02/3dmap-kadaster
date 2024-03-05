@@ -58,6 +58,8 @@
                                         <th scope="col">Tenure Status</th>
                                         <th scope="col">Started</th>
                                         <th scope="col">Finished</th>
+                                        <th scope="col">Lease of Agreement</th>
+                                        <th scope="col">Permit</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -73,9 +75,11 @@
                                             <td><?= $row['tenure_status'] ?></td>
                                             <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
                                             <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
+                                            <td><?= (!empty($row['agreement_number']) ? '<a href="/assets/PDF/agreement/' . str_replace('/', '.', $row['agreement_number']) . '.pdf" target="_blank"><i class="bi bi-download"></i></a><span> ' . $row['agreement_number'] . '</span>' : (empty($row['agreement_number']) && $row['tenure_status'] == "lease" ? '<button class="asbn btn btn-primary generateAgreement" data-room="' . $row['room_id'] . '" data-tenant="' . $row['tenant_id'] . '" data-from="' . $row['lp_id'] . '">Generate</button>' : '-')) ?></td>
+                                            <td><?= (!empty($row['permit_flats'])) ? '<a href="/assets/PDF/certificate/' . $row['permit_flats'] . '"><i class="bi bi-download" target="_blank"></i></a>' : '<span id="P-' . $row['tenant_id'] . '">No data</span>' ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/renters/edit-renter.php?Tenant=<?= $row['id']; ?>&Room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <a href="/data/renters/edit-renter.php?Tenant=<?= $row['tenant_id']; ?>&Room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
                                                     <form id="delete-<?= $row['id']; ?>" action="/action/delete-renters.php" method="post">
                                                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -119,6 +123,33 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#delete-' + userId).submit();
+                }
+            });
+        });
+
+        $(".generateAgreement").click(function(e) {
+            const buttonClicked = $(this);
+            const tenant_id = $(this).data('tenant');
+            const room_id = $(this).data('room');
+            const place = $(this).data('from');
+            $.ajax({
+                method: "POST",
+                url: `../../action/agreement.php`,
+                data: {
+                    tenant_id,
+                    room_id,
+                    place
+                },
+                dataType: "json",
+                success: function(response) {
+                    const agreementNumber = response;
+                    const file = agreementNumber.replace(/\//g, '.');
+                    buttonClicked.replaceWith(`<a href="/assets/PDF/agreement/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a><span> ${agreementNumber}</span>`);
+                    $(`#P-${tenant_id}`).replaceWith(`<a href="/assets/PDF/certificate/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a>`);
+                },
+                error: function(error) {
+                    console.log("error");
+                    console.log(error);
                 }
             });
         });

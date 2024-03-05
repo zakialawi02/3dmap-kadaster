@@ -40,7 +40,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <form action="/action/save-renter.php?Tenant=<?= $renters_table['id']; ?>&Room=<?= $renters_table['room_id']; ?>&renter2room_id=<?= $renters_table['renter2room_id']; ?>" method="POST" enctype="multipart/form-data">
+                <form action="/action/save-renter.php?Tenant=<?= $renters_table['tenant_id']; ?>&Room=<?= $renters_table['room_id']; ?>&renter2room_id=<?= $renters_table['renter2room_id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="room_id" class="form-label">Select Room</label>
                         <select class="form-select js-example-basic-single" id="room_id" name="room_id" style="width: 100%" required>

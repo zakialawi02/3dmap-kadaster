@@ -644,22 +644,22 @@ $(document).on('click', '#btnDetailTenant', function (e) {
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
-  var modals = document.querySelectorAll('.TARGETSCAN');
-  // Iterasi melalui setiap elemen modal
-  modals.forEach(modal => {
-    // Mendapatkan teks dari elemen modal
-    const modalText = modal.textContent || modal.innerText;
-    // Mengecek apakah teks mengandung kata "Height"
-    if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Height)/ig, '<a href="/test" target="_blank">$1</a>');
-    }
-    // Mengecek apakah teks mengandung kata "Height"
-    if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Tenure Status)/ig, '<a href="/tests" target="_blank">$1</a>');
-    }
-  });
+  // var modals = document.querySelectorAll('.TARGETSCAN');
+  // // Iterasi melalui setiap elemen modal
+  // modals.forEach(modal => {
+  //   // Mendapatkan teks dari elemen modal
+  //   const modalText = modal.textContent || modal.innerText;
+  //   // Mengecek apakah teks mengandung kata "Height"
+  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
+  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
+  //     modal.innerHTML = modal.innerHTML.replace(/(Height)/ig, '<a href="/test" target="_blank">$1</a>');
+  //   }
+  //   // Mengecek apakah teks mengandung kata "Height"
+  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
+  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
+  //     modal.innerHTML = modal.innerHTML.replace(/(Tenure Status)/ig, '<a href="/tests" target="_blank">$1</a>');
+  //   }
+  // });
 }
 
 
