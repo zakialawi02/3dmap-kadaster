@@ -561,7 +561,10 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
     `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
     `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Lease Aggrement Number</th><td style="width: 1%;">:</td><td> ## </td></tr>` +
+    `<tr><th>Lease Aggrement Number</th><td style="width: 1%;">:</td><td> ${data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== "" ? `<a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, '.')}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    </td></tr>` +
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/agreement/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    </td></tr>` +
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
     `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
@@ -2240,6 +2243,29 @@ $("#zoomToRusunawaLegal_5a26").on('click', function () {
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 
+// Layering Parcel Building  #############################
+// Function to toggle visibility based on feature objectId
+function toggleParcelVisibility(objectId, isVisible) {
+  parcelBD.entities.values.forEach(entity => {
+    if (entity.properties.id.getValue() == objectId) {
+      console.log(entity.show);
+      entity.show = isVisible;
+      console.log(entity.show);
+    }
+  });
+}
+
+$('#siolaParcel').change(function () {
+  toggleParcelVisibility("910222", $(this).is(':checked'));
+});
+
+$('#balaiParcel').change(function () {
+  toggleParcelVisibility("671122", $(this).is(':checked'));
+});
+
+$('#rusunawa').change(function () {
+  toggleParcelVisibility("598583", $(this).is(':checked'));
+});
 
 // Measure Toggle Tool
 var measure = false;
@@ -2736,6 +2762,11 @@ $("#resetTransparent").click(function () {
   resetTransparent(rusunawaLegal);
 });
 
+// Get Parcel (all building in one file geojson) ##########################################################################################
+  const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2488305));
+  await viewer.dataSources.add(parcelBD);
+
+
 // Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
@@ -3000,7 +3031,7 @@ function resetClipTilesets(first = false) {
 $(document).ready(function () {
   async function fetchSuggestionsFromDatabase() {
     try {
-      const response = await fetch(`/action/get-legal-object.php?get=get`); // Replace with your actual API endpoint
+      const response = await fetch(`/action/get-search.php?param=legal`); 
       if (!response.ok) {
         throw new Error('Error fetching suggestions');
       }
@@ -3008,7 +3039,7 @@ $(document).ready(function () {
       return data;
     } catch (error) {
       console.error('Error fetching suggestions:', error);
-      throw error; // You may want to handle this error further depending on your needs
+      throw error; 
     }
   }
 
@@ -3070,29 +3101,60 @@ $(document).ready(function () {
 
   (async function () {
     try {
-      const data = await fetchSuggestionsFromDatabase();
-      console.log(data);
-      data.forEach(item => {
-        // Push separate objects for data with the same ID
-        if (item.parcel_id != undefined && item.parcel_id != null && item.parcel_id != "") {
-          suggestionsData.push({
-            id: item.id,
-            data: item.parcel_id
-          });
+      try {
+        const legaldata = await fetch(`/action/get-search.php?param=legal`); 
+        if (!legaldata.ok) {
+          throw new Error('Error fetching suggestions');
         }
-        if (item.parcel_name != undefined && item.parcel_name != null && item.parcel_name != "") {
-          suggestionsData.push({
-            id: item.id,
-            data: item.parcel_name
-          });
+        const legalData = await legaldata.json();
+        await legalData.forEach(item => {
+          // Push separate objects for data with the same ID
+          if (item.id != undefined && item.id != null && item.id != "") {
+            suggestionsData.push({
+              id: item.id,
+              data: item.id
+            });
+          }
+        });
+      } catch (error) {
+        throw error;
+      }
+      try {
+        const roomdata = await fetch(`/action/get-search.php?param=room`); 
+        if (!roomdata.ok) {
+          throw new Error('Error fetching suggestions');
         }
-        if (item.resident_name != undefined && item.resident_name != null && item.resident_name != "") {
-          suggestionsData.push({
-            id: item.id,
-            data: item.resident_name
-          });
+        const roomData = await roomdata.json();
+        await roomData.forEach(item => {
+          // Push separate objects for data with the same ID
+          if (item.room_name != undefined && item.room_name != null && item.room_name != "") {
+            suggestionsData.push({
+              id: item.legal_object_id,
+              data: item.room_name
+            });
+          }
+        });
+      } catch (error) {
+        throw error;
+      }
+      try {
+        const parceldata = await fetch(`/action/get-search.php?param=parcel`); 
+        if (!parceldata.ok) {
+          throw new Error('Error fetching suggestions');
         }
-      });
+        const parcelData = await parceldata.json();
+        await parcelData.forEach(item => {
+          // Push separate objects for data with the same ID
+          if (item.parcel_id != undefined && item.parcel_id != null && item.parcel_id != "") {
+            suggestionsData.push({
+              id: item.id,
+              data: item.parcel_id
+            });
+          }
+        });
+      } catch (error) {
+        throw error;
+      }
 
       $("#searchInput").on('input', function (e) {
         const inputValue = $("#searchInput").val().toLowerCase();

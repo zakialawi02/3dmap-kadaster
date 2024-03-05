@@ -433,6 +433,8 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Building
                     boundary line <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
+                  <label class="" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola <a href="#" id="zoomToSiolaParcel"><i class="bi bi-zoom-in"></i></a></label>
 
                 </div>
               </div>
@@ -615,7 +617,8 @@
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_BB" id="balaiLegal_BB"> Underground space <a href="#" id="zoomToBalaiLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Building boundary line <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
-
+                  <label class="" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda<a href="#" id="zoomToBalaiParcel"><i class="bi bi-zoom-in"></i></a></label>
 
                 </div>
               </div>
@@ -1336,7 +1339,8 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Building
                     boundary line <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
-
+                  <label class="" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
 
                 </div>
               </div>
