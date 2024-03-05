@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none !important;
+        border: none;
+        scroll-behavior: smooth;
+      }
+      body {
+        background-image: url("/assets/img/frame.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      p {
+        padding: 0.1rem;
+        margin: 0.4rem 0.2rem;
+      }
+      #tenant_name {
+        font-size: 2rem;
+        text-decoration: underline black 1px;
+        margin: 0.6rem 0.4rem;
+      }
+    </style>
+
+    <title>Sertifikat</title>
+  </head>
+
+  <body style="margin: 1rem; padding: 2rem">
+    <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; margin-top: 3rem; padding: 0.5rem auto">
+      <h1 style="font-size: 2.2rem; font-weight: bold; padding: 0.6rem auto; margin: 0.8rem 0.2rem">{type} Permit Certificate for permit {place}</h1>
+    </div>
+    <div class="content" style="display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; margin: 0.6rem auto; text-align: center">
+      <p>Given to:</p>
+      <p id="tenant_name">{tenant_name}</p>
+      <p>Occupancy/Room Number: {room_id}</p>
+      <p>Status: {marriage_status}</p>
+      <p>Number of Residents: {number_residents}</p>
+      <p style="margin: 0.4rem auto"><b>Based on the Lease agreement letter number: {agreement_number}</b></p>
+      <p style="margin: 0.4rem auto"><b>This license is valid until {due_finished}</b></p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; padding: 0.4rem; margin: 1rem auto; margin-top: 2rem; width: 30%; position: absolute; right: 30px">
+      <p>Determined in {organizer_city}</p>
+      <p>On {date_now}</p>
+      <p>HEAD OF {organizer_name}</p>
+      <p>{organizer_city2}</p>
+      <p style="margin: 4rem"></p>
+      <p><u>{organizer_head}</u></p>
+    </div>
+  </body>
+</html>
