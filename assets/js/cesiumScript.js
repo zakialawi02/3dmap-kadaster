@@ -341,6 +341,31 @@ function createPickedFeatureDescription(pickedFeature) {
     `</tbody></table>`;
   return description;
 }
+function createPickedDataDescription(pickedData) {
+  const description =
+    `<table class="cesium-infoBox-defaultTable"><tbody>` +
+    `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
+    `<tr><th>GlobalId</th><td>${pickedData.GlobalId.getValue()}</td></tr>` +
+    `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
+    `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
+    `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
+    `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+    `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
+    `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
+    `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
+    `<tr><th>Measure Letter Number</th><td>${pickedData.measure_letter_number.getValue()}</td></tr>` +
+    `<tr><th>Name of Right Holder</th><td>${pickedData.right_holder.getValue()}</td></tr>` +
+    `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+    `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+    `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+    `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+    // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m²</td></tr>` +
+    `</tbody></table>`;
+  return description;
+}
 
 let pickedFeature;
 let dataRoom;
@@ -390,10 +415,22 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       $(".property-panel").removeClass("property-panel-show");
       return;
     }
-
     if (typeof pickedFeature.getPropertyIds !== 'function') {
+      $(".property-panel").removeClass("property-panel-show");
+      if (Cesium.defined(pickedFeature)) {
+        console.log(pickedFeature);
+        const entity = pickedFeature.id;
+        const pickedData=entity.properties.getValue();
+        if (pickedData) {
+          const pickData = entity.properties;
+          $(".property-panel").addClass("property-panel-show");
+          $("#property-content").html(createPickedDataDescription(pickData));
+          $("#card-title-property").html(`${pickData.id.getValue()}`);
+          return;
+        }
+      }
       pickedFeature = [];
-      console.error("Error: pickedFeature doesn't have a getPropertyIds function.");
+      console.error("Error: pickedFeature doesn't have a getPropertyIds function (in gml object).");
       return;
     }
     $(".property-panel").addClass("property-panel-show");
@@ -561,7 +598,7 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
     `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
     `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Lease Aggrement Number</th><td style="width: 1%;">:</td><td> ${data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== "" ? `<a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, '.')}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== "" ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, '.')}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>` : 'No Data!' }
     </td></tr>` +
     `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/agreement/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : 'No Data!' }
     </td></tr>` +
@@ -2248,9 +2285,7 @@ $("#zoomToRusunawaLegal_5a26").on('click', function () {
 function toggleParcelVisibility(objectId, isVisible) {
   parcelBD.entities.values.forEach(entity => {
     if (entity.properties.id.getValue() == objectId) {
-      console.log(entity.show);
       entity.show = isVisible;
-      console.log(entity.show);
     }
   });
 }
@@ -2763,11 +2798,12 @@ $("#resetTransparent").click(function () {
 });
 
 // Get Parcel (all building in one file geojson) ##########################################################################################
-  const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2488305));
+  // const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
+  // await viewer.dataSources.add(parcelBD);
+  const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
   await viewer.dataSources.add(parcelBD);
 
-
-// Get Siola   ############################################################################################
+// // Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
     show: true,
