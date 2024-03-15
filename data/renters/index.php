@@ -69,7 +69,7 @@
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
                                             <td><?= $row['legal_object_id'] ?></td>
-                                            <td><?= $row['room_id'] ?></td>
+                                            <td><?= $row['building']; ?> [<?= $row['room_id'] ?>]</td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['tenant_name'] ?></td>
                                             <td><?= $row['tenure_status'] ?></td>

@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `critics` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.critics: ~1 rows (approximately)
+-- Dumping data for table rrrcadastre2.critics: ~0 rows (approximately)
 REPLACE INTO `critics` (`id`, `critics`, `created_at`) VALUES
 	(4, 'Tes', '2024-02-16 07:20:39');
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `land_parcel_table` (
 -- Dumping data for table rrrcadastre2.land_parcel_table: ~3 rows (approximately)
 REPLACE INTO `land_parcel_table` (`id`, `parcel_id`, `building`) VALUES
 	(1, '3578071002B0001', 'Siola'),
-	(2, '3578071002B0002', 'Blai Pemuda'),
+	(2, '3578071002B0002', 'Balai Pemuda'),
 	(3, '3573031005B0001', 'Rusunawa Buring 2');
 
 -- Dumping structure for table rrrcadastre2.legal_objects_table
@@ -616,11 +616,12 @@ CREATE TABLE IF NOT EXISTS `managements_table` (
   `organizer_city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `organizer_head` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.managements_table: ~1 rows (approximately)
+-- Dumping data for table rrrcadastre2.managements_table: ~2 rows (approximately)
 REPLACE INTO `managements_table` (`id`, `organizer_name`, `organizer_address`, `organizer_city`, `organizer_head`) VALUES
-	(1, 'Public Works, Spatial Planning, Housing and Settlement Areas Office Settlement', 'jl. aaaaa', 'Malang', 'Drs. R. Dandung Julhardjanto, MT');
+	(1, 'Dinas Pekerjaan Umum, Penataan Ruang, Perumahan dan Kawasan Permukiman Permukiman', 'Jl.  Bingkil  Nomor  1', 'Malang', 'Drs. R. Dandung Julhardjanto, MT'),
+	(2, 'Dinas Perumahan Rakyat dan Kawasan Permukiman, Cipta Karya dan Tata Ruang', 'Jl. Taman Surya No.1', 'Surabaya', 'Lilik Arijanto, ST, MT');
 
 -- Dumping structure for table rrrcadastre2.renters_tenants
 CREATE TABLE IF NOT EXISTS `renters_tenants` (
@@ -637,15 +638,15 @@ CREATE TABLE IF NOT EXISTS `renters_tenants` (
   KEY `room_id` (`room_id`),
   CONSTRAINT `FK_renters_tenants_rooms_table` FOREIGN KEY (`room_id`) REFERENCES `rooms_table` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_renters_tenants_tenants_table` FOREIGN KEY (`tenant_id`) REFERENCES `tenants_table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.renters_tenants: ~100 rows (approximately)
+-- Dumping data for table rrrcadastre2.renters_tenants: ~101 rows (approximately)
 REPLACE INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due_finished`, `tenure_status`, `agreement_number`, `permit_flats`) VALUES
 	(9, 9, '0065', NULL, NULL, 'lease', NULL, NULL),
 	(10, 10, '0064', NULL, NULL, 'lease', NULL, NULL),
-	(11, 11, '0063', NULL, NULL, 'lease', '122', NULL),
+	(11, 11, '0063', NULL, NULL, 'lease', '', NULL),
 	(13, 13, '0167', NULL, NULL, 'lease', NULL, NULL),
-	(14, 14, '0177', NULL, NULL, 'lease', '0014/1679/3573403/2024', '0014.1679.3573403.2024.pdf'),
+	(14, 14, '0177', NULL, NULL, 'lease', '', ''),
 	(15, 15, '0168', NULL, NULL, 'lease', NULL, NULL),
 	(16, 16, '0169', NULL, NULL, 'lease', NULL, NULL),
 	(17, 17, '0170', NULL, NULL, 'lease', NULL, NULL),
@@ -654,8 +655,8 @@ REPLACE INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `du
 	(20, 20, '0173', NULL, NULL, 'lease', NULL, NULL),
 	(21, 21, '0174', NULL, NULL, 'lease', NULL, NULL),
 	(22, 22, '0175', NULL, NULL, 'lease', NULL, NULL),
-	(23, 23, '0178', NULL, NULL, 'lease', '0023/1679/3573403/2024', '0023.1679.3573403.2024.pdf'),
-	(24, 24, '0176', NULL, NULL, 'lease', '0024/1679/3573403/2024', '0024.1679.3573403.2024.pdf'),
+	(23, 23, '0178', NULL, NULL, 'lease', '', ''),
+	(24, 24, '0176', NULL, NULL, 'lease', '', ''),
 	(25, 25, '0130', NULL, NULL, 'lease', NULL, NULL),
 	(26, 26, '0119', NULL, NULL, 'lease', NULL, NULL),
 	(27, 27, '0120', NULL, NULL, 'lease', NULL, NULL),
@@ -731,7 +732,7 @@ REPLACE INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `du
 	(97, 97, '0085', NULL, NULL, 'lease', NULL, NULL),
 	(98, 98, '0086', NULL, NULL, 'lease', NULL, NULL),
 	(99, 99, '0087', NULL, NULL, 'lease', NULL, NULL),
-	(100, 100, '0088', NULL, NULL, 'lease', NULL, NULL),
+	(100, 100, '0088', NULL, NULL, 'lease', '', NULL),
 	(101, 101, '0089', NULL, NULL, 'lease', NULL, NULL),
 	(102, 102, '0090', NULL, NULL, 'lease', NULL, NULL),
 	(103, 103, '0091', NULL, NULL, 'lease', NULL, NULL),
@@ -758,59 +759,59 @@ CREATE TABLE IF NOT EXISTS `rooms_table` (
   CONSTRAINT `FK_rooms_table_managements_table` FOREIGN KEY (`organizer_id`) REFERENCES `managements_table` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.rooms_table: ~181 rows (approximately)
+-- Dumping data for table rrrcadastre2.rooms_table: ~172 rows (approximately)
 REPLACE INTO `rooms_table` (`room_id`, `legal_object_id`, `organizer_id`, `room_name`, `space_usage`, `rent_fee`) VALUES
-	('0001', 550615, NULL, 'Tourism Information Center', 'Tourism Information Center', ''),
-	('0002', 558371, NULL, 'PISA (Pusat Informasi Sahabat Anak)', 'PISA (Pusat Informasi Sahabat Anak)', ''),
-	('0003', 559588, NULL, 'public space', 'public space', ''),
-	('0004', 560626, NULL, 'Main Room', 'Main Room', ''),
-	('0005', 592037, NULL, 'Back Main Room', 'Back Main Room', ''),
-	('0006', 595885, NULL, 'Staff Office', 'Staff Office', ''),
-	('0007', 596362, NULL, 'Storage', 'Storage', ''),
-	('0008', 596892, NULL, 'Bengkel Muda Surabaya', 'Bengkel Muda Surabaya', ''),
-	('0009', 598132, NULL, 'Hallway', 'Hallway', ''),
-	('0010', 599448, NULL, 'DKS Gallery', 'DKS Gallery', ''),
-	('0011', 600819, NULL, 'Mathematics House', 'Mathematics House', ''),
-	('0012', 601254, NULL, 'Merah Putih Gallery', 'Merah Putih Gallery', ''),
-	('0013', 609329, NULL, 'Indoor Skateboard', 'Indoor Skateboard', ''),
-	('0014', 610016, NULL, 'Central doorway', 'Central doorway', ''),
-	('0015', 610552, NULL, 'Entrance Door', 'Entrance Door', ''),
-	('0016', 611250, NULL, 'Exhibition space', 'Exhibition space', ''),
-	('0017', 611746, NULL, 'Below Space', 'Below Space', ''),
-	('0018', 612232, NULL, 'Hallway', 'Hallway', ''),
-	('0019', 612619, NULL, 'Elevator', 'Elevator', ''),
-	('0020', 613040, NULL, 'Toilet', 'Toilet', ''),
-	('0021', 613441, NULL, 'Operator Room', 'Operator Room', ''),
-	('0022', 639829, NULL, 'UPT Balai Pemuda', 'UPT Balai Pemuda', ''),
-	('0025', 700690, NULL, 'Tourism Information Center', 'Tourism Information Center', ''),
-	('0027', 817240, NULL, 'Kriya Gallery', 'Kriya Gallery', ''),
-	('0028', 820143, NULL, 'Museum', 'Museum', ''),
-	('0029', 820815, NULL, 'Stairs', 'Stairs', ''),
-	('0030', 820896, NULL, 'Toilet Nursery', 'Toilet Nursery', ''),
-	('0031', 821077, NULL, 'UPTSA', 'UPTSA', ''),
-	('0032', 821964, NULL, 'ATM 1st floor', 'ATM 1st floor', ''),
-	('0033', 823865, NULL, 'Emergency Staircase', 'Emergency Staircase', ''),
-	('0034', 825386, NULL, 'Shaft', 'Shaft', ''),
-	('0035', 826868, NULL, 'Pantry Room', 'Pantry Room', ''),
-	('0036', 829098, NULL, 'Disparta', 'Disparta', ''),
-	('0037', 829358, NULL, 'Command Center', 'Command Center', ''),
-	('0038', 830288, NULL, 'DPM', 'DPM', ''),
-	('0039', 831096, NULL, 'Dispenduk', 'Dispenduk', ''),
-	('0040', 831440, NULL, 'Dispora', 'Dispora', ''),
-	('0041', 838147, NULL, 'Disperindag', 'Disperindag', ''),
-	('0042', 839609, NULL, 'Dispendukcapil', 'Dispendukcapil', ''),
-	('0043', 840850, NULL, '2nd Floor Corridor', '2nd Floor Corridor', ''),
-	('0044', 841116, NULL, 'Bridge 2nd floor', 'Bridge 2nd floor', ''),
-	('0045', 843868, NULL, '3rd Floor Corridor', '3rd Floor Corridor', ''),
-	('0046', 847875, NULL, 'Dinkop', 'Dinkop', ''),
-	('0047', 848368, NULL, 'Secretary Room', 'Secretary Room', ''),
-	('0048', 849039, NULL, 'Convention Hall 4th floor', 'Convention Hall 4th floor', ''),
-	('0049', 849276, NULL, 'Dispusip', 'Dispusip', ''),
-	('0050', 850924, NULL, 'Parking', 'Parking', ''),
-	('0051', 886033, NULL, 'Shared Space 4th floor', 'Shared Space 4th floor', ''),
-	('0053', 913870, NULL, 'L2.7 Ramp', 'L2.7 Ramp', ''),
-	('0054', 914699, NULL, 'Bridge 3rd floor', 'Bridge 3rd floor', ''),
-	('0056', 919493, NULL, 'Shaft', 'Shaft', ''),
+	('0001', 550615, 2, 'Tourism Information Center', 'Tourism Information Center', ''),
+	('0002', 558371, 2, 'PISA (Pusat Informasi Sahabat Anak)', 'PISA (Pusat Informasi Sahabat Anak)', ''),
+	('0003', 559588, 2, 'public space', 'public space', ''),
+	('0004', 560626, 2, 'Main Room', 'Main Room', ''),
+	('0005', 592037, 2, 'Back Main Room', 'Back Main Room', ''),
+	('0006', 595885, 2, 'Staff Office', 'Staff Office', ''),
+	('0007', 596362, 2, 'Storage', 'Storage', ''),
+	('0008', 596892, 2, 'Bengkel Muda Surabaya', 'Bengkel Muda Surabaya', ''),
+	('0009', 598132, 2, 'Hallway', 'Hallway', ''),
+	('0010', 599448, 2, 'DKS Gallery', 'DKS Gallery', ''),
+	('0011', 600819, 2, 'Mathematics House', 'Mathematics House', ''),
+	('0012', 601254, 2, 'Merah Putih Gallery', 'Merah Putih Gallery', ''),
+	('0013', 609329, 2, 'Indoor Skateboard', 'Indoor Skateboard', ''),
+	('0014', 610016, 2, 'Central doorway', 'Central doorway', ''),
+	('0015', 610552, 2, 'Entrance Door', 'Entrance Door', ''),
+	('0016', 611250, 2, 'Exhibition space', 'Exhibition space', ''),
+	('0017', 611746, 2, 'Below Space', 'Below Space', ''),
+	('0018', 612232, 2, 'Hallway', 'Hallway', ''),
+	('0019', 612619, 2, 'Elevator', 'Elevator', ''),
+	('0020', 613040, 2, 'Toilet', 'Toilet', ''),
+	('0021', 613441, 2, 'Operator Room', 'Operator Room', ''),
+	('0022', 639829, 2, 'UPT Balai Pemuda', 'UPT Balai Pemuda', ''),
+	('0025', 700690, 2, 'Tourism Information Center', 'Tourism Information Center', ''),
+	('0027', 817240, 2, 'Kriya Gallery', 'Kriya Gallery', ''),
+	('0028', 820143, 2, 'Museum', 'Museum', ''),
+	('0029', 820815, 2, 'Stairs', 'Stairs', ''),
+	('0030', 820896, 2, 'Toilet Nursery', 'Toilet Nursery', ''),
+	('0031', 821077, 2, 'UPTSA', 'UPTSA', ''),
+	('0032', 821964, 2, 'ATM 1st floor', 'ATM 1st floor', ''),
+	('0033', 823865, 2, 'Emergency Staircase', 'Emergency Staircase', ''),
+	('0034', 825386, 2, 'Shaft', 'Shaft', ''),
+	('0035', 826868, 2, 'Pantry Room', 'Pantry Room', ''),
+	('0036', 829098, 2, 'Disparta', 'Disparta', ''),
+	('0037', 829358, 2, 'Command Center', 'Command Center', ''),
+	('0038', 830288, 2, 'DPM', 'DPM', ''),
+	('0039', 831096, 2, 'Dispenduk', 'Dispenduk', ''),
+	('0040', 831440, 2, 'Dispora', 'Dispora', ''),
+	('0041', 838147, 2, 'Disperindag', 'Disperindag', ''),
+	('0042', 839609, 2, 'Dispendukcapil', 'Dispendukcapil', ''),
+	('0043', 840850, 2, '2nd Floor Corridor', '2nd Floor Corridor', ''),
+	('0044', 841116, 2, 'Bridge 2nd floor', 'Bridge 2nd floor', ''),
+	('0045', 843868, 2, '3rd Floor Corridor', '3rd Floor Corridor', ''),
+	('0046', 847875, 2, 'Dinkop', 'Dinkop', ''),
+	('0047', 848368, 2, 'Secretary Room', 'Secretary Room', ''),
+	('0048', 849039, 2, 'Convention Hall 4th floor', 'Convention Hall 4th floor', ''),
+	('0049', 849276, 2, 'Dispusip', 'Dispusip', ''),
+	('0050', 850924, 2, 'Parking', 'Parking', ''),
+	('0051', 886033, 2, 'Shared Space 4th floor', 'Shared Space 4th floor', ''),
+	('0053', 913870, 2, 'L2.7 Ramp', 'L2.7 Ramp', ''),
+	('0054', 914699, 2, 'Bridge 3rd floor', 'Bridge 3rd floor', ''),
+	('0056', 919493, 2, 'Shaft', 'Shaft', ''),
 	('0060', 599276, 1, 'Shared Space 1st floor', 'Shared Space 1st floor', ''),
 	('0061', 599584, 1, 'Parking', 'Parking', ''),
 	('0062', 599642, 1, 'Warehouse', 'Warehouse', ''),
@@ -950,7 +951,7 @@ CREATE TABLE IF NOT EXISTS `tenants_table` (
   `tenant_province` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_number` (`name_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table rrrcadastre2.tenants_table: ~100 rows (approximately)
 REPLACE INTO `tenants_table` (`id`, `tenant_name`, `name_number`, `tenant_job`, `tenant_religion`, `marriage_status`, `number_residents`, `tenant_address`, `tenant_rt_rw`, `tenant_village`, `tenant_district`, `tenant_city`, `tenant_province`) VALUES

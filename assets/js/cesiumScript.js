@@ -600,7 +600,7 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
     `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== "" ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, '.')}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>` : 'No Data!' }
     </td></tr>` +
-    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/agreement/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : 'No Data!' }
     </td></tr>` +
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
