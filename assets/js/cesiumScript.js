@@ -1,6 +1,5 @@
 // inisiasi cesium token
-Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 // Cesium.Ion.defaultAccessToken =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
@@ -16,7 +15,6 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
-
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
 viewer.scene.highDynamicRange = true;
@@ -26,28 +24,19 @@ viewer.scene.globe.baseColor = Cesium.Color.ALICEBLUE;
 viewer.scene.globe.undergroundColor = Cesium.Color.TRANSPARENT;
 viewer.scene.globe.depthTestAgainstTerrain = true;
 viewer.scene.screenSpaceCameraController.enableCollisionDetection = true;
-viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarScalar(
-  400.0,
-  0.0,
-  800.0,
-  1.0
-);
-
+viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarScalar(400.0, 0.0, 800.0, 1.0);
 
 viewer.camera.flyTo({
-  destination: Cesium.Cartesian3.fromDegrees(
-    112.73677426629814, -7.259593062440535, 20000
-  ),
+  destination: Cesium.Cartesian3.fromDegrees(112.73677426629814, -7.259593062440535, 20000),
   orientation: {
     heading: Cesium.Math.toRadians(0.0),
     pitch: Cesium.Math.toRadians(-90.0),
   },
 });
 
-
 // Initialize OpenLayers map
 const miniMap = new ol.Map({
-  target: 'map2d',
+  target: "map2d",
   layers: [
     new ol.layer.Tile({
       source: new ol.source.OSM(),
@@ -64,19 +53,13 @@ const miniMap = new ol.Map({
 });
 // add marker building object in openlayers
 const markerSiola = new ol.Feature({
-  geometry: new ol.geom.Point(
-    ol.proj.fromLonLat([112.73775781677266, -7.256371890525727])
-  ),
+  geometry: new ol.geom.Point(ol.proj.fromLonLat([112.73775781677266, -7.256371890525727])),
 });
 const markerBalai = new ol.Feature({
-  geometry: new ol.geom.Point(
-    ol.proj.fromLonLat([112.74531573749071, -7.264032458811419])
-  ),
+  geometry: new ol.geom.Point(ol.proj.fromLonLat([112.74531573749071, -7.264032458811419])),
 });
 const markerRusunawa = new ol.Feature({
-  geometry: new ol.geom.Point(
-    ol.proj.fromLonLat([112.64459980831899, -8.010094631402152])
-  ),
+  geometry: new ol.geom.Point(ol.proj.fromLonLat([112.64459980831899, -8.010094631402152])),
 });
 const vectorSource = new ol.source.Vector({
   features: [markerSiola, markerBalai, markerRusunawa],
@@ -103,8 +86,8 @@ const getCenterView = function () {
     heading,
     pitch,
     roll,
-  }
-}
+  };
+};
 // Adjust OpenLayers zoom based on height
 const getZoom = function (currentView) {
   let zoomLevel;
@@ -139,15 +122,16 @@ viewer.camera.moveEnd.addEventListener(function () {
   // Update OpenLayers view
   miniMap.getView().setCenter(ol.proj.fromLonLat([currentView.longitude, currentView.latitude]));
   miniMap.getView().setZoom(zoomLevel);
-  miniMap.getView().setRotation(Cesium.Math.toRadians((-currentView.heading)));
+  miniMap.getView().setRotation(Cesium.Math.toRadians(-currentView.heading));
 });
 
-
 const layers = viewer.imageryLayers;
-const openStreetMapBasemap = layers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-  url: "https://a.tile.openstreetmap.org/",
-  show: false,
-}));
+const openStreetMapBasemap = layers.addImageryProvider(
+  new Cesium.OpenStreetMapImageryProvider({
+    url: "https://a.tile.openstreetmap.org/",
+    show: false,
+  })
+);
 
 function changeBasemapLayer(selectedBasemap) {
   // console.log(layers);
@@ -195,10 +179,7 @@ $("#basemapSelector, #ShowBasemap").change(function () {
 // Set first camera the given longitude, latitude, and height.
 function firstCamera() {
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      112.73761619035064, -7.26164124554183,
-      600
-    ),
+    destination: Cesium.Cartesian3.fromDegrees(112.73761619035064, -7.26164124554183, 600),
     orientation: {
       heading: Cesium.Math.toRadians(0.0),
       pitch: Cesium.Math.toRadians(-45.0),
@@ -208,10 +189,7 @@ function firstCamera() {
 
 function secondCamera() {
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      112.7455751403341, -7.265563821748533,
-      200
-    ),
+    destination: Cesium.Cartesian3.fromDegrees(112.7455751403341, -7.265563821748533, 200),
     orientation: {
       heading: Cesium.Math.toRadians(0.0),
       pitch: Cesium.Math.toRadians(-45.0),
@@ -221,10 +199,7 @@ function secondCamera() {
 
 function thirdCamera() {
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      112.64490147028183, -8.012749056273925,
-      200
-    ),
+    destination: Cesium.Cartesian3.fromDegrees(112.64490147028183, -8.012749056273925, 200),
     orientation: {
       heading: Cesium.Math.toRadians(0.0),
       pitch: Cesium.Math.toRadians(-45.0),
@@ -282,9 +257,7 @@ function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchD
 function createTransparentStyle(alphaValue) {
   return new Cesium.Cesium3DTileStyle({
     color: {
-      conditions: [
-        ["true", `rgba(255, 255, 255, ${alphaValue})`],
-      ],
+      conditions: [["true", `rgba(255, 255, 255, ${alphaValue})`]],
     },
   });
 }
@@ -321,9 +294,7 @@ const selected = {
 const selectedEntity = new Cesium.Entity();
 
 // Penanganan klik kiri default
-const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
-  Cesium.ScreenSpaceEventType.LEFT_CLICK
-);
+const clickHandler = viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 // Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedFeatureDescription(pickedFeature) {
@@ -344,44 +315,44 @@ function createPickedFeatureDescription(pickedFeature) {
 function createPickedDataDescription(pickedData) {
   if (pickedData.hasProperty("GlobalId")) {
     const description =
-    `<table class="cesium-infoBox-defaultTable"><tbody>` +
-    `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
-    `<tr><th>GlobalId</th><td>${pickedData.GlobalId.getValue()}</td></tr>` +
-    `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
-    `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
-    `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
-    `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
-    `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
-    `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
-    `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
-    `<tr><th>Measure Letter Number</th><td>${pickedData.measure_letter_number.getValue()}</td></tr>` +
-    `<tr><th>Name of Right Holder</th><td>${pickedData.right_holder.getValue()}</td></tr>` +
-    `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
-    `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
-    `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
-    `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
-    // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-    // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-    `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
-    `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m²</td></tr>` +
-    `</tbody></table>`;
+      `<table class="cesium-infoBox-defaultTable"><tbody>` +
+      `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
+      `<tr><th>GlobalId</th><td>${pickedData.GlobalId.getValue()}</td></tr>` +
+      `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
+      `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
+      `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
+      `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+      `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
+      `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
+      `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
+      `<tr><th>Measure Letter Number</th><td>${pickedData.measure_letter_number.getValue()}</td></tr>` +
+      `<tr><th>Name of Right Holder</th><td>${pickedData.right_holder.getValue()}</td></tr>` +
+      `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+      `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+      `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+      `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m²</td></tr>` +
+      `</tbody></table>`;
     return description;
-  } else if(pickedData.hasProperty("kode")) {
+  } else if (pickedData.hasProperty("kode")) {
     const description =
-    `<table class="cesium-infoBox-defaultTable"><tbody>` +
-    `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
-    `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
-    `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
-    `<tr><th>Kawasan</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
-    // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
-    // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
-    // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
-    // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
-    // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-    // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-    `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
-    `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m²</td></tr>` +
-    `</tbody></table>`;
+      `<table class="cesium-infoBox-defaultTable"><tbody>` +
+      `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
+      `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
+      `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Kawasan</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+      // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+      // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+      // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m²</td></tr>` +
+      `</tbody></table>`;
     return description;
   }
 }
@@ -401,12 +372,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   silhouetteGreen.uniforms.length = 0.01;
   silhouetteGreen.selected = [];
 
-  viewer.scene.postProcessStages.add(
-    Cesium.PostProcessStageLibrary.createSilhouetteStage([
-      silhouetteBlue,
-      silhouetteGreen,
-    ])
-  );
+  viewer.scene.postProcessStages.add(Cesium.PostProcessStageLibrary.createSilhouetteStage([silhouetteBlue, silhouetteGreen]));
 
   // Saat mouse bergerak, siluetkan fitur berwarna biru
   viewer.screenSpaceEventHandler.setInputAction(function onMouseMove(movement) {
@@ -434,17 +400,17 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       $(".property-panel").removeClass("property-panel-show");
       return;
     }
-    if (typeof pickedFeature.getPropertyIds !== 'function') {
+    if (typeof pickedFeature.getPropertyIds !== "function") {
       $(".property-panel").removeClass("property-panel-show");
       if (Cesium.defined(pickedFeature)) {
         console.log(pickedFeature);
         const entity = pickedFeature.id;
-        const pickedData=entity.properties.getValue();
+        const pickedData = entity.properties.getValue();
         if (pickedData) {
           const pickData = entity.properties;
           $(".property-panel").addClass("property-panel-show");
           $("#property-content").html(createPickedDataDescription(pickData));
-          $("#card-title-property").html(`${(pickData.hasProperty("Tag"))?pickData.id.getValue():pickData.objectid.getValue()}`);
+          $("#card-title-property").html(`${pickData.hasProperty("Tag") ? pickData.id.getValue() : pickData.objectid.getValue()}`);
           return;
         }
       }
@@ -473,7 +439,6 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     //   console.log(`  ${propertyId}: ${pickedFeature.getProperty(propertyId)}`);
     // }
 
-
     const objectId = pickedFeature.getProperty("Tag");
     // console.log(objectId);
     // ajax request with sucses and error
@@ -498,35 +463,35 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         updatedName.text(`${data.building}`);
         if (data.room_id != undefined && data.room_id != null && data.room_id != "") {
           // Hapus baris tabel setelah parcel_id
-          const deletedRows = updatedName.closest('tr').nextAll('tr');
+          const deletedRows = updatedName.closest("tr").nextAll("tr");
           deletedRows.remove();
 
           // Tambahkan baris baru dengan nama "Room Data"
           const dataRoomROW = `<tr><th>Room Data</th><td>${data.room_id} <button type="button" id="btnDetailRoom" class="btn asbn cesium-button" data-legal="${data.object_id}" data-parcel="${data.parcel_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailRoom">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
-          updatedName.closest('tr').after(dataRoomROW);
+          updatedName.closest("tr").after(dataRoomROW);
           // Tambahkan baris baru dengan nama "Organizer Data"
           const dataOrganizerROW = `<tr><th>Organizer Data</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
-          updatedName.closest('tr').next('tr').after(dataOrganizerROW);
+          updatedName.closest("tr").next("tr").after(dataOrganizerROW);
           // Tambahkan baris baru dengan nama "Tenant Detail"
           const dataTenantROW = `<tr><th>Tenant Data</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
-          updatedName.closest('tr').next('tr').next('tr').after(dataTenantROW);
+          updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
           // Tambahkan baris baru dengan nama "Right"
           const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest('tr').next('tr').next('tr').next('tr').after(dataRightROW);
+          updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
           // Tambahkan baris baru dengan nama "Restriction"
           const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').after(dataRestrictionROW);
+          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
           // Tambahkan baris baru dengan nama "Responsibilities"
           const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest('tr').next('tr').next('tr').next('tr').next('tr').next('tr').after(dataResponsibilitiesROW);
+          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
         }
         scan();
         // add URI
         if (Array.isArray(tags)) {
           let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
           // Loop through the array and create links
-          tags.forEach(tag => {
+          tags.forEach((tag) => {
             // Check if tag.id_keyword is not null or empty
             if (tag.id_keyword !== null) {
               tagsHtml += `<div><a href="/data/uri/view.php?uri=${tag.slug}" target="_blank">${tag.word_name} <i class="bi bi-box-arrow-up-right"></i></a></div>`;
@@ -540,9 +505,8 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       error: function (error) {
         console.log("error");
         console.log(error);
-      }
+      },
     });
-
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 } else {
   // Jika siluet tidak didukung, atur warna fitur
@@ -603,23 +567,27 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
 }
 
 // Menangani klik pada tombol "View (room)"
-$(document).on('click', '#btnDetailRoom', function (e) {
+$(document).on("click", "#btnDetailRoom", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
-  $('#detailRoom .modal-body').html(loader);
+  $("#detailRoom .modal-body").html(loader);
   // Mendapatkan nilai ID dari atribut data
-  const legal = $(this).data('legal');
-  const parcel_id = $(this).data('parcel');
-  const room_id = $(this).data('room');
+  const legal = $(this).data("legal");
+  const parcel_id = $(this).data("parcel");
+  const room_id = $(this).data("room");
   const data = dataRoom;
   const table =
     `<table class="table"><tbody>` +
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
     `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
     `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== "" ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, '.')}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${
+      data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
+        ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
+        : "No Data!"
+    }
     </td></tr>` +
-    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : 'No Data!' }
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "No Data!"}
     </td></tr>` +
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
@@ -631,18 +599,18 @@ $(document).on('click', '#btnDetailRoom', function (e) {
     `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
     `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
-  $('#detailRoom .modal-body').html(table);
+  $("#detailRoom .modal-body").html(table);
   scan();
 });
 
 // Menangani klik pada tombol "View (organizer)"
-$(document).on('click', '#btnDetailOrganizer', function (e) {
+$(document).on("click", "#btnDetailOrganizer", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
-  $('#detailOrganizer .modal-body').html(loader);
+  $("#detailOrganizer .modal-body").html(loader);
   // Mendapatkan nilai ID dari atribut data
-  const organizer_id = $(this).data('organizer');
-  const room_id = $(this).data('room');
+  const organizer_id = $(this).data("organizer");
+  const room_id = $(this).data("room");
   const data = dataRoom;
   $.ajax({
     type: "get",
@@ -657,28 +625,28 @@ $(document).on('click', '#btnDetailOrganizer', function (e) {
         `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
         `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
         `</tbody></table>`;
-      $('#detailOrganizer .modal-body').html(table);
+      $("#detailOrganizer .modal-body").html(table);
       scan();
     },
     error: function (error) {
       console.log("error");
       console.log(error);
-    }
+    },
   });
 });
 
 // Menangani klik pada tombol "View (Tenant)"
-$(document).on('click', '#btnDetailTenant', function (e) {
+$(document).on("click", "#btnDetailTenant", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
-  $('#detailTenant .modal-body').html(loader);
+  $("#detailTenant .modal-body").html(loader);
   // Mendapatkan nilai ID dari atribut data
-  const tenant_id = $(this).data('tenant');
-  const renters_id = $(this).data('renter');
-  const room_id = $(this).data('room');
+  const tenant_id = $(this).data("tenant");
+  const renters_id = $(this).data("renter");
+  const room_id = $(this).data("room");
   const data = dataRoom;
   if (tenant_id && renters_id) {
-    const rtrw = JSON.parse(data.tenant_rt_rw)
+    const rtrw = JSON.parse(data.tenant_rt_rw);
     const table =
       `<table class="table"><tbody>` +
       `<tr><th>Name</th><td style="width: 1%;">:</td><td>${data.tenant_name}</td></tr>` +
@@ -692,11 +660,11 @@ $(document).on('click', '#btnDetailTenant', function (e) {
       `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.tenant_city}</td></tr>` +
       `<tr><th>Province</th><td style="width: 1%;">:</td><td>${data.tenant_province}</td></tr>` +
       `</tbody></table>`;
-    $('#detailTenant .modal-body').html(table);
+    $("#detailTenant .modal-body").html(table);
     scan();
   } else {
     const html = `<div><center>There are no tenants right now / No tenant data in Room ID: ${data.room_id}, ${data.building} </center></div>`;
-    $('#detailTenant .modal-body').html(html);
+    $("#detailTenant .modal-body").html(html);
   }
 });
 // TARGETSCAN Siola
@@ -720,7 +688,6 @@ function scan() {
   //   }
   // });
 }
-
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {
@@ -841,202 +808,168 @@ $("#siolaLegal_5a1").change(function () {
   setVisibilityByobject_id(siolaLegal, "850924", $(this).prop("checked"));
 });
 
-$("#zoomToSiolaLegal_1all").on('click', function () {
-  setTransparentByobject_id(siolaLegal, [
-    "817240",
-    "825386",
-    "820896",
-    "820815",
-    "919493",
-    "820143",
-    "821077",
-    "823865",
-    "821964",
-    "826868"
-  ]);
+$("#zoomToSiolaLegal_1all").on("click", function () {
+  setTransparentByobject_id(siolaLegal, ["817240", "825386", "820896", "820815", "919493", "820143", "821077", "823865", "821964", "826868"]);
   zoomToTileset(siolaBuildingL1, -5, 90, 150);
 });
-$("#zoomToSiolaLegal_2all").on('click', function () {
-  setTransparentByobject_id(siolaLegal, [
-    "841116",
-    "838147",
-    "840850",
-    "829358",
-    "829098",
-    "839609",
-    "913870"
-  ]);
+$("#zoomToSiolaLegal_2all").on("click", function () {
+  setTransparentByobject_id(siolaLegal, ["841116", "838147", "840850", "829358", "829098", "839609", "913870"]);
   zoomToTileset(siolaBuildingL2, -10, 90, 150);
 });
-$("#zoomToSiolaLegal_3all").on('click', function () {
-  setTransparentByobject_id(siolaLegal, [
-    "914699",
-    "831440",
-    "843868",
-    "830288",
-    "831096",
-    "848368",
-    "847875"
-  ]);
+$("#zoomToSiolaLegal_3all").on("click", function () {
+  setTransparentByobject_id(siolaLegal, ["914699", "831440", "843868", "830288", "831096", "848368", "847875"]);
   zoomToTileset(siolaBuildingL3, -15, 90, 150);
 });
-$("#zoomToSiolaLegal_4all").on('click', function () {
-  setTransparentByobject_id(siolaLegal, [
-    "849039",
-    "886033",
-    "849276"
-  ]);
+$("#zoomToSiolaLegal_4all").on("click", function () {
+  setTransparentByobject_id(siolaLegal, ["849039", "886033", "849276"]);
   zoomToTileset(siolaBuildingL4, -15, 90, 150);
 });
-$("#zoomToSiolaLegal_5all").on('click', function () {
-  setTransparentByobject_id(siolaLegal, [
-    "850924",
-  ]);
+$("#zoomToSiolaLegal_5all").on("click", function () {
+  setTransparentByobject_id(siolaLegal, ["850924"]);
   zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
-$("#zoomToSiolaLegal_gsb").on('click', function () {
+$("#zoomToSiolaLegal_gsb").on("click", function () {
   setTransparentByobject_id(siolaLegal, "921704");
   zoomToLocation(70, -26, 112.73628989849963, -7.25698919103089, 10, 0);
 });
-$("#zoomToSiolaLegal_bt").on('click', function () {
+$("#zoomToSiolaLegal_bt").on("click", function () {
   setTransparentByobject_id(siolaLegal, "910222");
   zoomToLocation(60, 65, 112.7364636251925, -7.257092539825164, -20, 0);
 });
-$("#zoomToSiolaLegal_bb").on('click', function () {
+$("#zoomToSiolaLegal_bb").on("click", function () {
   setTransparentByobject_id(siolaLegal, "915961");
   zoomToLocation(60, 200, 112.7343253773387, -7.258348227236101, -20, 0);
 });
 
-$("#zoomToSiolaLegal_1a1").on('click', function () {
+$("#zoomToSiolaLegal_1a1").on("click", function () {
   setTransparentByobject_id(siolaLegal, "817240");
   zoomToLocation(115, 20, 112.7364701048379, -7.255725655809104, -5, 0);
 });
-$("#zoomToSiolaLegal_1a2").on('click', function () {
+$("#zoomToSiolaLegal_1a2").on("click", function () {
   setTransparentByobject_id(siolaLegal, "825386");
   zoomToLocation(70, 20, 112.73614083014726, -7.256673453774129, -5, 0);
 });
-$("#zoomToSiolaLegal_1a3").on('click', function () {
+$("#zoomToSiolaLegal_1a3").on("click", function () {
   setTransparentByobject_id(siolaLegal, "820896");
   zoomToLocation(70, 25, 112.73614083014726, -7.256673453774129, -15, 0);
 });
-$("#zoomToSiolaLegal_1a4").on('click', function () {
+$("#zoomToSiolaLegal_1a4").on("click", function () {
   setTransparentByobject_id(siolaLegal, "820815");
   zoomToLocation(115, 15, 112.73703300890135, -7.256062486631589, -20, 0);
 });
-$("#zoomToSiolaLegal_1a5").on('click', function () {
+$("#zoomToSiolaLegal_1a5").on("click", function () {
   setTransparentByobject_id(siolaLegal, "919493");
   zoomToLocation(180, 20, 112.73775089782131, -7.255339612039106, -5, 0);
 });
-$("#zoomToSiolaLegal_1a6").on('click', function () {
+$("#zoomToSiolaLegal_1a6").on("click", function () {
   setTransparentByobject_id(siolaLegal, "820143");
   zoomToLocation(180, 20, 112.73774879316747, -7.255707084659419, -20, 0);
 });
-$("#zoomToSiolaLegal_1a7").on('click', function () {
+$("#zoomToSiolaLegal_1a7").on("click", function () {
   setTransparentByobject_id(siolaLegal, "821077");
   zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -10, 0);
 });
-$("#zoomToSiolaLegal_1a8").on('click', function () {
+$("#zoomToSiolaLegal_1a8").on("click", function () {
   setTransparentByobject_id(siolaLegal, "823865");
   zoomToLocation(180, 20, 112.73811080939606, -7.255376393416146, -15, 0);
 });
-$("#zoomToSiolaLegal_1a9").on('click', function () {
+$("#zoomToSiolaLegal_1a9").on("click", function () {
   setTransparentByobject_id(siolaLegal, "821964");
   zoomToLocation(20, 20, 112.73725740076955, -7.257555590592433, -15, 0);
 });
-$("#zoomToSiolaLegal_1a10").on('click', function () {
+$("#zoomToSiolaLegal_1a10").on("click", function () {
   setTransparentByobject_id(siolaLegal, "826868");
   zoomToLocation(345, 20, 112.73810487457202, -7.257580246584778, -5, 0);
 });
 
-$("#zoomToSiolaLegal_2a1").on('click', function () {
+$("#zoomToSiolaLegal_2a1").on("click", function () {
   setTransparentByobject_id(siolaLegal, "841116");
   zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -10, 0);
 });
-$("#zoomToSiolaLegal_2a2").on('click', function () {
+$("#zoomToSiolaLegal_2a2").on("click", function () {
   setTransparentByobject_id(siolaLegal, "838147");
   zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -10, 0);
 });
-$("#zoomToSiolaLegal_2a3").on('click', function () {
+$("#zoomToSiolaLegal_2a3").on("click", function () {
   setTransparentByobject_id(siolaLegal, "840850");
   zoomToLocation(70, 35, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
-$("#zoomToSiolaLegal_2a4").on('click', function () {
+$("#zoomToSiolaLegal_2a4").on("click", function () {
   setTransparentByobject_id(siolaLegal, "829358");
   zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
-$("#zoomToSiolaLegal_2a5").on('click', function () {
+$("#zoomToSiolaLegal_2a5").on("click", function () {
   setTransparentByobject_id(siolaLegal, "829098");
   zoomToLocation(175, 45, 112.73776680239449, -7.255272479365819, -15, 0);
 });
-$("#zoomToSiolaLegal_2a6").on('click', function () {
+$("#zoomToSiolaLegal_2a6").on("click", function () {
   setTransparentByobject_id(siolaLegal, "839609");
   zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
-$("#zoomToSiolaLegal_2a7").on('click', function () {
+$("#zoomToSiolaLegal_2a7").on("click", function () {
   setTransparentByobject_id(siolaLegal, "913870");
   zoomToLocation(265, 20, 112.7389374537573, -7.2564733527464185, -15, 0);
 });
 
-$("#zoomToSiolaLegal_3a1").on('click', function () {
+$("#zoomToSiolaLegal_3a1").on("click", function () {
   setTransparentByobject_id(siolaLegal, "914699");
   zoomToLocation(80, 30, 112.73652142258982, -7.256981171712124, -15, 0);
 });
-$("#zoomToSiolaLegal_3a2").on('click', function () {
+$("#zoomToSiolaLegal_3a2").on("click", function () {
   setTransparentByobject_id(siolaLegal, "831440");
   zoomToLocation(105, 40, 112.73650362692631, -7.255917393432451, -15, 0);
 });
-$("#zoomToSiolaLegal_3a3").on('click', function () {
+$("#zoomToSiolaLegal_3a3").on("click", function () {
   setTransparentByobject_id(siolaLegal, "843868");
   zoomToLocation(70, 40, 112.73667745777747, -7.2567879531324495, -15, 0);
 });
-$("#zoomToSiolaLegal_3a4").on('click', function () {
+$("#zoomToSiolaLegal_3a4").on("click", function () {
   setTransparentByobject_id(siolaLegal, "830288");
   zoomToLocation(345, 45, 112.73801409021175, -7.257541510238534, -15, 0);
 });
-$("#zoomToSiolaLegal_3a5").on('click', function () {
+$("#zoomToSiolaLegal_3a5").on("click", function () {
   setTransparentByobject_id(siolaLegal, "831096");
   zoomToLocation(175, 50, 112.73780550486839, -7.255527145036425, -25, 0);
 });
-$("#zoomToSiolaLegal_3a6").on('click', function () {
+$("#zoomToSiolaLegal_3a6").on("click", function () {
   setTransparentByobject_id(siolaLegal, "848368");
   zoomToLocation(180, 35, 112.73779026382113, -7.255632571893392, -15, 0);
 });
-$("#zoomToSiolaLegal_3a7").on('click', function () {
+$("#zoomToSiolaLegal_3a7").on("click", function () {
   setTransparentByobject_id(siolaLegal, "847875");
   zoomToLocation(175, 45, 112.73810218273863, -7.255308352851056, -15, 0);
 });
 
-$("#zoomToSiolaLegal_4a1").on('click', function () {
+$("#zoomToSiolaLegal_4a1").on("click", function () {
   setTransparentByobject_id(siolaLegal, "849039");
   zoomToLocation(65, 75, 112.73661741237805, -7.256992873425595, -25, 0);
 });
-$("#zoomToSiolaLegal_4a2").on('click', function () {
+$("#zoomToSiolaLegal_4a2").on("click", function () {
   setTransparentByobject_id(siolaLegal, "886033");
   zoomToLocation(345, 75, 112.73813421339062, -7.257867208348932, -20, 0);
 });
-$("#zoomToSiolaLegal_4a3").on('click', function () {
+$("#zoomToSiolaLegal_4a3").on("click", function () {
   setTransparentByobject_id(siolaLegal, "849276");
   zoomToLocation(180, 80, 112.73814898604392, -7.255089250207667, -25, 0);
 });
 
-$("#zoomToSiolaLegal_5a1").on('click', function () {
+$("#zoomToSiolaLegal_5a1").on("click", function () {
   setTransparentByobject_id(siolaLegal, "850924");
   zoomToTileset(siolaBuildingL5, -20, 90, 150);
 });
 
-
 // Layering button Balai pemuda   #########################################################################
-$("#balaiLevel_00").on('click', function () {
+$("#balaiLevel_00").on("click", function () {
   balaiBuildingL0.show = $(this).prop("checked");
 });
-$("#balaiLevel_0").on('click', function () {
+$("#balaiLevel_0").on("click", function () {
   balaiBuildingBasement.show = $(this).prop("checked");
 });
-$("#balaiLevel_1").on('click', function () {
+$("#balaiLevel_1").on("click", function () {
   balaiBuildingL1.show = $(this).prop("checked");
 });
-$("#balaiLevel_2").on('click', function () {
+$("#balaiLevel_2").on("click", function () {
   balaiBuildingL2.show = $(this).prop("checked");
 });
 
@@ -1118,135 +1051,111 @@ $("#balaiLegal_0a9").change(function () {
   setVisibilityByobject_id(balaiLegal, "609329", $(this).prop("checked"));
 });
 
-$("#zoomToBalaiLegal_0all").on('click', function () {
-  setTransparentByobject_id(balaiLegal, [
-    "612619",
-    "612232",
-    "613040",
-    "613441",
-    "610552",
-    "611250",
-    "611746",
-    "610016",
-    "609329"
-  ]);
+$("#zoomToBalaiLegal_0all").on("click", function () {
+  setTransparentByobject_id(balaiLegal, ["612619", "612232", "613040", "613441", "610552", "611250", "611746", "610016", "609329"]);
   zoomToTileset(balaiBuildingL1, -25, 355, 150);
 });
-$("#zoomToBalaiLegal_1all").on('click', function () {
-  setTransparentByobject_id(balaiLegal, [
-    "550615",
-    "558371",
-    "559588",
-    "600819",
-    "560626",
-    "592037",
-    "639829",
-    "595885",
-    "596362",
-    "596892",
-    "598132",
-    "599448",
-    "601254"
-  ]);
+$("#zoomToBalaiLegal_1all").on("click", function () {
+  setTransparentByobject_id(balaiLegal, ["550615", "558371", "559588", "600819", "560626", "592037", "639829", "595885", "596362", "596892", "598132", "599448", "601254"]);
   zoomToTileset(balaiBuildingL1, -25, 0, 100);
 });
 
-$("#zoomToBalaiLegal_gsb").on('click', function () {
+$("#zoomToBalaiLegal_gsb").on("click", function () {
   zoomToLocation(20, 120, 112.74437101987753, -7.265618497548999, -25, 0);
 });
-$("#zoomToBalaiLegal_bt").on('click', function () {
+$("#zoomToBalaiLegal_bt").on("click", function () {
   zoomToLocation(20, 250, 112.7432787543901, -7.267368495006733, -25, 0);
 });
-$("#zoomToBalaiLegal_bb").on('click', function () {
+$("#zoomToBalaiLegal_bb").on("click", function () {
   zoomToLocation(20, -35, 112.74455852005875, -7.266254249795577, 11, 0);
 });
 
-$("#zoomToBalaiLegal_1a1").on('click', function () {
+$("#zoomToBalaiLegal_1a1").on("click", function () {
   setTransparentByobject_id(balaiLegal, "550615");
   zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
 });
-$("#zoomToBalaiLegal_1a2").on('click', function () {
+$("#zoomToBalaiLegal_1a2").on("click", function () {
   setTransparentByobject_id(balaiLegal, "558371");
   zoomToLocation(20, 25, 112.74508005165397, -7.2642500848764255, -25, 0);
 });
-$("#zoomToBalaiLegal_1a3").on('click', function () {
+$("#zoomToBalaiLegal_1a3").on("click", function () {
   setTransparentByobject_id(balaiLegal, "559588");
   zoomToLocation(20, 25, 112.74514755642848, -7.2642758111076615, -25, 0);
 });
-$("#zoomToBalaiLegal_1a4").on('click', function () {
+$("#zoomToBalaiLegal_1a4").on("click", function () {
   setTransparentByobject_id(balaiLegal, "600819");
   zoomToLocation(20, 25, 112.74526629406043, -7.264316162622997, -25, 0);
 });
-$("#zoomToBalaiLegal_1a5").on('click', function () {
+$("#zoomToBalaiLegal_1a5").on("click", function () {
   setTransparentByobject_id(balaiLegal, "560626");
   zoomToLocation(20, 25, 112.74521826029621, -7.264175080955373, -25, 0);
 });
-$("#zoomToBalaiLegal_1a6").on('click', function () {
+$("#zoomToBalaiLegal_1a6").on("click", function () {
   setTransparentByobject_id(balaiLegal, "592037");
   zoomToLocation(20, 25, 112.74521802863246, -7.264175001191377, -25, 0);
 });
-$("#zoomToBalaiLegal_1a7").on('click', function () {
+$("#zoomToBalaiLegal_1a7").on("click", function () {
   setTransparentByobject_id(balaiLegal, "639829");
   zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
-$("#zoomToBalaiLegal_1a8").on('click', function () {
+$("#zoomToBalaiLegal_1a8").on("click", function () {
   setTransparentByobject_id(balaiLegal, "595885");
   zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
-$("#zoomToBalaiLegal_1a9").on('click', function () {
+$("#zoomToBalaiLegal_1a9").on("click", function () {
   setTransparentByobject_id(balaiLegal, "596362");
   zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
-$("#zoomToBalaiLegal_1a10").on('click', function () {
+$("#zoomToBalaiLegal_1a10").on("click", function () {
   setTransparentByobject_id(balaiLegal, "596892");
   zoomToLocation(20, 33, 112.74516885377157, -7.263981056792357, -45, 0);
 });
-$("#zoomToBalaiLegal_1a11").on('click', function () {
+$("#zoomToBalaiLegal_1a11").on("click", function () {
   setTransparentByobject_id(balaiLegal, "598132");
   zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
 });
-$("#zoomToBalaiLegal_1a12").on('click', function () {
+$("#zoomToBalaiLegal_1a12").on("click", function () {
   setTransparentByobject_id(balaiLegal, "599448");
   zoomToLocation(20, 30, 112.74530959098915, -7.264052226780129, -45, 0);
 });
-$("#zoomToBalaiLegal_1a13").on('click', function () {
+$("#zoomToBalaiLegal_1a13").on("click", function () {
   setTransparentByobject_id(balaiLegal, "601254");
   zoomToLocation(20, 30, 112.74534520728557, -7.264096743894646, -45, 0);
 });
 
-$("#zoomToBalaiLegal_0a1").on('click', function () {
+$("#zoomToBalaiLegal_0a1").on("click", function () {
   setTransparentByobject_id(balaiLegal, "612619");
   zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
 });
-$("#zoomToBalaiLegal_0a2").on('click', function () {
+$("#zoomToBalaiLegal_0a2").on("click", function () {
   setTransparentByobject_id(balaiLegal, "612232");
   zoomToLocation(11, 60, 112.7455540723557, -7.264151688578575, -60, 0);
 });
-$("#zoomToBalaiLegal_0a3").on('click', function () {
+$("#zoomToBalaiLegal_0a3").on("click", function () {
   setTransparentByobject_id(balaiLegal, "613040");
   zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
 });
-$("#zoomToBalaiLegal_0a4").on('click', function () {
+$("#zoomToBalaiLegal_0a4").on("click", function () {
   setTransparentByobject_id(balaiLegal, "613441");
   zoomToLocation(11, 60, 112.74570068943898, -7.2641893323861195, -60, 0);
 });
-$("#zoomToBalaiLegal_0a5").on('click', function () {
+$("#zoomToBalaiLegal_0a5").on("click", function () {
   setTransparentByobject_id(balaiLegal, "610552");
   zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
-$("#zoomToBalaiLegal_0a6").on('click', function () {
+$("#zoomToBalaiLegal_0a6").on("click", function () {
   setTransparentByobject_id(balaiLegal, "611250");
   zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
-$("#zoomToBalaiLegal_0a7").on('click', function () {
+$("#zoomToBalaiLegal_0a7").on("click", function () {
   setTransparentByobject_id(balaiLegal, "611746");
   zoomToLocation(20, 105, 112.74553493614476, -7.264522246696736, -60, 0);
 });
-$("#zoomToBalaiLegal_0a8").on('click', function () {
+$("#zoomToBalaiLegal_0a8").on("click", function () {
   setTransparentByobject_id(balaiLegal, "610016");
   zoomToLocation(20, 105, 112.74541372870215, -7.264674661924839, -60, 0);
 });
-$("#zoomToBalaiLegal_0a9").on('click', function () {
+$("#zoomToBalaiLegal_0a9").on("click", function () {
   setTransparentByobject_id(balaiLegal, "609329");
   zoomToLocation(11, 60, 112.74502607249624, -7.264704384970404, -60, 0);
 });
@@ -1652,30 +1561,11 @@ $("#rusunawaLegal_5a26").change(function () {
   setVisibilityByobject_id(rusunawaLegal, "618232", $(this).prop("checked"));
 });
 
-
-$("#zoomToRusunawaLegal_1all").on('click', function () {
-  setTransparentByobject_id(rusunawaLegal, [
-    "599276",
-    "599642",
-    "619195",
-    "619194",
-    "619196",
-    "601694",
-    "601835",
-    "601952",
-    "600414",
-    "600975",
-    "600292",
-    "600222",
-    "600145",
-    "600045",
-    "599963",
-    "599868",
-    "599584",
-  ]);
+$("#zoomToRusunawaLegal_1all").on("click", function () {
+  setTransparentByobject_id(rusunawaLegal, ["599276", "599642", "619195", "619194", "619196", "601694", "601835", "601952", "600414", "600975", "600292", "600222", "600145", "600045", "599963", "599868", "599584"]);
   zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
 });
-$("#zoomToRusunawaLegal_2all").on('click', function () {
+$("#zoomToRusunawaLegal_2all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, [
     "602333",
     "619134",
@@ -1706,7 +1596,7 @@ $("#zoomToRusunawaLegal_2all").on('click', function () {
   ]);
   zoomToTileset(rusunawaBuildingL2, -25, 180, 100);
 });
-$("#zoomToRusunawaLegal_3all").on('click', function () {
+$("#zoomToRusunawaLegal_3all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, [
     "606558",
     "618912",
@@ -1737,7 +1627,7 @@ $("#zoomToRusunawaLegal_3all").on('click', function () {
   ]);
   zoomToTileset(rusunawaBuildingL3, -25, 180, 100);
 });
-$("#zoomToRusunawaLegal_4all").on('click', function () {
+$("#zoomToRusunawaLegal_4all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, [
     "607296",
     "618801",
@@ -1768,7 +1658,7 @@ $("#zoomToRusunawaLegal_4all").on('click', function () {
   ]);
   zoomToTileset(rusunawaBuildingL4, -25, 180, 100);
 });
-$("#zoomToRusunawaLegal_5all").on('click', function () {
+$("#zoomToRusunawaLegal_5all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, [
     "607326",
     "618690",
@@ -1800,501 +1690,501 @@ $("#zoomToRusunawaLegal_5all").on('click', function () {
   zoomToTileset(rusunawaBuildingL5, -25, 180, 100);
 });
 
-$("#zoomToRusunawaLegal_gsb").on('click', function () {
+$("#zoomToRusunawaLegal_gsb").on("click", function () {
   zoomToLocation(200, 55, 112.64532688605156, -8.0095746475103, -20, 0);
 });
-$("#zoomToRusunawaLegal_bt").on('click', function () {
+$("#zoomToRusunawaLegal_bt").on("click", function () {
   zoomToLocation(195, 80, 112.64557670743565, -8.009150136716535, -15, 0);
 });
-$("#zoomToRusunawaLegal_bb").on('click', function () {
+$("#zoomToRusunawaLegal_bb").on("click", function () {
   zoomToLocation(205, -15, 112.645600600889, -8.009171410209218, 2, 0);
 });
 
-$("#zoomToRusunawaLegal_1a1").on('click', function () {
+$("#zoomToRusunawaLegal_1a1").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "599276");
   zoomToLocation(265, 50, 112.64589105170866, -8.010688873163765, -25, 0);
 });
-$("#zoomToRusunawaLegal_1a2").on('click', function () {
+$("#zoomToRusunawaLegal_1a2").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "599642");
   zoomToLocation(180, 15, 112.64514967384268, -8.01029641222483, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a3").on('click', function () {
+$("#zoomToRusunawaLegal_1a3").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619195");
   zoomToLocation(180, 15, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a4").on('click', function () {
+$("#zoomToRusunawaLegal_1a4").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619194");
   zoomToLocation(180, 15, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a5").on('click', function () {
+$("#zoomToRusunawaLegal_1a5").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619196");
   zoomToLocation(180, 15, 112.64500479106304, -8.010318705620248, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a6").on('click', function () {
+$("#zoomToRusunawaLegal_1a6").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "601694");
   zoomToLocation(180, 15, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a7").on('click', function () {
+$("#zoomToRusunawaLegal_1a7").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "601835");
   zoomToLocation(180, 15, 112.64479519186604, -8.010297620811423, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a8").on('click', function () {
+$("#zoomToRusunawaLegal_1a8").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "601952");
   zoomToLocation(180, 15, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a9").on('click', function () {
+$("#zoomToRusunawaLegal_1a9").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600414");
   zoomToLocation(180, 15, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a10").on('click', function () {
+$("#zoomToRusunawaLegal_1a10").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600975");
   zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a11").on('click', function () {
+$("#zoomToRusunawaLegal_1a11").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600292");
   zoomToLocation(0, 15, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a12").on('click', function () {
+$("#zoomToRusunawaLegal_1a12").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600222");
   zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a13").on('click', function () {
+$("#zoomToRusunawaLegal_1a13").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600145");
   zoomToLocation(0, 15, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a14").on('click', function () {
+$("#zoomToRusunawaLegal_1a14").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "600045");
   zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a15").on('click', function () {
+$("#zoomToRusunawaLegal_1a15").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "599963");
   zoomToLocation(0, 15, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a16").on('click', function () {
+$("#zoomToRusunawaLegal_1a16").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "599868");
   zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_1a17").on('click', function () {
+$("#zoomToRusunawaLegal_1a17").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "599584");
   zoomToLocation(0, 15, 112.64503407814374, -8.011198707875575, -15, 0);
 });
 
-$("#zoomToRusunawaLegal_2a1").on('click', function () {
+$("#zoomToRusunawaLegal_2a1").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "602333");
   zoomToLocation(265, 52, 112.64589105170866, -8.010688873163765, -25, 0);
 });
-$("#zoomToRusunawaLegal_2a2").on('click', function () {
+$("#zoomToRusunawaLegal_2a2").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619134");
   zoomToLocation(180, 17, 112.64514967384268, -8.01029641222483, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a3").on('click', function () {
+$("#zoomToRusunawaLegal_2a3").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619144");
   zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a4").on('click', function () {
+$("#zoomToRusunawaLegal_2a4").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619135");
   zoomToLocation(180, 17, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a5").on('click', function () {
+$("#zoomToRusunawaLegal_2a5").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619136");
   zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a6").on('click', function () {
+$("#zoomToRusunawaLegal_2a6").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619137");
   zoomToLocation(180, 17, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a7").on('click', function () {
+$("#zoomToRusunawaLegal_2a7").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619138");
   zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a8").on('click', function () {
+$("#zoomToRusunawaLegal_2a8").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619139");
   zoomToLocation(180, 17, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a9").on('click', function () {
+$("#zoomToRusunawaLegal_2a9").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619140");
   zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a10").on('click', function () {
+$("#zoomToRusunawaLegal_2a10").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619141");
   zoomToLocation(180, 17, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a11").on('click', function () {
+$("#zoomToRusunawaLegal_2a11").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619142");
   zoomToLocation(180, 17, 112.64479519186604, -8.010297620811423, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a12").on('click', function () {
+$("#zoomToRusunawaLegal_2a12").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619145");
   zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a13").on('click', function () {
+$("#zoomToRusunawaLegal_2a13").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "619143");
   zoomToLocation(180, 17, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a14").on('click', function () {
+$("#zoomToRusunawaLegal_2a14").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "602474");
   zoomToLocation(100, 10, 112.64432403935837, -8.010743169218108, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a15").on('click', function () {
+$("#zoomToRusunawaLegal_2a15").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618566");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a16").on('click', function () {
+$("#zoomToRusunawaLegal_2a16").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618555");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a17").on('click', function () {
+$("#zoomToRusunawaLegal_2a17").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618556");
   zoomToLocation(0, 17, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a18").on('click', function () {
+$("#zoomToRusunawaLegal_2a18").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618557");
   zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a19").on('click', function () {
+$("#zoomToRusunawaLegal_2a19").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618558");
   zoomToLocation(0, 17, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a20").on('click', function () {
+$("#zoomToRusunawaLegal_2a20").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618559");
   zoomToLocation(0, 17, 112.64489976543433, -8.011227147063853, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a21").on('click', function () {
+$("#zoomToRusunawaLegal_2a21").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618560");
   zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a22").on('click', function () {
+$("#zoomToRusunawaLegal_2a22").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618561");
   zoomToLocation(0, 17, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a23").on('click', function () {
+$("#zoomToRusunawaLegal_2a23").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618562");
   zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a24").on('click', function () {
+$("#zoomToRusunawaLegal_2a24").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618563");
   zoomToLocation(0, 17, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a25").on('click', function () {
+$("#zoomToRusunawaLegal_2a25").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618564");
   zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
 });
-$("#zoomToRusunawaLegal_2a26").on('click', function () {
+$("#zoomToRusunawaLegal_2a26").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618565");
   zoomToLocation(0, 17, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 
-$("#zoomToRusunawaLegal_3a1").on('click', function () {
+$("#zoomToRusunawaLegal_3a1").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "606558");
   zoomToLocation(265, 54, 112.64589105170866, -8.010688873163765, -25, 0);
 });
-$("#zoomToRusunawaLegal_3a2").on('click', function () {
+$("#zoomToRusunawaLegal_3a2").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618912");
   zoomToLocation(180, 19, 112.64514967384268, -8.01029641222483, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a3").on('click', function () {
+$("#zoomToRusunawaLegal_3a3").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618922");
   zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a4").on('click', function () {
+$("#zoomToRusunawaLegal_3a4").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618913");
   zoomToLocation(180, 19, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a5").on('click', function () {
+$("#zoomToRusunawaLegal_3a5").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618914");
   zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a6").on('click', function () {
+$("#zoomToRusunawaLegal_3a6").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618915");
   zoomToLocation(180, 19, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a7").on('click', function () {
+$("#zoomToRusunawaLegal_3a7").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618916");
   zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a8").on('click', function () {
+$("#zoomToRusunawaLegal_3a8").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618917");
   zoomToLocation(180, 19, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a9").on('click', function () {
+$("#zoomToRusunawaLegal_3a9").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618918");
   zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a10").on('click', function () {
+$("#zoomToRusunawaLegal_3a10").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618919");
   zoomToLocation(180, 19, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a11").on('click', function () {
+$("#zoomToRusunawaLegal_3a11").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618920");
   zoomToLocation(180, 19, 112.64479519186604, -8.010297620811423, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a12").on('click', function () {
+$("#zoomToRusunawaLegal_3a12").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618923");
   zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a13").on('click', function () {
+$("#zoomToRusunawaLegal_3a13").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618921");
   zoomToLocation(180, 19, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a14").on('click', function () {
+$("#zoomToRusunawaLegal_3a14").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "606910");
   zoomToLocation(100, 14, 112.64432403935837, -8.010743169218108, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a15").on('click', function () {
+$("#zoomToRusunawaLegal_3a15").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618455");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a16").on('click', function () {
+$("#zoomToRusunawaLegal_3a16").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618444");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a17").on('click', function () {
+$("#zoomToRusunawaLegal_3a17").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618445");
   zoomToLocation(0, 19, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a18").on('click', function () {
+$("#zoomToRusunawaLegal_3a18").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618446");
   zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a19").on('click', function () {
+$("#zoomToRusunawaLegal_3a19").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618447");
   zoomToLocation(0, 19, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a20").on('click', function () {
+$("#zoomToRusunawaLegal_3a20").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618448");
   zoomToLocation(0, 19, 112.64489976543433, -8.011227147063853, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a21").on('click', function () {
+$("#zoomToRusunawaLegal_3a21").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618449");
   zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a22").on('click', function () {
+$("#zoomToRusunawaLegal_3a22").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618450");
   zoomToLocation(0, 19, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a23").on('click', function () {
+$("#zoomToRusunawaLegal_3a23").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618451");
   zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a24").on('click', function () {
+$("#zoomToRusunawaLegal_3a24").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618452");
   zoomToLocation(0, 19, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a25").on('click', function () {
+$("#zoomToRusunawaLegal_3a25").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618453");
   zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
 });
-$("#zoomToRusunawaLegal_3a26").on('click', function () {
+$("#zoomToRusunawaLegal_3a26").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618454");
   zoomToLocation(0, 19, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 
-$("#zoomToRusunawaLegal_4a1").on('click', function () {
+$("#zoomToRusunawaLegal_4a1").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "607296");
   zoomToLocation(265, 56, 112.64589105170866, -8.010688873163765, -25, 0);
 });
-$("#zoomToRusunawaLegal_4a2").on('click', function () {
+$("#zoomToRusunawaLegal_4a2").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618801");
   zoomToLocation(180, 21, 112.64514967384268, -8.01029641222483, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a3").on('click', function () {
+$("#zoomToRusunawaLegal_4a3").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618811");
   zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a4").on('click', function () {
+$("#zoomToRusunawaLegal_4a4").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618802");
   zoomToLocation(180, 21, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a5").on('click', function () {
+$("#zoomToRusunawaLegal_4a5").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618803");
   zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a6").on('click', function () {
+$("#zoomToRusunawaLegal_4a6").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618804");
   zoomToLocation(180, 21, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a7").on('click', function () {
+$("#zoomToRusunawaLegal_4a7").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618805");
   zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a8").on('click', function () {
+$("#zoomToRusunawaLegal_4a8").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618806");
   zoomToLocation(180, 21, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a9").on('click', function () {
+$("#zoomToRusunawaLegal_4a9").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618807");
   zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a10").on('click', function () {
+$("#zoomToRusunawaLegal_4a10").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618808");
   zoomToLocation(180, 21, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a11").on('click', function () {
+$("#zoomToRusunawaLegal_4a11").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618809");
   zoomToLocation(180, 21, 112.64479519186604, -8.010297620811423, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a12").on('click', function () {
+$("#zoomToRusunawaLegal_4a12").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618812");
   zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a13").on('click', function () {
+$("#zoomToRusunawaLegal_4a13").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618810");
   zoomToLocation(180, 21, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a14").on('click', function () {
+$("#zoomToRusunawaLegal_4a14").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "606926");
   zoomToLocation(100, 16, 112.64432403935837, -8.010743169218108, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a15").on('click', function () {
+$("#zoomToRusunawaLegal_4a15").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618344");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a16").on('click', function () {
+$("#zoomToRusunawaLegal_4a16").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618333");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a17").on('click', function () {
+$("#zoomToRusunawaLegal_4a17").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618334");
   zoomToLocation(0, 21, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a18").on('click', function () {
+$("#zoomToRusunawaLegal_4a18").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618335");
   zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a19").on('click', function () {
+$("#zoomToRusunawaLegal_4a19").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618336");
   zoomToLocation(0, 21, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a20").on('click', function () {
+$("#zoomToRusunawaLegal_4a20").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618337");
   zoomToLocation(0, 21, 112.64489976543433, -8.011227147063853, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a21").on('click', function () {
+$("#zoomToRusunawaLegal_4a21").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618338");
   zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a22").on('click', function () {
+$("#zoomToRusunawaLegal_4a22").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618339");
   zoomToLocation(0, 21, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a23").on('click', function () {
+$("#zoomToRusunawaLegal_4a23").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618340");
   zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a24").on('click', function () {
+$("#zoomToRusunawaLegal_4a24").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618341");
   zoomToLocation(0, 21, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a25").on('click', function () {
+$("#zoomToRusunawaLegal_4a25").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618342");
   zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
 });
-$("#zoomToRusunawaLegal_4a26").on('click', function () {
+$("#zoomToRusunawaLegal_4a26").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618343");
   zoomToLocation(0, 21, 112.64510790597768, -8.011194667555896, -15, 0);
 });
 
-$("#zoomToRusunawaLegal_5a1").on('click', function () {
+$("#zoomToRusunawaLegal_5a1").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "607326");
   zoomToLocation(265, 58, 112.64589105170866, -8.010688873163765, -25, 0);
 });
-$("#zoomToRusunawaLegal_5a2").on('click', function () {
+$("#zoomToRusunawaLegal_5a2").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618690");
   zoomToLocation(180, 23, 112.64514967384268, -8.01029641222483, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a3").on('click', function () {
+$("#zoomToRusunawaLegal_5a3").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618700");
   zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a4").on('click', function () {
+$("#zoomToRusunawaLegal_5a4").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618691");
   zoomToLocation(180, 23, 112.64510978062461, -8.010324528984608, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a5").on('click', function () {
+$("#zoomToRusunawaLegal_5a5").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618692");
   zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a6").on('click', function () {
+$("#zoomToRusunawaLegal_5a6").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618693");
   zoomToLocation(180, 23, 112.64504428302469, -8.01031984160891, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a7").on('click', function () {
+$("#zoomToRusunawaLegal_5a7").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618694");
   zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a8").on('click', function () {
+$("#zoomToRusunawaLegal_5a8").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618695");
   zoomToLocation(180, 23, 112.6449624128508, -8.010321693114099, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a9").on('click', function () {
+$("#zoomToRusunawaLegal_5a9").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618696");
   zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a10").on('click', function () {
+$("#zoomToRusunawaLegal_5a10").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618697");
   zoomToLocation(180, 23, 112.64484878994745, -8.010306178459471, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a11").on('click', function () {
+$("#zoomToRusunawaLegal_5a11").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618698");
   zoomToLocation(180, 23, 112.64479519186604, -8.010297620811423, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a12").on('click', function () {
+$("#zoomToRusunawaLegal_5a12").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618701");
   zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a13").on('click', function () {
+$("#zoomToRusunawaLegal_5a13").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618699");
   zoomToLocation(180, 23, 112.64472517788248, -8.010298593763853, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a14").on('click', function () {
+$("#zoomToRusunawaLegal_5a14").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "606942");
   zoomToLocation(100, 18, 112.64432403935837, -8.010743169218108, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a15").on('click', function () {
+$("#zoomToRusunawaLegal_5a15").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618233");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a16").on('click', function () {
+$("#zoomToRusunawaLegal_5a16").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618222");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a17").on('click', function () {
+$("#zoomToRusunawaLegal_5a17").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618223");
   zoomToLocation(0, 23, 112.6447275664712, -8.011221986832947, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a18").on('click', function () {
+$("#zoomToRusunawaLegal_5a18").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618224");
   zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a19").on('click', function () {
+$("#zoomToRusunawaLegal_5a19").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618225");
   zoomToLocation(0, 23, 112.64483790260891, -8.01121886336246, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a20").on('click', function () {
+$("#zoomToRusunawaLegal_5a20").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618226");
   zoomToLocation(0, 23, 112.64489976543433, -8.011227147063853, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a21").on('click', function () {
+$("#zoomToRusunawaLegal_5a21").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618227");
   zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a22").on('click', function () {
+$("#zoomToRusunawaLegal_5a22").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618228");
   zoomToLocation(0, 23, 112.64496594980773, -8.011213045680796, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a23").on('click', function () {
+$("#zoomToRusunawaLegal_5a23").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618229");
   zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a24").on('click', function () {
+$("#zoomToRusunawaLegal_5a24").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618230");
   zoomToLocation(0, 23, 112.64503407814374, -8.011198707875575, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a25").on('click', function () {
+$("#zoomToRusunawaLegal_5a25").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618231");
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
-$("#zoomToRusunawaLegal_5a26").on('click', function () {
+$("#zoomToRusunawaLegal_5a26").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, "618232");
   zoomToLocation(0, 23, 112.64510790597768, -8.011194667555896, -15, 0);
 });
@@ -2306,12 +2196,12 @@ function toggleVisibilityGeojson(objectId, isVisible) {
   for (let i = 0; i < dataSources.length; i++) {
     const dataSource = dataSources.get(i);
     const entities = dataSource.entities.values;
-    entities.forEach(entity => {
-      if (entity.properties.hasOwnProperty('objectid') && entity.properties.objectid.getValue() == objectId) {
+    entities.forEach((entity) => {
+      if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
         entity.show = isVisible;
         return;
       }
-      if (entity.properties.hasOwnProperty('NIB') && entity.properties.id.getValue() == objectId) {
+      if (entity.properties.hasOwnProperty("NIB") && entity.properties.id.getValue() == objectId) {
         entity.show = isVisible;
         return;
       }
@@ -2319,183 +2209,180 @@ function toggleVisibilityGeojson(objectId, isVisible) {
   }
 }
 
-$('#siolaParcel').change(function () {
-  toggleVisibilityGeojson("910222", $(this).is(':checked'));
+$("#siolaParcel").change(function () {
+  toggleVisibilityGeojson("910222", $(this).is(":checked"));
 });
 
-$('#balaiParcel').change(function () {
-  toggleVisibilityGeojson("671122", $(this).is(':checked'));
+$("#balaiParcel").change(function () {
+  toggleVisibilityGeojson("671122", $(this).is(":checked"));
 });
 
-$('#rusunawa').change(function () {
-  toggleVisibilityGeojson("598583", $(this).is(':checked'));
+$("#rusunawa").change(function () {
+  toggleVisibilityGeojson("598583", $(this).is(":checked"));
 });
 
-
-
-$('#ealla').click(function () {
-  toggleVisibilityGeojson("14878", $(this).is(':checked'));
-  toggleVisibilityGeojson("14882", $(this).is(':checked'));
-  toggleVisibilityGeojson("15296", $(this).is(':checked'));
-  toggleVisibilityGeojson("15297", $(this).is(':checked'));
-  toggleVisibilityGeojson("14598", $(this).is(':checked'));
-  toggleVisibilityGeojson("16629", $(this).is(':checked'));
-  toggleVisibilityGeojson("15310", $(this).is(':checked'));
-  toggleVisibilityGeojson("15306", $(this).is(':checked'));
-  toggleVisibilityGeojson("16351", $(this).is(':checked'));
-  toggleVisibilityGeojson("16352", $(this).is(':checked'));
-  toggleVisibilityGeojson("15307", $(this).is(':checked'));
-  toggleVisibilityGeojson("15305", $(this).is(':checked'));
-  toggleVisibilityGeojson("15309", $(this).is(':checked'));
-  toggleVisibilityGeojson("15304", $(this).is(':checked'));
-  toggleVisibilityGeojson("14880", $(this).is(':checked'));
-  toggleVisibilityGeojson("16630", $(this).is(':checked'));
-  toggleVisibilityGeojson("15298", $(this).is(':checked'));
-  toggleVisibilityGeojson("16286", $(this).is(':checked'));
-  toggleVisibilityGeojson("14879", $(this).is(':checked'));
-  toggleVisibilityGeojson("15300", $(this).is(':checked'));
-  toggleVisibilityGeojson("15302", $(this).is(':checked'));
-  toggleVisibilityGeojson("15299", $(this).is(':checked'));
-  toggleVisibilityGeojson("15308", $(this).is(':checked'));
-  toggleVisibilityGeojson("14881", $(this).is(':checked'));
-  toggleVisibilityGeojson("15303", $(this).is(':checked'));
-  toggleVisibilityGeojson("15301", $(this).is(':checked'));
-});  
-$('#e1').change(function () {
-  toggleVisibilityGeojson("14878", $(this).is(':checked'));
+$("#ealla").click(function () {
+  toggleVisibilityGeojson("14878", $(this).is(":checked"));
+  toggleVisibilityGeojson("14882", $(this).is(":checked"));
+  toggleVisibilityGeojson("15296", $(this).is(":checked"));
+  toggleVisibilityGeojson("15297", $(this).is(":checked"));
+  toggleVisibilityGeojson("14598", $(this).is(":checked"));
+  toggleVisibilityGeojson("16629", $(this).is(":checked"));
+  toggleVisibilityGeojson("15310", $(this).is(":checked"));
+  toggleVisibilityGeojson("15306", $(this).is(":checked"));
+  toggleVisibilityGeojson("16351", $(this).is(":checked"));
+  toggleVisibilityGeojson("16352", $(this).is(":checked"));
+  toggleVisibilityGeojson("15307", $(this).is(":checked"));
+  toggleVisibilityGeojson("15305", $(this).is(":checked"));
+  toggleVisibilityGeojson("15309", $(this).is(":checked"));
+  toggleVisibilityGeojson("15304", $(this).is(":checked"));
+  toggleVisibilityGeojson("14880", $(this).is(":checked"));
+  toggleVisibilityGeojson("16630", $(this).is(":checked"));
+  toggleVisibilityGeojson("15298", $(this).is(":checked"));
+  toggleVisibilityGeojson("16286", $(this).is(":checked"));
+  toggleVisibilityGeojson("14879", $(this).is(":checked"));
+  toggleVisibilityGeojson("15300", $(this).is(":checked"));
+  toggleVisibilityGeojson("15302", $(this).is(":checked"));
+  toggleVisibilityGeojson("15299", $(this).is(":checked"));
+  toggleVisibilityGeojson("15308", $(this).is(":checked"));
+  toggleVisibilityGeojson("14881", $(this).is(":checked"));
+  toggleVisibilityGeojson("15303", $(this).is(":checked"));
+  toggleVisibilityGeojson("15301", $(this).is(":checked"));
 });
-$('#e2').change(function () {
-  toggleVisibilityGeojson("14882", $(this).is(':checked'));
+$("#e1").change(function () {
+  toggleVisibilityGeojson("14878", $(this).is(":checked"));
 });
-$('#e3').change(function () {
+$("#e2").change(function () {
+  toggleVisibilityGeojson("14882", $(this).is(":checked"));
+});
+$("#e3").change(function () {
   console.log("L3");
-  toggleVisibilityGeojson("15296", $(this).is(':checked'));
+  toggleVisibilityGeojson("15296", $(this).is(":checked"));
 });
-$('#e4').change(function () {
-  toggleVisibilityGeojson("15297", $(this).is(':checked'));
+$("#e4").change(function () {
+  toggleVisibilityGeojson("15297", $(this).is(":checked"));
 });
-$('#e5').change(function () {
-  toggleVisibilityGeojson("14598", $(this).is(':checked'));
+$("#e5").change(function () {
+  toggleVisibilityGeojson("14598", $(this).is(":checked"));
 });
-$('#e6').change(function () {
-  toggleVisibilityGeojson("16629", $(this).is(':checked'));
+$("#e6").change(function () {
+  toggleVisibilityGeojson("16629", $(this).is(":checked"));
 });
-$('#e7').change(function () {
-  toggleVisibilityGeojson("15310", $(this).is(':checked'));
+$("#e7").change(function () {
+  toggleVisibilityGeojson("15310", $(this).is(":checked"));
 });
-$('#e8').change(function () {
-  toggleVisibilityGeojson("15306", $(this).is(':checked'));
+$("#e8").change(function () {
+  toggleVisibilityGeojson("15306", $(this).is(":checked"));
 });
-$('#e9').change(function () {
-  toggleVisibilityGeojson("16351", $(this).is(':checked'));
+$("#e9").change(function () {
+  toggleVisibilityGeojson("16351", $(this).is(":checked"));
 });
-$('#e10').change(function () {
-  toggleVisibilityGeojson("16352", $(this).is(':checked'));
+$("#e10").change(function () {
+  toggleVisibilityGeojson("16352", $(this).is(":checked"));
 });
-$('#e11').change(function () {
-  toggleVisibilityGeojson("15307", $(this).is(':checked'));
+$("#e11").change(function () {
+  toggleVisibilityGeojson("15307", $(this).is(":checked"));
 });
-$('#e12').change(function () {
-  toggleVisibilityGeojson("15305", $(this).is(':checked'));
+$("#e12").change(function () {
+  toggleVisibilityGeojson("15305", $(this).is(":checked"));
 });
-$('#e13').change(function () {
-  toggleVisibilityGeojson("15309", $(this).is(':checked'));
+$("#e13").change(function () {
+  toggleVisibilityGeojson("15309", $(this).is(":checked"));
 });
-$('#e14').change(function () {
-  toggleVisibilityGeojson("15304", $(this).is(':checked'));
+$("#e14").change(function () {
+  toggleVisibilityGeojson("15304", $(this).is(":checked"));
 });
-$('#e15').change(function () {
-  toggleVisibilityGeojson("14880", $(this).is(':checked'));
+$("#e15").change(function () {
+  toggleVisibilityGeojson("14880", $(this).is(":checked"));
 });
-$('#e16').change(function () {
-  toggleVisibilityGeojson("16630", $(this).is(':checked'));
+$("#e16").change(function () {
+  toggleVisibilityGeojson("16630", $(this).is(":checked"));
 });
-$('#e17').change(function () {
-  toggleVisibilityGeojson("15298", $(this).is(':checked'));
+$("#e17").change(function () {
+  toggleVisibilityGeojson("15298", $(this).is(":checked"));
 });
-$('#e18').change(function () {
-  toggleVisibilityGeojson("16286", $(this).is(':checked'));
+$("#e18").change(function () {
+  toggleVisibilityGeojson("16286", $(this).is(":checked"));
 });
-$('#e19').change(function () {
-  toggleVisibilityGeojson("14879", $(this).is(':checked'));
+$("#e19").change(function () {
+  toggleVisibilityGeojson("14879", $(this).is(":checked"));
 });
-$('#e20').change(function () {
-  toggleVisibilityGeojson("15300", $(this).is(':checked'));
+$("#e20").change(function () {
+  toggleVisibilityGeojson("15300", $(this).is(":checked"));
 });
-$('#e21').change(function () {
-  toggleVisibilityGeojson("15302", $(this).is(':checked'));
+$("#e21").change(function () {
+  toggleVisibilityGeojson("15302", $(this).is(":checked"));
 });
-$('#e22').change(function () {
-  toggleVisibilityGeojson("15299", $(this).is(':checked'));
+$("#e22").change(function () {
+  toggleVisibilityGeojson("15299", $(this).is(":checked"));
 });
-$('#e23').change(function () {
-  toggleVisibilityGeojson("15308", $(this).is(':checked'));
+$("#e23").change(function () {
+  toggleVisibilityGeojson("15308", $(this).is(":checked"));
 });
-$('#e24').change(function () {
-  toggleVisibilityGeojson("14881", $(this).is(':checked'));
+$("#e24").change(function () {
+  toggleVisibilityGeojson("14881", $(this).is(":checked"));
 });
-$('#e25').change(function () {
-  toggleVisibilityGeojson("15303", $(this).is(':checked'));
+$("#e25").change(function () {
+  toggleVisibilityGeojson("15303", $(this).is(":checked"));
 });
-$('#e26').change(function () {
-  toggleVisibilityGeojson("15301", $(this).is(':checked'));
-});
-
-$('#eallb').click(function () {
-  toggleVisibilityGeojson("15890", $(this).is(':checked'));
-  toggleVisibilityGeojson("16488", $(this).is(':checked'));
-  toggleVisibilityGeojson("16513", $(this).is(':checked'));
-  toggleVisibilityGeojson("16268", $(this).is(':checked'));
-  toggleVisibilityGeojson("14970", $(this).is(':checked'));
-  toggleVisibilityGeojson("16267", $(this).is(':checked'));
-  toggleVisibilityGeojson("16266", $(this).is(':checked'));
-  toggleVisibilityGeojson("16652", $(this).is(':checked'));
-  toggleVisibilityGeojson("14969", $(this).is(':checked'));
-  toggleVisibilityGeojson("14968", $(this).is(':checked'));
-  toggleVisibilityGeojson("16651", $(this).is(':checked'));
-});
-$('#e27').change(function () {
-  toggleVisibilityGeojson("15890", $(this).is(':checked'));
-});
-$('#e28').change(function () {
-  toggleVisibilityGeojson("16488", $(this).is(':checked'));
-});
-$('#e29').change(function () {
-  toggleVisibilityGeojson("16513", $(this).is(':checked'));
-});
-$('#e30').change(function () {
-  toggleVisibilityGeojson("16268", $(this).is(':checked'));
-});
-$('#e31').change(function () {
-  toggleVisibilityGeojson("14970", $(this).is(':checked'));
-});
-$('#e32').change(function () {
-  toggleVisibilityGeojson("16267", $(this).is(':checked'));
-});
-$('#e33').change(function () {
-  toggleVisibilityGeojson("16266", $(this).is(':checked'));
-});
-$('#e34').change(function () {
-  toggleVisibilityGeojson("16652", $(this).is(':checked'));
-});
-$('#e35').change(function () {
-  toggleVisibilityGeojson("14969", $(this).is(':checked'));
-});
-$('#e36').change(function () {
-  toggleVisibilityGeojson("14968", $(this).is(':checked'));
-});
-$('#e37').change(function () {
-  toggleVisibilityGeojson("16651", $(this).is(':checked'));
+$("#e26").change(function () {
+  toggleVisibilityGeojson("15301", $(this).is(":checked"));
 });
 
+$("#eallb").click(function () {
+  toggleVisibilityGeojson("15890", $(this).is(":checked"));
+  toggleVisibilityGeojson("16488", $(this).is(":checked"));
+  toggleVisibilityGeojson("16513", $(this).is(":checked"));
+  toggleVisibilityGeojson("16268", $(this).is(":checked"));
+  toggleVisibilityGeojson("14970", $(this).is(":checked"));
+  toggleVisibilityGeojson("16267", $(this).is(":checked"));
+  toggleVisibilityGeojson("16266", $(this).is(":checked"));
+  toggleVisibilityGeojson("16652", $(this).is(":checked"));
+  toggleVisibilityGeojson("14969", $(this).is(":checked"));
+  toggleVisibilityGeojson("14968", $(this).is(":checked"));
+  toggleVisibilityGeojson("16651", $(this).is(":checked"));
+});
+$("#e27").change(function () {
+  toggleVisibilityGeojson("15890", $(this).is(":checked"));
+});
+$("#e28").change(function () {
+  toggleVisibilityGeojson("16488", $(this).is(":checked"));
+});
+$("#e29").change(function () {
+  toggleVisibilityGeojson("16513", $(this).is(":checked"));
+});
+$("#e30").change(function () {
+  toggleVisibilityGeojson("16268", $(this).is(":checked"));
+});
+$("#e31").change(function () {
+  toggleVisibilityGeojson("14970", $(this).is(":checked"));
+});
+$("#e32").change(function () {
+  toggleVisibilityGeojson("16267", $(this).is(":checked"));
+});
+$("#e33").change(function () {
+  toggleVisibilityGeojson("16266", $(this).is(":checked"));
+});
+$("#e34").change(function () {
+  toggleVisibilityGeojson("16652", $(this).is(":checked"));
+});
+$("#e35").change(function () {
+  toggleVisibilityGeojson("14969", $(this).is(":checked"));
+});
+$("#e36").change(function () {
+  toggleVisibilityGeojson("14968", $(this).is(":checked"));
+});
+$("#e37").change(function () {
+  toggleVisibilityGeojson("16651", $(this).is(":checked"));
+});
 
 // Measure Toggle Tool
 var measure = false;
-const tool = new MeasureTool(viewer, {})
+const tool = new MeasureTool(viewer, {});
 $("#meassure").click(function (e) {
-  $(".measure-panel").toggleClass('measure-panel-show');
-  $("#meassure").toggleClass('selected');
-  if ($(".measure-panel").hasClass('measure-panel-show')) {
+  $(".measure-panel").toggleClass("measure-panel-show");
+  $("#meassure").toggleClass("selected");
+  if ($(".measure-panel").hasClass("measure-panel-show")) {
     measure = true;
   } else {
     measure = false;
@@ -2504,37 +2391,36 @@ $("#meassure").click(function (e) {
 });
 $("#mdistance").click(function (e) {
   measure = true;
-  measure ? tool.activate('distance') : null;
+  measure ? tool.activate("distance") : null;
 });
 $("#marea").click(function (e) {
   measure = true;
-  measure ? tool.activate('area') : null;
+  measure ? tool.activate("area") : null;
 });
 $("#mclear").click(function (e) {
-  tool.clearAll()
+  tool.clearAll();
   measure = false;
 });
 
-
 //// Layering check/uncheck all ##########################################################################
 // siola
-$('#siolaLevelAllHide').click(function () {
+$("#siolaLevelAllHide").click(function () {
   siolaBuildingL0.show = false;
   siolaBuildingL1.show = false;
   siolaBuildingL2.show = false;
   siolaBuildingL3.show = false;
   siolaBuildingL4.show = false;
   siolaBuildingL5.show = false;
-  $('.siola-building-layer-panel .set_level').prop('checked', false);
+  $(".siola-building-layer-panel .set_level").prop("checked", false);
 });
-$('#siolaLevelAllShow').click(function () {
+$("#siolaLevelAllShow").click(function () {
   siolaBuildingL0.show = true;
   siolaBuildingL1.show = true;
   siolaBuildingL2.show = true;
   siolaBuildingL3.show = true;
   siolaBuildingL4.show = true;
   siolaBuildingL5.show = true;
-  $('.siola-building-layer-panel .set_level').prop('checked', true);
+  $(".siola-building-layer-panel .set_level").prop("checked", true);
 });
 
 $("#siolaLegal_1all").change(function () {
@@ -2582,19 +2468,19 @@ $("#siolaLegal_5all").change(function () {
 });
 
 // balai pemuda
-$('#balaiLevelAllHide').click(function () {
+$("#balaiLevelAllHide").click(function () {
   balaiBuildingL0.show = false;
   balaiBuildingBasement.show = false;
   balaiBuildingL1.show = false;
   balaiBuildingL2.show = false;
-  $('.balai-building-layer-panel .set_level').prop('checked', false);
+  $(".balai-building-layer-panel .set_level").prop("checked", false);
 });
-$('#balaiLevelAllShow').click(function () {
+$("#balaiLevelAllShow").click(function () {
   balaiBuildingL0.show = true;
   balaiBuildingBasement.show = true;
   balaiBuildingL1.show = true;
   balaiBuildingL2.show = true;
-  $('.balai-building-layer-panel .set_level').prop('checked', true);
+  $(".balai-building-layer-panel .set_level").prop("checked", true);
 });
 
 $("#balaiLegal_0all").change(function () {
@@ -2659,7 +2545,7 @@ $("#balaiLegal_1all").change(function () {
 });
 
 // rusunawa
-$('#rusunawaLevelAllHide').click(function () {
+$("#rusunawaLevelAllHide").click(function () {
   rusunawaBuildingL0.show = false;
   rusunawaBuildingL1.show = false;
   rusunawaBuildingL2.show = false;
@@ -2667,9 +2553,9 @@ $('#rusunawaLevelAllHide').click(function () {
   rusunawaBuildingL4.show = false;
   rusunawaBuildingL5.show = false;
   rusunawaBuildingL6.show = false;
-  $('.rusunawa-building-layer-panel .set_level').prop('checked', false);
+  $(".rusunawa-building-layer-panel .set_level").prop("checked", false);
 });
-$('#rusunawaLevelAllShow').click(function () {
+$("#rusunawaLevelAllShow").click(function () {
   rusunawaBuildingL0.show = true;
   rusunawaBuildingL1.show = true;
   rusunawaBuildingL2.show = true;
@@ -2677,7 +2563,7 @@ $('#rusunawaLevelAllShow').click(function () {
   rusunawaBuildingL4.show = true;
   rusunawaBuildingL5.show = true;
   rusunawaBuildingL6.show = true;
-  $('.rusunawa-building-layer-panel .set_level').prop('checked', true);
+  $(".rusunawa-building-layer-panel .set_level").prop("checked", true);
 });
 
 $("#rusunawaLegal_1all").change(function () {
@@ -2821,34 +2707,34 @@ $("#rusunawaLegal_5all").change(function () {
 const colorMap = {
   "Anotha Blue": new Cesium.Color(0 / 255, 0 / 255, 255 / 255, 1.0), // Anotha Blue
   "Baby Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Baby Blue
-  "Blue": new Cesium.Color(0.0, 0.0, 1.0, 1.0), // Blue
-  "Brown": new Cesium.Color(165 / 255, 42 / 255, 42 / 255, 1.0), // Brown
-  "Coral": new Cesium.Color(255 / 255, 127 / 255, 80 / 255, 1.0), // Coral
-  "Green": new Cesium.Color(0.0, 1.0, 0.0, 1.0), // Green
+  Blue: new Cesium.Color(0.0, 0.0, 1.0, 1.0), // Blue
+  Brown: new Cesium.Color(165 / 255, 42 / 255, 42 / 255, 1.0), // Brown
+  Coral: new Cesium.Color(255 / 255, 127 / 255, 80 / 255, 1.0), // Coral
+  Green: new Cesium.Color(0.0, 1.0, 0.0, 1.0), // Green
   "Green bright": new Cesium.Color(0.0, 1.0, 0.5, 1.0), // Green bright
-  "Grey": new Cesium.Color(128 / 255, 128 / 255, 128 / 255, 1.0), // Grey
-  "Lumut": new Cesium.Color(25, 133, 54, 1.0),
+  Grey: new Cesium.Color(128 / 255, 128 / 255, 128 / 255, 1.0), // Grey
+  Lumut: new Cesium.Color(25, 133, 54, 1.0),
   "Light Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Light Blue
-  "Maroon": new Cesium.Color(128 / 255, 0 / 255, 0 / 255, 1.0), // Maroon
-  "Merah": new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Merah
-  "Navy": new Cesium.Color(0 / 255, 0 / 255, 128 / 255, 1.0), // Navy
+  Maroon: new Cesium.Color(128 / 255, 0 / 255, 0 / 255, 1.0), // Maroon
+  Merah: new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Merah
+  Navy: new Cesium.Color(0 / 255, 0 / 255, 128 / 255, 1.0), // Navy
   "Neon Green": new Cesium.Color(57 / 255, 255 / 255, 20 / 255, 1.0), // Neon Green
-  "Orange": new Cesium.Color(255 / 255, 165 / 255, 0 / 255, 1.0), // Orange
-  "Pink": new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
+  Orange: new Cesium.Color(255 / 255, 165 / 255, 0 / 255, 1.0), // Orange
+  Pink: new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
   "pink baby": new Cesium.Color(255 / 255, 192 / 255, 203 / 255, 1.0), // Pink
-  "Purple": new Cesium.Color(128 / 255, 0 / 255, 128 / 255, 1.0), // Purple
-  "Red": new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Red
+  Purple: new Cesium.Color(128 / 255, 0 / 255, 128 / 255, 1.0), // Purple
+  Red: new Cesium.Color(1.0, 0.0, 0.0, 1.0), // Red
   "Red Pastel": new Cesium.Color(255 / 255, 105 / 255, 97 / 255, 1.0), // Red Pastel
-  "Sienna": new Cesium.Color(160 / 255, 82 / 255, 45 / 255, 1.0), // Sienna
-  "Violet": new Cesium.Color(238 / 255, 130 / 255, 238 / 255, 1.0), // Violet
-  "Yellow": new Cesium.Color(1.0, 1.0, 0.0, 1.0), // Yellow
-  "Sage": new Cesium.Color(188 / 255, 206 / 255, 172 / 255, 1.0), // Sage
+  Sienna: new Cesium.Color(160 / 255, 82 / 255, 45 / 255, 1.0), // Sienna
+  Violet: new Cesium.Color(238 / 255, 130 / 255, 238 / 255, 1.0), // Violet
+  Yellow: new Cesium.Color(1.0, 1.0, 0.0, 1.0), // Yellow
+  Sage: new Cesium.Color(188 / 255, 206 / 255, 172 / 255, 1.0), // Sage
   "Dark Purple": new Cesium.Color(72 / 255, 61 / 255, 139 / 255, 1.0), // Dark Purple
 };
 
 function getColorFromProperty(inputProperties) {
   if (inputProperties.includes("-") || inputProperties.includes(" - ")) {
-    const splitString = inputProperties.split('-').map(function (item) {
+    const splitString = inputProperties.split("-").map(function (item) {
       return item.trim();
     });
     return splitString[1];
@@ -2880,12 +2766,12 @@ let MappingTransparentTileset = [];
 
 function mappingHide(Tag, isChecked) {
   if (isChecked) {
-    MappingHideTileset = MappingHideTileset.filter(data => data !== Tag);
+    MappingHideTileset = MappingHideTileset.filter((data) => data !== Tag);
   } else {
     if (!undefined) {
       MappingHideTileset.push(Tag);
     }
-    return
+    return;
   }
   console.log("hide");
   console.log(MappingHideTileset);
@@ -2927,7 +2813,7 @@ function setVisibilityByobject_id(tileset, Tag, isChecked) {
 
 function mappingTransparent(Tag) {
   if (Array.isArray(Tag)) {
-    MappingTransparentTileset = Tag
+    MappingTransparentTileset = Tag;
   } else {
     MappingTransparentTileset.push(Tag);
   }
@@ -2968,7 +2854,7 @@ function setTransparentByobject_id(tileset, Tag) {
 // reset Transparency
 function resetTransparent(tileset) {
   MappingTransparentTileset = [];
-  setVisibilityByobject_id(tileset)
+  setVisibilityByobject_id(tileset);
 }
 
 // underground view   ###################################################################################
@@ -2988,7 +2874,7 @@ $("#resetTransparent").click(function () {
 const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
-    entities.forEach(entity => {
+    entities.forEach((entity) => {
       const height = entity.properties.height.getValue();
       if (height !== undefined) {
         entity.polygon.extrudedHeight = height;
@@ -3021,11 +2907,11 @@ const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojso
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
- // const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
- // await viewer.dataSources.add(parcelBD);
-  // const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
-  // await viewer.dataSources.add(parcelBD);
-  const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
+// const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
+// await viewer.dataSources.add(parcelBD);
+// const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
+// await viewer.dataSources.add(parcelBD);
+const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
     return viewer.dataSources.add(dataSource);
@@ -3072,15 +2958,12 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
-  }, )
+  })
 );
 
-const siolaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2465320)
-);
+const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465320));
 
 siolaLegal.style = setColorStyle;
-
 
 // hide preloader after finish load data
 $(function () {
@@ -3115,9 +2998,7 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
   })
 );
 
-const balaiLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2465321)
-);
+const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465321));
 
 balaiLegal.style = setColorStyle;
 
@@ -3156,84 +3037,75 @@ const rusunawaBuildingL5 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
     show: true,
     featureIdLabel: "rusunawaBuildingL5",
-  }, )
+  })
 );
 const rusunawaBuildingL6 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
     show: true,
     featureIdLabel: "rusunawaBuildingL6",
-  }, )
+  })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2478741)
-);
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2478741));
 
 rusunawaLegal.style = setColorStyle;
-
-
 
 // hide preloader after finish load data
 $(function () {
   $(".loader-container").removeClass("d-none");
 });
 
-
 // Buat koleksi bidang pemotongan (clipping plane collection) SIOLA
 let siolaClippingPlanes = new Cesium.ClippingPlaneCollection({
   planes: [
     new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0), // Plane Z
   ],
   edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
-  edgeColor: Cesium.Color.RED
+  edgeColor: Cesium.Color.RED,
 });
 let balaiClippingPlanes = new Cesium.ClippingPlaneCollection({
   planes: [
     new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0), // Plane Z
   ],
   edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
-  edgeColor: Cesium.Color.RED
+  edgeColor: Cesium.Color.RED,
 });
 let rusunawaClippingPlanes = new Cesium.ClippingPlaneCollection({
   planes: [
     new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 50.0), // Plane X
     new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), 50.0), // Plane Y
-    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0) // Plane Z
+    new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, -1.0), 50.0), // Plane Z
   ],
   edgeWidth: 0.0, // Lebar garis untuk menandai pemotongan (bisa disesuaikan)
-  edgeColor: Cesium.Color.RED
+  edgeColor: Cesium.Color.RED,
 });
 
 // Daftar tileset dan pemotongan untuk setiap jenis bangunan
 let tilesetsList = {
-  "clsiola": {
+  clsiola: {
     tileset: [siolaBuildingL0, siolaBuildingL1, siolaBuildingL2, siolaBuildingL3, siolaBuildingL4, siolaBuildingL5],
-    clippingPlanes: siolaClippingPlanes
+    clippingPlanes: siolaClippingPlanes,
   },
-  "clbalai": {
+  clbalai: {
     tileset: [balaiBuildingL0, balaiBuildingBasement, balaiBuildingL1, balaiBuildingL2],
-    clippingPlanes: balaiClippingPlanes
+    clippingPlanes: balaiClippingPlanes,
   },
-  "clrusunawa": {
+  clrusunawa: {
     tileset: [rusunawaBuildingL0, rusunawaBuildingL1, rusunawaBuildingL2, rusunawaBuildingL3, rusunawaBuildingL4, rusunawaBuildingL5, rusunawaBuildingL6],
-    clippingPlanes: rusunawaClippingPlanes
+    clippingPlanes: rusunawaClippingPlanes,
   },
 };
 
 // Fungsi untuk membuat ClippingPlaneCollection dengan nilai slider tertentu
 function createClippingPlanes(sliderX, sliderY, sliderZ) {
   return new Cesium.ClippingPlaneCollection({
-    planes: [
-      new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), sliderX),
-      new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), sliderY),
-      new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, 1.0), sliderZ)
-    ],
+    planes: [new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), sliderX), new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 1.0, 0.0), sliderY), new Cesium.ClippingPlane(new Cesium.Cartesian3(0.0, 0.0, 1.0), sliderZ)],
     edgeWidth: 0.0,
-    edgeColor: Cesium.Color.RED
+    edgeColor: Cesium.Color.RED,
   });
 }
 
@@ -3250,9 +3122,9 @@ $(".clip-item input[type='range']").on("input", function () {
   let tilesetInfo = tilesetsList[selectedRadioValue];
   // Perbarui pemotongan pada setiap tileset dengan nilai slider yang sesuai
   let sliderGroup = $("." + selectedRadioValue);
-  let sliderXVal = sliderGroup.find('.sliderX').val();
-  let sliderYVal = sliderGroup.find('.sliderY').val();
-  let sliderZVal = sliderGroup.find('.sliderZ').val();
+  let sliderXVal = sliderGroup.find(".sliderX").val();
+  let sliderYVal = sliderGroup.find(".sliderY").val();
+  let sliderZVal = sliderGroup.find(".sliderZ").val();
   // Perbarui pemotongan pada setiap tileset yang terkait
   updateClippingPlanes(tilesetInfo, sliderXVal, sliderYVal, sliderZVal);
 });
@@ -3274,9 +3146,21 @@ function resetClipTilesets(first = false) {
   Object.keys(tilesetsList).forEach(function (buildingType) {
     let tilesetInfo = tilesetsList[buildingType];
     // Dapatkan nilai maksimum dan minimum dari elemen input
-    let defaultSliderX = parseFloat($("." + buildingType).find('.sliderX').attr('max'));
-    let defaultSliderY = parseFloat($("." + buildingType).find('.sliderY').attr('min'));
-    let defaultSliderZ = parseFloat($("." + buildingType).find('.sliderZ').attr('min'));
+    let defaultSliderX = parseFloat(
+      $("." + buildingType)
+        .find(".sliderX")
+        .attr("max")
+    );
+    let defaultSliderY = parseFloat(
+      $("." + buildingType)
+        .find(".sliderY")
+        .attr("min")
+    );
+    let defaultSliderZ = parseFloat(
+      $("." + buildingType)
+        .find(".sliderZ")
+        .attr("min")
+    );
     if (first == 1) {
       // init nilai default dari clippingtileset
       tilesetInfo.tileset.forEach(function (tileset) {
@@ -3289,82 +3173,104 @@ function resetClipTilesets(first = false) {
       clippingPlanes.get(2).distance = defaultSliderZ;
     }
     // Setel nilai slider pada tampilan ke nilai default
-    $("." + buildingType).find('.sliderX').val(defaultSliderX);
-    $("." + buildingType).find('.sliderY').val(defaultSliderY);
-    $("." + buildingType).find('.sliderZ').val(defaultSliderZ);
+    $("." + buildingType)
+      .find(".sliderX")
+      .val(defaultSliderX);
+    $("." + buildingType)
+      .find(".sliderY")
+      .val(defaultSliderY);
+    $("." + buildingType)
+      .find(".sliderZ")
+      .val(defaultSliderZ);
   });
 }
-
-
 
 // handle autocomplete seacrh
 $(document).ready(function () {
   async function fetchSuggestionsFromDatabase() {
     try {
-      const response = await fetch(`/action/get-search.php?param=legal`); 
+      const response = await fetch(`/action/get-search.php?param=legal`);
       if (!response.ok) {
-        throw new Error('Error fetching suggestions');
+        throw new Error("Error fetching suggestions");
       }
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error('Error fetching suggestions:', error);
-      throw error; 
+      console.error("Error fetching suggestions:", error);
+      throw error;
     }
   }
 
-  const suggestionsData = [{
-    id: "1",
-    data: "Siola"
-  }, {
-    id: "2",
-    data: "Balai Pemuda"
-  }, {
-    id: "3",
-    data: "Rusunawa Buring"
-  }, {
-    id: "siola0floor",
-    data: "Siola underground floor"
-  }, {
-    id: "siola1floor",
-    data: "Siola 1st floor"
-  }, {
-    id: "siola2floor",
-    data: "Siola 2nd floor"
-  }, {
-    id: "siola3floor",
-    data: "Siola 3rd floor"
-  }, {
-    id: "siola4floor",
-    data: "Siola 4th floor"
-  }, {
-    id: "siola5floor",
-    data: "Siola 5th floor"
-  }, {
-    id: "balai0floor",
-    data: "Balai Pemuda underground floor"
-  }, {
-    id: "balai1floor",
-    data: "Balai Pemuda 1st floor"
-  }, {
-    id: "rusun1floor",
-    data: "Rusunawa Buring 1st floor"
-  }, {
-    id: "rusun2floor",
-    data: "Rusunawa Buring 2nd floor"
-  }, {
-    id: "rusun3floor",
-    data: "Rusunawa Buring 3rd floor"
-  }, {
-    id: "rusun4floor",
-    data: "Rusunawa Buring 4th floor"
-  }, {
-    id: "rusun5floor",
-    data: "Rusunawa Buring 5th floor"
-  }, {
-    id: "rusun6floor",
-    data: "Rusunawa Buring Roof"
-  }, ];
+  const suggestionsData = [
+    {
+      id: "1",
+      data: "Siola",
+    },
+    {
+      id: "2",
+      data: "Balai Pemuda",
+    },
+    {
+      id: "3",
+      data: "Rusunawa Buring",
+    },
+    {
+      id: "siola0floor",
+      data: "Siola underground floor",
+    },
+    {
+      id: "siola1floor",
+      data: "Siola 1st floor",
+    },
+    {
+      id: "siola2floor",
+      data: "Siola 2nd floor",
+    },
+    {
+      id: "siola3floor",
+      data: "Siola 3rd floor",
+    },
+    {
+      id: "siola4floor",
+      data: "Siola 4th floor",
+    },
+    {
+      id: "siola5floor",
+      data: "Siola 5th floor",
+    },
+    {
+      id: "balai0floor",
+      data: "Balai Pemuda underground floor",
+    },
+    {
+      id: "balai1floor",
+      data: "Balai Pemuda 1st floor",
+    },
+    {
+      id: "rusun1floor",
+      data: "Rusunawa Buring 1st floor",
+    },
+    {
+      id: "rusun2floor",
+      data: "Rusunawa Buring 2nd floor",
+    },
+    {
+      id: "rusun3floor",
+      data: "Rusunawa Buring 3rd floor",
+    },
+    {
+      id: "rusun4floor",
+      data: "Rusunawa Buring 4th floor",
+    },
+    {
+      id: "rusun5floor",
+      data: "Rusunawa Buring 5th floor",
+    },
+    {
+      id: "rusun6floor",
+      data: "Rusunawa Buring Roof",
+    },
+  ];
 
   console.log([...new Set(suggestionsData)]);
   console.log(suggestionsData);
@@ -3372,17 +3278,17 @@ $(document).ready(function () {
   (async function () {
     try {
       try {
-        const legaldata = await fetch(`/action/get-search.php?param=legal`); 
+        const legaldata = await fetch(`/action/get-search.php?param=legal`);
         if (!legaldata.ok) {
-          throw new Error('Error fetching suggestions');
+          throw new Error("Error fetching suggestions");
         }
         const legalData = await legaldata.json();
-        await legalData.forEach(item => {
+        await legalData.forEach((item) => {
           // Push separate objects for data with the same ID
           if (item.id != undefined && item.id != null && item.id != "") {
             suggestionsData.push({
               id: item.id,
-              data: item.id
+              data: item.id,
             });
           }
         });
@@ -3390,17 +3296,17 @@ $(document).ready(function () {
         throw error;
       }
       try {
-        const roomdata = await fetch(`/action/get-search.php?param=room`); 
+        const roomdata = await fetch(`/action/get-search.php?param=room`);
         if (!roomdata.ok) {
-          throw new Error('Error fetching suggestions');
+          throw new Error("Error fetching suggestions");
         }
         const roomData = await roomdata.json();
-        await roomData.forEach(item => {
+        await roomData.forEach((item) => {
           // Push separate objects for data with the same ID
           if (item.room_name != undefined && item.room_name != null && item.room_name != "") {
             suggestionsData.push({
               id: item.legal_object_id,
-              data: item.room_name
+              data: item.room_name,
             });
           }
         });
@@ -3408,17 +3314,17 @@ $(document).ready(function () {
         throw error;
       }
       try {
-        const parceldata = await fetch(`/action/get-search.php?param=parcel`); 
+        const parceldata = await fetch(`/action/get-search.php?param=parcel`);
         if (!parceldata.ok) {
-          throw new Error('Error fetching suggestions');
+          throw new Error("Error fetching suggestions");
         }
         const parcelData = await parceldata.json();
-        await parcelData.forEach(item => {
+        await parcelData.forEach((item) => {
           // Push separate objects for data with the same ID
           if (item.parcel_id != undefined && item.parcel_id != null && item.parcel_id != "") {
             suggestionsData.push({
               id: item.id,
-              data: item.parcel_id
+              data: item.parcel_id,
             });
           }
         });
@@ -3426,20 +3332,16 @@ $(document).ready(function () {
         throw error;
       }
 
-      $("#searchInput").on('input', function (e) {
+      $("#searchInput").on("input", function (e) {
         const inputValue = $("#searchInput").val().toLowerCase();
         // Hide autocomplete results if input empty
         if (!inputValue.trim() || inputValue == "") {
           $("#autocompleteResults").html("");
           return;
         }
-        const filteredSuggestions = suggestionsData.filter(suggestion =>
-          suggestion.data.toLowerCase().includes(inputValue)
-        );
+        const filteredSuggestions = suggestionsData.filter((suggestion) => suggestion.data.toLowerCase().includes(inputValue));
         // Generate HTML for autocomplete results
-        const resultsHTML = filteredSuggestions.map(suggestion =>
-          `<div class="autocomplete-item" data-id="${suggestion.id}">${suggestion.data}</div>`
-        ).join("");
+        const resultsHTML = filteredSuggestions.map((suggestion) => `<div class="autocomplete-item" data-id="${suggestion.id}">${suggestion.data}</div>`).join("");
         $("#autocompleteResults").html(resultsHTML);
         // Attach click event to each autocomplete item
         $(".autocomplete-item").on("click", function () {
@@ -3448,7 +3350,6 @@ $(document).ready(function () {
           selectSuggestion(selectedId, selectedText);
         });
       });
-
     } catch (error) {
       console.log(error);
       // Handle error if needed
@@ -4201,7 +4102,6 @@ $(document).ready(function () {
         break;
     }
   }
-
 });
 
 $(document).ready(function () {
