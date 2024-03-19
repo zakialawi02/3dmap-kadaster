@@ -342,7 +342,8 @@ function createPickedFeatureDescription(pickedFeature) {
   return description;
 }
 function createPickedDataDescription(pickedData) {
-  const description =
+  if (pickedData.hasProperty("GlobalId")) {
+    const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
     `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
     `<tr><th>GlobalId</th><td>${pickedData.GlobalId.getValue()}</td></tr>` +
@@ -364,7 +365,25 @@ function createPickedDataDescription(pickedData) {
     `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
     `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m²</td></tr>` +
     `</tbody></table>`;
-  return description;
+    return description;
+  } else if(pickedData.hasProperty("kode")) {
+    const description =
+    `<table class="cesium-infoBox-defaultTable"><tbody>` +
+    `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
+    `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
+    `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
+    `<tr><th>Kawasan</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+    // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+    // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+    // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+    // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+    // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m²</td></tr>` +
+    `</tbody></table>`;
+    return description;
+  }
 }
 
 let pickedFeature;
@@ -425,7 +444,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           const pickData = entity.properties;
           $(".property-panel").addClass("property-panel-show");
           $("#property-content").html(createPickedDataDescription(pickData));
-          $("#card-title-property").html(`${pickData.id.getValue()}`);
+          $("#card-title-property").html(`${(pickData.hasProperty("Tag"))?pickData.id.getValue():pickData.objectid.getValue()}`);
           return;
         }
       }
@@ -2282,25 +2301,193 @@ $("#zoomToRusunawaLegal_5a26").on('click', function () {
 
 // Layering Parcel Building  #############################
 // Function to toggle visibility based on feature objectId
-function toggleParcelVisibility(objectId, isVisible) {
-  parcelBD.entities.values.forEach(entity => {
-    if (entity.properties.id.getValue() == objectId) {
-      entity.show = isVisible;
-    }
-  });
+function toggleVisibilityGeojson(objectId, isVisible) {
+  const dataSources = viewer.dataSources; // Mengambil semua sumber data GeoJSON yang dimuat
+  for (let i = 0; i < dataSources.length; i++) {
+    const dataSource = dataSources.get(i);
+    const entities = dataSource.entities.values;
+    entities.forEach(entity => {
+      if (entity.properties.hasOwnProperty('objectid') && entity.properties.objectid.getValue() == objectId) {
+        entity.show = isVisible;
+        return;
+      }
+      if (entity.properties.hasOwnProperty('NIB') && entity.properties.id.getValue() == objectId) {
+        entity.show = isVisible;
+        return;
+      }
+    });
+  }
 }
 
 $('#siolaParcel').change(function () {
-  toggleParcelVisibility("910222", $(this).is(':checked'));
+  toggleVisibilityGeojson("910222", $(this).is(':checked'));
 });
 
 $('#balaiParcel').change(function () {
-  toggleParcelVisibility("671122", $(this).is(':checked'));
+  toggleVisibilityGeojson("671122", $(this).is(':checked'));
 });
 
 $('#rusunawa').change(function () {
-  toggleParcelVisibility("598583", $(this).is(':checked'));
+  toggleVisibilityGeojson("598583", $(this).is(':checked'));
 });
+
+
+
+$('#ealla').click(function () {
+  toggleVisibilityGeojson("14878", $(this).is(':checked'));
+  toggleVisibilityGeojson("14882", $(this).is(':checked'));
+  toggleVisibilityGeojson("15296", $(this).is(':checked'));
+  toggleVisibilityGeojson("15297", $(this).is(':checked'));
+  toggleVisibilityGeojson("14598", $(this).is(':checked'));
+  toggleVisibilityGeojson("16629", $(this).is(':checked'));
+  toggleVisibilityGeojson("15310", $(this).is(':checked'));
+  toggleVisibilityGeojson("15306", $(this).is(':checked'));
+  toggleVisibilityGeojson("16351", $(this).is(':checked'));
+  toggleVisibilityGeojson("16352", $(this).is(':checked'));
+  toggleVisibilityGeojson("15307", $(this).is(':checked'));
+  toggleVisibilityGeojson("15305", $(this).is(':checked'));
+  toggleVisibilityGeojson("15309", $(this).is(':checked'));
+  toggleVisibilityGeojson("15304", $(this).is(':checked'));
+  toggleVisibilityGeojson("14880", $(this).is(':checked'));
+  toggleVisibilityGeojson("16630", $(this).is(':checked'));
+  toggleVisibilityGeojson("15298", $(this).is(':checked'));
+  toggleVisibilityGeojson("16286", $(this).is(':checked'));
+  toggleVisibilityGeojson("14879", $(this).is(':checked'));
+  toggleVisibilityGeojson("15300", $(this).is(':checked'));
+  toggleVisibilityGeojson("15302", $(this).is(':checked'));
+  toggleVisibilityGeojson("15299", $(this).is(':checked'));
+  toggleVisibilityGeojson("15308", $(this).is(':checked'));
+  toggleVisibilityGeojson("14881", $(this).is(':checked'));
+  toggleVisibilityGeojson("15303", $(this).is(':checked'));
+  toggleVisibilityGeojson("15301", $(this).is(':checked'));
+});  
+$('#e1').change(function () {
+  toggleVisibilityGeojson("14878", $(this).is(':checked'));
+});
+$('#e2').change(function () {
+  toggleVisibilityGeojson("14882", $(this).is(':checked'));
+});
+$('#e3').change(function () {
+  console.log("L3");
+  toggleVisibilityGeojson("15296", $(this).is(':checked'));
+});
+$('#e4').change(function () {
+  toggleVisibilityGeojson("15297", $(this).is(':checked'));
+});
+$('#e5').change(function () {
+  toggleVisibilityGeojson("14598", $(this).is(':checked'));
+});
+$('#e6').change(function () {
+  toggleVisibilityGeojson("16629", $(this).is(':checked'));
+});
+$('#e7').change(function () {
+  toggleVisibilityGeojson("15310", $(this).is(':checked'));
+});
+$('#e8').change(function () {
+  toggleVisibilityGeojson("15306", $(this).is(':checked'));
+});
+$('#e9').change(function () {
+  toggleVisibilityGeojson("16351", $(this).is(':checked'));
+});
+$('#e10').change(function () {
+  toggleVisibilityGeojson("16352", $(this).is(':checked'));
+});
+$('#e11').change(function () {
+  toggleVisibilityGeojson("15307", $(this).is(':checked'));
+});
+$('#e12').change(function () {
+  toggleVisibilityGeojson("15305", $(this).is(':checked'));
+});
+$('#e13').change(function () {
+  toggleVisibilityGeojson("15309", $(this).is(':checked'));
+});
+$('#e14').change(function () {
+  toggleVisibilityGeojson("15304", $(this).is(':checked'));
+});
+$('#e15').change(function () {
+  toggleVisibilityGeojson("14880", $(this).is(':checked'));
+});
+$('#e16').change(function () {
+  toggleVisibilityGeojson("16630", $(this).is(':checked'));
+});
+$('#e17').change(function () {
+  toggleVisibilityGeojson("15298", $(this).is(':checked'));
+});
+$('#e18').change(function () {
+  toggleVisibilityGeojson("16286", $(this).is(':checked'));
+});
+$('#e19').change(function () {
+  toggleVisibilityGeojson("14879", $(this).is(':checked'));
+});
+$('#e20').change(function () {
+  toggleVisibilityGeojson("15300", $(this).is(':checked'));
+});
+$('#e21').change(function () {
+  toggleVisibilityGeojson("15302", $(this).is(':checked'));
+});
+$('#e22').change(function () {
+  toggleVisibilityGeojson("15299", $(this).is(':checked'));
+});
+$('#e23').change(function () {
+  toggleVisibilityGeojson("15308", $(this).is(':checked'));
+});
+$('#e24').change(function () {
+  toggleVisibilityGeojson("14881", $(this).is(':checked'));
+});
+$('#e25').change(function () {
+  toggleVisibilityGeojson("15303", $(this).is(':checked'));
+});
+$('#e26').change(function () {
+  toggleVisibilityGeojson("15301", $(this).is(':checked'));
+});
+
+$('#eallb').click(function () {
+  toggleVisibilityGeojson("15890", $(this).is(':checked'));
+  toggleVisibilityGeojson("16488", $(this).is(':checked'));
+  toggleVisibilityGeojson("16513", $(this).is(':checked'));
+  toggleVisibilityGeojson("16268", $(this).is(':checked'));
+  toggleVisibilityGeojson("14970", $(this).is(':checked'));
+  toggleVisibilityGeojson("16267", $(this).is(':checked'));
+  toggleVisibilityGeojson("16266", $(this).is(':checked'));
+  toggleVisibilityGeojson("16652", $(this).is(':checked'));
+  toggleVisibilityGeojson("14969", $(this).is(':checked'));
+  toggleVisibilityGeojson("14968", $(this).is(':checked'));
+  toggleVisibilityGeojson("16651", $(this).is(':checked'));
+});
+$('#e27').change(function () {
+  toggleVisibilityGeojson("15890", $(this).is(':checked'));
+});
+$('#e28').change(function () {
+  toggleVisibilityGeojson("16488", $(this).is(':checked'));
+});
+$('#e29').change(function () {
+  toggleVisibilityGeojson("16513", $(this).is(':checked'));
+});
+$('#e30').change(function () {
+  toggleVisibilityGeojson("16268", $(this).is(':checked'));
+});
+$('#e31').change(function () {
+  toggleVisibilityGeojson("14970", $(this).is(':checked'));
+});
+$('#e32').change(function () {
+  toggleVisibilityGeojson("16267", $(this).is(':checked'));
+});
+$('#e33').change(function () {
+  toggleVisibilityGeojson("16266", $(this).is(':checked'));
+});
+$('#e34').change(function () {
+  toggleVisibilityGeojson("16652", $(this).is(':checked'));
+});
+$('#e35').change(function () {
+  toggleVisibilityGeojson("14969", $(this).is(':checked'));
+});
+$('#e36').change(function () {
+  toggleVisibilityGeojson("14968", $(this).is(':checked'));
+});
+$('#e37').change(function () {
+  toggleVisibilityGeojson("16651", $(this).is(':checked'));
+});
+
 
 // Measure Toggle Tool
 var measure = false;
@@ -2798,10 +2985,57 @@ $("#resetTransparent").click(function () {
 });
 
 // Get Parcel (all building in one file geojson) ##########################################################################################
-  // const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
+const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojson")
+  .then((dataSource) => {
+    const entities = dataSource.entities.values;
+    entities.forEach(entity => {
+      const height = entity.properties.height.getValue();
+      if (height !== undefined) {
+        entity.polygon.extrudedHeight = height;
+      }
+
+      const kode = entity.properties.kode.getValue();
+      if (kode !== undefined) {
+        if (kode === "R-2") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(250, 250, 110)").withAlpha(0.5);
+        } else if (kode === "K-4") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(235, 120, 120)").withAlpha(0.5);
+        } else if (kode === "K-5") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(235, 120, 120)").withAlpha(0.5);
+        } else if (kode === "SPU-5" || kode === "SPU-6" || kode === "SPU-1") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(220, 160, 120)").withAlpha(0.5);
+        } else if (kode === "KT-1") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(198, 142, 255)").withAlpha(0.5);
+        } else {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(128, 128, 128)").withAlpha(0.5);
+        }
+        entity.polygon.outlineColor = Cesium.Color.fromCssColorString("gray").withAlpha(0.5);
+      }
+    });
+    return viewer.dataSources.add(dataSource);
+  })
+  .then(() => {
+    console.log("GeoJSON EVNBD berhasil dimuat dan ditampilkan di viewer.");
+  })
+  .catch((error) => {
+    console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
+  });
+
+ // const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
+ // await viewer.dataSources.add(parcelBD);
+  // const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
   // await viewer.dataSources.add(parcelBD);
-  const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
-  await viewer.dataSources.add(parcelBD);
+  const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
+  .then((dataSource) => {
+    const entities = dataSource.entities.values;
+    return viewer.dataSources.add(dataSource);
+  })
+  .then(() => {
+    console.log("GeoJSON parcelBD berhasil dimuat dan ditampilkan di viewer.");
+  })
+  .catch((error) => {
+    console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
+  });
 
 // // Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
