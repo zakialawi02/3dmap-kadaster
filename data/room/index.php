@@ -82,7 +82,7 @@
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
                                             <td><?= $row['id']; ?></td>
-                                            <td><?= $row['parcel_id']; ?></td>
+                                            <td><?= $row['parcel_id']; ?> - <?= $row['building']; ?></td>
                                             <td><?= $row['room_id'] ?></td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['space_usage'] ?></td>

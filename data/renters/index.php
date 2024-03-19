@@ -69,7 +69,7 @@
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
                                             <td><?= $row['legal_object_id'] ?></td>
-                                            <td><?= $row['room_id'] ?></td>
+                                            <td><?= $row['building']; ?> [<?= $row['room_id'] ?>]</td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['tenant_name'] ?></td>
                                             <td><?= $row['tenure_status'] ?></td>
@@ -132,6 +132,8 @@
             const tenant_id = $(this).data('tenant');
             const room_id = $(this).data('room');
             const place = $(this).data('from');
+            const loader = `<button class="loader" style=" margin: 0 auto; "></button>`;
+            buttonClicked.replaceWith(loader);
             $.ajax({
                 method: "POST",
                 url: `../../action/agreement.php`,
@@ -144,12 +146,13 @@
                 success: function(response) {
                     const agreementNumber = response;
                     const file = agreementNumber.replace(/\//g, '.');
-                    buttonClicked.replaceWith(`<a href="/assets/PDF/agreement/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a><span> ${agreementNumber}</span>`);
+                    $('.loader').replaceWith(`<a href="/assets/PDF/agreement/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a><span> ${agreementNumber}</span>`);
                     $(`#P-${tenant_id}`).replaceWith(`<a href="/assets/PDF/certificate/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a>`);
                 },
                 error: function(error) {
                     console.log("error");
-                    console.log(error);
+                    alert("Failed!!");
+                    $('.loader').replaceWith(buttonClicked);
                 }
             });
         });

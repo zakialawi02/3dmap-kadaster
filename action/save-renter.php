@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $room_id = $room_idNEW;
             }
-            $sqlUpdateRenter = "UPDATE renters_tenants SET room_id = '$room_id', due_started = " . (!empty($due_started) ? "'$due_started'" : "NULL") . ", due_finished = " . (!empty($due_finished) ? "'$due_finished'" : "NULL") . ", tenure_status = '$tenure_status' WHERE id = $renter2roomID";
+            $sqlUpdateRenter = "UPDATE renters_tenants SET room_id = '$room_id', due_started = " . (!empty($due_started) ? "'$due_started'" : "NULL") . ", due_finished = " . (!empty($due_finished) ? "'$due_finished'" : "NULL") . ", tenure_status = '$tenure_status', agreement_number = '', permit_flats = '' WHERE id = $renter2roomID";
             $resultSql = mysqli_query($conn, $sqlUpdateRenter);
             if ($resultSql) {
                 setFlashMessage('success', 'Data updated successfully, <b> NIK ' . $name_number . ' in Room ' . $room_id . ' with status ' . $tenure_status . '</b>');
@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $rtrw = json_encode($rtrw);
             $due_started = $_POST['due_started'];
             $due_finished = $_POST['due_finished'];
+
             // cek Room required
             if (empty($room_id)) {
                 setFlashMessage('error', 'Room ID is required. Please provide a valid Room ID.');
@@ -157,7 +158,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sqlInsertRenter = "INSERT INTO renters_tenants (tenant_id, room_id, due_started, due_finished, tenure_status) VALUES ('$tenantInsertedId', '$room_id', " . (!empty($due_started) ? "'$due_started'" : "NULL") . " , " . (!empty($due_finished) ? "'$due_finished'" : "NULL") . ", '$tenure_status')";
             $resultSql = mysqli_query($conn, $sqlInsertRenter);
             if ($resultSql) {
+                $insertData = mysqli_insert_id($conn);
                 setFlashMessage('success', 'Data updated successfully, <b> NIK ' . $name_number . ' in Room ' . $room_id . ' with status ' . $tenure_status . '</b>');
+                // create agreement
+                $tenantID = $tenantInsertedId;
+                $roomID = $room_id;
+                generateAgreement($tenantID, $room_id);
             } else {
                 setFlashMessage('error', 'Data update failed');
                 echo "Error: " . $sql . "<br>" . $conn->error;

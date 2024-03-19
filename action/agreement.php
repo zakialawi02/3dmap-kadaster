@@ -12,8 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $from = $_POST['place'];
 
     $tenantNumber = str_pad($tenantID, 4, '0', STR_PAD_LEFT);
-    if ($from == "3") {
-        $placeNumber = "3573403";
+    $mappingData = [
+        "1" => "3578071",
+        "siola" => "3578071",
+        "2" => "3578071",
+        "balaipemuda" => "3578071",
+        "3" => "3573403",
+        "rusunawaburing2" => "3573403",
+    ];
+    if (isset($mappingData[$from])) {
+        $placeNumber = $mappingData[$from];
     } else {
         $placeNumber = "XXXXXXX";
     }
@@ -29,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $agrementNumber;
     }
 
-    $sql = "SELECT rt.id as renter2room_id, rt.tenant_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rt.agreement_number, rt.permit_flats, t.*, rm.*, m.id as organizer_id, m.organizer_name, m.organizer_city, m.organizer_head
+    $sql = "SELECT rt.id as renter2room_id, rt.tenant_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rt.agreement_number, rt.permit_flats, t.*, rm.*, m.id as organizer_id, m.organizer_name, m.organizer_address, m.organizer_city, m.organizer_head
                 FROM renters_tenants rt
                 LEFT JOIN rooms_table rm ON rt.room_id = rm.room_id
                 LEFT JOIN tenants_table t ON rt.tenant_id = t.id
@@ -49,12 +57,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $htmlContent2 = file_get_contents($html);
 
     // Ganti placeholder dengan data dari database
-    $htmlContent = str_replace('{place}', "RUSUNAWA BURING 2", $htmlContent);
+    if ($from == "1") {
+        $t = "SIOLA";
+        $c = "Kota Surabaya";
+        $uu = "821.2/166/35.78.071 /2021";
+    } elseif ($from == "2") {
+        $t = "BALAI PEMUDA";
+        $c = "Kota Surabaya";
+        $uu = "821.2/166/35.78.071 /2021";
+    } elseif ($from == "3") {
+        $t = "RUSUNAWA BURING 2";
+        $c = "Kota Malang";
+        $uu = "821.2/166/35.73.502 /2022";
+    }
+    $htmlContent = str_replace('{place}', $t, $htmlContent);
     $htmlContent = str_replace('{room_id}', $roomID, $htmlContent);
     $htmlContent = str_replace('{agreement_number}', json_decode($agrementNumber), $htmlContent);
     $htmlContent = str_replace('{date_now}', date("l, j F Y"), $htmlContent);
-    $htmlContent = str_replace('{agrement_place}', "Kota Malang", $htmlContent);
+    $htmlContent = str_replace('{agrement_place}', $c, $htmlContent);
     $htmlContent = str_replace('{nik}', $renter_table['name_number'], $htmlContent);
+    $htmlContent = str_replace('{noUU}', $uu, $htmlContent);
+    $htmlContent = str_replace('{organizer_name}', $renter_table['organizer_name'], $htmlContent);
+    $htmlContent = str_replace('{organizer_city}', $renter_table['organizer_city'], $htmlContent);
+    $htmlContent = str_replace('{organizer_address}', $renter_table['organizer_address'], $htmlContent);
     $htmlContent = str_replace('{organizer_head}', $renter_table['organizer_head'], $htmlContent);
     $htmlContent = str_replace('{tenant_name}', $renter_table['tenant_name'], $htmlContent);
     $htmlContent = str_replace('{kelurahan}', $renter_table['tenant_village'], $htmlContent);
@@ -66,15 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mpdf = new Mpdf(['orientation' => 'P', 'format' => 'A4-P']);
 
     $mpdf->WriteHTML($htmlContent);
-    $mpdf->AddPage();
-    $mpdf->WriteHTML($htmlContent2);
+    // $mpdf->AddPage();
+    // $mpdf->WriteHTML($htmlContent2);
 
     // Simpan PDF ke folder server
     $fileName = $fileName . '.pdf';
     $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
     $mpdf->Output($filePath, 'F');
 
-    $urlToRun = "http://3dmap-kadaster.test/action/sertifikat.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=" . $fileName;
+    $urlToRun = "http://3dmap-kadaster.test/action/sertifikat.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
     $response = file_get_contents($urlToRun);
 }
 

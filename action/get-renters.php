@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // debugVarDump($renters_table);
     } else {
         // ge all data
-        $sql = "SELECT rt.id as renter2room_id, rt.tenant_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rt.agreement_number, rt.permit_flats, rm.*, t.*, lo.id as legal_id, lp.id as lp_id
+        $sql = "SELECT rt.id as renter2room_id, rt.tenant_id, rt.room_id, rt.due_started, rt.due_finished, rt.tenure_status, rt.agreement_number, rt.permit_flats, rm.*, t.*, lo.id as legal_id, lp.id as lp_id, lp.building
         FROM renters_tenants rt
         LEFT JOIN rooms_table rm ON rt.room_id = rm.room_id
         LEFT JOIN tenants_table t ON rt.tenant_id = t.id

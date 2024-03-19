@@ -59,6 +59,14 @@
                         <label for="tenant_job" class="form-label">Job</label>
                         <input type="text" class="form-control" id="tenant_job" name="tenant_job" value="<?= old('tenant_job'); ?>" required>
                     </div>
+                    <!-- <div class="mb-3">
+                        <label for="number_residents" class="form-label">Number of Residents</label>
+                        <input type="text" class="form-control" id="number_residents" name="number_residents" value="<?= old('number_residents'); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="marriage_status" class="form-label">Marriage Status</label>
+                        <input type="text" class="form-control" id="marriage_status" name="marriage_status" value="<?= old('marriage_status'); ?>" required>
+                    </div> -->
                     <div class="mb-3">
                         <label for="tenant_religion" class="form-label">Religion</label>
                         <input type="text" class="form-control" id="tenant_religion" name="tenant_religion" value="<?= old('tenant_religion'); ?>" required>
@@ -133,9 +141,8 @@
                 dataType: "json",
                 cache: true,
                 success: function(response) {
-                    console.log(response);
                     $.each(response, function(index, roomsData) {
-                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + roomsData.parcel_id + " - " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
+                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + "[" + roomsData.building + " - " + roomsData.parcel_id + "] " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
                     });
                     (selectedRoom ? "" : $("#parcel_id").val(''));
                 },
