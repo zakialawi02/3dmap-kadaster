@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="/assets/css/style.css" />
 
-    <title>Login</title>
+    <title>Masuk</title>
 
 </head>
 
@@ -34,7 +34,7 @@ if (isset($_SESSION['islogin'])) {
             <div class="row justify-content-center">
 
                 <div class="col-md-6">
-                    <h2>Login</h2>
+                    <h2>Masuk</h2>
                     <?php if (isset($flashMessage)) : ?>
                         <div class="mt-2 alert alert-<?= ($flashMessage['type'] == "success" ? "success" : "danger"); ?> alert-dismissible fade show" role="alert">
                             <span><?= $flashMessage['message']; ?></span>
@@ -47,10 +47,10 @@ if (isset($_SESSION['islogin'])) {
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Kata Sandi</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">Masuk</button>
                     </form>
                 </div>
             </div>
