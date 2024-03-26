@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $htmlContent = file_get_contents($html);
 
             // Ganti placeholder dengan data dari database
-            $htmlContent = str_replace('{type}', "Occupancy", $htmlContent);
+            $htmlContent = str_replace('{type}', "Penghunian", $htmlContent);
             $htmlContent = str_replace('{place}', $parcel['building'], $htmlContent);
             $htmlContent = str_replace('{tenant_name}', $renter_table['tenant_name'], $htmlContent);
             $htmlContent = str_replace('{room_id}', $renter_table['room_id'], $htmlContent);
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $htmlContent = str_replace('{number_residents}', $renter_table['number_residents'] ?? "-", $htmlContent);
             $htmlContent = str_replace('{agreement_number}', $renter_table['agreement_number'] ?? "-", $htmlContent);
             $htmlContent = str_replace('{due_finished}', !empty($renter_table['due_finished']) ? (new DateTime($renter_table['due_finished']))->format('j-M-Y') : "-", $htmlContent);
-            $htmlContent = str_replace('{date_now}', date("j F Y"), $htmlContent);
+            $htmlContent = str_replace('{date_now}', timeIDN('tanggal bulan tahun'), $htmlContent);
             $htmlContent = str_replace('{organizer_city}', $renter_table['organizer_city'], $htmlContent);
             $htmlContent = str_replace('{organizer_city2}', strtoupper($renter_table['organizer_city']), $htmlContent);
             $htmlContent = str_replace('{organizer_name}', strtoupper($renter_table['organizer_name']), $htmlContent);

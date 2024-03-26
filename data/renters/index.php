@@ -147,7 +147,7 @@
                     const agreementNumber = response;
                     const file = agreementNumber.replace(/\//g, '.');
                     $('.loader').replaceWith(`<a href="/assets/PDF/agreement/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a><span> ${agreementNumber}</span>`);
-                    $(`#P-${tenant_id}`).replaceWith(`<a href="/assets/PDF/certificate/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a>`);
+                    $(`#P-${tenant_id}`).replaceWith(`<a href="/assets/PDF/certificate/S_${file}.pdf"><i class="bi bi-download" target="_blank"></i></a>`);
                 },
                 error: function(error) {
                     console.log("error");

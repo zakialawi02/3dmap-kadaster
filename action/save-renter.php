@@ -99,6 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $resultSql = mysqli_query($conn, $sqlUpdateRenter);
             if ($resultSql) {
                 setFlashMessage('success', 'Data updated successfully, <b> NIK ' . $name_number . ' in Room ' . $room_id . ' with status ' . $tenure_status . '</b>');
+                // create agreement
+                $tenantID = $TenantID;
+                $roomID = $room_id;
+                generateAgreement($tenantID, $room_id);
             } else {
                 setFlashMessage('error', 'Data update failed');
                 echo "Error: " . $sql . "<br>" . $conn->error;

@@ -144,7 +144,7 @@
                 cache: true,
                 success: function(response) {
                     $.each(response, function(index, roomsData) {
-                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + roomsData.parcel_id + " - " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
+                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + "[" + roomsData.building + " - " + roomsData.parcel_id + "] " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
                     });
                     (selectedRoom ? "" : $("#parcel_id").val(''));
                 },

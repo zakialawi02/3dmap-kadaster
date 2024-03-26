@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `land_parcel_table` (
   UNIQUE KEY `parcel_id` (`parcel_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.land_parcel_table: ~3 rows (approximately)
+-- Dumping data for table rrrcadastre2.land_parcel_table: ~4 rows (approximately)
 REPLACE INTO `land_parcel_table` (`id`, `parcel_id`, `building`) VALUES
 	(1, '3578071002B0001', 'Siola'),
 	(2, '3578071002B0002', 'Balai Pemuda'),
@@ -640,13 +640,13 @@ CREATE TABLE IF NOT EXISTS `renters_tenants` (
   CONSTRAINT `FK_renters_tenants_tenants_table` FOREIGN KEY (`tenant_id`) REFERENCES `tenants_table` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table rrrcadastre2.renters_tenants: ~101 rows (approximately)
+-- Dumping data for table rrrcadastre2.renters_tenants: ~100 rows (approximately)
 REPLACE INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due_finished`, `tenure_status`, `agreement_number`, `permit_flats`) VALUES
 	(9, 9, '0065', NULL, NULL, 'lease', NULL, NULL),
 	(10, 10, '0064', NULL, NULL, 'lease', NULL, NULL),
 	(11, 11, '0063', NULL, NULL, 'lease', '', NULL),
 	(13, 13, '0167', NULL, NULL, 'lease', NULL, NULL),
-	(14, 14, '0177', NULL, NULL, 'lease', '', ''),
+	(14, 14, '0177', NULL, NULL, 'lease', '0014/1679/3573403/2024', 'S_0014.1679.3573403.2024.pdf'),
 	(15, 15, '0168', NULL, NULL, 'lease', NULL, NULL),
 	(16, 16, '0169', NULL, NULL, 'lease', NULL, NULL),
 	(17, 17, '0170', NULL, NULL, 'lease', NULL, NULL),
@@ -655,7 +655,7 @@ REPLACE INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `du
 	(20, 20, '0173', NULL, NULL, 'lease', NULL, NULL),
 	(21, 21, '0174', NULL, NULL, 'lease', NULL, NULL),
 	(22, 22, '0175', NULL, NULL, 'lease', NULL, NULL),
-	(23, 23, '0178', NULL, NULL, 'lease', '', ''),
+	(23, 23, '0178', NULL, NULL, 'lease', '0023/1679/3573403/2024', 'S_0023.1679.3573403.2024.pdf'),
 	(24, 24, '0176', NULL, NULL, 'lease', '', ''),
 	(25, 25, '0130', NULL, NULL, 'lease', NULL, NULL),
 	(26, 26, '0119', NULL, NULL, 'lease', NULL, NULL),

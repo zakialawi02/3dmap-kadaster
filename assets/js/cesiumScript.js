@@ -476,8 +476,8 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           const dataTenantROW = `<tr><th>Data Penyewa</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
-          // Tambahkan baris baru dengan nama "Kewajiban"
-          const dataRightROW = `<tr><th>Kewajiban</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Hak"
+          const dataRightROW = `<tr><th>Hak</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
           // Tambahkan baris baru dengan nama "Batasan"
           const dataRestrictionROW = `<tr><th>Batasan</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Baca <i class="bi bi-eye"></i></button></td></tr>`;
