@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $htmlContent = str_replace('{place}', $t, $htmlContent);
     $htmlContent = str_replace('{room_id}', $roomID, $htmlContent);
     $htmlContent = str_replace('{agreement_number}', json_decode($agrementNumber), $htmlContent);
-    $htmlContent = str_replace('{date_now}', date("l, j F Y"), $htmlContent);
+    $htmlContent = str_replace('{date_now}', timeIDN(), $htmlContent);
     $htmlContent = str_replace('{agrement_place}', $c, $htmlContent);
     $htmlContent = str_replace('{nik}', $renter_table['name_number'], $htmlContent);
     $htmlContent = str_replace('{noUU}', $uu, $htmlContent);
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
     $mpdf->Output($filePath, 'F');
 
-    $urlToRun = "http://3dmap-kadaster.test/action/sertifikat.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
+    $urlToRun = base_url() . "/action/sertifikat.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
     $response = file_get_contents($urlToRun);
 }
 
@@ -117,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($result->num_rows > 0) {
         $renter_table = $result->fetch_assoc();
     }
-    debugVarDump($renter_table);
 }
 
 

@@ -50,13 +50,13 @@
     <nav>
       <div class="nav-logo">
         <div class="name-logo">
-          <h1>RRR Representation <br> in 3D Land Administration Prototype</h1>
+          <h1>Prototipe Representasi RRR <br> Administrasi Pertanahan 3D</h1>
         </div>
       </div>
       <div class="search">
         <form id="searchForm" class="d-flex">
-          <input class="form-control me-2" type="search" id="searchInput" placeholder="Search" aria-label="Search" autocomplete="off">
-          <button class="asbn btn btn-secondary" type="button" role="button" id="searchButton">Search</button>
+          <input class="form-control me-2" type="search" id="searchInput" placeholder="Cari" aria-label="Cari" autocomplete="off">
+          <button class="asbn btn btn-secondary" type="button" role="button" id="searchButton">Cari</button>
         </form>
         <div id="autocompleteResults"></div>
       </div>
@@ -65,9 +65,9 @@
           <li>
             <a href="#" id="layer-toggle" title="Show layer panel"><i class="bi bi-stack"></i> Layer</a>
           </li>
-          <li><a href="#" id="clip-toggle" title="Clip">Clip</a></li>
+          <li><a href="#" id="clip-toggle" title="klip">klip</a></li>
           <li>
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Camera</a>
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Kamera</a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li class="dropdown-li" id="first-camera"><a class="dropdown-item" href="#">Siola</a></li>
               <li class="dropdown-li" id="second-camera"><a class="dropdown-item" href="#">Balai pemuda</a></li>
@@ -75,20 +75,20 @@
             </ul>
           </li>
           <li>
-            <a id="meassure" class="" href="#" title="Meassurement"><i class="bi bi-rulers"></i></a>
+            <a id="meassure" class="" href="#" title="Ukur Jarak"><i class="bi bi-rulers"></i></a>
           </li>
           <li>
             <a id="minimap" class="" href="#" title="Minimap/Inset"><i class="bi bi-globe-asia-australia"></i></a>
           </li>
           <li>
-            <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
+            <a id="helpCesium" href="#" title="Bantuan Penggunaan"><i class="bi bi-question-circle-fill"></i></a>
           </li>
           <span class="divider"></span>
           <?php if (isset($_SESSION['islogin'])) : ?>
             <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
             <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
           <?php else : ?>
-            <li><a href="/auth/login.php" title="Login"><i class="bi bi-box-arrow-in-right"></i></a></li>
+            <li><a href="/auth/login.php" title="Masuk"><i class="bi bi-box-arrow-in-right"></i></a></li>
           <?php endif ?>
         </ul>
         <div id="hamb"><i class="bi bi-list"></i></div>
@@ -99,7 +99,7 @@
   <div class="preload">
     <div class="bg-loading">
       <img src="assets/img/load.gif">
-      <p>Fetching data and rendering content.</p>
+      <p>Mengambil data dan merender konten.</p>
     </div>
   </div>
 
@@ -109,7 +109,7 @@
 
   <!-- kritik dan saran -->
   <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
-    <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
+    <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Kritik & Saran</button>
   </div>
   <!-- Modal -->
   <div class="modal fade welcomemodal" id="critics" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="criticsLabel" aria-hidden="true">
@@ -137,7 +137,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailRoomLabel">Detail Rooms</h1>
+            <h1 class="modal-title fs-5" id="detailRoomLabel">Rincian Ruangan</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -152,7 +152,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
+            <h1 class="modal-title fs-5" id="detailOrganizerLabel">Rincian Pengelola</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -193,46 +193,42 @@
               <div class="accordion-body">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
-                    <button type="button" class="btn xs-btn btn-primary building-segment active">Physical
-                      Object</button>
-                    <button type="button" class="btn xs-btn btn-primary legal-segment">Legal Object</button>
+                    <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
+                    <button type="button" class="btn xs-btn btn-primary legal-segment">Objek Yuridis</button>
                   </div>
                 </div>
 
                 <div class="siola-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllShow">Check
-                      all</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllHide">Uncheck
-                      all</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllShow">Tampilkan semua</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllHide">Sembunyikan semua</button>
                   </div>
 
-                  <p class="mb-1">Upperground object</p>
+                  <p class="mb-1">Objek atas tanah </p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_5" id="siolaLevel_5"> Level 5</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_5" id="siolaLevel_5"> Lantai 5</label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_4" id="siolaLevel_4"> Level 4</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_4" id="siolaLevel_4"> Lantai 4</label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_3" id="siolaLevel_3"> Level 3</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_3" id="siolaLevel_3"> Lantai 3</label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_2" id="siolaLevel_2"> Level 2</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_2" id="siolaLevel_2"> Lantai 2</label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_1" id="siolaLevel_1"> Level 1</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_1" id="siolaLevel_1"> Lantai 1</label>
 
-                  <p class="mt-2 mb-1">Underground object</p>
+                  <p class="mt-2 mb-1">Objek bawah tanah</p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_0" id="siolaLevel_0"> Pile or building
-                    foundation</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_0" id="siolaLevel_0"> Tiang pancang atau pondasi bangunan</label>
 
                 </div>
 
                 <div class="siola-legal-layer-panel p-2 m-1 d-none">
-                  <p class="mb-1">Rights Unit</p>
+                  <p class="mb-1">Unit Hak</p>
                   <ul id="myUL">
                     <li>
                       <span class="caret caret-down"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_1all" id="siolaLegal_1all"> Level 1 <a href="#" id="zoomToSiolaLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_1all" id="siolaLegal_1all"> Lantai 1 <a href="#" id="zoomToSiolaLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested active">
                         <li>
@@ -293,7 +289,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_2all" id="siolaLegal_2all"> Level 2 <a href="#" id="zoomToSiolaLegal_2all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_2all" id="siolaLegal_2all"> Lantai 2 <a href="#" id="zoomToSiolaLegal_2all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -339,7 +335,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_3all" id="siolaLegal_3all"> Level 3 <a href="#" id="zoomToSiolaLegal_3all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_3all" id="siolaLegal_3all"> Lantai 3 <a href="#" id="zoomToSiolaLegal_3all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -385,7 +381,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_4all" id="siolaLegal_4all"> Level 4 <a href="#" id="zoomToSiolaLegal_4all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_4all" id="siolaLegal_4all"> Lantai 4 <a href="#" id="zoomToSiolaLegal_4all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -411,7 +407,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_5all" id="siolaLegal_5all"> Level 5 <a href="#" id="zoomToSiolaLegal_5all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaLegal_5all" id="siolaLegal_5all"> Lantai 5 <a href="#" id="zoomToSiolaLegal_5all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -423,16 +419,14 @@
                     </li>
                   </ul>
 
-                  <p class="mt-2 mb-1">Restriction Space</p>
+                  <p class="mt-2 mb-1">Batas Ruang</p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BT" id="siolaLegal_BT"> Upperground
-                    space <a href="#" id="zoomToSiolaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BT" id="siolaLegal_BT"> Ruang atas tanah <a href="#" id="zoomToSiolaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BB" id="siolaLegal_BB"> Underground
                     space <a href="#" id="zoomToSiolaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Building
-                    boundary line <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola <a href="#" id="zoomToSiolaParcel"><i class="bi bi-zoom-in"></i></a></label>
                   <ul id="myUL">
@@ -600,39 +594,37 @@
               <div class="accordion-body">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
-                    <button type="button" class="btn xs-btn btn-primary building-segment active">Physical
-                      Object</button>
-                    <button type="button" class="btn xs-btn btn-primary legal-segment">Legal Object</button>
+                    <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
+                    <button type="button" class="btn xs-btn btn-primary legal-segment">Objek Yuridis</button>
                   </div>
                 </div>
 
                 <div class="balai-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllShow">Check
-                      all</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllHide">Uncheck
-                      all</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllShow">Tampilkan semua</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllHide">Sembunyikan semua</button>
                   </div>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_2" id="balaiLevel_2"> Roof</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_1" id="balaiLevel_1"> Level 1</label>
 
-                  <p class="mt-2 mb-1">Underground object</p>
+                  <p class="mb-1">Objek atas tanah </p>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_2" id="balaiLevel_2"> Atap</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_1" id="balaiLevel_1"> Lantai 1</label>
+
+                  <p class="mt-2 mb-1">Objek bawah tanah</p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_0" id="balaiLevel_0"> Basement</label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_00" id="balaiLevel_00"> Pile or building
-                    foundation</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_00" id="balaiLevel_00"> Tiang pancang atau pondasi bangunan</label>
                 </div>
 
                 <div class="balai-legal-layer-panel p-2 m-1 d-none">
-                  <p class="mb-1">Rights Unit</p>
+                  <p class="mb-1">Unit Hak</p>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiLegal_0all" id="balaiLegal_0all"> Level 0 <a href="#" id="zoomToBalaiLegal_0all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiLegal_0all" id="balaiLegal_0all"> Lantai 0 <a href="#" id="zoomToBalaiLegal_0all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -688,7 +680,7 @@
                     <li>
                       <span class="caret caret-down"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiLegal_1all" id="balaiLegal_1all"> Level 1 <a href="#" id="zoomToBalaiLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiLegal_1all" id="balaiLegal_1all"> Lantai 1 <a href="#" id="zoomToBalaiLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested active">
                         <li>
@@ -760,13 +752,13 @@
                     </li>
                   </ul>
 
-                  <p class="mt-2 mb-1">Restriction Space</p>
+                  <p class="mt-2 mb-1">Batas Ruang</p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_BT" id="balaiLegal_BT"> Upperground space <a href="#" id="zoomToBalaiLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_BT" id="balaiLegal_BT"> Ruang atas tanah <a href="#" id="zoomToBalaiLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_BB" id="balaiLegal_BB"> Underground space <a href="#" id="zoomToBalaiLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_BB" id="balaiLegal_BB"> Ruang bawah tanah <a href="#" id="zoomToBalaiLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Building boundary line <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda<a href="#" id="zoomToBalaiParcel"><i class="bi bi-zoom-in"></i></a></label>
                   <ul id="myUL">
@@ -848,46 +840,44 @@
               <div class="accordion-body">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
-                    <button type="button" class="btn xs-btn btn-primary building-segment active">Physical
-                      Object</button>
-                    <button type="button" class="btn xs-btn btn-primary legal-segment">Legal Object</button>
+                    <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
+                    <button type="button" class="btn xs-btn btn-primary legal-segment">Objek Yuridis</button>
                   </div>
                 </div>
 
                 <div class="rusunawa-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllShow">Check
-                      all</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllHide">Uncheck
-                      all</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllShow">Tampilkan semua</button>
+                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllHide">Sembunyikan semua</button>
                   </div>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_r" id="rusunawaLevel_r"> Roof</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_5" id="rusunawaLevel_5"> Level 5</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_4" id="rusunawaLevel_4"> Level 4</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_3" id="rusunawaLevel_3"> Level 3</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_2" id="rusunawaLevel_2"> Level 2</label>
-                  <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_1" id="rusunawaLevel_1"> Level 1</label>
 
-                  <p class="mt-2 mb-1">Underground object</p>
+                  <p class="mb-1">Objek atas tanah </p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_0" id="rusunawaLevel_0"> Pile or building
-                    foundation</label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_r" id="rusunawaLevel_r"> Atap</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_5" id="rusunawaLevel_5"> Lantai 5</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_4" id="rusunawaLevel_4"> Lantai 4</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_3" id="rusunawaLevel_3"> Lantai 3</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_2" id="rusunawaLevel_2"> Lantai 2</label>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_1" id="rusunawaLevel_1"> Lantai 1</label>
+
+                  <p class="mt-2 mb-1">Objek bawah tanah</p>
+                  <label class="layer-item" style="margin-left: 0px">
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_0" id="rusunawaLevel_0"> Tiang pancang atau pondasi bangunan</label>
                 </div>
 
                 <div class="rusunawa-legal-layer-panel p-2 m-1 d-none">
-                  <p class="mb-1">Rights Unit</p>
+                  <p class="mb-1">Unit Hak</p>
 
                   <ul id="myUL">
                     <li>
                       <span class="caret caret-down"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1all" id="rusunawaLegal_1all"> Level 1 <a href="#" id="zoomToRusunawaLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_1all" id="rusunawaLegal_1all"> Lantai 1 <a href="#" id="zoomToRusunawaLegal_1all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested active">
                         <li>
@@ -983,7 +973,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_2all" id="rusunawaLegal_2all"> Level 2 <a href="#" id="zoomToRusunawaLegal_2all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_2all" id="rusunawaLegal_2all"> Lantai 2 <a href="#" id="zoomToRusunawaLegal_2all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -1124,7 +1114,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_3all" id="rusunawaLegal_3all"> Level 3 <a href="#" id="zoomToRusunawaLegal_3all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_3all" id="rusunawaLegal_3all"> Lantai 3 <a href="#" id="zoomToRusunawaLegal_3all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -1265,7 +1255,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_4all" id="rusunawaLegal_4all"> Level 4 <a href="#" id="zoomToRusunawaLegal_4all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_4all" id="rusunawaLegal_4all"> Lantai 4 <a href="#" id="zoomToRusunawaLegal_4all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -1406,7 +1396,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_5all" id="rusunawaLegal_5all"> Level 5 <a href="#" id="zoomToRusunawaLegal_5all"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawaLegal_5all" id="rusunawaLegal_5all"> Lantai 5 <a href="#" id="zoomToRusunawaLegal_5all"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -1543,16 +1533,13 @@
                     </li>
                   </ul>
 
-                  <p class="mt-2 mb-1">Restriction Space</p>
+                  <p class="mt-2 mb-1">Batas Ruang</p>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_BT" id="rusunawaLegal_BT"> Upperground
-                    space <a href="#" id="zoomToRusunawaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_BT" id="rusunawaLegal_BT"> Ruang atas tanah <a href="#" id="zoomToRusunawaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_BB" id="rusunawaLegal_BB"> Underground
-                    space <a href="#" id="zoomToRusunawaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_BB" id="rusunawaLegal_BB"> Ruang bawah tanah <a href="#" id="zoomToRusunawaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Building
-                    boundary line <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
 
@@ -1563,7 +1550,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingFour">
               <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                Basemap
+                Peta dasar
               </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
@@ -1576,7 +1563,7 @@
                   </select>
                   <div class="pt-3">
                     <label class="layer-item" style="margin-left: 0px">
-                      <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="" name="ShowBasemap" id="ShowBasemap"> Show Basemap</label>
+                      <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="" name="ShowBasemap" id="ShowBasemap"> Tampilkan Peta dasar</label>
                   </div>
                 </div>
 
@@ -1589,9 +1576,9 @@
 
         <div class="other-layer-panel p-2 m-1">
           <label class="layer-item" style="margin-left: 0px">
-            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" autocomplete="off" class="underground" name="underground_1" id="underground_1"> Underground view</label>
+            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" autocomplete="off" class="underground" name="underground_1" id="underground_1"> Tampilan bawah tanah</label>
           <div>
-            <button type="button" class="btn xs-btn btn-outline-info" id="resetTransparent">Reset Transparency</button>
+            <button type="button" class="btn xs-btn btn-outline-info" id="resetTransparent">Setel Ulang Transparansi</button>
           </div>
         </div>
       </div>
