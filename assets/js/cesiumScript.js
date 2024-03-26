@@ -334,7 +334,7 @@ function createPickedDataDescription(pickedData) {
       // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
       `<tr><th>Luas</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Keliling</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Keliling</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
     return description;
   } else if (pickedData.hasProperty("kode")) {
@@ -350,8 +350,9 @@ function createPickedDataDescription(pickedData) {
       // `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
     return description;
   }
@@ -2376,6 +2377,29 @@ $("#e37").change(function () {
   toggleVisibilityGeojson("16651", $(this).is(":checked"));
 });
 
+$("#eallc").click(function () {
+  toggleVisibilityGeojson("1542", $(this).is(":checked"));
+  toggleVisibilityGeojson("582", $(this).is(":checked"));
+  toggleVisibilityGeojson("641", $(this).is(":checked"));
+  toggleVisibilityGeojson("1543", $(this).is(":checked"));
+  toggleVisibilityGeojson("583", $(this).is(":checked"));
+});
+$("#e38").change(function () {
+  toggleVisibilityGeojson("1542", $(this).is(":checked"));
+});
+$("#e39").change(function () {
+  toggleVisibilityGeojson("582", $(this).is(":checked"));
+});
+$("#e40").change(function () {
+  toggleVisibilityGeojson("641", $(this).is(":checked"));
+});
+$("#e41").change(function () {
+  toggleVisibilityGeojson("1543", $(this).is(":checked"));
+});
+$("#e42").change(function () {
+  toggleVisibilityGeojson("583", $(this).is(":checked"));
+});
+
 // Measure Toggle Tool
 var measure = false;
 const tool = new MeasureTool(viewer, {});
@@ -2870,8 +2894,10 @@ $("#resetTransparent").click(function () {
   resetTransparent(rusunawaLegal);
 });
 
+firstCamera();
+
 // Get Parcel (all building in one file geojson) ##########################################################################################
-const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojson")
+const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
@@ -2882,7 +2908,7 @@ const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojso
 
       const kode = entity.properties.kode.getValue();
       if (kode !== undefined) {
-        if (kode === "R-2") {
+        if (kode === "R-2" || kode === "R-3") {
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(250, 250, 110)").withAlpha(0.5);
         } else if (kode === "K-4") {
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(235, 120, 120)").withAlpha(0.5);
@@ -2892,6 +2918,8 @@ const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment_surabaya.geojso
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(220, 160, 120)").withAlpha(0.5);
         } else if (kode === "KT-1") {
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(198, 142, 255)").withAlpha(0.5);
+        } else if (kode === "RTH-1") {
+          entity.polygon.material = Cesium.Color.fromCssColorString("rgb(150, 220, 80)").withAlpha(0.5);
         } else {
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(128, 128, 128)").withAlpha(0.5);
         }
@@ -2970,7 +2998,6 @@ $(function () {
   $(".preload").addClass("d-none");
   $(".loader-container").removeClass("d-none");
 });
-firstCamera();
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(

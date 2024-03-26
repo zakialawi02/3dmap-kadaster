@@ -493,16 +493,6 @@
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            ENV S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            ENV S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
                             ENV S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
@@ -1542,7 +1532,40 @@
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
+                  <ul id="myUL">
+                    <li>
+                      <span class="caret"> </span>
+                      <label class="" style="margin-left: 0px">
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="ealla"> ENV R<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
 
+                      <ul class="nested">
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
+                            ENV R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
+                            ENV R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
+                            ENV R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
+                            ENV R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
+                            ENV R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
+                        </li>
+                      </ul>
+                    </li>
                 </div>
               </div>
             </div>
