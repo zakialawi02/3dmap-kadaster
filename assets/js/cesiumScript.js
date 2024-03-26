@@ -262,6 +262,23 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
+function displayPDF() {
+  const pdfUrl = `${baseUrl}assets/PDF/PERJANJIAN SEWA MENYEWA BARU.pdf`;
+  // const pdfUrl = "https://rrr3dap.ybo.my.id/assets/PDF/agreement/0023.1679.3573403.2024.pdf";
+  const pdfObject = $("<object>")
+    .attr({
+      data: "https://docs.google.com/gview?url=" + pdfUrl + "&embedded=true",
+      type: "application/pdf",
+      width: "100%",
+      height: "520px",
+    })
+    .html('Unable to display PDF file. <a href="' + pdfUrl + '">Download</a> instead.');
+  pdfObject.appendTo("#detailRight .modal-body");
+  const downloadParagraph = $("<p>").html('Pdf file not showing? <a href="' + pdfUrl + '">Download here</a>');
+  downloadParagraph.closest("object").after(pdfObject);
+  return pdfObject;
+}
+
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -668,6 +685,14 @@ $(document).on("click", "#btnDetailTenant", function (e) {
     $("#detailTenant .modal-body").html(html);
   }
 });
+
+$(document).on("click", "#btnRight", function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $("#detailRight .modal-body").html(loader);
+  $("#detailRight .modal-body").html(displayPDF());
+});
+
 // TARGETSCAN Siola
 function scan() {
   console.log("SCAN");

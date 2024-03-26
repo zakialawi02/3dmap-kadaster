@@ -177,6 +177,58 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailRightLabel">Hak</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            /
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailRestrictionLabel">Batasan</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column align-items-center ">
+            <div class="content">
+              <h3 style="text-align:center;">Pasal 1</h3>
+              <h3 style="text-align:center;">KETENTUAN UMUM</h3>
+              <ol>
+                <li>
+                  <p style="text-align:justify;">Rumah Susun Sederhana Sewa yang selanjutnya disebut<strong>&nbsp;</strong>RUSUNAWA &nbsp;adalah bangunan gedung bertingkat yang dibangun dalam suatu lingkungan yang terbagi ini termasuk semua dalam bagian-bagian yang distrukturkan secara fungsional dalam arah horisontal maupun vertikal dan merupakan satuan-satuan yang masing-masing digunakan secara terpisah, status penguasaannya sewa serta dibangun dengan menggunakan dana Anggaran Pendapatan dan Belanja Negara dan/atau Anggaran Pendapatan dan Belanja Daerah dengan fungsi utamanya sebagai hunian;</p>
+                </li>
+                <li>
+                  <p style="text-align:justify;">Sewa adalah pemanfaatan barang milik daerah oleh pihak lain dalam jangka waktu tertentu dengan menerima imbalan &nbsp;uang tunai;</p>
+                </li>
+                <li>
+                  <p style="text-align:justify;">Biaya RUSUNAWA &nbsp;adalah semua biaya termasuk rekening PLN, rekening PDAM, dan iuran pengelolaan yang harus dibayar oleh penyewa/penghuni;</p>
+                </li>
+                <li>
+                  <p style="text-align:justify;">Penyewa adalah penghuni/penyewa yang membayar biaya sewa dan telah mendapat persetujuan tertulis dari pengelola RUSUNAWA untuk dapat menempati dan bertempat tinggal sementara untuk jangka waktu sesuai dalam perjanjian ini;</p>
+                </li>
+                <li>
+                  <p style="text-align:justify;">Yang berhak dan dapat melakukan perjanjian sewa menyewa Rumah Susun&nbsp; adalah Warga Negara Indonesia yang berdomisili di wilayah Kota Malang, serta termasuk dalam kelompok masyarakat berpenghasilan rendah sesuai Pasal 1 ayat (14) Peraturan Walikota Nomor 41 Tahun 2013 tentang &nbsp;Tata Cara Pengelolaan Rumah Susun Sederhana Sewa</p>
+                </li>
+              </ol>
+              <h3 style="margin-left:0cm;text-align:center;">Pasal 2</h3>
+              <h3 style="margin-left:0cm;text-align:center;">OBYEK SEWA MENYEWA</h3>
+              <p style="margin-left:7.1pt;text-align:justify;">Dalam Perjanjian ini yang menjadi obyek Perjanjian sewa menyewa ini adalah RUSUNAWA Buring&nbsp;2 pada Hunian&nbsp;<strong>B.05 Lantai&nbsp;2&nbsp;</strong>yang terletak di Jalan&nbsp;Citra Garden Boulevard No.1&nbsp;Kota Malang.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <div class="layer-panel card">
@@ -1536,7 +1588,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="ealla"> ENV R<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> ENV R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
@@ -1696,6 +1748,12 @@
   <footer>
     <!-- place footer here -->
   </footer>
+
+  <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
+  <?php $base_url = base_url(); ?>
+  <script>
+    const baseUrl = "<?php echo $base_url; ?>";
+  </script>
 
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
