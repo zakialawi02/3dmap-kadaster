@@ -367,7 +367,7 @@ function createPickedDataDescription(pickedData) {
       // `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th>Tinggi</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
@@ -697,22 +697,22 @@ $(document).on("click", "#btnRight", function (e) {
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
-  // var modals = document.querySelectorAll('.TARGETSCAN');
-  // // Iterasi melalui setiap elemen modal
-  // modals.forEach(modal => {
-  //   // Mendapatkan teks dari elemen modal
-  //   const modalText = modal.textContent || modal.innerText;
-  //   // Mengecek apakah teks mengandung kata "Height"
-  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-  //     modal.innerHTML = modal.innerHTML.replace(/(Height)/ig, '<a href="/test" target="_blank">$1</a>');
-  //   }
-  //   // Mengecek apakah teks mengandung kata "Height"
-  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-  //     modal.innerHTML = modal.innerHTML.replace(/(Tenure Status)/ig, '<a href="/tests" target="_blank">$1</a>');
-  //   }
-  // });
+  const modals = document.querySelectorAll(".TARGETSCAN");
+  // Iterasi melalui setiap elemen modal
+  modals.forEach((modal) => {
+    // Mendapatkan teks dari elemen modal
+    const modalText = modal.textContent || modal.innerText;
+    // Mengecek apakah teks mengandung kata "Rusunawa"
+    if (modalText.toLowerCase().includes("Rusunawa".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Rusunawa" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Rusunawa)/gi, '<a href="/test" target="_blank">$1</a>');
+    }
+    // Mengecek apakah teks mengandung kata "Rumah Susun"
+    if (modalText.toLowerCase().includes("Rumah Susun".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Rumah Susun" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Rumah Susun)/gi, '<a href="/tests" target="_blank">$1</a>');
+    }
+  });
 }
 
 // Layering button Siola  ################################################################################
@@ -2223,7 +2223,7 @@ function toggleVisibilityGeojson(objectId, isVisible) {
     const dataSource = dataSources.get(i);
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
-      if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
+      if (entity.properties.hasOwnProperty("OBJECTID") && entity.properties.OBJECTID.getValue() == objectId) {
         entity.show = isVisible;
         return;
       }
@@ -3050,7 +3050,7 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
   })
 );
 
-const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465321));
+const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520612));
 
 balaiLegal.style = setColorStyle;
 
@@ -3098,7 +3098,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
   })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2478741));
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520710));
 
 rusunawaLegal.style = setColorStyle;
 
