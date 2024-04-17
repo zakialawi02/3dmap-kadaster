@@ -262,23 +262,6 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
-function displayPDF() {
-  const pdfUrl = `${baseUrl}assets/PDF/PERJANJIAN SEWA MENYEWA BARU.pdf`;
-  // const pdfUrl = "https://rrr3dap.ybo.my.id/assets/PDF/agreement/0023.1679.3573403.2024.pdf";
-  const pdfObject = $("<object>")
-    .attr({
-      data: "https://docs.google.com/gview?url=" + pdfUrl + "&embedded=true",
-      type: "application/pdf",
-      width: "100%",
-      height: "520px",
-    })
-    .html('Unable to display PDF file. <a href="' + pdfUrl + '">Download</a> instead.');
-  pdfObject.appendTo("#detailRight .modal-body");
-  const downloadParagraph = $("<p>").html('Pdf file not showing? <a href="' + pdfUrl + '">Download here</a>');
-  downloadParagraph.closest("object").after(pdfObject);
-  return pdfObject;
-}
-
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -693,15 +676,56 @@ $(document).on("click", "#btnRight", function (e) {
   $("#detailRight .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  $("#detailRight .modal-body").html(displayRight(parcel));
+  displayRight(parcel, "right").then((result) => {
+    $("#detailRight .modal-body").html(result);
+    scan();
+  });
 });
 
-function displayRight(data) {
-  console.log({ data });
-  return `<div>TEST</div>`;
+// Menangani klik pada tombol "Read (Restriction)"
+$(document).on("click", "#btnRestriction", function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $("#detailRestriction .modal-body").html(loader);
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  displayRight(parcel, "restriction").then((result) => {
+    $("#detailRestriction .modal-body").html(result);
+    scan();
+  });
+});
+
+// Menangani klik pada tombol "Read (Responsibilities)"
+$(document).on("click", "#btnResponsibilities", function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $("#detailResponsibilities .modal-body").html(loader);
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  displayRight(parcel, "responsibilities").then((result) => {
+    $("#detailResponsibilities .modal-body").html(result);
+    scan();
+  });
+});
+
+function displayRight(parcelId, typerrr) {
+  let url;
+  const type = typerrr.toLowerCase();
+  if (parcelId == "3578071002B0001") {
+    url = `/data/rrr/siola-${type}.php`;
+  } else if (parcelId == "3578071002B0002") {
+    url = `/data/rrr/balai-pemuda-${type}.php`;
+  } else if (parcelId == "3573031005B0001") {
+    url = `/data/rrr/rusunawa-${type}.php`;
+  } else {
+    throw new Error("Parcel ID not found");
+  }
+  return fetch(url)
+    .then((response) => response.text())
+    .catch((error) => console.error("Failed to fetch right information:", error));
 }
 
-// TARGETSCAN Siola
+// TARGETSCAN
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"

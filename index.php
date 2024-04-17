@@ -111,7 +111,7 @@
   <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
     <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Kritik & Saran</button>
   </div>
-  <!-- Modal -->
+  <!-- Modal critics and suggestions -->
   <div class="modal fade welcomemodal" id="critics" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="criticsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -133,45 +133,45 @@
 
   <main>
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
+    <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRoomLabel">Rincian Ruangan</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail room
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+    <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailOrganizerLabel">Rincian Pengelola</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail organizer
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
+    <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail tenant
           </div>
         </div>
       </div>
@@ -179,52 +179,44 @@
 
     <!-- Modal -->
     <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRightLabel">Hak</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            /
+          <div class="modal-body TARGETSCAN">
+            / right
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
+    <div class="modal fade" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRestrictionLabel">Batasan</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body d-flex flex-column align-items-center ">
-            <div class="content">
-              <h3 style="text-align:center;">Pasal 1</h3>
-              <h3 style="text-align:center;">KETENTUAN UMUM</h3>
-              <ol>
-                <li>
-                  <p style="text-align:justify;">Rumah Susun Sederhana Sewa yang selanjutnya disebut<strong>&nbsp;</strong>RUSUNAWA &nbsp;adalah bangunan gedung bertingkat yang dibangun dalam suatu lingkungan yang terbagi ini termasuk semua dalam bagian-bagian yang distrukturkan secara fungsional dalam arah horisontal maupun vertikal dan merupakan satuan-satuan yang masing-masing digunakan secara terpisah, status penguasaannya sewa serta dibangun dengan menggunakan dana Anggaran Pendapatan dan Belanja Negara dan/atau Anggaran Pendapatan dan Belanja Daerah dengan fungsi utamanya sebagai hunian;</p>
-                </li>
-                <li>
-                  <p style="text-align:justify;">Sewa adalah pemanfaatan barang milik daerah oleh pihak lain dalam jangka waktu tertentu dengan menerima imbalan &nbsp;uang tunai;</p>
-                </li>
-                <li>
-                  <p style="text-align:justify;">Biaya RUSUNAWA &nbsp;adalah semua biaya termasuk rekening PLN, rekening PDAM, dan iuran pengelolaan yang harus dibayar oleh penyewa/penghuni;</p>
-                </li>
-                <li>
-                  <p style="text-align:justify;">Penyewa adalah penghuni/penyewa yang membayar biaya sewa dan telah mendapat persetujuan tertulis dari pengelola RUSUNAWA untuk dapat menempati dan bertempat tinggal sementara untuk jangka waktu sesuai dalam perjanjian ini;</p>
-                </li>
-                <li>
-                  <p style="text-align:justify;">Yang berhak dan dapat melakukan perjanjian sewa menyewa Rumah Susun&nbsp; adalah Warga Negara Indonesia yang berdomisili di wilayah Kota Malang, serta termasuk dalam kelompok masyarakat berpenghasilan rendah sesuai Pasal 1 ayat (14) Peraturan Walikota Nomor 41 Tahun 2013 tentang &nbsp;Tata Cara Pengelolaan Rumah Susun Sederhana Sewa</p>
-                </li>
-              </ol>
-              <h3 style="margin-left:0cm;text-align:center;">Pasal 2</h3>
-              <h3 style="margin-left:0cm;text-align:center;">OBYEK SEWA MENYEWA</h3>
-              <p style="margin-left:7.1pt;text-align:justify;">Dalam Perjanjian ini yang menjadi obyek Perjanjian sewa menyewa ini adalah RUSUNAWA Buring&nbsp;2 pada Hunian&nbsp;<strong>B.05 Lantai&nbsp;2&nbsp;</strong>yang terletak di Jalan&nbsp;Citra Garden Boulevard No.1&nbsp;Kota Malang.</p>
-            </div>
+          <div class="modal-body TARGETSCAN">
+            / restriction
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailResponsibilities" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailResponsibilitiesLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h1 class="modal-title fs-5" id="detailResponsibilitiesLabel">Tanggung Jawab</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body TARGETSCAN">
+            / responsibilities
           </div>
         </div>
       </div>
@@ -1663,7 +1655,7 @@
       <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card TARGETSCAN">
+    <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
