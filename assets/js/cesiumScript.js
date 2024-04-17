@@ -686,12 +686,20 @@ $(document).on("click", "#btnDetailTenant", function (e) {
   }
 });
 
+// Menangani klik pada tombol "Read (Right)"
 $(document).on("click", "#btnRight", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
   $("#detailRight .modal-body").html(loader);
-  $("#detailRight .modal-body").html(displayPDF());
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  $("#detailRight .modal-body").html(displayRight(parcel));
 });
+
+function displayRight(data) {
+  console.log({ data });
+  return `<div>TEST</div>`;
+}
 
 // TARGETSCAN Siola
 function scan() {
@@ -2223,7 +2231,7 @@ function toggleVisibilityGeojson(objectId, isVisible) {
     const dataSource = dataSources.get(i);
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
-      if (entity.properties.hasOwnProperty("OBJECTID") && entity.properties.OBJECTID.getValue() == objectId) {
+      if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
         entity.show = isVisible;
         return;
       }
@@ -3098,7 +3106,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
   })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520710));
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2541786));
 
 rusunawaLegal.style = setColorStyle;
 
