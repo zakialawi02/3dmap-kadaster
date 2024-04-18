@@ -303,11 +303,11 @@ function createPickedFeatureDescription(pickedFeature) {
     `<tr><th>ObjectID</th><td>${pickedFeature.getProperty("Tag")}</td></tr>` +
     `<tr><th>GlobalId</th><td>${pickedFeature.getProperty("GlobalId")}</td></tr>` +
     `<tr><th>parcel_id</th><td>${pickedFeature.getProperty("parcel_id")}</td></tr>` +
-    `<tr><th>Nama</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-    `<tr><th>Tinggi</th><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
-    `<tr><th>Luas</th><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Name</th><td>${pickedFeature.getProperty("Name")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Height</th><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+    `<tr><th>Area</th><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
     `<tr><th>Volume</th><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
   return description;
@@ -319,22 +319,22 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
       `<tr><th>GlobalId</th><td>${pickedData.GlobalId.getValue()}</td></tr>` +
       `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
-      `<tr><th>Nama</th><td>${pickedData.Name.getValue()}</td></tr>` +
-      `<tr><th>Status Hak Tanah</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
-      `<tr><th>Peta Situasi Nomor</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
-      `<tr><th>Waktu Berakhirnya Hak</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
-      `<tr><th>Asal Hak</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
-      `<tr><th>Tanggal Surat Ukur</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
-      `<tr><th>Nomor Surat Ukur</th><td>${pickedData.measure_letter_number.getValue()}</td></tr>` +
-      `<tr><th>Nama Pemegang Hak</th><td>${pickedData.right_holder.getValue()}</td></tr>` +
-      `<tr><th>Provinsi</th><td>${pickedData.province.getValue()}</td></tr>` +
-      `<tr><th>Kab/Kota</th><td>${pickedData.city.getValue()}</td></tr>` +
-      `<tr><th>Kecamatan</th><td>${pickedData.district.getValue()}</td></tr>` +
-      `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Luas</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Keliling</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
+      `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
+      `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+      `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
+      `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
+      `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
+      `<tr><th>Measure Letter Number</th><td>${pickedData.measure_letter_number.getValue()}</td></tr>` +
+      `<tr><th>Name of Right Holder</th><td>${pickedData.right_holder.getValue()}</td></tr>` +
+      `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+      `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+      `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+      `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
     return description;
   } else if (pickedData.hasProperty("kode")) {
@@ -342,17 +342,17 @@ function createPickedDataDescription(pickedData) {
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
       `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
-      `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
-      `<tr><th>Kawasan</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
-      // `<tr><th>Provinsi</th><td>${pickedData.province.getValue()}</td></tr>` +
-      // `<tr><th>Kab/Kota</th><td>${pickedData.city.getValue()}</td></tr>` +
-      // `<tr><th>Kecamatan</th><td>${pickedData.district.getValue()}</td></tr>` +
-      // `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Tinggi</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
-      `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th>Zone</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Area Name</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
+      // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
+      // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
+      // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
     return description;
   }
@@ -460,37 +460,37 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         $("#card-title-property").html(`${data.object_id}`);
         const updatedParcelID = $('th:contains("parcel_id") + td');
         updatedParcelID.text(`${data.parcel_id}`);
-        const updatedName = $('th:contains("Nama") + td');
+        const updatedName = $('th:contains("Name") + td');
         updatedName.text(`${data.building}`);
         if (data.room_id != undefined && data.room_id != null && data.room_id != "") {
           // Hapus baris tabel setelah parcel_id
           const deletedRows = updatedName.closest("tr").nextAll("tr");
           deletedRows.remove();
 
-          // Tambahkan baris baru dengan nama "Data Ruang"
-          const dataRoomROW = `<tr><th>Data Ruang</th><td>${data.room_id} <button type="button" id="btnDetailRoom" class="btn asbn cesium-button" data-legal="${data.object_id}" data-parcel="${data.parcel_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailRoom">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Room Data"
+          const dataRoomROW = `<tr><th>Room Data</th><td>${data.room_id} <button type="button" id="btnDetailRoom" class="btn asbn cesium-button" data-legal="${data.object_id}" data-parcel="${data.parcel_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailRoom">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").after(dataRoomROW);
-          // Tambahkan baris baru dengan nama "Data Pengelola"
-          const dataOrganizerROW = `<tr><th>Data Pengelola</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Organizer Data"
+          const dataOrganizerROW = `<tr><th>Organizer Data</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").after(dataOrganizerROW);
           // Tambahkan baris baru dengan nama "Tenant Detail"
-          const dataTenantROW = `<tr><th>Data Penyewa</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          const dataTenantROW = `<tr><th>Tenant Data</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
-          // Tambahkan baris baru dengan nama "Hak"
-          const dataRightROW = `<tr><th>Hak</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Right"
+          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
-          // Tambahkan baris baru dengan nama "Batasan"
-          const dataRestrictionROW = `<tr><th>Batasan</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Restriction"
+          const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
-          // Tambahkan baris baru dengan nama "Tanggung Jawab"
-          const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Responsibilities"
+          const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
         }
         scan();
         // add URI
         if (Array.isArray(tags)) {
-          let tagsHtml = `<div class="mt-2"><span>Tautan Terkait/Tag URI:</span>`;
+          let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
           // Loop through the array and create links
           tags.forEach((tag) => {
             // Check if tag.id_keyword is not null or empty
@@ -580,24 +580,24 @@ $(document).on("click", "#btnDetailRoom", function (e) {
   const table =
     `<table class="table"><tbody>` +
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-    `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
-    `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Nomor Perjanjian Sewa</th><td style="width: 1%;">:</td><td> ${
+    `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+    `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+    `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${
       data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
         ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
         : "Tidak ada Data!"
     }
     </td></tr>` +
-    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
     </td></tr>` +
-    `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
-    `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
-    `<tr><th>Waktu Berakhir</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
-    `<tr><th>Biaya Sewa (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-    `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
-    `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
+    `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
+    `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
+    `<tr><th>Rent Fee (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Height</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+    `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
     `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
   $("#detailRoom .modal-body").html(table);
@@ -621,10 +621,10 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
       const data = response;
       const table =
         `<table class="table"><tbody>` +
-        `<tr><th>Nama Pengelola</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
-        `<tr><th>Alamat</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
-        `<tr><th>Kab/Kota</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
-        `<tr><th>Kepala Pengelola</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
+        `<tr><th>Organizer Name</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
+        `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
+        `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
+        `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
         `</tbody></table>`;
       $("#detailOrganizer .modal-body").html(table);
       scan();
@@ -650,21 +650,21 @@ $(document).on("click", "#btnDetailTenant", function (e) {
     const rtrw = JSON.parse(data.tenant_rt_rw);
     const table =
       `<table class="table"><tbody>` +
-      `<tr><th>Nama</th><td style="width: 1%;">:</td><td>${data.tenant_name}</td></tr>` +
+      `<tr><th>Name</th><td style="width: 1%;">:</td><td>${data.tenant_name}</td></tr>` +
       `<tr><th style="width: 55%;">Nomor Induk (NIK)</th><td style="width: 1%;">:</td><td>${data.name_number}</td></tr>` +
-      `<tr><th>Pekerjaan</th><td style="width: 1%;">:</td><td>${data.tenant_job}</td></tr>` +
-      `<tr><th>Agama</th><td style="width: 1%;">:</td><td>${data.tenant_religion}</td></tr>` +
-      `<tr><th>Alamat</th><td style="width: 1%;">:</td><td>${data.tenant_address}</td></tr>` +
+      `<tr><th>Job</th><td style="width: 1%;">:</td><td>${data.tenant_job}</td></tr>` +
+      `<tr><th>Religion</th><td style="width: 1%;">:</td><td>${data.tenant_religion}</td></tr>` +
+      `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.tenant_address}</td></tr>` +
       `<tr><th>RT/RW</th><td style="width: 1%;">:</td><td>${rtrw.tenant_rt}/${rtrw.tenant_rw}</td></tr>` +
-      `<tr><th>Kelurahan</th><td style="width: 1%;">:</td><td>${data.tenant_village}</td></tr>` +
-      `<tr><th>Kecamatan</th><td style="width: 1%;">:</td><td>${data.tenant_district}</td></tr>` +
-      `<tr><th>Kab/Kota</th><td style="width: 1%;">:</td><td>${data.tenant_city}</td></tr>` +
-      `<tr><th>Provinsi</th><td style="width: 1%;">:</td><td>${data.tenant_province}</td></tr>` +
+      `<tr><th>Village</th><td style="width: 1%;">:</td><td>${data.tenant_village}</td></tr>` +
+      `<tr><th>District</th><td style="width: 1%;">:</td><td>${data.tenant_district}</td></tr>` +
+      `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.tenant_city}</td></tr>` +
+      `<tr><th>Province</th><td style="width: 1%;">:</td><td>${data.tenant_province}</td></tr>` +
       `</tbody></table>`;
     $("#detailTenant .modal-body").html(table);
     scan();
   } else {
-    const html = `<div><center>Tidak ada penyewa saat ini / Tidak ada data penyewa pada Ruang ID: ${data.room_id}, ${data.building} </center></div>`;
+    const html = `<div><center>There are no tenants right now / No tenant data in Room ID: ${data.room_id}, ${data.building} </center></div>`;
     $("#detailTenant .modal-body").html(html);
   }
 });
