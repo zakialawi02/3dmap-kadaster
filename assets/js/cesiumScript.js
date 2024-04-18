@@ -262,23 +262,6 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
-function displayPDF() {
-  const pdfUrl = `${baseUrl}assets/PDF/PERJANJIAN SEWA MENYEWA BARU.pdf`;
-  // const pdfUrl = "https://rrr3dap.ybo.my.id/assets/PDF/agreement/0023.1679.3573403.2024.pdf";
-  const pdfObject = $("<object>")
-    .attr({
-      data: "https://docs.google.com/gview?url=" + pdfUrl + "&embedded=true",
-      type: "application/pdf",
-      width: "100%",
-      height: "520px",
-    })
-    .html('Unable to display PDF file. <a href="' + pdfUrl + '">Download</a> instead.');
-  pdfObject.appendTo("#detailRight .modal-body");
-  const downloadParagraph = $("<p>").html('Pdf file not showing? <a href="' + pdfUrl + '">Download here</a>');
-  downloadParagraph.closest("object").after(pdfObject);
-  return pdfObject;
-}
-
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -367,7 +350,7 @@ function createPickedDataDescription(pickedData) {
       // `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th>Tinggi</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
@@ -686,33 +669,82 @@ $(document).on("click", "#btnDetailTenant", function (e) {
   }
 });
 
+// Menangani klik pada tombol "Read (Right)"
 $(document).on("click", "#btnRight", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
   $("#detailRight .modal-body").html(loader);
-  $("#detailRight .modal-body").html(displayPDF());
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  displayRight(parcel, "right").then((result) => {
+    $("#detailRight .modal-body").html(result);
+    scan();
+  });
 });
 
-// TARGETSCAN Siola
+// Menangani klik pada tombol "Read (Restriction)"
+$(document).on("click", "#btnRestriction", function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $("#detailRestriction .modal-body").html(loader);
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  displayRight(parcel, "restriction").then((result) => {
+    $("#detailRestriction .modal-body").html(result);
+    scan();
+  });
+});
+
+// Menangani klik pada tombol "Read (Responsibilities)"
+$(document).on("click", "#btnResponsibilities", function (e) {
+  // loader animation
+  const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
+  $("#detailResponsibilities .modal-body").html(loader);
+  const data = dataRoom;
+  const parcel = data.parcel_id;
+  displayRight(parcel, "responsibilities").then((result) => {
+    $("#detailResponsibilities .modal-body").html(result);
+    scan();
+  });
+});
+
+function displayRight(parcelId, typerrr) {
+  let url;
+  const type = typerrr.toLowerCase();
+  if (parcelId == "3578071002B0001") {
+    url = `/data/rrr/siola-${type}.php`;
+  } else if (parcelId == "3578071002B0002") {
+    url = `/data/rrr/balai-pemuda-${type}.php`;
+  } else if (parcelId == "3573031005B0001") {
+    url = `/data/rrr/rusunawa-${type}.php`;
+  } else {
+    throw new Error("Parcel ID not found");
+  }
+  return fetch(url)
+    .then((response) => response.text())
+    .catch((error) => console.error("Failed to fetch right information:", error));
+}
+
+// TARGETSCAN
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
-  // var modals = document.querySelectorAll('.TARGETSCAN');
-  // // Iterasi melalui setiap elemen modal
-  // modals.forEach(modal => {
-  //   // Mendapatkan teks dari elemen modal
-  //   const modalText = modal.textContent || modal.innerText;
-  //   // Mengecek apakah teks mengandung kata "Height"
-  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-  //     modal.innerHTML = modal.innerHTML.replace(/(Height)/ig, '<a href="/test" target="_blank">$1</a>');
-  //   }
-  //   // Mengecek apakah teks mengandung kata "Height"
-  //   if (modalText.toLowerCase().includes('Height'.toLowerCase())) {
-  //     // Menambahkan link pada teks yang mengandung kata "Height" dengan target="_blank"
-  //     modal.innerHTML = modal.innerHTML.replace(/(Tenure Status)/ig, '<a href="/tests" target="_blank">$1</a>');
-  //   }
-  // });
+  const modals = document.querySelectorAll(".TARGETSCAN");
+  // Iterasi melalui setiap elemen modal
+  modals.forEach((modal) => {
+    // Mendapatkan teks dari elemen modal
+    const modalText = modal.textContent || modal.innerText;
+    // Mengecek apakah teks mengandung kata "Rusunawa"
+    if (modalText.toLowerCase().includes("Rusunawa".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Rusunawa" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Rusunawa)/gi, '<a href="/test" target="_blank">$1</a>');
+    }
+    // Mengecek apakah teks mengandung kata "Rumah Susun"
+    if (modalText.toLowerCase().includes("Rumah Susun".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Rumah Susun" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Rumah Susun)/gi, '<a href="/tests" target="_blank">$1</a>');
+    }
+  });
 }
 
 // Layering button Siola  ################################################################################
@@ -3050,7 +3082,7 @@ const balaiBuildingL2 = viewer.scene.primitives.add(
   })
 );
 
-const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465321));
+const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520612));
 
 balaiLegal.style = setColorStyle;
 
@@ -3098,7 +3130,7 @@ const rusunawaBuildingL6 = viewer.scene.primitives.add(
   })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2478741));
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2541786));
 
 rusunawaLegal.style = setColorStyle;
 
