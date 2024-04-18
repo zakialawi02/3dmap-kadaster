@@ -4234,4 +4234,5 @@ $(document).ready(function () {
 $(document).ready(function () {
   $(".loader-container").addClass("d-none");
   resetClipTilesets(1);
+  resetClipTilesets();
 });
