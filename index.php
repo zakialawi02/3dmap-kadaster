@@ -111,7 +111,7 @@
   <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
     <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
   </div>
-  <!-- Modal -->
+  <!-- Modal critics and suggestions -->
   <div class="modal fade welcomemodal" id="critics" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="criticsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -133,45 +133,45 @@
 
   <main>
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
+    <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRoomLabel">Detail Rooms</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail room
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+    <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail organizer
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
+    <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body TARGETSCAN">
+            detail tenant
           </div>
         </div>
       </div>
@@ -179,14 +179,14 @@
 
     <!-- Modal -->
     <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRightLabel">Right</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            /
+          <div class="modal-body TARGETSCAN">
+            / right
           </div>
         </div>
       </div>
@@ -1657,7 +1657,7 @@
       <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card TARGETSCAN">
+    <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
