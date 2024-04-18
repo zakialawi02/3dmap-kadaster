@@ -50,7 +50,7 @@
     <nav>
       <div class="nav-logo">
         <div class="name-logo">
-          <h1>Prototipe Representasi RRR <br> Administrasi Pertanahan 3D</h1>
+          <h1>RRR Representation <br> in 3D Land Administration Prototype</h1>
         </div>
       </div>
       <div class="search">
