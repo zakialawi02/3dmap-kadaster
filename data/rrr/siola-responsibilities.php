@@ -2,7 +2,7 @@
     <ol style="list-style-type:upper-roman;">
         <li><strong>Penyewa dan Penyelenggara</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
                         <li>A</li>
                     </ol>
                 </li>
@@ -11,7 +11,7 @@
                     </ol>
                 </li>
                 <li>
-                    <p>Surat Ijin Penghunian</p>
+                    <p>Surat Ijin Penggunaan Ruang</p>
                     <p>WEWEW</p>
                 </li>
                 <li>
@@ -24,7 +24,7 @@
     <ol style="list-style-type:upper-roman;" start="2">
         <li><strong>Penyewa</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -32,7 +32,7 @@
                         <li>&nbsp;</li>
                     </ol>
                 </li>
-                <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -44,7 +44,7 @@
         </li>
         <li><strong>Penyelenggara</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -52,7 +52,7 @@
                         <li>&nbsp;</li>
                     </ol>
                 </li>
-                <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
