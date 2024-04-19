@@ -11,7 +11,7 @@
                     </ol>
                 </li>
                 <li>
-                    <p>Surat Ijin Penghunian</p>
+                    <p>Surat Ijin Sewa</p>
                     <p>WEWEW</p>
                 </li>
                 <li>
@@ -32,7 +32,7 @@
                         <li>&nbsp;</li>
                     </ol>
                 </li>
-                <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -52,7 +52,7 @@
                         <li>&nbsp;</li>
                     </ol>
                 </li>
-                <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
