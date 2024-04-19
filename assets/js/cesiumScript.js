@@ -588,7 +588,9 @@ $(document).on("click", "#btnDetailRoom", function (e) {
         : "Tidak ada Data!"
     }
     </td></tr>` +
-    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
+    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${
+      data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"
+    }
     </td></tr>` +
     `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
@@ -734,15 +736,15 @@ function scan() {
   modals.forEach((modal) => {
     // Mendapatkan teks dari elemen modal
     const modalText = modal.textContent || modal.innerText;
-    // Mengecek apakah teks mengandung kata "Rusunawa"
-    if (modalText.toLowerCase().includes("Rusunawa".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Rusunawa" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Rusunawa)/gi, '<a href="/test" target="_blank">$1</a>');
+    // Mengecek apakah teks mengandung kata "Hak"
+    if (modalText.toLowerCase().includes("Hak".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Hak" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Hak)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/" target="_blank">$1</a>');
     }
-    // Mengecek apakah teks mengandung kata "Rumah Susun"
-    if (modalText.toLowerCase().includes("Rumah Susun".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Rumah Susun" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Rumah Susun)/gi, '<a href="/tests" target="_blank">$1</a>');
+    // Mengecek apakah teks mengandung kata "Kewajiban"
+    if (modalText.toLowerCase().includes("Kewajiban".toLowerCase())) {
+      // Menambahkan link pada teks yang mengandung kata "Kewajiban" dengan target="_blank"
+      modal.innerHTML = modal.innerHTML.replace(/(Kewajiban)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-kewajiban/" target="_blank">$1</a>');
     }
   });
 }
