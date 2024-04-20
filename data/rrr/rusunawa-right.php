@@ -1,19 +1,19 @@
 <ol style="list-style-type:upper-roman;">
-    <li><strong>Penyewa dan Penyelenggara</strong>
+    <li><strong>Renters and Organizers</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
-                    <li>Status Penguasaan adalah sewa (Pasal 1 Ketentuan Umum Ayat 1)</li>
+            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+                    <li>Tenure status is lease (Article 1 General Provisions Paragraph 1)</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li>Statement Letter<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li>Occupancy License<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li>Mayor's Rules<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -21,44 +21,44 @@
     </li>
 </ol>
 <ol style="list-style-type:upper-roman;" start="2">
-    <li><strong>Penyewa</strong>
+    <li><strong>Renters</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
-                    <li>Menempati hunian, mendapatkan layanan listrik, air, dan pembuangan limbah, serta pelayanan perbaikan (Pasal 5 Hak dan Kewajiban Ayat 1)</li>
-                    <li>Hak memperpanjang sewa (Pasal 6 Jangka Waktu dan Berakhirnya Perjanjian Sewa - Ayat 2)</li>
+            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+                    <li>Occupy the dwelling, obtain electricity, water, and sewage services, and repair services (Article 5 Rights and Obligations Paragraph 1)</li>
+                    <li>Right to renew the lease (Article 6 Term and Expiration of Lease Agreement - Paragraph 2)</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li>Statement Letter<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li>Occupancy License<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li>Mayor's Rules<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
         </ol>
     </li>
-    <li><strong>Penyelenggara</strong>
+    <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
-                    <li>Melakukan seleksi penghuni, pemutakhiran data, serta memberlakukan sanksi (Pasal 4 Hak dan Kewajiban Ayat 1)</li>
-                    <li>Hak berkaitan dengan pemutusan perjanjian sewa menyewa (Pasal 9 Pemutusan Perjanjian Sewa Menyewa)</li>
-                    <li>Pemberi Hak berwenang atas sanksi yang sesuai perjanjian sewa menyewa (Pasal 12 Sanksi-Sanksi)</li>
+            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+                    <li>Conducting tenant selection, updating data, and imposing sanctions (Article 4 Rights and Obligations Paragraph 1)</li>
+                    <li>Rights relating to termination of the lease agreement (Article 9 Termination of Lease Agreement)</li>
+                    <li>The Grantor is authorized to impose sanctions in accordance with the lease agreement (Article 12 Sanctions).</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li>Statement Letter<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li>Occupancy License<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li>Mayor's Rules<ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
