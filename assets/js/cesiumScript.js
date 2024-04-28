@@ -487,7 +487,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
         }
-        scan();
+        // scan();
         // add URI
         if (Array.isArray(tags)) {
           let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
@@ -588,9 +588,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
         : "Tidak ada Data!"
     }
     </td></tr>` +
-    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${
-      data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"
-    }
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
     </td></tr>` +
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
