@@ -107,10 +107,43 @@
     <div class="loader"></div>
   </div>
 
-  <!-- kritik dan saran -->
-  <div class="saran" style="position: absolute; bottom:10px; right:10px; z-index:100;">
-    <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">critics & suggestions</button>
+
+  <!-- Modal welcome -->
+  <div class="modal fade" id="welcome" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="welcomeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header p-2">
+          <h1 class="modal-title fs-5" id="welcomeLabel">Welcome</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4>Selamat Datang di Sistem Informasi Geografis 3D Kadaster</h4>
+          <p>Kadaster 3D adalah inovasi dalam teknologi informasi geografis yang memungkinkan visualisasi dan manajemen data kadastral dengan representasi objek-objek real estat dalam tiga dimensi, yang memungkinkan pemetaan lebih akurat dari ruang yang tersedia, baik di atas maupun di bawah permukaan tanah. Sistem ini dirancang untuk memberikan gambaran yang lebih jelas dan detail mengenai objek-objek kadastral seperti bangunan, lahan, dan infrastruktur lainnya, dengan menampilkan informasi mengenai lokasi, dimensi, dan hak atas tanah serta batasan dan tanggung jawab terkait.</p>
+          <p>Jelajahi dimensi baru dalam pemetaan dan pengelolaan lahan dengan teknologi GIS 3D kami. Temukan data detil properti, analisis ruang terkait RRR (Right (Hak), Restriction (Batasan), Resposibility (Tanggung Jawab)), dan visualisasi yang membantu Anda dalam membuat keputusan yang lebih baik dan berinovasi dalam perencanaan. WebGIS 3D Kadaster, membawa perspektif baru dalam pemahaman dan pengelolaan ruang Anda.</p>
+        </div>
+      </div>
+    </div>
   </div>
+
+
+  <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
+    <!-- button kritik dan saran -->
+    <div class="saran">
+      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics and Suggestions</button>
+    </div>
+
+    <!-- button F&Q -->
+    <div class="faq">
+      <button type="button" class="cesium-button" id="btn-faq" data-bs-toggle="modal" data-bs-target="#faq">FAQ</button>
+    </div>
+
+    <!-- button welcome (hidden) -->
+    <div class="d-none welcome">
+      <button type="button" class="cesium-button" id="btn-welcome" data-bs-toggle="modal" data-bs-target="#welcome">Welcome</button>
+    </div>
+  </div>
+
+
   <!-- Modal -->
   <div class="modal fade welcomemodal" id="critics" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="criticsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -126,6 +159,50 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal F&Q -->
+  <div class="modal fade" id="faq" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="faqLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header p-2">
+          <h1 class="modal-title fs-5" id="faqLabel">Frequently Asked Questions (FAQ)</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal-dialog-scrollable">
+          <ol>
+            <li>
+              <p><strong>Apa itu kadaster 3 dimensi?</strong></p>
+              <p>Kadaster 3 dimensi adalah sistem pendataan dan pendaftaran tanah yang mencakup informasi ruang tiga dimensi. Sistem ini memungkinkan pemetaan dan dokumentasi properti tidak hanya pada bidang datar dua dimensi, tetapi juga dalam ruang tiga dimensi, termasuk lantai atas dan bawah tanah.&nbsp;</p>
+            </li>
+            <li>
+              <p><strong>Hak apa saja yang dapat tercakup dalam kadaster 3 dimensi?</strong></p>
+              <p>Dalam kadaster 3 dimensi, hak atas tanah dibedakan menjadi beberapa lapisan atau zona. Misalnya, satu zona untuk permukaan tanah, satu lagi untuk ruang di bawah tanah, dan satu lagi mungkin untuk ruang udara di atasnya. Setiap zona dapat memiliki pemilik yang berbeda dengan hak yang terdefinisi dengan jelas. Misalnya, seseorang dapat memiliki apartemen di lantai 5 tanpa memiliki seluruh gedung.</p>
+            </li>
+            <li>
+              <p><strong>Apa batasan yang ada dalam sistem kadaster 3 dimensi?</strong></p>
+              <p>Batasan dalam kadaster 3 dimensi terutama berkaitan dengan penggunaan ruang atas dan bawah. Setiap unit properti memiliki batas vertikal yang jelas yang tidak boleh dilanggar oleh unit lain tanpa persetujuan. Misalnya, tidak boleh ada penetrasi struktural yang mengganggu unit lain di atas atau di bawahnya.</p>
+            </li>
+            <li>
+              <p><strong>Bagaimana tanggung jawab dibagi dalam kadaster 3 dimensi?</strong></p>
+              <p>Tanggung jawab umumnya dibagi berdasarkan posisi vertikal dan horizontal properti. Misalnya, pemilik apartemen bertanggung jawab atas perawatan dan perbaikan dalam unitnya, sementara asosiasi pemilik gedung mungkin bertanggung jawab untuk area umum dan fasilitas bersama seperti atap, lift, dan sistem utilitas utama.</p>
+            </li>
+            <li>
+              <p><strong>Apa manfaat utama dari sistem kadaster 3 dimensi?</strong></p>
+              <p>Manfaat utama termasuk peningkatan kejelasan dalam kepemilikan dan batasan properti, penyelesaian sengketa yang lebih efektif, dan peningkatan efisiensi dalam pengelolaan dan pembangunan ruang vertikal. Ini juga mendukung inovasi dalam pengembangan real estat dan infrastruktur perkotaan.</p>
+            </li>
+            <li>
+              <p><strong>Bagaimana kadaster 3 dimensi mempengaruhi pembangunan bertingkat?</strong></p>
+              <p>Kadaster 3 dimensi sangat penting dalam pembangunan bertingkat karena memungkinkan pengembang dan pemilik properti untuk memisahkan hak kepemilikan secara vertikal. Ini memudahkan penjualan dan pengelolaan unit individu dalam gedung bertingkat, seperti apartemen atau kantor.</p>
+            </li>
+            <li>
+              <p><strong>Apakah kadaster 3 dimensi mempengaruhi nilai properti?</strong></p>
+              <p>Ya, kadaster 3 dimensi dapat mempengaruhi nilai properti karena memberikan kejelasan hukum yang lebih besar tentang apa yang dimiliki seseorang secara tepat. Ini meningkatkan keamanan hukum bagi pemilik dan potensial investor, yang bisa meningkatkan nilai properti tersebut.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
