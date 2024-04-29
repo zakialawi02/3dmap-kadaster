@@ -343,7 +343,11 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
       `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
       `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Sub Zona</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
       `<tr><th>Kawasan</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      `<tr><th>Sub UP</th><td>${pickedData.sub_up.getValue()}</td></tr>` +
+      `<tr><th>UP</th><td>${pickedData.up.getValue()}</td></tr>` +
+      `<tr><th>Blok</th><td>${pickedData.blok.getValue()}</td></tr>` +
       // `<tr><th>Provinsi</th><td>${pickedData.province.getValue()}</td></tr>` +
       // `<tr><th>Kab/Kota</th><td>${pickedData.city.getValue()}</td></tr>` +
       // `<tr><th>Kecamatan</th><td>${pickedData.district.getValue()}</td></tr>` +
@@ -588,9 +592,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
         : "Tidak ada Data!"
     }
     </td></tr>` +
-    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${
-      data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"
-    }
+    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
     </td></tr>` +
     `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
@@ -728,6 +730,16 @@ function displayRight(parcelId, typerrr) {
 }
 
 // TARGETSCAN
+const dataKeyword = [
+  {
+    keyword: "Hak",
+    url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
+  },
+  {
+    keyword: "Kewajiban",
+    url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
+  },
+];
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
@@ -736,16 +748,14 @@ function scan() {
   modals.forEach((modal) => {
     // Mendapatkan teks dari elemen modal
     const modalText = modal.textContent || modal.innerText;
-    // Mengecek apakah teks mengandung kata "Hak"
-    if (modalText.toLowerCase().includes("Hak".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Hak" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Hak)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/" target="_blank">$1</a>');
-    }
-    // Mengecek apakah teks mengandung kata "Kewajiban"
-    if (modalText.toLowerCase().includes("Kewajiban".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Kewajiban" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Kewajiban)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-kewajiban/" target="_blank">$1</a>');
-    }
+    // Iterasi melalui setiap data dalam dataKeyword
+    dataKeyword.forEach(({ keyword, url }) => {
+      // Mengecek apakah teks mengandung kata yang sesuai dengan keyword di dataKeyword
+      if (modalText.toLowerCase().includes(keyword.toLowerCase())) {
+        // Menambahkan link pada teks yang mengandung kata dengan target="_blank"
+        modal.innerHTML = modal.innerHTML.replace(new RegExp(keyword, "gi"), `<a href="${url}" target="_blank">${keyword}</a>`);
+      }
+    });
   });
 }
 

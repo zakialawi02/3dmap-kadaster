@@ -1,19 +1,23 @@
 <ol style="list-style-type:upper-roman;">
     <li><strong>Penyewa dan Penyelenggara</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Penyelesaian Perselisihan (Pasal 11)</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -23,11 +27,12 @@
 <ol style="list-style-type:upper-roman;" start="2">
     <li><strong>Penyewa</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Penyewa memberikan imbalan uang tunai (Pasal 1 Ketentuan Umum Ayat 2)</li>
                     <li>Biaya sewa untuk rekening PLN, rekening PDAM, dan iuran pengelolaan (Pasal 1 Ketentuan Umum Ayat 3)</li>
                     <li>Membayar biaya sewa sesuai jumlah yang telah ditetapkan
-                        <meta charset="utf-8"> (Pasal 3 Besaran Sewa)
+                        <meta charset="utf-8">(Pasal 3 Besaran Sewa)
                     </li>
                     <li>
                         <meta charset="utf-8">Kewajiban Penerima Hak (Pasal 5 Hak dan Kewajiban Ayat 2)
@@ -38,15 +43,18 @@
                     <li>Penghuni, sebagai penyewa, memiliki kewajiban-kewajiban seperti melaporkan perubahan dalam daftar penghuni, menciptakan lingkungan yang aman dan bersih, serta mematuhi semua peraturan yang ditetapkan oleh pengelola. Mereka juga harus mematikan perangkat elektronik saat meninggalkan hunian, menjaga ketenangan lingkungan, dan melaporkan jika akan meninggalkan hunian untuk sementara waktu. Selain itu, penghuni diwajibkan mematuhi peraturan parkir, serta meminta izin untuk peralatan dan renovasi umum.</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -54,19 +62,23 @@
     </li>
     <li><strong>Penyelenggara</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Surat Perjanjian Sewa Menyewa<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Kewajiban Pemberi Hak penyewa (Pasal 4 Hak dan Kewajiban Ayat 2)</li>
                 </ol>
             </li>
-            <li>Surat Pernyataan<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Surat Ijin Penghunian<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Aturan Walikota<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
