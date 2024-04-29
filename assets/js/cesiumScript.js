@@ -343,7 +343,11 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
       `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
       `<tr><th>Zone</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Sub Zone</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
       `<tr><th>Area Name</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      `<tr><th>Sub UP</th><td>${pickedData.sub_up.getValue()}</td></tr>` +
+      `<tr><th>UP</th><td>${pickedData.up.getValue()}</td></tr>` +
+      `<tr><th>Blok</th><td>${pickedData.blok.getValue()}</td></tr>` +
       // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
       // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
       // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
@@ -726,6 +730,20 @@ function displayRight(parcelId, typerrr) {
 }
 
 // TARGETSCAN
+const dataKeyword = [
+  {
+    keyword: "Rights",
+    url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
+  },
+  {
+    keyword: "Responsibilities",
+    url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
+  },
+  {
+    keyword: "Rusunawa",
+    url: "http://3dmap-kadaster.test/data/uri/view.php?uri=rumah-susun",
+  },
+];
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
@@ -734,16 +752,14 @@ function scan() {
   modals.forEach((modal) => {
     // Mendapatkan teks dari elemen modal
     const modalText = modal.textContent || modal.innerText;
-    // Mengecek apakah teks mengandung kata "Hak"
-    if (modalText.toLowerCase().includes("Hak".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Hak" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Hak)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/" target="_blank">$1</a>');
-    }
-    // Mengecek apakah teks mengandung kata "Kewajiban"
-    if (modalText.toLowerCase().includes("Kewajiban".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Kewajiban" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Kewajiban)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-kewajiban/" target="_blank">$1</a>');
-    }
+    // Iterasi melalui setiap data dalam dataKeyword
+    dataKeyword.forEach(({ keyword, url }) => {
+      // Mengecek apakah teks mengandung kata yang sesuai dengan keyword di dataKeyword
+      if (modalText.toLowerCase().includes(keyword.toLowerCase())) {
+        // Menambahkan link pada teks yang mengandung kata dengan target="_blank"
+        modal.innerHTML = modal.innerHTML.replace(new RegExp(keyword, "gi"), `<a href="${url}" target="_blank">${keyword}</a>`);
+      }
+    });
   });
 }
 

@@ -1,20 +1,24 @@
 <ol style="list-style-type:upper-roman;">
     <li><strong>Renters and Organizers</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>The main function of flats is residential (Article 1 General Provisions Paragraph 1)</li>
                     <li>Lease agreement is not transferable (Article 10 Transfer)</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -24,7 +28,8 @@
 <ol style="list-style-type:upper-roman;" start="2">
     <li><strong>Renters</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Rent for a certain period of time (Article 1 General Provisions Paragraphs 2 and 4)</li>
                     <li>Tenants are specifically Indonesian citizens who live in the Malang City area, and are included in the low-income community group according to Article 1 paragraph (14) of Mayor Regulation Number 41 of 2013 concerning Procedures for the Management of Simple Rental Flats (Article 1 General Provisions Paragraph 5)</li>
                     <li>The lease agreement is valid until a predetermined time limit (Article 6 Term and Expiration of the Lease Agreement)</li>
@@ -35,15 +40,18 @@
                     <li>During the validity period of the rental agreement, the Tenant is prohibited from subletting or transferring rental rights, selling the dwelling unit, or using the dwelling for business. Prohibitions also include building alterations, storage of hazardous materials, and activities that disturb order. Violations may lead to administrative sanctions or criminal penalties.</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -51,19 +59,23 @@
     </li>
     <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
