@@ -357,10 +357,12 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>Tinggi</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th style="align-content: start;;">Peraturan Batas Tinggi Bangunan</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
       `</tbody></table>`;
     return description;
   }
 }
+// Function to remove line breaks
 
 let pickedFeature;
 let dataRoom;

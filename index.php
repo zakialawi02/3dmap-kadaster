@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>3D Cadastre</title>
+  <title>Prototipe Kadaster 3 Dimensi</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -32,12 +32,6 @@
       padding: 0;
       bottom: 0;
       width: 100%;
-    }
-
-    .divider {
-      border-right: 1px solid white;
-      padding-right: 10px;
-      margin-right: 10px;
     }
   </style>
 </head>
@@ -83,7 +77,7 @@
           <li>
             <a id="helpCesium" href="#" title="Bantuan Penggunaan"><i class="bi bi-question-circle-fill"></i></a>
           </li>
-          <span class="divider"></span>
+          <span class="divider solid"></span>
           <?php if (isset($_SESSION['islogin'])) : ?>
             <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
             <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
@@ -117,7 +111,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h4>Selamat Datang di Sistem Informasi Geografis 3D Kadaster</h4>
+          <h4>Selamat Datang di Kadaster 3 Dimensi</h4>
           <p>Kadaster 3D adalah inovasi dalam teknologi informasi geografis yang memungkinkan visualisasi dan manajemen data kadastral dengan representasi objek-objek real estat dalam tiga dimensi, yang memungkinkan pemetaan lebih akurat dari ruang yang tersedia, baik di atas maupun di bawah permukaan tanah. Sistem ini dirancang untuk memberikan gambaran yang lebih jelas dan detail mengenai objek-objek kadastral seperti bangunan, lahan, dan infrastruktur lainnya, dengan menampilkan informasi mengenai lokasi, dimensi, dan hak atas tanah serta batasan dan tanggung jawab terkait.</p>
           <p>Jelajahi dimensi baru dalam pemetaan dan pengelolaan lahan dengan teknologi GIS 3D kami. Temukan data detil properti, analisis ruang terkait RRR (Right (Hak), Restriction (Batasan), Resposibility (Tanggung Jawab)), dan visualisasi yang membantu Anda dalam membuat keputusan yang lebih baik dan berinovasi dalam perencanaan. WebGIS 3D Kadaster, membawa perspektif baru dalam pemahaman dan pengelolaan ruang Anda.</p>
         </div>

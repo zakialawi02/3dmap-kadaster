@@ -57,6 +57,12 @@
   }
 }
 
+.divider {
+  border-right: 1px solid white;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
 body {
   font-family: "Open Sans", "Roboto", "Segoe UI", sans-serif;
   font-weight: 500;
@@ -405,6 +411,12 @@ ul,
 }
 
 @media (max-width: 994px) {
+  .divider {
+    display: block;
+    border-style: inset;
+    border-width: 1px;
+  }
+
   header nav .nav-menu .nav-menu-group {
     display: block;
     position: absolute;
