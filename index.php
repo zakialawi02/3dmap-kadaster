@@ -117,9 +117,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h4>Selamat Datang di Sistem Informasi Geografis 3D Kadaster</h4>
-          <p>Kadaster 3D adalah inovasi dalam teknologi informasi geografis yang memungkinkan visualisasi dan manajemen data kadastral dengan representasi objek-objek real estat dalam tiga dimensi, yang memungkinkan pemetaan lebih akurat dari ruang yang tersedia, baik di atas maupun di bawah permukaan tanah. Sistem ini dirancang untuk memberikan gambaran yang lebih jelas dan detail mengenai objek-objek kadastral seperti bangunan, lahan, dan infrastruktur lainnya, dengan menampilkan informasi mengenai lokasi, dimensi, dan hak atas tanah serta batasan dan tanggung jawab terkait.</p>
-          <p>Jelajahi dimensi baru dalam pemetaan dan pengelolaan lahan dengan teknologi GIS 3D kami. Temukan data detil properti, analisis ruang terkait RRR (Right (Hak), Restriction (Batasan), Resposibility (Tanggung Jawab)), dan visualisasi yang membantu Anda dalam membuat keputusan yang lebih baik dan berinovasi dalam perencanaan. WebGIS 3D Kadaster, membawa perspektif baru dalam pemahaman dan pengelolaan ruang Anda.</p>
+          <h4>Welcome to Cadastral 3D Geographic Information System</h4>
+          <p>3D cadastral is an innovation in geographic information technology that allows visualization and management of cadastral data with the representation of real estate objects in three dimensions, allowing more accurate mapping of the available space, both above and below ground level. The system is designed to provide a clearer and more detailed picture of cadastral objects such as buildings, land, and other infrastructure, by displaying information on location, dimensions, and land rights and related limitations and responsibilities.</p>
+          <p>Explore new dimensions in mapping and land management with our 3D GIS technology. Discover detailed property data, space analysis related to RRR (Right, Restriction, Resposibility), and visualizations that help you make better decisions and innovate planning. WebGIS 3D Cadastre, brings a new perspective in the understanding and management of your space.</p>
         </div>
       </div>
     </div>
@@ -175,32 +175,32 @@
         <div class="modal-body modal-dialog-scrollable">
           <ol>
             <li>
-              <p><strong>Apa itu kadaster 3 dimensi?</strong></p>
-              <p>Kadaster 3 dimensi adalah sistem pendataan dan pendaftaran tanah yang mencakup informasi ruang tiga dimensi. Sistem ini memungkinkan pemetaan dan dokumentasi properti tidak hanya pada bidang datar dua dimensi, tetapi juga dalam ruang tiga dimensi, termasuk lantai atas dan bawah tanah.&nbsp;</p>
+              <p><strong>What is a 3-dimensional cadastre?</strong></p>
+              <p>A 3-dimensional cadastral is a land collection and registration system that includes three-dimensional space information. The system allows mapping and documentation of properties not only on two-dimensional flat planes, but also in three-dimensional spaces, including upper and underground floors.&nbsp;</p>
             </li>
             <li>
-              <p><strong>Hak apa saja yang dapat tercakup dalam kadaster 3 dimensi?</strong></p>
-              <p>Dalam kadaster 3 dimensi, hak atas tanah dibedakan menjadi beberapa lapisan atau zona. Misalnya, satu zona untuk permukaan tanah, satu lagi untuk ruang di bawah tanah, dan satu lagi mungkin untuk ruang udara di atasnya. Setiap zona dapat memiliki pemilik yang berbeda dengan hak yang terdefinisi dengan jelas. Misalnya, seseorang dapat memiliki apartemen di lantai 5 tanpa memiliki seluruh gedung.</p>
+              <p><strong>What rights can be covered in a 3-dimensional cadastre?</strong></p>
+              <p>In 3-dimensional cadastre, land rights are distinguished into layers or zones. For example, one zone is for ground level, another is for underground space, and another may be for air space above it. Each zone can have different owners with clearly defined rights. For example, a person can have an apartment on the 5th floor without owning the entire building.</p>
             </li>
             <li>
-              <p><strong>Apa batasan yang ada dalam sistem kadaster 3 dimensi?</strong></p>
-              <p>Batasan dalam kadaster 3 dimensi terutama berkaitan dengan penggunaan ruang atas dan bawah. Setiap unit properti memiliki batas vertikal yang jelas yang tidak boleh dilanggar oleh unit lain tanpa persetujuan. Misalnya, tidak boleh ada penetrasi struktural yang mengganggu unit lain di atas atau di bawahnya.</p>
+              <p><strong>What limitations exist in the 3-dimensional cadastral system?</strong></p>
+              <p>The limitations in the 3-dimensional cadastral relate primarily to the use of upper and lower chambers. Each unit of property has clear vertical boundaries that must not be violated by other units without consent. For example, there should be no structural penetration interfering with other units above or below it.</p>
             </li>
             <li>
-              <p><strong>Bagaimana tanggung jawab dibagi dalam kadaster 3 dimensi?</strong></p>
-              <p>Tanggung jawab umumnya dibagi berdasarkan posisi vertikal dan horizontal properti. Misalnya, pemilik apartemen bertanggung jawab atas perawatan dan perbaikan dalam unitnya, sementara asosiasi pemilik gedung mungkin bertanggung jawab untuk area umum dan fasilitas bersama seperti atap, lift, dan sistem utilitas utama.</p>
+              <p><strong>How are responsibilities divided in 3-dimensional cadastre?</strong></p>
+              <p>Responsibilities are generally divided based on the vertical and horizontal position of the property. For example, an apartment owner is responsible for maintenance and repairs within his unit, while a building owners association may be responsible for common areas and shared amenities such as roofs, elevators, and major utility systems.</p>
             </li>
             <li>
-              <p><strong>Apa manfaat utama dari sistem kadaster 3 dimensi?</strong></p>
-              <p>Manfaat utama termasuk peningkatan kejelasan dalam kepemilikan dan batasan properti, penyelesaian sengketa yang lebih efektif, dan peningkatan efisiensi dalam pengelolaan dan pembangunan ruang vertikal. Ini juga mendukung inovasi dalam pengembangan real estat dan infrastruktur perkotaan.</p>
+              <p><strong>What are the main benefits of a 3-dimensional cadastral system?</strong></p>
+              <p>Key benefits include increased clarity in property ownership and boundaries, more effective dispute resolution, and increased efficiency in the management and construction of vertical spaces. It also supports innovation in real estate development and urban infrastructure.</p>
             </li>
             <li>
-              <p><strong>Bagaimana kadaster 3 dimensi mempengaruhi pembangunan bertingkat?</strong></p>
-              <p>Kadaster 3 dimensi sangat penting dalam pembangunan bertingkat karena memungkinkan pengembang dan pemilik properti untuk memisahkan hak kepemilikan secara vertikal. Ini memudahkan penjualan dan pengelolaan unit individu dalam gedung bertingkat, seperti apartemen atau kantor.</p>
+              <p><strong>How does the 3-dimensional cadastral affect multilevel development?</strong></p>
+              <p>3-dimensional cadastre is very important in multi-storey development because it allows developers and property owners to separate ownership rights vertically. This makes it easier to sell and manage individual units within a multi-storey building, such as an apartment or office.</p>
             </li>
             <li>
-              <p><strong>Apakah kadaster 3 dimensi mempengaruhi nilai properti?</strong></p>
-              <p>Ya, kadaster 3 dimensi dapat mempengaruhi nilai properti karena memberikan kejelasan hukum yang lebih besar tentang apa yang dimiliki seseorang secara tepat. Ini meningkatkan keamanan hukum bagi pemilik dan potensial investor, yang bisa meningkatkan nilai properti tersebut.</p>
+              <p><strong>Does the 3-dimensional cadastral affect the value of the property?</strong></p>
+              <p>Yes, a 3-dimensional cadastral can affect the value of a property because it provides greater legal clarity on what a person owns exactly. This increases legal security for owners and potential investors, which can increase the value of the property.</p>
             </li>
           </ol>
         </div>
@@ -210,14 +210,14 @@
 
   <main>
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
+    <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailRoomLabel">Detail Rooms</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body TARGETSCAN">
             ...
           </div>
         </div>
@@ -225,14 +225,14 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
+    <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body TARGETSCAN">
             ...
           </div>
         </div>
@@ -240,14 +240,14 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade TARGETSCAN" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
+    <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
             <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body TARGETSCAN">
             ...
           </div>
         </div>
@@ -554,138 +554,138 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> ENV S<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Building Plan S<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-                            ENV S.1 <a href="#" id="zoomToe1"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.1 <a href="#" id="zoomToe1"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-                            ENV S.2 <a href="#" id="zoomToe2"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.2 <a href="#" id="zoomToe2"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-                            ENV S.3 <a href="#" id="zoomToe3"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.3 <a href="#" id="zoomToe3"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-                            ENV S.4 <a href="#" id="zoomToe4"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.4 <a href="#" id="zoomToe4"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-                            ENV S.5 <a href="#" id="zoomToe5"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.5 <a href="#" id="zoomToe5"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-                            ENV S.6 <a href="#" id="zoomToe6"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.6 <a href="#" id="zoomToe6"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-                            ENV S.7 <a href="#" id="zoomToe7"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.7 <a href="#" id="zoomToe7"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-                            ENV S.8 <a href="#" id="zoomToe8"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.8 <a href="#" id="zoomToe8"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-                            ENV S.9 <a href="#" id="zoomToe9"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.9 <a href="#" id="zoomToe9"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-                            ENV S.10 <a href="#" id="zoomToe10"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.10 <a href="#" id="zoomToe10"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            ENV S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            ENV S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-                            ENV S.13 <a href="#" id="zoomToe13"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.13 <a href="#" id="zoomToe13"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-                            ENV S.14 <a href="#" id="zoomToe14"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.14 <a href="#" id="zoomToe14"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-                            ENV S.15 <a href="#" id="zoomToe15"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.15 <a href="#" id="zoomToe15"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-                            ENV S.16 <a href="#" id="zoomToe16"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.16 <a href="#" id="zoomToe16"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-                            ENV S.17 <a href="#" id="zoomToe17"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.17 <a href="#" id="zoomToe17"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-                            ENV S.18 <a href="#" id="zoomToe18"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.18 <a href="#" id="zoomToe18"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-                            ENV S.19 <a href="#" id="zoomToe19"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.19 <a href="#" id="zoomToe19"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-                            ENV S.20 <a href="#" id="zoomToe20"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.20 <a href="#" id="zoomToe20"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-                            ENV S.21 <a href="#" id="zoomToe21"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.21 <a href="#" id="zoomToe21"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-                            ENV S.22 <a href="#" id="zoomToe22"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.22 <a href="#" id="zoomToe22"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-                            ENV S.23 <a href="#" id="zoomToe23"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.23 <a href="#" id="zoomToe23"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-                            ENV S.24 <a href="#" id="zoomToe24"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.24 <a href="#" id="zoomToe24"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-                            ENV S.25 <a href="#" id="zoomToe25"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.25 <a href="#" id="zoomToe25"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-                            ENV S.26 <a href="#" id="zoomToe26"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan S.26 <a href="#" id="zoomToe26"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -877,63 +877,63 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> ENV B<a href="#" id="zoomToeallb"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Building Plan B<a href="#" id="zoomToeallb"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-                            ENV B.1 <a href="#" id="zoomToe27"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.1 <a href="#" id="zoomToe27"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-                            ENV B.2 <a href="#" id="zoomToe28"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.2 <a href="#" id="zoomToe28"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            ENV B.3 <a href="#" id="zoomToe29"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.3 <a href="#" id="zoomToe29"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-                            ENV B.4 <a href="#" id="zoomToe30"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.4 <a href="#" id="zoomToe30"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            ENV B.5 <a href="#" id="zoomToe31"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.5 <a href="#" id="zoomToe31"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-                            ENV B.6 <a href="#" id="zoomToe32"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.6 <a href="#" id="zoomToe32"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-                            ENV B.7 <a href="#" id="zoomToe33"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.7 <a href="#" id="zoomToe33"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-                            ENV B.8 <a href="#" id="zoomToe34"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.8 <a href="#" id="zoomToe34"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-                            ENV B.9 <a href="#" id="zoomToe35"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.9 <a href="#" id="zoomToe35"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-                            ENV B.10 <a href="#" id="zoomToe36"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.10 <a href="#" id="zoomToe36"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-                            ENV B.11 <a href="#" id="zoomToe37"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan B.11 <a href="#" id="zoomToe37"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -1659,33 +1659,33 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> ENV R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Building Plan R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-                            ENV R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-                            ENV R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-                            ENV R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-                            ENV R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-                            ENV R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
+                            Building Plan R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
                         </li>
                       </ul>
                     </li>
@@ -1734,7 +1734,7 @@
       <div id="map2d"></div>
     </div>
 
-    <div class="property-panel card TARGETSCAN">
+    <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>

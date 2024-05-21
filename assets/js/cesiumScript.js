@@ -343,7 +343,11 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
       `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
       `<tr><th>Zone</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Sub Zone</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
       `<tr><th>Area Name</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      `<tr><th>Sub UP</th><td>${pickedData.sub_up.getValue()}</td></tr>` +
+      `<tr><th>UP</th><td>${pickedData.up.getValue()}</td></tr>` +
+      `<tr><th>Blok</th><td>${pickedData.blok.getValue()}</td></tr>` +
       // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
       // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
       // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
@@ -353,6 +357,14 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
+      `<tr><th style="align-content: start;;">Building Height Limit Regulation</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
+      `<tr><th>Document source</th><td>${
+        pickedData.kota.getValue() === "Surabaya"
+          ? `<a href='https://petaperuntukan-dprkpp.surabaya.go.id/' target='_blank'>link</a>`
+          : pickedData.kota.getValue() === "Malang"
+          ? `<a href='https://drive.google.com/file/d/1_ezBnAv40YjHUE0N1elo1csVky1Kr-Io/view?usp=sharing' target='_blank'>dokumen 1</a> & <a href='https://drive.google.com/file/d/1ag675Dtp3Y4Bx1e_j3bolyRPf1GUO0rz/view?usp=sharing' target='_blank'>dokumen 2</a>`
+          : ""
+      }</td></tr>` +
       `</tbody></table>`;
     return description;
   }
@@ -726,6 +738,20 @@ function displayRight(parcelId, typerrr) {
 }
 
 // TARGETSCAN
+const dataKeyword = [
+  {
+    keyword: "Rights",
+    url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
+  },
+  {
+    keyword: "Responsibilities",
+    url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
+  },
+  {
+    keyword: "Rusunawa",
+    url: "http://3dmap-kadaster.test/data/uri/view.php?uri=rumah-susun",
+  },
+];
 function scan() {
   console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
@@ -734,16 +760,14 @@ function scan() {
   modals.forEach((modal) => {
     // Mendapatkan teks dari elemen modal
     const modalText = modal.textContent || modal.innerText;
-    // Mengecek apakah teks mengandung kata "Hak"
-    if (modalText.toLowerCase().includes("Hak".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Hak" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Hak)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/" target="_blank">$1</a>');
-    }
-    // Mengecek apakah teks mengandung kata "Kewajiban"
-    if (modalText.toLowerCase().includes("Kewajiban".toLowerCase())) {
-      // Menambahkan link pada teks yang mengandung kata "Kewajiban" dengan target="_blank"
-      modal.innerHTML = modal.innerHTML.replace(/(Kewajiban)/gi, '<a href="https://www.gramedia.com/literasi/pengertian-kewajiban/" target="_blank">$1</a>');
-    }
+    // Iterasi melalui setiap data dalam dataKeyword
+    dataKeyword.forEach(({ keyword, url }) => {
+      // Mengecek apakah teks mengandung kata yang sesuai dengan keyword di dataKeyword
+      if (modalText.toLowerCase().includes(keyword.toLowerCase())) {
+        // Menambahkan link pada teks yang mengandung kata dengan target="_blank"
+        modal.innerHTML = modal.innerHTML.replace(new RegExp(keyword, "gi"), `<a href="${url}" target="_blank">${keyword}</a>`);
+      }
+    });
   });
 }
 

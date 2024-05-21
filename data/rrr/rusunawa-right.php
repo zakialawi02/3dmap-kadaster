@@ -1,19 +1,23 @@
 <ol style="list-style-type:upper-roman;">
     <li><strong>Renters and Organizers</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Tenure status is lease (Article 1 General Provisions Paragraph 1)</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -23,20 +27,24 @@
 <ol style="list-style-type:upper-roman;" start="2">
     <li><strong>Renters</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Occupy the dwelling, obtain electricity, water, and sewage services, and repair services (Article 5 Rights and Obligations Paragraph 1)</li>
                     <li>Right to renew the lease (Article 6 Term and Expiration of Lease Agreement - Paragraph 2)</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
@@ -44,21 +52,25 @@
     </li>
     <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
-            <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>Conducting tenant selection, updating data, and imposing sanctions (Article 4 Rights and Obligations Paragraph 1)</li>
                     <li>Rights relating to termination of the lease agreement (Article 9 Termination of Lease Agreement)</li>
                     <li>The Grantor is authorized to impose sanctions in accordance with the lease agreement (Article 12 Sanctions).</li>
                 </ol>
             </li>
-            <li>Statement Letter<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Occupancy License<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li>Mayor's Rules<ol style="list-style-type:decimal;">
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
