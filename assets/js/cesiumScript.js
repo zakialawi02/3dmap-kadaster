@@ -358,6 +358,13 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>Luas</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Keliling</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th style="align-content: start;;">Peraturan Batas Tinggi Bangunan</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
+      `<tr><th>Sumber peraturan</th><td>${
+        pickedData.kota.getValue() === "Surabaya"
+          ? `<a href='https://petaperuntukan-dprkpp.surabaya.go.id/' target='_blank'>link</a>`
+          : pickedData.kota.getValue() === "Malang"
+          ? `<a href='https://drive.google.com/file/d/1_ezBnAv40YjHUE0N1elo1csVky1Kr-Io/view?usp=sharing' target='_blank'>dokumen 1</a> & <a href='https://drive.google.com/file/d/1ag675Dtp3Y4Bx1e_j3bolyRPf1GUO0rz/view?usp=sharing' target='_blank'>dokumen 2</a>`
+          : ""
+      }</td></tr>` +
       `</tbody></table>`;
     return description;
   }
