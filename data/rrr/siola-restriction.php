@@ -2,7 +2,9 @@
     <ol style="list-style-type:upper-roman;">
         <li><strong>Renters and Organizers</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Letter of Agreement for Use of Space<ol style="list-style-type:decimal;">
+
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
+
                         <li>A</li>
                     </ol>
                 </li>
@@ -10,9 +12,11 @@
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Permission to use space<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
+
+                <li>
+                    <p>Surat Ijin Penggunaan Ruang</p>
+                    <p>WEWEW</p>
+
                 </li>
                 <li>Mayor's Rules<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
@@ -24,15 +28,19 @@
     <ol style="list-style-type:upper-roman;" start="2">
         <li><strong>Renters</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Letter of Agreement for Use of Space<ol style="list-style-type:decimal;">
-                        <li>A</li>
+
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
+                        <li>&nbsp;</li>
+
                     </ol>
                 </li>
                 <li>Statement Letter<ol style="list-style-type:decimal;">
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Permission to use space<ol style="list-style-type:decimal;">
+
+                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
+
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -44,15 +52,19 @@
         </li>
         <li><strong>Organizer</strong>
             <ol style="list-style-type:upper-latin;">
-                <li>Letter of Agreement for Use of Space<ol style="list-style-type:decimal;">
-                        <li>A</li>
+
+                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
+                        <li>&nbsp;</li>
+
                     </ol>
                 </li>
                 <li>Statement Letter<ol style="list-style-type:decimal;">
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Permission to use space<ol style="list-style-type:decimal;">
+
+                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
+
                         <li>&nbsp;</li>
                     </ol>
                 </li>

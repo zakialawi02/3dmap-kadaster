@@ -83,7 +83,7 @@
           <li>
             <a id="helpCesium" href="#" title="Help"><i class="bi bi-question-circle-fill"></i></a>
           </li>
-          <span class="divider"></span>
+          <span class="divider solid"></span>
           <?php if (isset($_SESSION['islogin'])) : ?>
             <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
             <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
@@ -129,7 +129,7 @@
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
     <!-- button kritik dan saran -->
     <div class="saran">
-      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics and Suggestions</button>
+      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics & Suggestions</button>
     </div>
 
     <!-- button F&Q -->
@@ -214,7 +214,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailRoomLabel">Detail Rooms</h1>
+            <h1 class="modal-title fs-5" id="detailRoomLabel">Room Detail</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -229,7 +229,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailOrganizerLabel">Detail Management</h1>
+            <h1 class="modal-title fs-5" id="detailOrganizerLabel">Organizer Detail</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -244,7 +244,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Tenant Detail</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -325,7 +325,7 @@
                     <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllHide">Uncheck all</button>
                   </div>
 
-                  <p class="mb-1">Upperground object</p>
+                  <p class="mb-1">Upperrground object </p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="siolaLevel_5" id="siolaLevel_5"> Level 5</label>
                   <label class="layer-item" style="margin-left: 0px">
@@ -716,7 +716,7 @@
                     <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllHide">Uncheck all</button>
                   </div>
 
-                  <p class="mb-1">Upperground object</p>
+                  <p class="mb-1">Upperrground object </p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="balaiLevel_2" id="balaiLevel_2"> Roof</label>
                   <label class="layer-item" style="margin-left: 0px">
@@ -963,7 +963,7 @@
                     <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllHide">Uncheck all</button>
                   </div>
 
-                  <p class="mb-1">Objek atas tanah </p>
+                  <p class="mb-1">Upperground object </p>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_r" id="rusunawaLevel_r"> Roof</label>
                   <label class="layer-item" style="margin-left: 0px">

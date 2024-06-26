@@ -1,23 +1,27 @@
 <ol style="list-style-type:upper-roman;">
     <li><strong>Renters and Organizers</strong>
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
-                    <li>The main function of flats is residential (Article 1 General Provisions Paragraph 1)</li>
-                    <li>Lease agreement is not transferable (Article 10 Transfer)</li>
+                    <li>Fungsi utama rumah susun adalah hunian (Pasal 1 Ketentuan Umum Ayat 1)</li>
+                    <li>Perjanjian sewa menyewa tidak dapat dialihkan (Pasal 10 Pengalihan)</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
-                <ol style="list-style-type:decimal;">
-                    <li>&nbsp;</li>
-                </ol>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+                <ol style="list-style-type:decimal;">
+                    <li>&nbsp;</li>
+                </ol>
+            </li>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
@@ -28,29 +32,35 @@
 <ol style="list-style-type:upper-roman;" start="2">
     <li><strong>Renters</strong>
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
-                    <li>Rent for a certain period of time (Article 1 General Provisions Paragraphs 2 and 4)</li>
-                    <li>Tenants are specifically Indonesian citizens who live in the Malang City area, and are included in the low-income community group according to Article 1 paragraph (14) of Mayor Regulation Number 41 of 2013 concerning Procedures for the Management of Simple Rental Flats (Article 1 General Provisions Paragraph 5)</li>
-                    <li>The lease agreement is valid until a predetermined time limit (Article 6 Term and Expiration of the Lease Agreement)</li>
-                    <li>Occupancy is only for one family (Article 7 Code of Conduct Paragraph 2)</li>
-                    <li>Equipment work, repair / renovation of a general nature, must be authorized by the manager (Article 7 Code of Conduct Paragraph 9)</li>
-                    <li>Residents / guests who bring vehicles place them in a designated parking lot / location (Article 7 Code of Conduct Paragraph 11)</li>
-                    <li>Other pets other than those prohibited in the provisions of this lease agreement may be kept with the permission of the manager (Article 7 Code of Conduct Paragraph 13).</li>
-                    <li>During the validity period of the rental agreement, the Tenant is prohibited from subletting or transferring rental rights, selling the dwelling unit, or using the dwelling for business. Prohibitions also include building alterations, storage of hazardous materials, and activities that disturb order. Violations may lead to administrative sanctions or criminal penalties.</li>
+                    <li>Sewa dalam jangka waktu tertentu (Pasal 1 Ketentuan Umum Ayat 2 dan 4)</li>
+                    <li>Penyewa dikhususkan WNI yang berdomisili di wilayah Kota Malang, serta termasuk dalam kelompok masyarakat berpenghasilan rendah sesuai Pasal 1 ayat (14) Peraturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i> Nomor 41 Tahun 2013 tentang &nbsp;Tata Cara Pengelolaan Rumah Susun Sederhana Sewa (Pasal 1 Ketentuan Umum Ayat 5)</li>
+                    <li>Perjanjian sewa berlaku hingga batas waktu yang telah ditentukan (Pasal 6 Jangka Waktu dan Berakhirnya Perjanjian Sewa)</li>
+                    <li>Hunian hanya untuk satu keluarga (Pasal 7 Tata Tertib Ayat 2)</li>
+                    <li>Pengerjaan peralatan, perbaikan/renovasi yang bersifat umum, harus seijin pengelola (Pasal 7 Tata Tertib Ayat 9)</li>
+                    <li>Penghuni/tamu yang membawa kendaraan menempatkan pada tempat parkir/lokasi yang telah ditetapkan (Pasal 7 Tata Tertib Ayat 11)</li>
+                    <li>Hewan peliharaan lain diluar yang dilarang dalam ketentuan perjanjian sewa ini dapat dipelihara dengan seijin pengelola (Pasal 7 Tata Tertib Ayat 13)</li>
+                    <li>Selama masa berlakunya perjanjian sewa, Penyewa dilarang menyewakan atau memindahkan hak sewa, menjual unit hunian, atau menggunakan hunian untuk usaha. Larangan juga termasuk perubahan bangunan, penyimpanan bahan berbahaya, dan kegiatan yang mengganggu ketertiban. Pelanggaran dapat berujung pada sanksi administratif atau hukuman pidana.</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
-                <ol style="list-style-type:decimal;">
-                    <li>&nbsp;</li>
-                </ol>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+                <ol style="list-style-type:decimal;">
+                    <li>&nbsp;</li>
+                </ol>
+            </li>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
@@ -59,22 +69,30 @@
     </li>
     <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=drive_link" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=drive_link" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1hdIxmT4boV-cCTjkaHXZ80kDuAnNyZNR/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=drive_link" download="file">Occupancy License <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link" download="file">Mayor's Rules <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>

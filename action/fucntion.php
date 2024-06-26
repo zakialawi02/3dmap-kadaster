@@ -76,7 +76,7 @@ function debugVarDump($variable, $die = true)
 
 use Mpdf\Mpdf;
 
-function generateAgreement($tenantID, $roomID)
+function generateAgreementRusun($tenantID, $roomID)
 {
     include 'db_connect.php';
     $query = "SELECT rm.room_id, rm.legal_object_id, lo.id as objectId, lo.parcel_id, lp.id as buildingId, lp.parcel_id
@@ -129,9 +129,9 @@ function generateAgreement($tenantID, $roomID)
     }
 
     // Generate PDF
-    $html = $_SERVER['DOCUMENT_ROOT'] . "/generateAgreementPDF.html";
+    $html = $_SERVER['DOCUMENT_ROOT'] . "/generateAgreementRusunPDF.html";
     $htmlContent = file_get_contents($html);
-    $html = $_SERVER['DOCUMENT_ROOT'] . "/generateAgreementPDF2.html";
+    $html = $_SERVER['DOCUMENT_ROOT'] . "/generateAgreementRusunPDF2.html";
     $htmlContent2 = file_get_contents($html);
 
     // Ganti placeholder dengan data dari database
@@ -177,7 +177,7 @@ function generateAgreement($tenantID, $roomID)
     $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
     $mpdf->Output($filePath, 'F');
 
-    $urlToRun = base_url() . "/action/sertifikat.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
+    $urlToRun = base_url() . "/action/sertifikatRusun.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
     echo "<br>";
     echo $urlToRun;
     $response = file_get_contents($urlToRun);

@@ -10,9 +10,9 @@
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Rental Permit<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
+                <li>
+                    <p>Surat Ijin Sewa</p>
+                    <p>WEWEW</p>
                 </li>
                 <li>Mayor's Rules<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
@@ -32,7 +32,7 @@
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Rental Permit<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>
@@ -52,7 +52,7 @@
                         <li>A</li>
                     </ol>
                 </li>
-                <li>Rental Permit<ol style="list-style-type:decimal;">
+                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
                         <li>&nbsp;</li>
                     </ol>
                 </li>

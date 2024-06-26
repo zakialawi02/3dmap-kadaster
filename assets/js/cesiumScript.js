@@ -321,7 +321,7 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
       `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
       `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
-      `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+      `<tr><th>Situation Map No.	</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
       `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
       `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
       `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
@@ -331,8 +331,8 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
       `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
       `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
       `<tr><th>Area</th><td>${parseFloat(pickedData.area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Length</th><td>${parseFloat(pickedData.length.getValue()).toFixed(3)} m</td></tr>` +
       `</tbody></table>`;
@@ -341,24 +341,24 @@ function createPickedDataDescription(pickedData) {
     const description =
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
-      `<tr><th>Kode</th><td>${pickedData.kode.getValue()}</td></tr>` +
+      `<tr><th>Code</th><td>${pickedData.kode.getValue()}</td></tr>` +
       `<tr><th>Zone</th><td>${pickedData.zona.getValue()}</td></tr>` +
       `<tr><th>Sub Zone</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
-      `<tr><th>Area Name</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
+      `<tr><th>Region</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
       `<tr><th>Sub UP</th><td>${pickedData.sub_up.getValue()}</td></tr>` +
       `<tr><th>UP</th><td>${pickedData.up.getValue()}</td></tr>` +
-      `<tr><th>Blok</th><td>${pickedData.blok.getValue()}</td></tr>` +
+      `<tr><th>Block</th><td>${pickedData.blok.getValue()}</td></tr>` +
       // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
       // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
       // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
       // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
       `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
-      `<tr><th style="align-content: start;;">Building Height Limit Regulation</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
-      `<tr><th>Document source</th><td>${
+      `<tr><th style="align-content: start;;">Peraturan Batas Tinggi Bangunan</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
+      `<tr><th>Sumber peraturan</th><td>${
         pickedData.kota.getValue() === "Surabaya"
           ? `<a href='https://petaperuntukan-dprkpp.surabaya.go.id/' target='_blank'>link</a>`
           : pickedData.kota.getValue() === "Malang"
@@ -490,19 +490,19 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
           // Tambahkan baris baru dengan nama "Right"
-          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read <i class="bi bi-eye"></i></button></td></tr>`;
+          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read<i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
           // Tambahkan baris baru dengan nama "Restriction"
           const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
-          // Tambahkan baris baru dengan nama "Responsibilities"
-          const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
+          // Tambahkan baris baru dengan nama "Tanggung Jawab"
+          const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
         }
         // scan();
         // add URI
         if (Array.isArray(tags)) {
-          let tagsHtml = `<div class="mt-2"><span>Related Link/URI tag:</span>`;
+          let tagsHtml = `<div class="mt-2"><span>Related Links/URI Tags:</span>`;
           // Loop through the array and create links
           tags.forEach((tag) => {
             // Check if tag.id_keyword is not null or empty
@@ -594,13 +594,13 @@ $(document).on("click", "#btnDetailRoom", function (e) {
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
     `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
     `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${
+    `<tr><th>Agreement Number</th><td style="width: 1%;">:</td><td> ${
       data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
         ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
-        : "Tidak ada Data!"
+        : "No Data!"
     }
     </td></tr>` +
-    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "No Data!"}
     </td></tr>` +
     `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
     `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +

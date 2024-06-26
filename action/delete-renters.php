@@ -8,6 +8,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the user from the POST request
     $id = $_POST['id'];
 
+    // SQL query to get aggrement data
+    $query = "SELECT * FROM renters_tenants where tenant_id = '$id'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $agreement = $row['agreement_number'];
+        $agreement = str_replace("/", ".", $agreement);
+        $permit = $row['permit_flats'];
+
+        // Hapus file
+        $fileName = $agreement . '.pdf';
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+        $fileName = $permit;
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/certificate/' . $fileName;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
     // SQL query to delete the parcel
     $sql = "DELETE FROM tenants_table WHERE id = '$id'";
     $conn->query($sql);
