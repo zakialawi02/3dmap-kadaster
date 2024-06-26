@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Prototipe Kadaster 3 Dimensi</title>
+  <title>Purwarupa Kadaster 3 Dimensi</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -44,7 +44,7 @@
     <nav>
       <div class="nav-logo">
         <div class="name-logo">
-          <h1>Prototipe Representasi RRR <br> Administrasi Pertanahan 3D</h1>
+          <h1>Purwarupa Representasi RRR <br> Administrasi Pertanahan 3D</h1>
         </div>
       </div>
       <div class="search">
@@ -107,13 +107,21 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header p-2">
-          <h1 class="modal-title fs-5" id="welcomeLabel">Welcome</h1>
+          <h1 class="modal-title fs-5" id="welcomeLabel">Selamat Datang</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h4>Selamat Datang di Kadaster 3 Dimensi</h4>
-          <p>Kadaster 3D adalah inovasi dalam teknologi informasi geografis yang memungkinkan visualisasi dan manajemen data kadastral dengan representasi objek-objek real estat dalam tiga dimensi, yang memungkinkan pemetaan lebih akurat dari ruang yang tersedia, baik di atas maupun di bawah permukaan tanah. Sistem ini dirancang untuk memberikan gambaran yang lebih jelas dan detail mengenai objek-objek kadastral seperti bangunan, lahan, dan infrastruktur lainnya, dengan menampilkan informasi mengenai lokasi, dimensi, dan hak atas tanah serta batasan dan tanggung jawab terkait.</p>
-          <p>Jelajahi dimensi baru dalam pemetaan dan pengelolaan lahan dengan teknologi GIS 3D kami. Temukan data detil properti, analisis ruang terkait RRR (Right (Hak), Restriction (Batasan), Resposibility (Tanggung Jawab)), dan visualisasi yang membantu Anda dalam membuat keputusan yang lebih baik dan berinovasi dalam perencanaan. WebGIS 3D Kadaster, membawa perspektif baru dalam pemahaman dan pengelolaan ruang Anda.</p>
+          <h4 class="text-center mb-3">Purwarupa Aplikasi Administrasi Pertanahan 3 Dimensi</h4>
+          <p class="text-center">Aplikasi ini dirancang untuk memfasilitasi pemahaman dan pengelolaan
+            <br><b>representasi hak, batasan, dan tanggung jawab</b> dalam konteks pertanahan modern.
+            <br>Melalui teknologi 3D, Anda dapat menjelajahi detail
+            <br>hak atas tanah, batas properti, dan tanggung jawab yang menyertainya
+            <br>dengan cara yang lebih interaktif dan informatif.
+          </p>
+          <p class="text-center">Aplikasi ini menyediakan alat yang diperlukan untuk memastikan kepatuhan terhadap
+            <br>peraturan pertanahan yang berlaku, membantu dalam penyusunan dokumen legal, dan mempermudah proses pengambilan keputusan terkait properti.
+          </p>
+          <p class="text-center">Mari kita mulai perjalanan menuju pengelolaan tanah yang lebih transparan dan efisien</p>
         </div>
       </div>
     </div>
@@ -237,7 +245,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Tenant</h1>
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Penyewa</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">

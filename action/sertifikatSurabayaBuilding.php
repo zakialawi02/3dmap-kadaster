@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     WHERE lo.id = '$legalID'";
             $result = $conn->query($sql);
             $parcel = $result->fetch_assoc();
-            $html = $_SERVER['DOCUMENT_ROOT'] . "/generateSertifikatPDF.html";
+            $html = $_SERVER['DOCUMENT_ROOT'] . "/generateSertifikatSurabayaPDF.html";
             $htmlContent = file_get_contents($html);
 
             // Ganti placeholder dengan data dari database

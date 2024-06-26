@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // create agreement
                 $tenantID = $TenantID;
                 $roomID = $room_id;
-                generateAgreement($tenantID, $room_id);
+                // generateAgreementRusun($tenantID, $room_id);
             } else {
                 setFlashMessage('error', 'Data update failed');
                 echo "Error: " . $sql . "<br>" . $conn->error;
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // create agreement
                 $tenantID = $tenantInsertedId;
                 $roomID = $room_id;
-                generateAgreement($tenantID, $room_id);
+                // generateAgreementRusun($tenantID, $room_id);
             } else {
                 setFlashMessage('error', 'Data update failed');
                 echo "Error: " . $sql . "<br>" . $conn->error;
