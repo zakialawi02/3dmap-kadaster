@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jun 26, 2024 at 03:01 PM
--- Server version: 10.11.7-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: localhost:3306
+-- Generation Time: Jun 26, 2024 at 03:20 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u408105443_rrrcadastre3`
+-- Database: `rrrcadastre2`
 --
 
 -- --------------------------------------------------------
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `critics` (
-  `id` int(11) NOT NULL,
-  `critics` varchar(5000) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `critics` varchar(5000) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -47,9 +47,9 @@ INSERT INTO `critics` (`id`, `critics`, `created_at`) VALUES
 --
 
 CREATE TABLE `land_parcel_table` (
-  `id` int(11) NOT NULL,
-  `parcel_id` varchar(50) DEFAULT NULL,
-  `building` varchar(50) DEFAULT NULL
+  `id` int NOT NULL,
+  `parcel_id` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `building` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,9 +68,9 @@ INSERT INTO `land_parcel_table` (`id`, `parcel_id`, `building`) VALUES
 --
 
 CREATE TABLE `legal_objects_table` (
-  `id` int(11) NOT NULL,
-  `parcel_id` varchar(50) NOT NULL,
-  `parcel_name` varchar(250) DEFAULT NULL
+  `id` int NOT NULL,
+  `parcel_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `parcel_name` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -267,8 +267,8 @@ INSERT INTO `legal_objects_table` (`id`, `parcel_id`, `parcel_name`) VALUES
 --
 
 CREATE TABLE `linked_uri` (
-  `object_id` int(11) NOT NULL,
-  `id_keyword` int(11) NOT NULL
+  `object_id` int NOT NULL,
+  `id_keyword` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -655,11 +655,11 @@ INSERT INTO `linked_uri` (`object_id`, `id_keyword`) VALUES
 --
 
 CREATE TABLE `managements_table` (
-  `id` int(11) NOT NULL,
-  `organizer_name` varchar(255) NOT NULL,
-  `organizer_address` varchar(255) DEFAULT NULL,
-  `organizer_city` varchar(255) DEFAULT NULL,
-  `organizer_head` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `organizer_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `organizer_address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `organizer_city` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `organizer_head` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -677,14 +677,14 @@ INSERT INTO `managements_table` (`id`, `organizer_name`, `organizer_address`, `o
 --
 
 CREATE TABLE `renters_tenants` (
-  `id` int(11) NOT NULL,
-  `tenant_id` int(11) NOT NULL,
-  `room_id` varchar(50) NOT NULL,
+  `id` int NOT NULL,
+  `tenant_id` int NOT NULL,
+  `room_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `due_started` date DEFAULT NULL,
   `due_finished` date DEFAULT NULL,
-  `tenure_status` varchar(50) DEFAULT NULL,
-  `agreement_number` varchar(50) DEFAULT NULL,
-  `permit_flats` varchar(50) DEFAULT NULL
+  `tenure_status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `agreement_number` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `permit_flats` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -694,101 +694,101 @@ CREATE TABLE `renters_tenants` (
 INSERT INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due_finished`, `tenure_status`, `agreement_number`, `permit_flats`) VALUES
 (9, 9, '0065', NULL, NULL, 'lease', NULL, NULL),
 (10, 10, '0064', NULL, NULL, 'lease', NULL, NULL),
-(11, 11, '0063', NULL, NULL, 'lease', '', NULL),
-(13, 13, '0167', NULL, NULL, 'lease', '0013/1679/3573403/2024', 'S_0013.1679.3573403.2024.pdf'),
+(11, 11, '0063', NULL, NULL, 'lease', NULL, NULL),
+(13, 13, '0167', NULL, NULL, 'lease', NULL, NULL),
 (14, 14, '0177', NULL, NULL, 'lease', '0014/1679/3573403/2024', 'S_0014.1679.3573403.2024.pdf'),
-(15, 15, '0168', NULL, NULL, 'lease', '0015/1679/3573403/2024', 'S_0015.1679.3573403.2024.pdf'),
-(16, 16, '0169', NULL, NULL, 'lease', '0016/1679/3573403/2024', 'S_0016.1679.3573403.2024.pdf'),
-(17, 17, '0170', NULL, NULL, 'lease', '0017/1679/3573403/2024', 'S_0017.1679.3573403.2024.pdf'),
-(18, 18, '0171', NULL, NULL, 'lease', '0018/1679/3573403/2024', 'S_0018.1679.3573403.2024.pdf'),
-(19, 19, '0172', NULL, NULL, 'lease', '0019/1679/3573403/2024', 'S_0019.1679.3573403.2024.pdf'),
-(20, 20, '0173', NULL, NULL, 'lease', '0020/1679/3573403/2024', 'S_0020.1679.3573403.2024.pdf'),
-(21, 21, '0174', NULL, NULL, 'lease', '0021/1679/3573403/2024', 'S_0021.1679.3573403.2024.pdf'),
-(22, 22, '0175', NULL, NULL, 'lease', '0022/1679/3573403/2024', 'S_0022.1679.3573403.2024.pdf'),
+(15, 15, '0168', NULL, NULL, 'lease', NULL, NULL),
+(16, 16, '0169', NULL, NULL, 'lease', NULL, NULL),
+(17, 17, '0170', NULL, NULL, 'lease', NULL, NULL),
+(18, 18, '0171', NULL, NULL, 'lease', NULL, NULL),
+(19, 19, '0172', NULL, NULL, 'lease', NULL, NULL),
+(20, 20, '0173', NULL, NULL, 'lease', NULL, NULL),
+(21, 21, '0174', NULL, NULL, 'lease', NULL, NULL),
+(22, 22, '0175', NULL, NULL, 'lease', NULL, NULL),
 (23, 23, '0178', NULL, NULL, 'lease', '0023/1679/3573403/2024', 'S_0023.1679.3573403.2024.pdf'),
 (24, 24, '0176', NULL, NULL, 'lease', '0024/1679/3573403/2024', 'S_0024.1679.3573403.2024.pdf'),
-(25, 25, '0130', NULL, NULL, 'lease', '0025/1679/3573403/2024', 'S_0025.1679.3573403.2024.pdf'),
-(26, 26, '0119', NULL, NULL, 'lease', '0026/1679/3573403/2024', 'S_0026.1679.3573403.2024.pdf'),
-(27, 27, '0120', NULL, NULL, 'lease', '0027/1679/3573403/2024', 'S_0027.1679.3573403.2024.pdf'),
-(28, 28, '0121', NULL, NULL, 'lease', '0028/1679/3573403/2024', 'S_0028.1679.3573403.2024.pdf'),
-(29, 29, '0122', NULL, NULL, 'lease', '0029/1679/3573403/2024', 'S_0029.1679.3573403.2024.pdf'),
-(30, 30, '0123', NULL, NULL, 'lease', '0030/1679/3573403/2024', 'S_0030.1679.3573403.2024.pdf'),
-(31, 31, '0124', NULL, NULL, 'lease', '0031/1679/3573403/2024', 'S_0031.1679.3573403.2024.pdf'),
-(32, 32, '0125', NULL, NULL, 'lease', '0032/1679/3573403/2024', 'S_0032.1679.3573403.2024.pdf'),
-(33, 33, '0126', NULL, NULL, 'lease', '0033/1679/3573403/2024', 'S_0033.1679.3573403.2024.pdf'),
-(34, 34, '0127', NULL, NULL, 'lease', '0034/1679/3573403/2024', 'S_0034.1679.3573403.2024.pdf'),
-(35, 35, '0128', NULL, NULL, 'lease', '0035/1679/3573403/2024', 'S_0035.1679.3573403.2024.pdf'),
-(36, 36, '0129', NULL, NULL, 'lease', '0036/1679/3573403/2024', 'S_0036.1679.3573403.2024.pdf'),
-(37, 37, '0155', NULL, NULL, 'lease', '0037/1679/3573403/2024', 'S_0037.1679.3573403.2024.pdf'),
-(38, 38, '0165', NULL, NULL, 'lease', '0038/1679/3573403/2024', 'S_0038.1679.3573403.2024.pdf'),
-(39, 39, '0156', NULL, NULL, 'lease', '0039/1679/3573403/2024', 'S_0039.1679.3573403.2024.pdf'),
-(40, 40, '0157', NULL, NULL, 'lease', '0040/1679/3573403/2024', 'S_0040.1679.3573403.2024.pdf'),
-(41, 41, '0158', NULL, NULL, 'lease', '0041/1679/3573403/2024', 'S_0041.1679.3573403.2024.pdf'),
-(42, 42, '0159', NULL, NULL, 'lease', '0042/1679/3573403/2024', 'S_0042.1679.3573403.2024.pdf'),
-(43, 43, '0160', NULL, NULL, 'lease', '0043/1679/3573403/2024', 'S_0043.1679.3573403.2024.pdf'),
-(44, 44, '0161', NULL, NULL, 'lease', '0044/1679/3573403/2024', 'S_0044.1679.3573403.2024.pdf'),
-(45, 45, '0162', NULL, NULL, 'lease', '0045/1679/3573403/2024', 'S_0045.1679.3573403.2024.pdf'),
-(46, 46, '0163', NULL, NULL, 'lease', '0046/1679/3573403/2024', 'S_0046.1679.3573403.2024.pdf'),
-(47, 47, '0166', NULL, NULL, 'lease', '0047/1679/3573403/2024', 'S_0047.1679.3573403.2024.pdf'),
-(48, 48, '0164', NULL, NULL, 'lease', '0048/1679/3573403/2024', 'S_0048.1679.3573403.2024.pdf'),
-(49, 49, '0118', NULL, NULL, 'lease', '0049/1679/3573403/2024', 'S_0049.1679.3573403.2024.pdf'),
-(50, 50, '0107', NULL, NULL, 'lease', '0050/1679/3573403/2024', 'S_0050.1679.3573403.2024.pdf'),
-(51, 51, '0108', NULL, NULL, 'lease', '0051/1679/3573403/2024', 'S_0051.1679.3573403.2024.pdf'),
-(52, 52, '0109', NULL, NULL, 'lease', '0052/1679/3573403/2024', 'S_0052.1679.3573403.2024.pdf'),
-(53, 53, '0110', NULL, NULL, 'lease', '0053/1679/3573403/2024', 'S_0053.1679.3573403.2024.pdf'),
-(54, 54, '0111', NULL, NULL, 'lease', '0054/1679/3573403/2024', 'S_0054.1679.3573403.2024.pdf'),
-(55, 55, '0112', NULL, NULL, 'lease', '0055/1679/3573403/2024', 'S_0055.1679.3573403.2024.pdf'),
-(56, 56, '0113', NULL, NULL, 'lease', '0056/1679/3573403/2024', 'S_0056.1679.3573403.2024.pdf'),
-(57, 57, '0114', NULL, NULL, 'lease', '0057/1679/3573403/2024', 'S_0057.1679.3573403.2024.pdf'),
-(58, 58, '0115', NULL, NULL, 'lease', '0058/1679/3573403/2024', 'S_0058.1679.3573403.2024.pdf'),
-(59, 59, '0116', NULL, NULL, 'lease', '0059/1679/3573403/2024', 'S_0059.1679.3573403.2024.pdf'),
-(60, 60, '0117', NULL, NULL, 'lease', '0060/1679/3573403/2024', 'S_0060.1679.3573403.2024.pdf'),
-(61, 61, '0143', NULL, NULL, 'lease', '0061/1679/3573403/2024', 'S_0061.1679.3573403.2024.pdf'),
-(62, 62, '0153', NULL, NULL, 'lease', '0062/1679/3573403/2024', 'S_0062.1679.3573403.2024.pdf'),
-(63, 63, '0144', NULL, NULL, 'lease', '0063/1679/3573403/2024', 'S_0063.1679.3573403.2024.pdf'),
-(64, 64, '0145', NULL, NULL, 'lease', '0064/1679/3573403/2024', 'S_0064.1679.3573403.2024.pdf'),
-(65, 65, '0146', NULL, NULL, 'lease', '0065/1679/3573403/2024', 'S_0065.1679.3573403.2024.pdf'),
-(66, 66, '0147', NULL, NULL, 'lease', '0066/1679/3573403/2024', 'S_0066.1679.3573403.2024.pdf'),
-(67, 67, '0148', NULL, NULL, 'lease', '0067/1679/3573403/2024', 'S_0067.1679.3573403.2024.pdf'),
-(68, 68, '0149', NULL, NULL, 'lease', '0068/1679/3573403/2024', 'S_0068.1679.3573403.2024.pdf'),
-(69, 69, '0150', NULL, NULL, 'lease', '0069/1679/3573403/2024', 'S_0069.1679.3573403.2024.pdf'),
-(70, 70, '0151', NULL, NULL, 'lease', '0070/1679/3573403/2024', 'S_0070.1679.3573403.2024.pdf'),
-(71, 71, '0154', NULL, NULL, 'lease', '0071/1679/3573403/2024', 'S_0071.1679.3573403.2024.pdf'),
-(72, 72, '0152', NULL, NULL, 'lease', '0072/1679/3573403/2024', 'S_0072.1679.3573403.2024.pdf'),
-(73, 73, '0106', NULL, NULL, 'lease', '0073/1679/3573403/2024', 'S_0073.1679.3573403.2024.pdf'),
+(25, 25, '0130', NULL, NULL, 'lease', NULL, NULL),
+(26, 26, '0119', NULL, NULL, 'lease', NULL, NULL),
+(27, 27, '0120', NULL, NULL, 'lease', NULL, NULL),
+(28, 28, '0121', NULL, NULL, 'lease', NULL, NULL),
+(29, 29, '0122', NULL, NULL, 'lease', NULL, NULL),
+(30, 30, '0123', NULL, NULL, 'lease', NULL, NULL),
+(31, 31, '0124', NULL, NULL, 'lease', NULL, NULL),
+(32, 32, '0125', NULL, NULL, 'lease', NULL, NULL),
+(33, 33, '0126', NULL, NULL, 'lease', NULL, NULL),
+(34, 34, '0127', NULL, NULL, 'lease', NULL, NULL),
+(35, 35, '0128', NULL, NULL, 'lease', NULL, NULL),
+(36, 36, '0129', NULL, NULL, 'lease', NULL, NULL),
+(37, 37, '0155', NULL, NULL, 'lease', NULL, NULL),
+(38, 38, '0165', NULL, NULL, 'lease', NULL, NULL),
+(39, 39, '0156', NULL, NULL, 'lease', NULL, NULL),
+(40, 40, '0157', NULL, NULL, 'lease', NULL, NULL),
+(41, 41, '0158', NULL, NULL, 'lease', NULL, NULL),
+(42, 42, '0159', NULL, NULL, 'lease', NULL, NULL),
+(43, 43, '0160', NULL, NULL, 'lease', NULL, NULL),
+(44, 44, '0161', NULL, NULL, 'lease', NULL, NULL),
+(45, 45, '0162', NULL, NULL, 'lease', NULL, NULL),
+(46, 46, '0163', NULL, NULL, 'lease', NULL, NULL),
+(47, 47, '0166', NULL, NULL, 'lease', NULL, NULL),
+(48, 48, '0164', NULL, NULL, 'lease', NULL, NULL),
+(49, 49, '0118', NULL, NULL, 'lease', NULL, NULL),
+(50, 50, '0107', NULL, NULL, 'lease', NULL, NULL),
+(51, 51, '0108', NULL, NULL, 'lease', NULL, NULL),
+(52, 52, '0109', NULL, NULL, 'lease', NULL, NULL),
+(53, 53, '0110', NULL, NULL, 'lease', NULL, NULL),
+(54, 54, '0111', NULL, NULL, 'lease', NULL, NULL),
+(55, 55, '0112', NULL, NULL, 'lease', NULL, NULL),
+(56, 56, '0113', NULL, NULL, 'lease', NULL, NULL),
+(57, 57, '0114', NULL, NULL, 'lease', NULL, NULL),
+(58, 58, '0115', NULL, NULL, 'lease', NULL, NULL),
+(59, 59, '0116', NULL, NULL, 'lease', NULL, NULL),
+(60, 60, '0117', NULL, NULL, 'lease', NULL, NULL),
+(61, 61, '0143', NULL, NULL, 'lease', NULL, NULL),
+(62, 62, '0153', NULL, NULL, 'lease', NULL, NULL),
+(63, 63, '0144', NULL, NULL, 'lease', NULL, NULL),
+(64, 64, '0145', NULL, NULL, 'lease', NULL, NULL),
+(65, 65, '0146', NULL, NULL, 'lease', NULL, NULL),
+(66, 66, '0147', NULL, NULL, 'lease', NULL, NULL),
+(67, 67, '0148', NULL, NULL, 'lease', NULL, NULL),
+(68, 68, '0149', NULL, NULL, 'lease', NULL, NULL),
+(69, 69, '0150', NULL, NULL, 'lease', NULL, NULL),
+(70, 70, '0151', NULL, NULL, 'lease', NULL, NULL),
+(71, 71, '0154', NULL, NULL, 'lease', NULL, NULL),
+(72, 72, '0152', NULL, NULL, 'lease', NULL, NULL),
+(73, 73, '0106', NULL, NULL, 'lease', NULL, NULL),
 (74, 74, '0095', NULL, NULL, 'lease', NULL, NULL),
 (75, 75, '0096', NULL, NULL, 'lease', NULL, NULL),
 (76, 76, '0097', NULL, NULL, 'lease', NULL, NULL),
 (77, 77, '0098', NULL, NULL, 'lease', NULL, NULL),
-(78, 78, '0099', NULL, NULL, 'lease', '0078/1679/3573403/2024', 'S_0078.1679.3573403.2024.pdf'),
-(79, 79, '0100', NULL, NULL, 'lease', '0079/1679/3573403/2024', 'S_0079.1679.3573403.2024.pdf'),
-(80, 80, '0101', NULL, NULL, 'lease', '0080/1679/3573403/2024', 'S_0080.1679.3573403.2024.pdf'),
-(81, 81, '0102', NULL, NULL, 'lease', '0081/1679/3573403/2024', 'S_0081.1679.3573403.2024.pdf'),
-(82, 82, '0103', NULL, NULL, 'lease', '0082/1679/3573403/2024', 'S_0082.1679.3573403.2024.pdf'),
-(83, 83, '0104', NULL, NULL, 'lease', '0083/1679/3573403/2024', 'S_0083.1679.3573403.2024.pdf'),
-(84, 84, '0105', NULL, NULL, 'lease', '0084/1679/3573403/2024', 'S_0084.1679.3573403.2024.pdf'),
-(85, 85, '0131', NULL, NULL, 'lease', '0085/1679/3573403/2024', 'S_0085.1679.3573403.2024.pdf'),
-(86, 86, '0141', NULL, NULL, 'lease', '0086/1679/3573403/2024', 'S_0086.1679.3573403.2024.pdf'),
-(87, 87, '0132', NULL, NULL, 'lease', '0087/1679/3573403/2024', 'S_0087.1679.3573403.2024.pdf'),
-(88, 88, '0133', NULL, NULL, 'lease', '0088/1679/3573403/2024', 'S_0088.1679.3573403.2024.pdf'),
-(89, 89, '0134', NULL, NULL, 'lease', '0089/1679/3573403/2024', 'S_0089.1679.3573403.2024.pdf'),
-(90, 90, '0135', NULL, NULL, 'lease', '0090/1679/3573403/2024', 'S_0090.1679.3573403.2024.pdf'),
-(91, 91, '0136', NULL, NULL, 'lease', '0091/1679/3573403/2024', 'S_0091.1679.3573403.2024.pdf'),
-(92, 92, '0137', NULL, NULL, 'lease', '0092/1679/3573403/2024', 'S_0092.1679.3573403.2024.pdf'),
-(93, 93, '0138', NULL, NULL, 'lease', '0093/1679/3573403/2024', 'S_0093.1679.3573403.2024.pdf'),
-(94, 94, '0139', NULL, NULL, 'lease', '0094/1679/3573403/2024', 'S_0094.1679.3573403.2024.pdf'),
-(95, 95, '0142', NULL, NULL, 'lease', '0095/1679/3573403/2024', 'S_0095.1679.3573403.2024.pdf'),
-(96, 96, '0140', NULL, NULL, 'lease', '0096/1679/3573403/2024', 'S_0096.1679.3573403.2024.pdf'),
+(78, 78, '0099', NULL, NULL, 'lease', NULL, NULL),
+(79, 79, '0100', NULL, NULL, 'lease', NULL, NULL),
+(80, 80, '0101', NULL, NULL, 'lease', NULL, NULL),
+(81, 81, '0102', NULL, NULL, 'lease', NULL, NULL),
+(82, 82, '0103', NULL, NULL, 'lease', NULL, NULL),
+(83, 83, '0104', NULL, NULL, 'lease', NULL, NULL),
+(84, 84, '0105', NULL, NULL, 'lease', NULL, NULL),
+(85, 85, '0131', NULL, NULL, 'lease', NULL, NULL),
+(86, 86, '0141', NULL, NULL, 'lease', NULL, NULL),
+(87, 87, '0132', NULL, NULL, 'lease', NULL, NULL),
+(88, 88, '0133', NULL, NULL, 'lease', NULL, NULL),
+(89, 89, '0134', NULL, NULL, 'lease', NULL, NULL),
+(90, 90, '0135', NULL, NULL, 'lease', NULL, NULL),
+(91, 91, '0136', NULL, NULL, 'lease', NULL, NULL),
+(92, 92, '0137', NULL, NULL, 'lease', NULL, NULL),
+(93, 93, '0138', NULL, NULL, 'lease', NULL, NULL),
+(94, 94, '0139', NULL, NULL, 'lease', NULL, NULL),
+(95, 95, '0142', NULL, NULL, 'lease', NULL, NULL),
+(96, 96, '0140', NULL, NULL, 'lease', NULL, NULL),
 (97, 97, '0085', NULL, NULL, 'lease', NULL, NULL),
 (98, 98, '0086', NULL, NULL, 'lease', NULL, NULL),
-(99, 99, '0087', NULL, NULL, 'lease', '0099/1679/3573403/2024', 'S_0099.1679.3573403.2024.pdf'),
-(100, 100, '0088', NULL, NULL, 'lease', '', NULL),
+(99, 99, '0087', NULL, NULL, 'lease', NULL, NULL),
+(100, 100, '0088', NULL, NULL, 'lease', NULL, NULL),
 (101, 101, '0089', NULL, NULL, 'lease', NULL, NULL),
 (102, 102, '0090', NULL, NULL, 'lease', NULL, NULL),
 (103, 103, '0091', NULL, NULL, 'lease', NULL, NULL),
 (104, 104, '0092', NULL, NULL, 'lease', NULL, NULL),
 (105, 105, '0093', NULL, NULL, 'lease', NULL, NULL),
-(106, 106, '0094', NULL, NULL, 'lease', '0106/1679/3573403/2024', 'S_0106.1679.3573403.2024.pdf'),
+(106, 106, '0094', NULL, NULL, 'lease', NULL, NULL),
 (107, 107, '0083', NULL, NULL, 'lease', NULL, NULL),
 (108, 108, '0084', NULL, NULL, 'lease', NULL, NULL),
 (109, 109, '0087', NULL, NULL, 'in queue', NULL, NULL);
@@ -800,12 +800,12 @@ INSERT INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due
 --
 
 CREATE TABLE `rooms_table` (
-  `room_id` varchar(50) NOT NULL,
-  `legal_object_id` int(11) DEFAULT NULL,
-  `organizer_id` int(11) DEFAULT NULL,
-  `room_name` varchar(255) DEFAULT NULL,
-  `space_usage` varchar(255) DEFAULT NULL,
-  `rent_fee` varchar(255) DEFAULT NULL
+  `room_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `legal_object_id` int DEFAULT NULL,
+  `organizer_id` int DEFAULT NULL,
+  `room_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `space_usage` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `rent_fee` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -993,19 +993,19 @@ INSERT INTO `rooms_table` (`room_id`, `legal_object_id`, `organizer_id`, `room_n
 --
 
 CREATE TABLE `tenants_table` (
-  `id` int(11) NOT NULL,
-  `tenant_name` varchar(255) NOT NULL,
-  `name_number` varchar(255) NOT NULL,
-  `tenant_job` varchar(255) DEFAULT NULL,
-  `tenant_religion` varchar(255) DEFAULT NULL,
-  `marriage_status` varchar(255) DEFAULT NULL,
-  `number_residents` varchar(255) DEFAULT NULL,
-  `tenant_address` varchar(255) DEFAULT NULL,
-  `tenant_rt_rw` varchar(255) DEFAULT NULL,
-  `tenant_village` varchar(255) DEFAULT NULL,
-  `tenant_district` varchar(255) DEFAULT NULL,
-  `tenant_city` varchar(255) DEFAULT NULL,
-  `tenant_province` varchar(255) DEFAULT NULL
+  `id` int NOT NULL,
+  `tenant_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name_number` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_job` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_religion` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `marriage_status` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `number_residents` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_rt_rw` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_village` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_district` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_city` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tenant_province` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1121,11 +1121,11 @@ INSERT INTO `tenants_table` (`id`, `tenant_name`, `name_number`, `tenant_job`, `
 --
 
 CREATE TABLE `uri_table` (
-  `id_keyword` int(11) NOT NULL,
-  `word_name` varchar(250) NOT NULL,
-  `slug` varchar(250) NOT NULL,
-  `isUrl` varchar(50) NOT NULL DEFAULT 'false',
-  `uri_content` varchar(5000) NOT NULL
+  `id_keyword` int NOT NULL,
+  `word_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `isUrl` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'false',
+  `uri_content` varchar(5000) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1150,11 +1150,11 @@ INSERT INTO `uri_table` (`id_keyword`, `word_name`, `slug`, `isUrl`, `uri_conten
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `id` int NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1247,43 +1247,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `critics`
 --
 ALTER TABLE `critics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `land_parcel_table`
 --
 ALTER TABLE `land_parcel_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `managements_table`
 --
 ALTER TABLE `managements_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `renters_tenants`
 --
 ALTER TABLE `renters_tenants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `tenants_table`
 --
 ALTER TABLE `tenants_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `uri_table`
 --
 ALTER TABLE `uri_table`
-  MODIFY `id_keyword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_keyword` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables

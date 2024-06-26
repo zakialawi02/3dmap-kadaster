@@ -30,6 +30,20 @@
         margin-bottom: 1rem;
         padding: 1rem auto;
       }
+      .row {
+        overflow: hidden;
+      }
+
+      .left {
+        float: left;
+        margin-left: 3rem;
+        padding: auto 10px;
+      }
+
+      .right {
+        float: right;
+        padding: auto 10px;
+      }
     </style>
 
     <title>PDF</title>
@@ -80,19 +94,287 @@
 
       <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
         <ol>
-          <li>Besaran sewa ditetapkan sebesar Rp. 175.000,- ( Seratus Tujuh Puluh Lima Ribu Rupiah ) per bulan berdasarkan Peraturan Walikota Malang Nomor 41 Tahun 2013 tentang Tata Cara Pengelolaan Rumah Susun Sederhana Sewa.</li>
+          <li>Besaran sewa ditetapkan sebesar {rent_fee} per bulan berdasarkan Peraturan Walikota Malang Nomor 41 Tahun 2013 tentang Tata Cara Pengelolaan Rumah Susun Sederhana Sewa.</li>
           <li>Besaran sewa sebagaimana dimaksud pada ayat (1) tidak/belum termasuk biaya RUSUNAWA.</li>
         </ol>
       </div>
     </div>
 
     <div class="pasal">
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 4</h2>
+        <h2 style="font-weight: bold">HAK DAN KEWAJIBAN</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <p>(1) Hak PIHAK KESATU :</p>
+        <ol style="list-style-type: lower-latin">
+          <li>Melakukan seleksi dan menetapkan calon penghuni;</li>
+          <li>Melakukan pendataan dan pemutakhiran data penghuni secara berkala;</li>
+          <li>Mengenakan sanksi-sanksi apabila terjadi pelanggaran tata tertib rumah susun oleh <b>PIHAK KEDUA</b>;</li>
+          <li>Memutuskan perjanjian sewa-menyewa apabila penghuni tidak melaksanakan kewajiban dan atau melanggar larangan;</li>
+          <li>Mengenakan sanksi pelanggaran yang dilakukan penghuni sesuai peraturan yang telah ditetapkan;</li>
+          <li>Mengeluarkan penghuni RUSUNAWA bila terlambat melakukan pembayaran selama 2 bulan;</li>
+          <li>Melakukan pemutusan kontrak secara sepihak jika <b>PIHAK KEDUA</b> diketahui atau sedang dalam proses hukum atas tindak pidana;</li>
+          <li>Menerbitkan kartu kendali pembayaran kepada <b>PIHAK KEDUA</b> sebagai informasi atas pembayaran sewa dan lain-lain biaya pengelolaan yang dibayarkan penghuni;</li>
+        </ol>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <p>(2) Kewajiban PIHAK KESATU :</p>
+        <ol style="list-style-type: lower-latin">
+          <li>Mengkoordinasikan upaya pengamanan dan pemeliharaan ketertiban lingkungan rumah susun sederhana sewa;</li>
+          <li>Memelihara lingkungan fisik dan sarana prasarana di rumah susun sederhana sewa;</li>
+          <li>
+            Melakukan pemeriksaan dan pemeliharaan terhadap saluran air hujan, saluran air limbah, saluran limbah tinja, saluran listrik, dinding luar dan penerangan jalan/tangga menuju ruangan penyewa/penghuni, pipa-pipa plumbing, pipa gas, dan lain-lain utilitas di lingkungan rumah susun sederhana
+            sewa;
+          </li>
+          <li>Menyampaikan teguran kepada <b>PIHAK KEDUA</b> apabila <b>PIHAK KEDUA</b> membuat kegaduhan/kerusuhan dan atau pengrusakan fasilitas rumah susun;</li>
+          <li>Menyediakan suatu hunian darurat apabila terjadi kerusakan pada satuan unit hunian yang di tempati penghuni;</li>
+          <li>Memberikan pelayanan terhadap pengaduan yang disampikan oleh penghuni;</li>
+          <li>Melakukan pemantauan rutin terhadap kesesuaian/kebenaran penghuni yang tinggal di RUSUNAWA sesuai dengan perjanjian sewa yang telah ditandatangani.</li>
+        </ol>
+      </div>
     </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 5</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <p>(1) Hak PIHAK KEDUA :</p>
+        <ol style="list-style-type: lower-latin">
+          <li>Menempati hunian rumah sewa yang dimaksud untuk keperluan tempat tinggal sebagaimana dimaksud Pasal 2 perjanjian ini;</li>
+          <li>Memperoleh layanan listrik, air bersih, pembuangan air limbah dan sampah;</li>
+          <li>Mendapatkan pelayanan atas perbaikan kerusakan bangunan, prasarana dan sarana dan utilitas umum yang bukan disebabkan oleh penghuni;</li>
+          <li>Menempati satuan hunian cadangan yang disiapkan oleh pengelola apabila dibutuhkan perbaikan pada satuan hunian yang ditempati;</li>
+          <li>Memanfaatkan prasarana, sarana dan utilitas rusunawa sesuai dengan fungsinya;</li>
+        </ol>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <p>(2) Kewajiban PIHAK KEDUA :</p>
+        <ol style="list-style-type: lower-latin">
+          <li>Menaati peraturan dan tata tertib penghuni rusunawa yang ditetapkan oleh pengelola;</li>
+          <li>Memelihara, merawat, menjaga kebersihan satuan hunian dan sarana umum serta berpartisipasi dalam pemeliharaannya;</li>
+          <li>Membuang sampah pada tempat yang telah ditentukan secara rapi dan teratur;</li>
+          <li>Membayar sewa sebagaimana dimaksud dalam Pasal 3 secara rutin selambat-lambatnya tanggal 10 (sepuluh) pada bulan bersangkutan sesuai mekanisme yang telah di tentukan;</li>
+          <li>Membayar biaya pemakaian air bersih, listrik, dan lain-lain biaya pengelolaan sesuai ketentuan;</li>
+          <li>Melaporkan kepada pihak pengelola apabila mengetahui adanya kerusakan pada prasarana, sarana, dan utilitas di RUSUNAWA;</li>
+          <li>Membayar ganti rugi untuk setiap kerusakan yang diakibatkan kelalaian penghuni;</li>
+          <li>Mengosongkan ruang hunian selambat-lambatnya 7 (tujuh) hari sebelum jangka waktu Perjanjian Sewa Menyewa ini berakhir;</li>
+          <li>Berpartisipasi dalam menciptakan lingkungan dan kehidupan masyarakat yang harmonis;</li>
+          <li>Mengikuti sosialisasi dan bimbingan yang dilaksanakan oleh pengelola;</li>
+          <li>Memarkir dan meletakkan kendaraan di area yang telah ditetapkan;</li>
+          <li>Melaporkan kepada <b>PIHAK KESATU</b>, apabila kedatangan tamu dari luar yang akan menginap di ruangan <b>PIHAK KEDUA</b> dalam waktu 1 x 24 jam dengan menyerahkan fotokopi identitas diri tamu bersangkutan yang sah dan masih berlaku;</li>
+          <li>Mengajukan izin kepada <b>PIHAK KESATU</b> apabila akan melaksanakan kegiatan yang bersifat menimbulkan keramaian dan atau pengumpulan massa di lingkungan rusunawa.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 6</h2>
+        <h2 style="font-weight: bold">JANGKA WAKTU DAN BERAKHIRNYA PERJANJIAN SEWA</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>Perjanjian sewa ini berlaku sampai dengan tanggal {due_finished};</li>
+          <li>
+            Apabila jangka waktu perjanjian sewa sebagaimana dimaksud dalam ayat (1) berakhir dan <b>PIHAK KEDUA</b> bermaksud memperpanjang perjanjian, maka <b>PIHAK KEDUA</b> mengajukan izin pemanfaatan fasilitas hunian RUSUNAWA kepada <b>PIHAK KESATU</b> paling lambat 1 (satu) bulan sebelum
+            berakhirnya perjanjian;
+          </li>
+          <li>
+            Apabila jangka waktu perjanjian ini berakhir dan/atau karena sebab lain yang mengakibatkan berakhirnya perjanjian, maka <b>PIHAK KEDUA</b> wajib mengosongkan ruang Hunian dalam keadaan baik dan menyerahkan ruangan hunian yang disewanya dalam keadaan baik paling lambat 7 (tujuh) hari
+            kerja sebelum berakhirnya Perjanjian Sewa RUSUNAWA.
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 7</h2>
+        <h2 style="font-weight: bold">TATA TERTIB</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>Penghuni adalah penyewa yang ditetapkan berdasarkan perjanjian sewa;</li>
+          <li>Hunian hanya diperkenankan dihuni satu keluarga sebagaimana dibuktikan dengan daftar nama pada kartu keluarga;</li>
+          <li>Melaporkan perubahan daftar penghuni apabila terjadi perubahan dalam kartu keluarga penghuni yang bersangkutan;</li>
+          <li>Menciptakan keamanan, ketertiban, kebersihan, kerapian, dan keasrian hunian dan lingkungan sekitar hunian;</li>
+          <li>Mematikan sambungan listrik ke setiap perangkat eletronik yang digunakan, menutup kran air dan mengamankan gas pada saat meninggalkan hunian;</li>
+          <li>Menjaga kenyamanan dan ketenangan dengan tidak membuat kegaduhan/keonaran yang dapat mengganggu lingkungan;</li>
+          <li>Melaporkan ke pengelola apabila akan meninggalkan/mengosongkan tempat hunian untuk sementara waktu;</li>
+          <li>Menjalin hubungan kekeluargaan antar sesama penghuni;</li>
+          <li>Pengerjaan peralatan, perbaikan/renovasi yang bersifat umum, harus seijin pengelola;</li>
+          <li>Berakhirnya perjanjian sewa (tidak diperbarui izin) atau karena sesuatu hal yang mengakibatkan diakhirinya perjanjian sewa maka hunian sewa harus dalam keadaan kosong (tidak ada barang-barang yang ditinggalkan);</li>
+          <li>Penghuni/tamu yang membawa kendaraan menempatkan pada tempat parkir/lokasi yang telah ditetapkan;</li>
+          <li>Mentaati peraturan maupun ketentuan-ketentuan yang diatur dalam perjanjian sewa menyewa RUSUNAWA dan yang diberlakukan oleh pengelola;</li>
+          <li>Hewan peliharaan lain di luar yang dilarang dalam ketentuan perjanjian sewa ini dapat dipelihara dengan seijin pengelola.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 8</h2>
+        <h2 style="font-weight: bold">LARANGAN</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <p>Selama jangka waktu berlakunya perjanjian sewa menyewa ini berlangsung, <b>PIHAK KEDUA</b> dilarang :</p>
+        <ol>
+          <li>Menyewakan atau memindah tangankan hak sewa kepada pihak lain dimaksud kepada pihak lain dengan alasan apapun;</li>
+          <li>Memperjualbelikan atau menyewakan unit hunian RUSUNAWA kepada pihak lain dengan alasan apapun;</li>
+          <li>Menyewa lebih dari satu satuan hunian;</li>
+          <li>Menggunakan satuan hunian sebagai tempat usaha/gudang;</li>
+          <li>Mengisi satuan hunian melebihi ketentuan tata tertib;</li>
+          <li>Mengubah prasarana, sarana, dan utilitas RUSUNAWA;</li>
+          <li>Menjemur pakaian dan lainnya di luar tempat yang telah ditentukan (seperti di jendela, pagar, jalan umum, keluar dari teralis, dll);</li>
+          <li>Melakukan perubahan/perombakan bangunan rumah sewa dimaksud dalam bentuk apapun;</li>
+          <li>Menyimpan/mengizinkan penyimpanan segala bahan bersifat eksplosif, segala bahan kimia yang mudah terbakar atau bahan lainnya yang dapat menyebabkan bahaya terhadap rumah susun sederhana sewa atau penghuni lainnya;</li>
+          <li>Melakukan perbuatan perjudian atau bermain dengan menggunakan taruhan uang atau barang, perbuatan meminum minuman keras;</li>
+          <li>Membawa minuman keras, mengajak orang lain untuk minum-minuman keras;</li>
+          <li>Melakukan perbuatan maksiat yang melanggar kesusilaan umum dan agama;</li>
+          <li>Mengadakan pertemuan untuk berbuat pelanggaran kriminal, terorisme, dan politik;</li>
+          <li>Melakukan perbuatan onar, berkelahi dengan penghuni lain di lingkungan kompleks rumah susun sewa;</li>
+          <li>Memasak dengan menggunakan kayu, arang, atau bahan lain yang mengotori lingkungan;</li>
+          <li>Membuang benda-benda ke dalam saluran air kamar mandi/WC yang dapat menyumbat saluran pembuangan;</li>
+          <li>Penghuni dilarang menambah/merubah instalasi listrik, air, dan sarana lainnya tanpa izin tertulis dari pengelola;</li>
+          <li>Menyimpan atau meletakkan barang/benda di koridor tangga/tempat-tempat yang mengganggu/menghalangi kepentingan bersama;</li>
+          <li>Mendirikan atau membuat bangunan di area RUSUNAWA tanpa seizin pengelola;</li>
+          <li>Melakukan maksiat dan akan dihukum secara pidana dan agama;</li>
+          <li>Memasang alat komunikasi dan antena radio/TV di luar yang disediakan oleh pengelola;</li>
+          <li>Membuang benda-benda ke dalam saluran air, kamar mandi/WC yang dapat menyumbat saluran pembuangan;</li>
+          <li>Melakukan kegiatan yang menimbulkan suara keras/bising, bau menyengat, termasuk memelihara binatang peliharaan yang mengganggu keamanan, kenyamanan, dan ketertiban lingkungan;</li>
+          <li>Membawa, meletakkan, menaruh benda/barang yang beratnya melampaui batas yang sudah ditentukan sehingga dapat membahayakan konstruksi bangunan rumah susun sewa;</li>
+          <li>Membuang barang atau segala sesuatu secara sembarangan lebih-lebih dari tingkat atas ke bawah;</li>
+          <li>Mengganggu dan segala perbuatan atau tindakan yang dilakukan oleh <b>PIHAK KEDUA</b> kepada <b>PIHAK KESATU</b> pada saat perbaikan/pemeliharaan ruangan rumah susun;</li>
+          <li>Menghalangi, menutup atau meletakkan barang di ruang umum, tangga, dan tempat fasilitas bersama lainnya;</li>
+          <li>Melakukan kegiatan transaksi atau memakai dan atau penyalahgunaan narkotika dan obat-obatan keras yang dilarang oleh Undang-Undang Narkotika dan penyalahgunaan obat bius;</li>
+          <li>Memelihara hewan peliharaan anjing, binatang primata, binatang liar, binatang melata, dan binatang yang dilindungi;</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 9</h2>
+        <h2 style="font-weight: bold">PEMUTUSAN PERJANJIAN SEWA MENYEWA</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>
+            Apabila <b>PIHAK KEDUA</b> tidak melaksanakan dan/atau lalai dalam melaksanakan perjanjian ini baik sebagian maupun seluruhnya, maka <b>PIHAK KESATU></b> dapat memberikan peringatan tertulis pada <b>PIHAK KEDUA</b> sebanyak 3 (tiga) kali berturut-turut, masing-masing dengan tenggang
+            waktu 7 (Tujuh) hari;
+          </li>
+          <li>Apabila 7 (Tujuh) hari setelah peringatan ketiga tidak ditanggapi oleh <b>PIHAK KEDUA</b>, maka <b>PIHAK KESATU</b> dapat memutus perjanjian ini secara sepihak dan <b>PIHAK KEDUA</b> harus mengosongkan unit hunian RUSUNAWA dimaksud;</li>
+          <li>
+            Apabila dalam jangka waktu sebulan sejak tanggal perjanjian ini ditandatangani <b>PIHAK KEDUA</b> belum menempati hunian RUSUNAWA, maka <b>PIHAK KESATU</b> dapat memutus perjanjian ini secara sepihak dan uang sewa yang telah disetor ke <b>PIHAK KESATU</b> tidak dapat ditarik kembali;
+          </li>
+          <li>Apabila <b>PIHAK KEDUA</b> tidak membayar uang sewa dan biaya RUSUNAWA selama 2 bulan berturut-turut, maka <b>PIHAK KESATU</b> dapat memutus perjanjian ini secara sepihak dan mengosongkan unit hunian RUSUNAWA yang dimaksud;</li>
+          <li><b>PIHAK KEDUA</b> mengajukan permohonan pengunduran diri sebelum masa kontrak sewa berakhir.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 10</h2>
+        <h2 style="font-weight: bold">PENGALIHAN</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <center>
+          <p>Perjanjian Sewa Menyewa ini tidak dapat dialihkan baik untuk sebagian maupun untuk keseluruhannya dengan alasan apapun.</p>
+        </center>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 11</h2>
+        <h2 style="font-weight: bold">PENYELESAIAN PERSELISIHAN</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>Apabila terjadi perselisihan dalam perjanjian ini akan diselesaikan dengan cara musyawarah untuk mufakat.</li>
+          <li>Apabila penyelesaian sebagaimana dimaksud ayat (1) tidak terjadi kata sepakat, maka akan diselesaikan secara hukum di Pengadilan Negeri Kota Malang.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 12</h2>
+        <h2 style="font-weight: bold">SANKSI-SANKSI</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>Penghuni yang melanggar sewa, sewa menyewa dan tidak bersedia mengkosongkan tempat hunian, pengelola dapat meminta bantuan instansi yang berwenang untuk menyelesaikannya;</li>
+          <li>
+            <b>PIHAK KEDUA</b> sepakat apabila <b>PIHAK KEDUA</b> lalai atau disengaja melakukan pelanggaran Pasal 5 ayat (2) dan Pasal 7, maka seketika itu juga Perjanjian Sewa Menyewa ini menjadi batal demi hukum, dan <b>PIHAK KEDUA</b> bersedia memberikan penggantian kerugian kepada
+            <b>PIHAK KESATU</b>;
+          </li>
+          <li><b>PIHAK KEDUA</b> dapat dikenakan sanksi teknis dan administrasi dalam hal pelanggaran kewajiban maupun tata tertib;</li>
+          <li>Sanksi administrasi dapat berupa: teguran secara lisan, teguran secara tertulis, pengenaan denda, pembongkaran, pemutusan, perjanjian sewa menyewa secara sepihak dan uang sewa yang sudah dibayarkan tidak dikembalikan;</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+        <h2 style="font-weight: bold">Pasal 13</h2>
+        <h2 style="font-weight: bold">KETENTUAN PENUTUP</h2>
+      </div>
+
+      <div style="padding: 0.6rem auto; margin: 0.8rem 0.2rem">
+        <ol>
+          <li>Perjanjian ini dibuat dan ditandatangani dengan penuh kesadaran, tanggung jawab, dan tidak ada paksaan dari pihak manapun.</li>
+          <li>Perjanjian ini dibuat dalam rangkap 3 (tiga), 2 (dua) diantaranya bermaterai cukup dan mempunyai kekuatan hukum yang sama, masing-masing untuk PARA PIHAK, dan untuk keperluan administrasi dibuat rekaman dalam rangkap 1 (satu).</li>
+        </ol>
+      </div>
+    </div>
+
+    <center>
+      <div class="">
+        <div class="row">
+          <div class="left">
+            <b>PIHAK KEDUA,</b>
+          </div>
+          <div class="right">
+            <b>PIHAK KESATU</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="left">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <b>{tenant_name}</b>
+        </div>
+        <div class="right">
+          <p>
+            KEPALA {organizer_name} <br />
+            {organizer_city}
+          </p>
+          <br />
+          <br />
+          <br />
+          <p><u>{organizer_head}</u></p>
+        </div>
+      </div>
+    </center>
   </body>
 </html>

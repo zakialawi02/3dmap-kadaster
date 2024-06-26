@@ -124,11 +124,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $htmlContent = str_replace('{rt}', $rtrw['tenant_rt'], $htmlContent);
         $htmlContent = str_replace('{rw}', $rtrw['tenant_rw'], $htmlContent);
 
+        $htmlContent2 = str_replace('{rent_fee}', "Rp. " . $renter_table['rent_fee'] . ",-" ?? 'sesuai ketentuan yang ditetapkan', $htmlContent2);
+        $htmlContent2 = str_replace('{due_finished}', $renter_table['due_finished'] ?? 'sesuai jangka waktu yang ditentukan', $htmlContent2);
+        $htmlContent2 = str_replace('{tenant_name}', $renter_table['tenant_name'], $htmlContent2);
+        $htmlContent2 = str_replace('{organizer_city}', strtoupper($renter_table['organizer_city']), $htmlContent2);
+        $htmlContent2 = str_replace('{organizer_name}', strtoupper($renter_table['organizer_name']), $htmlContent2);
+        $htmlContent2 = str_replace('{organizer_head}', $renter_table['organizer_head'], $htmlContent2);
+
+
         $mpdf = new Mpdf(['orientation' => 'P', 'format' => 'A4-P']);
 
         $mpdf->WriteHTML($htmlContent);
-        // $mpdf->AddPage();
-        // $mpdf->WriteHTML($htmlContent2);
+        $mpdf->AddPage();
+        $mpdf->WriteHTML($htmlContent2);
 
         // Simpan PDF ke folder server
         $fileName = $fileName . '.pdf';
