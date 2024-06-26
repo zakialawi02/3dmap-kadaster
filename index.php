@@ -550,143 +550,143 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola <a href="#" id="zoomToSiolaParcel"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola </label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-                            Tata Bangunan S.1 <a href="#" id="zoomToe1"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-                            Tata Bangunan S.2 <a href="#" id="zoomToe2"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-                            Tata Bangunan S.3 <a href="#" id="zoomToe3"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-                            Tata Bangunan S.4 <a href="#" id="zoomToe4"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-                            Tata Bangunan S.5 <a href="#" id="zoomToe5"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-                            Tata Bangunan S.6 <a href="#" id="zoomToe6"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-                            Tata Bangunan S.7 <a href="#" id="zoomToe7"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-                            Tata Bangunan S.8 <a href="#" id="zoomToe8"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-                            Tata Bangunan S.9 <a href="#" id="zoomToe9"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-                            Tata Bangunan S.10 <a href="#" id="zoomToe10"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            Tata Bangunan S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.11 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            Tata Bangunan S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.12 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-                            Tata Bangunan S.13 <a href="#" id="zoomToe13"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.13 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-                            Tata Bangunan S.14 <a href="#" id="zoomToe14"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.14 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-                            Tata Bangunan S.15 <a href="#" id="zoomToe15"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.15 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-                            Tata Bangunan S.16 <a href="#" id="zoomToe16"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.16 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-                            Tata Bangunan S.17 <a href="#" id="zoomToe17"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.17 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-                            Tata Bangunan S.18 <a href="#" id="zoomToe18"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.18 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-                            Tata Bangunan S.19 <a href="#" id="zoomToe19"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.19 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-                            Tata Bangunan S.20 <a href="#" id="zoomToe20"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.20 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-                            Tata Bangunan S.21 <a href="#" id="zoomToe21"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.21 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-                            Tata Bangunan S.22 <a href="#" id="zoomToe22"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.22 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-                            Tata Bangunan S.23 <a href="#" id="zoomToe23"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.23 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-                            Tata Bangunan S.24 <a href="#" id="zoomToe24"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.24 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-                            Tata Bangunan S.25 <a href="#" id="zoomToe25"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.25 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-                            Tata Bangunan S.26 <a href="#" id="zoomToe26"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.26 </label>
                         </li>
                       </ul>
                     </li>
@@ -872,68 +872,68 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda<a href="#" id="zoomToBalaiParcel"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B<a href="#" id="zoomToeallb"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-                            Tata Bangunan B.1 <a href="#" id="zoomToe27"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-                            Tata Bangunan B.2 <a href="#" id="zoomToe28"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            Tata Bangunan B.3 <a href="#" id="zoomToe29"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-                            Tata Bangunan B.4 <a href="#" id="zoomToe30"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            Tata Bangunan B.5 <a href="#" id="zoomToe31"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-                            Tata Bangunan B.6 <a href="#" id="zoomToe32"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-                            Tata Bangunan B.7 <a href="#" id="zoomToe33"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-                            Tata Bangunan B.8 <a href="#" id="zoomToe34"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-                            Tata Bangunan B.9 <a href="#" id="zoomToe35"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-                            Tata Bangunan B.10 <a href="#" id="zoomToe36"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-                            Tata Bangunan B.11 <a href="#" id="zoomToe37"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.11 </label>
                         </li>
                       </ul>
                     </li>
@@ -1653,38 +1653,38 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-                            Tata Bangunan R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-                            Tata Bangunan R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-                            Tata Bangunan R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-                            Tata Bangunan R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-                            Tata Bangunan R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.5 </label>
                         </li>
                       </ul>
                     </li>
