@@ -88,7 +88,7 @@
             <li><a href="/dashboard" title="Dashboard"><i class="bi bi-grid-3x3-gap-fill"></i></a></li>
             <li><a href="/action/auth/process_logout.php" title="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
           <?php else : ?>
-            <li><a href="/auth/login.php" title="Masuk"><i class="bi bi-box-arrow-in-right"></i></a></li>
+            <li><a href="/auth/login.php" title="Login"><i class="bi bi-box-arrow-in-right"></i></a></li>
           <?php endif ?>
         </ul>
         <div id="hamb"><i class="bi bi-list"></i></div>

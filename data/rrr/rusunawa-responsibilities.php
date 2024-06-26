@@ -1,5 +1,5 @@
 <ol style="list-style-type:upper-roman;">
-    <li><strong>Penyewa dan Penyelenggara</strong>
+    <li><strong>Renters and Organizers</strong>
         <ol style="list-style-type:upper-latin;">
             <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
@@ -25,7 +25,7 @@
     </li>
 </ol>
 <ol style="list-style-type:upper-roman;" start="2">
-    <li><strong>Penyewa</strong>
+    <li><strong>Renters</strong>
         <ol style="list-style-type:upper-latin;">
             <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
@@ -60,7 +60,7 @@
             </li>
         </ol>
     </li>
-    <li><strong>Penyelenggara</strong>
+    <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
             <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
