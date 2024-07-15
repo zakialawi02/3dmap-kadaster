@@ -187,6 +187,28 @@ header .nav-menu .hamb {
   color: #9bc6ff !important;
 }
 
+#welcome {
+  z-index: 9999;
+}
+
+#usab-button {
+  position: absolute;
+  top: 50%;
+  right: -92px;
+  transform: translateY(-50%);
+  width: max-content;
+  rotate: 90deg;
+}
+
+.usab-test {
+  width: 40rem !important;
+  z-index: 10000;
+}
+
+.offcanvas-backdrop.show {
+  z-index: 9999;
+}
+
 /* Layer Panel */
 .layer-panel {
   position: absolute;

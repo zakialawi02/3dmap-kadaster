@@ -132,10 +132,13 @@ function formatCustomDate(dateString) {
 $(document).ready(function () {
   setTimeout(function () {
     $("#welcome").modal("show");
-  }, 2000);
+  }, 1000);
 });
 
 $(document).ready(function () {
+  const usabBtn = document.getElementById("usab-button");
+  const usab = new bootstrap.Offcanvas("#usab");
+
   // Cari modal element
   const modalCritics = new bootstrap.Modal(document.getElementById("critics"), {
     keyboard: true,
@@ -178,4 +181,9 @@ $(document).ready(function () {
       modalCritics.hide();
     }
   });
+
+  if (window.location.search.includes("usability_test=true")) {
+    usab.show();
+    usabBtn.style.visibility = "visible";
+  }
 });

@@ -301,7 +301,29 @@
     </div>
 
 
+    <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" id="usabLabel">Usability Test Guide</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, numquam maiores. Voluptatibus, culpa non. Iusto perspiciatis fugiat quidem magnam perferendis:
+          <ol>
+            <li>Petunjuk 1</li>
+            <li>Perintah 2</li>
+            <li>Penjelasan 3</li>
+            <li>Contoh 4</li>
+            <li>Tugas 5</li>
+          </ol>
+        </div>
+      </div>
+      <button class="btn btn-warning" id="usab-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#usab" aria-controls="usab">Usability Test Guide ⬆️</button>
+    </div>
+
+
     <div class="layer-panel card">
+      <input type="file" id="fileInput" accept=".json,.3dtile,.gltf,.glb" />
       <div class="card-body p-2">
 
         <div class="accordion" id="accordionExample">

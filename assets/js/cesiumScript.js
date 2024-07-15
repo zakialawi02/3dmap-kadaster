@@ -3072,10 +3072,33 @@ const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.from
 siolaLegal.style = setColorStyle;
 
 // hide preloader after finish load data
-$(function () {
-  $(".preload").addClass("d-none");
-  $(".loader-container").removeClass("d-none");
-});
+
+$(".preload").addClass("d-none");
+$(".loader-container").removeClass("d-none");
+document.getElementById("fileInput").addEventListener("change", handleFileUpload, false);
+
+async function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const fileReader = new FileReader();
+
+    fileReader.onload = function (e) {
+      const arrayBuffer = e.target.result;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      loadTilesetFromArrayBuffer(uint8Array);
+    };
+
+    fileReader.readAsArrayBuffer(file);
+  }
+}
+
+async function loadTilesetFromArrayBuffer(arrayBuffer) {
+  const blob = new Blob([arrayBuffer]);
+  const url = URL.createObjectURL(blob);
+
+  const tileset = await Cesium.Cesium3DTileset.fromUrl(url);
+  viewer.scene.primitives.add(tileset);
+}
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
