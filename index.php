@@ -22,6 +22,10 @@
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/OBJLoader.js"></script>
+
   <link rel="stylesheet" href="assets/css/style.css" />
 
   <style>
@@ -1751,6 +1755,46 @@
       </div>
     </div>
 
+
+    <div id="topRight" class="">
+      <div id="simSection" class="position-relative">
+        <div class="d-flex flex-row align-items-center gap-1">
+          <div class="p-1">
+            <span>Cek simulasi desain</span>
+          </div>
+          <div id="menuToggleBtn" class="border-0 border-start">
+            <i class="bi bi-list"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="menuSection" class="d-none">
+        <div class="m-1 p-2">
+          <div id="menuItem" class="d-flex flex-column">
+            <div class="mb-0">
+              <label for="formFileSm" class="form-label">File input</label>
+              <div class="input-group">
+                <input class="form-control form-control-sm" id="formFileSm" type="file">
+              </div>
+              <div id="buildingHeight" class="py-1"></div>
+              <div id="coordinateInputs" class="my-2" style="display: none;">
+                <label for="latitude" class="form-label">Latitude</label>
+                <input class="form-control form-control-sm" id="latitude" type="number" step="any" min="-180" max="180">
+                <label for="longitude" class="form-label">Longitude</label>
+                <input class="form-control form-control-sm" id="longitude" type="number" step="any" min="-180" max="180">
+                <label for="longitude" class="form-label">Heading</label>
+                <input class="form-control form-control-sm" id="hdg" type="number" step="any" min="0" max="360" value="0">
+              </div>
+              <div class="mt-2 d-flex justify-content-end">
+                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
     <div class="minimap-panel card">
       <div id="map2d"></div>
     </div>
@@ -1852,6 +1896,8 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script>
+
 
   <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>

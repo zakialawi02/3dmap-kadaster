@@ -68,6 +68,7 @@ const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
 miniMap.addLayer(vectorLayer);
+
 // get center view from cesium
 const getCenterView = function () {
   // Get the current camera position
@@ -88,6 +89,7 @@ const getCenterView = function () {
     roll,
   };
 };
+
 // Adjust OpenLayers zoom based on height
 const getZoom = function (currentView) {
   let zoomLevel;
@@ -114,6 +116,7 @@ const getZoom = function (currentView) {
   }
   return zoomLevel;
 };
+
 // Add an event listener for camera move end
 viewer.camera.moveEnd.addEventListener(function () {
   const currentView = getCenterView();
@@ -369,7 +372,6 @@ function createPickedDataDescription(pickedData) {
     return description;
   }
 }
-// Function to remove line breaks
 
 let pickedFeature;
 let dataRoom;
@@ -2274,6 +2276,7 @@ function toggleVisibilityGeojson(objectId, isVisible) {
   const dataSources = viewer.dataSources; // Mengambil semua sumber data GeoJSON yang dimuat
   for (let i = 0; i < dataSources.length; i++) {
     const dataSource = dataSources.get(i);
+    // [0]=> measurement, [1]=>environment geojson, [2]=>bidang tanah geojson
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
       if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
@@ -3013,10 +3016,6 @@ const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
-// const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
-// await viewer.dataSources.add(parcelBD);
-// const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
-// await viewer.dataSources.add(parcelBD);
 const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
@@ -3075,30 +3074,199 @@ siolaLegal.style = setColorStyle;
 
 $(".preload").addClass("d-none");
 $(".loader-container").removeClass("d-none");
-document.getElementById("fileInput").addEventListener("change", handleFileUpload, false);
 
-async function handleFileUpload(event) {
+let currentModel;
+let buildingHeight;
+
+// Fungsi untuk membaca file 3D yang diupload
+function handleFileUpload(event) {
   const file = event.target.files[0];
   if (file) {
-    const fileReader = new FileReader();
-
-    fileReader.onload = function (e) {
+    const reader = new FileReader();
+    reader.onload = async function (e) {
       const arrayBuffer = e.target.result;
       const uint8Array = new Uint8Array(arrayBuffer);
-      loadTilesetFromArrayBuffer(uint8Array);
-    };
 
-    fileReader.readAsArrayBuffer(file);
+      if (file.name.endsWith(".glb")) {
+        try {
+          const bbox = await computeBoundingBoxFromGLB(uint8Array);
+          buildingHeight = getObjectHeight(bbox);
+          $("#buildingHeight").html(`${buildingHeight.toFixed(3)} m`);
+
+          // Tampilkan input koordinat
+          document.getElementById("coordinateInputs").style.display = "block";
+
+          // Simpan data file dan bounding box untuk digunakan saat update posisi
+          window.uploadedFile = uint8Array;
+          window.uploadedFileType = "glb";
+          window.uploadedFileBBox = bbox;
+        } catch (error) {
+          alert("Gagal memparsing model GLB");
+        }
+      } else if (file.name.endsWith(".obj")) {
+        // Implementasi untuk OBJ jika diperlukan
+        alert("Format file OBJ belum didukung untuk perhitungan tinggi.");
+      } else {
+        alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
+      }
+    };
+    reader.readAsArrayBuffer(file);
   }
 }
 
-async function loadTilesetFromArrayBuffer(arrayBuffer) {
-  const blob = new Blob([arrayBuffer]);
-  const url = URL.createObjectURL(blob);
+// Fungsi untuk menghitung bounding box dari model GLB
+function computeBoundingBoxFromGLB(uint8Array) {
+  return new Promise((resolve, reject) => {
+    const loader = new THREE.GLTFLoader();
+    const blob = new Blob([uint8Array], { type: "model/gltf-binary" });
+    const url = URL.createObjectURL(blob);
 
-  const tileset = await Cesium.Cesium3DTileset.fromUrl(url);
-  viewer.scene.primitives.add(tileset);
+    loader.load(
+      url,
+      (gltf) => {
+        const bbox = new THREE.Box3().setFromObject(gltf.scene);
+        URL.revokeObjectURL(url);
+        resolve(bbox);
+      },
+      undefined,
+      (error) => {
+        reject(error);
+      }
+    );
+  });
 }
+
+// Fungsi untuk mendapatkan tinggi objek dari bounding box
+function getObjectHeight(bbox) {
+  const height = bbox.max.y - bbox.min.y;
+  return height;
+}
+
+// Fungsi untuk menampilkan model dan mengupdate posisinya
+function updateModelPosition() {
+  const latitude = parseFloat(document.getElementById("latitude").value);
+  const longitude = parseFloat(document.getElementById("longitude").value);
+  const hdg = parseFloat(document.getElementById("hdg").value);
+
+  if (isNaN(latitude) || isNaN(longitude)) {
+    alert("Masukkan koordinat yang valid.");
+    return;
+  }
+
+  const position = Cesium.Cartesian3.fromDegrees(longitude, latitude, 0);
+  const heading = Cesium.Math.toRadians(hdg || 0);
+  const pitch = 0;
+  const roll = 0;
+  const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+  const orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
+
+  if (currentModel) {
+    viewer.entities.remove(currentModel);
+  }
+
+  if (window.uploadedFileType === "glb") {
+    currentModel = viewer.entities.add({
+      position: position,
+      orientation: orientation,
+      model: {
+        uri: URL.createObjectURL(new Blob([window.uploadedFile])),
+        scale: 1.0,
+      },
+    });
+  } else if (window.uploadedFileType === "obj") {
+    const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+    const primitive = viewer.scene.primitives.add(
+      Cesium.Model.fromGltf({
+        url: URL.createObjectURL(new Blob([window.uploadedFile])),
+        modelMatrix: modelMatrix,
+        scale: 1.0,
+      })
+    );
+    currentModel = primitive;
+  }
+
+  viewer.flyTo(currentModel, {
+    duration: 1,
+  });
+
+  const modelBoundingSphere = new Cesium.BoundingSphere(position, buildingHeight / 2);
+  addBoundingSphereToViewer(modelBoundingSphere);
+
+  const geojsonEntities = viewer.dataSources.get(1).entities.values;
+  detectIntersection(modelBoundingSphere, geojsonEntities);
+}
+
+function addBoundingSphereToViewer(boundingSphere, color = Cesium.Color.RED) {
+  // Hapus entitas bounding sphere yang lama
+  if (viewer.entities.getById("boundingSphere")) {
+    viewer.entities.remove(viewer.entities.getById("boundingSphere"));
+  }
+
+  // Tambahkan entitas bounding sphere
+  viewer.entities.add({
+    id: "boundingSphere",
+    position: boundingSphere.center,
+    ellipsoid: {
+      radii: new Cesium.Cartesian3(boundingSphere.radius, boundingSphere.radius, boundingSphere.radius),
+      material: color.withAlpha(0.5),
+      outline: true,
+      outlineColor: Cesium.Color.BLACK,
+    },
+  });
+}
+
+function calculateBoundingSphereFromEntity(entity) {
+  if (!entity.polygon || !entity.polygon.hierarchy) {
+    console.warn("Entity tidak memiliki data polygon untuk bounding box.");
+    return null;
+  }
+
+  const positions = entity.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions;
+  if (!positions || positions.length === 0) {
+    console.warn("Entity tidak memiliki posisi untuk bounding box.");
+    return null;
+  }
+
+  const minMax = positions.reduce(
+    (acc, pos) => {
+      const cartographic = Cesium.Cartographic.fromCartesian(pos);
+      acc.minLat = Math.min(acc.minLat, cartographic.latitude);
+      acc.maxLat = Math.max(acc.maxLat, cartographic.latitude);
+      acc.minLon = Math.min(acc.minLon, cartographic.longitude);
+      acc.maxLon = Math.max(acc.maxLon, cartographic.longitude);
+      return acc;
+    },
+    { minLat: Infinity, maxLat: -Infinity, minLon: Infinity, maxLon: -Infinity }
+  );
+
+  const minPosition = Cesium.Cartesian3.fromRadians(minMax.minLon, minMax.minLat);
+  const maxPosition = Cesium.Cartesian3.fromRadians(minMax.maxLon, minMax.maxLat);
+
+  return new Cesium.BoundingSphere(Cesium.Cartesian3.midpoint(minPosition, maxPosition, new Cesium.Cartesian3()), Cesium.Cartesian3.distance(minPosition, maxPosition) / 2);
+}
+function detectIntersection(modelBBox, geojsonEntities) {
+  geojsonEntities.forEach((entity) => {
+    const entityBBox = calculateBoundingSphereFromEntity(entity);
+    if (!entityBBox) return;
+
+    // Periksa interseksi antara dua bounding spheres
+    const distance = Cesium.Cartesian3.distance(modelBBox.center, entityBBox.center);
+    const sumRadii = modelBBox.radius + entityBBox.radius;
+
+    if (distance <= sumRadii) {
+      console.log({ entity });
+      console.log(`Model intersect dengan entity dengan ID: ${entity.id}`);
+      console.log(entity.objectid);
+      // Dapatkan properties dari GeoJSON yang berpotongan
+      const properties = entity.properties;
+      console.log("Properties yang bertampalan:", properties);
+    }
+  });
+}
+
+// Event listeners
+document.getElementById("formFileSm").addEventListener("change", handleFileUpload);
+document.getElementById("cek3d").addEventListener("click", updateModelPosition);
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(

@@ -130,6 +130,11 @@ function formatCustomDate(dateString) {
 }
 
 $(document).ready(function () {
+  $("#menuToggleBtn").click(function (e) {
+    e.stopPropagation();
+    $("#menuSection").toggleClass("d-none");
+  });
+
   setTimeout(function () {
     $("#welcome").modal("show");
   }, 1000);
