@@ -130,14 +130,30 @@ function formatCustomDate(dateString) {
 }
 
 $(document).ready(function () {
+  $("#menuToggleBtn").click(function (e) {
+    e.stopPropagation();
+    $("#menuSection").toggleClass("d-none");
+  });
+
   setTimeout(function () {
     $("#welcome").modal("show");
   }, 1000);
 });
 
 $(document).ready(function () {
+  $("#btn-usability").click(function (e) {
+    usabBtn.style.visibility = "visible";
+    usab.show();
+  });
+
   const usabBtn = document.getElementById("usab-button");
   const usab = new bootstrap.Offcanvas("#usab");
+
+  // Periksa apakah parameter usability_test=true ada di URL saat halaman dimuat
+  if (window.location.search.includes("usability_test=true")) {
+    usabBtn.style.visibility = "visible";
+    usab.show();
+  }
 
   // Cari modal element
   const modalCritics = new bootstrap.Modal(document.getElementById("critics"), {
@@ -181,9 +197,4 @@ $(document).ready(function () {
       modalCritics.hide();
     }
   });
-
-  if (window.location.search.includes("usability_test=true")) {
-    usab.show();
-    usabBtn.style.visibility = "visible";
-  }
 });

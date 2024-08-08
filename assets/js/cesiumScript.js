@@ -1,9 +1,9 @@
-// inisiasi cesium token
+//** */ Inisiasi cesium token
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 // Cesium.Ion.defaultAccessToken =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
-// Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
+//** */ Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
   // terrain: Cesium.Terrain.fromWorldTerrain(),
   animation: false,
@@ -15,6 +15,7 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
+//** */ Set environment cesium parameters
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
 viewer.scene.highDynamicRange = true;
@@ -26,6 +27,7 @@ viewer.scene.globe.depthTestAgainstTerrain = true;
 viewer.scene.screenSpaceCameraController.enableCollisionDetection = true;
 viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarScalar(400.0, 0.0, 800.0, 1.0);
 
+//** */ Set camera position for first time
 viewer.camera.flyTo({
   destination: Cesium.Cartesian3.fromDegrees(112.73677426629814, -7.259593062440535, 20000),
   orientation: {
@@ -34,6 +36,7 @@ viewer.camera.flyTo({
   },
 });
 
+// ** */ Add Minimap
 // Initialize OpenLayers map
 const miniMap = new ol.Map({
   target: "map2d",
@@ -68,6 +71,7 @@ const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
 miniMap.addLayer(vectorLayer);
+
 // get center view from cesium
 const getCenterView = function () {
   // Get the current camera position
@@ -88,6 +92,7 @@ const getCenterView = function () {
     roll,
   };
 };
+
 // Adjust OpenLayers zoom based on height
 const getZoom = function (currentView) {
   let zoomLevel;
@@ -114,6 +119,7 @@ const getZoom = function (currentView) {
   }
   return zoomLevel;
 };
+
 // Add an event listener for camera move end
 viewer.camera.moveEnd.addEventListener(function () {
   const currentView = getCenterView();
@@ -133,6 +139,7 @@ const openStreetMapBasemap = layers.addImageryProvider(
   })
 );
 
+// Fungsi untuk mengganti layer peta dasar
 function changeBasemapLayer(selectedBasemap) {
   // console.log(layers);
   if ($("#ShowBasemap").prop("checked") === true) {
@@ -176,6 +183,7 @@ $("#basemapSelector, #ShowBasemap").change(function () {
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = !$("#underground_1").prop("checked");
 });
 
+//** */ Fungsi untuk posisi camera
 // Set first camera the given longitude, latitude, and height.
 function firstCamera() {
   viewer.camera.flyTo({
@@ -207,6 +215,7 @@ function thirdCamera() {
   });
 }
 
+// Fungsi untuk mengubah koordinat
 function DD2DMS(deg, direct = false) {
   var direction = "";
   if (direct == "lat") {
@@ -223,6 +232,7 @@ function DD2DMS(deg, direct = false) {
   return `${degrees}° ${Math.floor(minutes)}' ${seconds.toFixed(2)}" ${direction}`;
 }
 
+// Fungsi untuk mengatur zoom ke tileset
 function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
   // Zoom to the tileset
   const heading = Cesium.Math.toRadians(headingDegrees);
@@ -237,6 +247,7 @@ function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDist
   });
 }
 
+// Fungsi untuk mengatur zoom ke lokasi
 function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchDegrees = -25, roll = 0) {
   // Zoom to position
   const heading = Cesium.Math.toRadians(headingDegrees);
@@ -254,6 +265,7 @@ function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchD
   });
 }
 
+// Fungsi untuk membuat style transparan [not use]
 function createTransparentStyle(alphaValue) {
   return new Cesium.Cesium3DTileStyle({
     color: {
@@ -262,6 +274,7 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
+//** */ Event click camera
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -293,7 +306,7 @@ const selected = {
 // Entitas yang menyimpan info tentang fitur terpilih
 const selectedEntity = new Cesium.Entity();
 
-// Penanganan klik kiri default
+// Penanganan event klik kiri default
 const clickHandler = viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 // Fungsi untuk membuat deskripsi HTML fitur terpilih
@@ -312,6 +325,7 @@ function createPickedFeatureDescription(pickedFeature) {
     `</tbody></table>`;
   return description;
 }
+// Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedDataDescription(pickedData) {
   if (pickedData.hasProperty("GlobalId")) {
     const description =
@@ -369,8 +383,8 @@ function createPickedDataDescription(pickedData) {
     return description;
   }
 }
-// Function to remove line breaks
 
+//** */ Event untuk klik kiri mouse
 let pickedFeature;
 let dataRoom;
 // Cek apakah siluet didukung
@@ -403,7 +417,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-  // Saat mouse diklik, siluetkan fitur berwarna hijau dan tampilkan metadata di InfoBox
+  // Saat mouse diklik, siluetkan fitur berwarna hijau dan tampilkan metadata gml di properti panel
   viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     silhouetteGreen.selected = [];
 
@@ -529,6 +543,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     originalColor: new Cesium.Color(),
   };
 
+  // Saat mouse hover siluetkan fitur berwarna biru
   viewer.screenSpaceEventHandler.setInputAction(function onMouseMove(movement) {
     if (Cesium.defined(highlighted.feature)) {
       highlighted.feature.color = highlighted.originalColor;
@@ -548,6 +563,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+  // Saat mouse diklik, tampilkan metadata geojson di properti panel
   viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     if (Cesium.defined(selected.feature)) {
       selected.feature.color = selected.originalColor;
@@ -580,7 +596,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 
-// Menangani klik pada tombol "View (room)"
+// Menangani event klik pada tombol "View (room)"
 $(document).on("click", "#btnDetailRoom", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -617,7 +633,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
   scan();
 });
 
-// Menangani klik pada tombol "View (organizer)"
+// Menangani event klik pada tombol "View (organizer)"
 $(document).on("click", "#btnDetailOrganizer", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -649,7 +665,7 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
   });
 });
 
-// Menangani klik pada tombol "View (Tenant)"
+// Menangani event klik pada tombol "View (Tenant)"
 $(document).on("click", "#btnDetailTenant", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -682,7 +698,7 @@ $(document).on("click", "#btnDetailTenant", function (e) {
   }
 });
 
-// Menangani klik pada tombol "Read (Right)"
+// Menangani event klik pada tombol "Read (Right)"
 $(document).on("click", "#btnRight", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -695,7 +711,7 @@ $(document).on("click", "#btnRight", function (e) {
   });
 });
 
-// Menangani klik pada tombol "Read (Restriction)"
+// Menangani event klik pada tombol "Read (Restriction)"
 $(document).on("click", "#btnRestriction", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -708,7 +724,7 @@ $(document).on("click", "#btnRestriction", function (e) {
   });
 });
 
-// Menangani klik pada tombol "Read (Responsibilities)"
+// Menangani event klik pada tombol "Read (Responsibilities)"
 $(document).on("click", "#btnResponsibilities", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -887,6 +903,7 @@ $("#siolaLegal_5a1").change(function () {
   setVisibilityByobject_id(siolaLegal, "850924", $(this).prop("checked"));
 });
 
+// Event klik zoomTo Siola legal
 $("#zoomToSiolaLegal_1all").on("click", function () {
   setTransparentByobject_id(siolaLegal, ["817240", "825386", "820896", "820815", "919493", "820143", "821077", "823865", "821964", "826868"]);
   zoomToTileset(siolaBuildingL1, -5, 90, 150);
@@ -1130,6 +1147,7 @@ $("#balaiLegal_0a9").change(function () {
   setVisibilityByobject_id(balaiLegal, "609329", $(this).prop("checked"));
 });
 
+// Event zoomTo Balai Legal
 $("#zoomToBalaiLegal_0all").on("click", function () {
   setTransparentByobject_id(balaiLegal, ["612619", "612232", "613040", "613441", "610552", "611250", "611746", "610016", "609329"]);
   zoomToTileset(balaiBuildingL1, -25, 355, 150);
@@ -1640,6 +1658,7 @@ $("#rusunawaLegal_5a26").change(function () {
   setVisibilityByobject_id(rusunawaLegal, "618232", $(this).prop("checked"));
 });
 
+// Event zoomTo Rusunawa Legal
 $("#zoomToRusunawaLegal_1all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, ["599276", "599642", "619195", "619194", "619196", "601694", "601835", "601952", "600414", "600975", "600292", "600222", "600145", "600045", "599963", "599868", "599584"]);
   zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
@@ -2269,11 +2288,12 @@ $("#zoomToRusunawaLegal_5a26").on("click", function () {
 });
 
 // Layering Parcel Building  #############################
-// Function to toggle visibility based on feature objectId
+// Function to toggle visibility based on feature objectId geojson
 function toggleVisibilityGeojson(objectId, isVisible) {
   const dataSources = viewer.dataSources; // Mengambil semua sumber data GeoJSON yang dimuat
   for (let i = 0; i < dataSources.length; i++) {
     const dataSource = dataSources.get(i);
+    // [0]=> measurement, [1]=>environment geojson, [2]=>bidang tanah geojson
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
       if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
@@ -2288,6 +2308,7 @@ function toggleVisibilityGeojson(objectId, isVisible) {
   }
 }
 
+// Event untuk show/hide objek geojson
 $("#siolaParcel").change(function () {
   toggleVisibilityGeojson("910222", $(this).is(":checked"));
 });
@@ -2805,7 +2826,7 @@ $("#rusunawaLegal_5all").change(function () {
   setVisibilityByobject_id(rusunawaLegal, "618232", isChecked);
 });
 
-// set style tileset [gml]
+// set style for tileset [gml]
 const colorMap = {
   "Anotha Blue": new Cesium.Color(0 / 255, 0 / 255, 255 / 255, 1.0), // Anotha Blue
   "Baby Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Baby Blue
@@ -2879,6 +2900,7 @@ function mappingHide(Tag, isChecked) {
   console.log(MappingHideTileset);
 }
 
+// Fungsi untuk set visibility object tileset
 function setVisibilityByobject_id(tileset, Tag, isChecked) {
   mappingHide(Tag, isChecked);
   tileset.style = new Cesium.Cesium3DTileStyle({
@@ -2923,6 +2945,7 @@ function mappingTransparent(Tag) {
   // console.log(MappingTransparentTileset);
 }
 
+// Fungsi untuk set transparansi objek legal
 function setTransparentByobject_id(tileset, Tag) {
   MappingTransparentTileset = [];
   mappingTransparent(Tag);
@@ -3013,10 +3036,6 @@ const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
-// const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
-// await viewer.dataSources.add(parcelBD);
-// const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
-// await viewer.dataSources.add(parcelBD);
 const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
@@ -3075,30 +3094,177 @@ siolaLegal.style = setColorStyle;
 
 $(".preload").addClass("d-none");
 $(".loader-container").removeClass("d-none");
-document.getElementById("fileInput").addEventListener("change", handleFileUpload, false);
 
-async function handleFileUpload(event) {
+let currentModel;
+let buildingHeight;
+
+// Fungsi untuk membaca file 3D yang diupload
+function handleFileUpload(event) {
   const file = event.target.files[0];
   if (file) {
-    const fileReader = new FileReader();
-
-    fileReader.onload = function (e) {
+    const reader = new FileReader();
+    reader.onload = async function (e) {
       const arrayBuffer = e.target.result;
       const uint8Array = new Uint8Array(arrayBuffer);
-      loadTilesetFromArrayBuffer(uint8Array);
-    };
 
-    fileReader.readAsArrayBuffer(file);
+      if (file.name.endsWith(".glb")) {
+        try {
+          const bbox = await computeBoundingBoxFromGLB(uint8Array);
+          buildingHeight = getObjectHeight(bbox);
+          $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+
+          // Tampilkan input koordinat
+          document.getElementById("coordinateInputs").style.display = "block";
+
+          // Simpan data file dan bounding box untuk digunakan saat update posisi
+          window.uploadedFile = uint8Array;
+          window.uploadedFileType = "glb";
+          window.uploadedFileBBox = bbox;
+        } catch (error) {
+          alert("Gagal memparsing model GLB");
+        }
+      } else if (file.name.endsWith(".obj")) {
+        // Implementasi untuk OBJ jika diperlukan
+        alert("Format file OBJ belum didukung untuk perhitungan tinggi.");
+      } else {
+        alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
+      }
+    };
+    reader.readAsArrayBuffer(file);
   }
 }
 
-async function loadTilesetFromArrayBuffer(arrayBuffer) {
-  const blob = new Blob([arrayBuffer]);
-  const url = URL.createObjectURL(blob);
+// Fungsi untuk menghitung bounding box dari model GLB
+function computeBoundingBoxFromGLB(uint8Array) {
+  return new Promise((resolve, reject) => {
+    const loader = new THREE.GLTFLoader();
+    const blob = new Blob([uint8Array], { type: "model/gltf-binary" });
+    const url = URL.createObjectURL(blob);
 
-  const tileset = await Cesium.Cesium3DTileset.fromUrl(url);
-  viewer.scene.primitives.add(tileset);
+    loader.load(
+      url,
+      (gltf) => {
+        const bbox = new THREE.Box3().setFromObject(gltf.scene);
+        URL.revokeObjectURL(url);
+        resolve(bbox);
+      },
+      undefined,
+      (error) => {
+        reject(error);
+      }
+    );
+  });
 }
+
+// Fungsi untuk mendapatkan tinggi objek dari bounding box
+function getObjectHeight(bbox) {
+  const height = bbox.max.y - bbox.min.y;
+  return height;
+}
+
+// Fungsi untuk menampilkan model dan mengupdate posisinya
+function updateModelPosition() {
+  const latitude = parseFloat(document.getElementById("latitude").value);
+  const longitude = parseFloat(document.getElementById("longitude").value);
+  const hdg = parseFloat(document.getElementById("hdg").value);
+
+  if (isNaN(latitude) || isNaN(longitude)) {
+    alert("Masukkan koordinat yang valid.");
+    return;
+  }
+
+  const position = Cesium.Cartesian3.fromDegrees(longitude, latitude, 0);
+  const heading = Cesium.Math.toRadians(hdg || 0);
+  const pitch = 0;
+  const roll = 0;
+  const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+  const orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
+
+  if (currentModel) {
+    viewer.entities.remove(currentModel);
+  }
+
+  if (window.uploadedFileType === "glb") {
+    currentModel = viewer.entities.add({
+      position: position,
+      orientation: orientation,
+      model: {
+        uri: URL.createObjectURL(new Blob([window.uploadedFile])),
+        scale: 1.0,
+      },
+    });
+  } else if (window.uploadedFileType === "obj") {
+    const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+    const primitive = viewer.scene.primitives.add(
+      Cesium.Model.fromGltf({
+        url: URL.createObjectURL(new Blob([window.uploadedFile])),
+        modelMatrix: modelMatrix,
+        scale: 1.0,
+      })
+    );
+    currentModel = primitive;
+  }
+
+  viewer.flyTo(currentModel, {
+    duration: 1,
+  });
+
+  const modelBoundingSphere = new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(longitude, latitude, buildingHeight), 1.0);
+  detectIntersection(modelBoundingSphere, viewer.dataSources.get(1).entities.values);
+}
+
+function calculateBoundingSphereFromEntity(entity) {
+  if (!entity.polygon || !entity.polygon.hierarchy) {
+    console.warn("Entity tidak memiliki data polygon untuk bounding box.");
+    return null;
+  }
+
+  const positions = entity.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions;
+  if (!positions || positions.length === 0) {
+    console.warn("Entity tidak memiliki posisi untuk bounding box.");
+    return null;
+  }
+
+  const minMax = positions.reduce(
+    (acc, pos) => {
+      const cartographic = Cesium.Cartographic.fromCartesian(pos);
+      acc.minLat = Math.min(acc.minLat, cartographic.latitude);
+      acc.maxLat = Math.max(acc.maxLat, cartographic.latitude);
+      acc.minLon = Math.min(acc.minLon, cartographic.longitude);
+      acc.maxLon = Math.max(acc.maxLon, cartographic.longitude);
+      return acc;
+    },
+    { minLat: Infinity, maxLat: -Infinity, minLon: Infinity, maxLon: -Infinity }
+  );
+
+  const minPosition = Cesium.Cartesian3.fromRadians(minMax.minLon, minMax.minLat);
+  const maxPosition = Cesium.Cartesian3.fromRadians(minMax.maxLon, minMax.maxLat);
+
+  return new Cesium.BoundingSphere(Cesium.Cartesian3.midpoint(minPosition, maxPosition, new Cesium.Cartesian3()), Cesium.Cartesian3.distance(minPosition, maxPosition) / 2);
+}
+function detectIntersection(modelBBox, geojsonEntities) {
+  geojsonEntities.forEach((entity) => {
+    const entityBBox = calculateBoundingSphereFromEntity(entity);
+    if (!entityBBox) return;
+
+    // Periksa interseksi antara dua bounding spheres
+    const distance = Cesium.Cartesian3.distance(modelBBox.center, entityBBox.center);
+    const sumRadii = modelBBox.radius + entityBBox.radius;
+
+    if (distance < sumRadii) {
+      console.log({ entity });
+      console.log(`Model intersect dengan entity dengan ID: ${entity.id}`);
+      console.log(entity.properties.objectid.getValue());
+      // Dapatkan properties dari GeoJSON yang berpotongan
+      const properties = entity.properties;
+      console.log("Properties yang bertampalan:", properties);
+    }
+  });
+}
+
+// Event listeners
+document.getElementById("formFileSm").addEventListener("change", handleFileUpload);
+document.getElementById("cek3d").addEventListener("click", updateModelPosition);
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
@@ -3269,6 +3435,7 @@ $("#reset-clip").click(function (e) {
   resetClipTilesets();
 });
 
+// Fungsi untuk mereset semua clipping tileset
 function resetClipTilesets(first = false) {
   // Iterasi melalui semua jenis bangunan
   Object.keys(tilesetsList).forEach(function (buildingType) {
@@ -3313,22 +3480,8 @@ function resetClipTilesets(first = false) {
   });
 }
 
-// handle autocomplete seacrh
+// Handle event autocomplete seacrh
 $(document).ready(function () {
-  async function fetchSuggestionsFromDatabase() {
-    try {
-      const response = await fetch(`/action/get-search.php?param=legal`);
-      if (!response.ok) {
-        throw new Error("Error fetching suggestions");
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching suggestions:", error);
-      throw error;
-    }
-  }
-
   const suggestionsData = [
     {
       id: "1",
@@ -3435,6 +3588,25 @@ $(document).ready(function () {
             suggestionsData.push({
               id: item.legal_object_id,
               data: item.room_name,
+            });
+          }
+        });
+      } catch (error) {
+        throw error;
+      }
+      try {
+        const renterdata = await fetch(`/action/get-search.php?param=renters`);
+        if (!renterdata.ok) {
+          throw new Error("Error fetching suggestions");
+        }
+        const renterlData = await renterdata.json();
+
+        await renterlData.forEach((item) => {
+          // Push separate objects for data with the same ID
+          if (item.id != undefined && item.id != null && item.id != "") {
+            suggestionsData.push({
+              id: item.id,
+              data: item.tenant_name,
             });
           }
         });
