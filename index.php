@@ -10,13 +10,13 @@
 
   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
-  <!-- Bootstrap CSS v5.2.1 -->
+  <!-- Bootstrap & Jquery -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.js "></script>
   <link href=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.css " rel="stylesheet">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
@@ -94,6 +94,7 @@
     </nav>
   </header>
 
+  <!-- Preload -->
   <div class="preload">
     <div class="bg-loading">
       <img src="assets/img/load.gif">
@@ -133,6 +134,10 @@
 
 
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
+    <div class="saran">
+      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Lakukan Tes</button>
+    </div>
+
     <!-- button kritik dan saran -->
     <div class="saran">
       <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Kritik & Saran</button>
@@ -214,7 +219,7 @@
   </div>
 
   <main>
-    <!-- Modal -->
+    <!-- Modal Room -->
     <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -229,7 +234,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Organizer -->
     <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -244,7 +249,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Tenant -->
     <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -259,7 +264,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Right -->
     <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -274,7 +279,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Restriction -->
     <div class="modal fade" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -289,7 +294,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Responsibilities -->
     <div class="modal fade" id="detailResponsibilities" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailResponsibilitiesLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -304,7 +309,7 @@
       </div>
     </div>
 
-
+    <!-- Panel Usability Test -->
     <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title fw-bold" id="usabLabel">Usability Test Guide</h5>
@@ -325,11 +330,9 @@
       <button class="btn btn-warning" id="usab-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#usab" aria-controls="usab">Usability Test Guide ⬆️</button>
     </div>
 
-
+    <!-- Panel Layer Data -->
     <div class="layer-panel card">
-      <input type="file" id="fileInput" accept=".json,.3dtile,.gltf,.glb" />
       <div class="card-body p-2">
-
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -1755,7 +1758,7 @@
       </div>
     </div>
 
-
+    <!-- Panel Cek Simulasi -->
     <div id="topRight" class="">
       <div id="simSection" class="position-relative">
         <div class="d-flex flex-row align-items-center gap-1">
@@ -1779,11 +1782,11 @@
               <div id="buildingHeight" class="py-1"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label">Latitude</label>
-                <input class="form-control form-control-sm" id="latitude" type="number" step="any" min="-180" max="180">
+                <input class="form-control form-control-sm" id="latitude" type="number" step="any" min="-180" max="180" placeholder="-7,258300">
                 <label for="longitude" class="form-label">Longitude</label>
-                <input class="form-control form-control-sm" id="longitude" type="number" step="any" min="-180" max="180">
+                <input class="form-control form-control-sm" id="longitude" type="number" step="any" min="-180" max="180" placeholder="112,73890">
                 <label for="longitude" class="form-label">Heading</label>
-                <input class="form-control form-control-sm" id="hdg" type="number" step="any" min="0" max="360" value="0">
+                <input class="form-control form-control-sm" id="hdg" type="number" step="any" min="0" max="360" value="0" placeholder="330">
               </div>
               <div class="mt-2 d-flex justify-content-end">
                 <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
@@ -1795,20 +1798,22 @@
       </div>
     </div>
 
+    <!-- Panel Minimap -->
     <div class="minimap-panel card">
       <div id="map2d"></div>
     </div>
 
+    <!-- Panel properti data -->
     <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
       </div>
       <div class="property-content cesium-infoBox-description" id="property-content">
-
       </div>
     </div>
 
+    <!-- Panel Meassurement -->
     <div class="measure-panel card">
       <div class="card-body p-2">
         <button id="mdistance" type="button" class="asbn cesium-button">distance (horizontal)</button>
@@ -1821,6 +1826,7 @@
       </div>
     </div>
 
+    <!-- Panel Clipping -->
     <div class="clip-panel card">
       <div class="card-body p-2">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="clsiola" checked>
