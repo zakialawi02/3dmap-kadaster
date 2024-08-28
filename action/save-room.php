@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'room_name' => $_POST['room_name'],
             'organizer' => $_POST['organizer'],
             'rent_fee' => $_POST['rent_fee'],
+            'space_usage' => $_POST['space_usage'],
+            'is_public' => $_POST['is_public'],
         ];
         $_SESSION['oldForm'] = $oldForm;
         if (isset($_GET['room']) && !empty($_GET['room']) && isset($_GET['legal']) && !empty($_GET['legal'])) {
@@ -27,10 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $room_idNEW = $_POST['room_id'];
             $legal_object_id = $_GET['legal'];
             $legal_object_idNEW = $_POST['legal_object_id'];
+            $is_public = $_POST['is_public'] === 'yes' ? 1 : 0;
             $room_name = $_POST['room_name'];
             $space_usage = $_POST['space_usage'];
             $organizer = $_POST['organizer'];
-            $rent_fee = $_POST['rent_fee'];
+            $rent_fee = ($_POST['is_public'] === 'yes') ? null : $_POST['rent_fee'];
             if ($room_id != $room_idNEW) {
                 // jika room_id beda/ganti
                 // cek duplikat room id NEW
@@ -55,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $legal_object_id = $legal_object_idNEW;
             }
-            $sqlUpdateRoom = "UPDATE rooms_table SET room_id = '$room_id', legal_object_id = $legal_object_id, organizer_id = $organizer, room_name = '$room_name', space_usage = '$space_usage', rent_fee = '$rent_fee' WHERE room_id = '$roomId'";
+            $sqlUpdateRoom = "UPDATE rooms_table SET room_id = '$room_id', legal_object_id = $legal_object_id, organizer_id = $organizer, room_name = '$room_name', space_usage = '$space_usage', rent_fee = '$rent_fee', is_public = '$is_public' WHERE room_id = '$roomId'";
             $resultSql = mysqli_query($conn, $sqlUpdateRoom);
             if ($resultSql) {
                 setFlashMessage('success', 'Data updated successfully');
@@ -67,10 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // save data baru
             $room_id = $_POST['room_id'];
             $legal_object_id = $_POST['legal_object_id'];
+            $is_public = $_POST['is_public'] === 'yes' ? 1 : 0;
             $room_name = $_POST['room_name'];
             $space_usage = $_POST['space_usage'];
             $organizer = $_POST['organizer'];
-            $rent_fee = $_POST['rent_fee'];
+            $rent_fee = ($_POST['is_public'] === 'yes') ? null : $_POST['rent_fee'];
             // cek duplikat room id 
             $query = "SELECT * FROM rooms_table WHERE room_id = '$room_id'";
             $result = mysqli_query($conn, $query);
@@ -87,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }
-            $sqlInsertRoom = "INSERT INTO rooms_table (room_id, legal_object_id, room_name, organizer_id, space_usage, rent_fee) VALUES ('$room_id', '$legal_object_id', '$room_name', '$organizer', '$space_usage', '$rent_fee')";
+            $sqlInsertRoom = "INSERT INTO rooms_table (room_id, legal_object_id, room_name, organizer_id, space_usage, rent_fee, is_public) VALUES ('$room_id', '$legal_object_id', '$room_name', '$organizer', '$space_usage', '$rent_fee', '$is_public')";
             $resultSql = mysqli_query($conn, $sqlInsertRoom);
             if ($resultSql) {
                 setFlashMessage('success', 'Data saved successfully');

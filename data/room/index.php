@@ -71,6 +71,7 @@
                                         <th scope="col">Room ID</th>
                                         <th scope="col">Room Name</th>
                                         <th scope="col">Space Usage</th>
+                                        <th scope="col">Shared Space</th>
                                         <th scope="col">Rent Fee</th>
                                         <th scope="col">Management</th>
                                         <th scope="col">Action</th>
@@ -86,6 +87,7 @@
                                             <td><?= $row['room_id'] ?></td>
                                             <td><?= $row['room_name'] ?></td>
                                             <td><?= $row['space_usage'] ?></td>
+                                            <td><?= ($row['is_public'] == true) ? "Shared" : "Private" ?></td>
                                             <td> Rp. <?= $row['rent_fee'] ?></td>
                                             <td>
                                                 <?= (strlen($row['organizer_name'] ?? "") > 25) ? substr($row['organizer_name'], 0, 25) . '...' . '<button type="button" class="btn asbn btn-info btnDetailOrganizer" data-organizer="' . $row['organizer_id'] . '" data-bs-toggle="modal" data-bs-target="#detailOrganizer"><i class="bi bi-zoom-in"></i></button>' : ($row['organizer_name'] ?? "-"); ?>

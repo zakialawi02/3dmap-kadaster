@@ -311,6 +311,7 @@ const clickHandler = viewer.screenSpaceEventHandler.getInputAction(Cesium.Screen
 
 // Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedFeatureDescription(pickedFeature) {
+  // ambil informasi pada objek gml
   const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
     `<tr><th>ObjectID</th><td>${pickedFeature.getProperty("Tag")}</td></tr>` +
@@ -328,6 +329,7 @@ function createPickedFeatureDescription(pickedFeature) {
 // Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedDataDescription(pickedData) {
   if (pickedData.hasProperty("GlobalId")) {
+    // ambil data atribut pada bidang parcel
     const description =
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
@@ -352,6 +354,7 @@ function createPickedDataDescription(pickedData) {
       `</tbody></table>`;
     return description;
   } else if (pickedData.hasProperty("kode")) {
+    // ambil data atribut pada bidang tata bangunan
     const description =
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
@@ -479,7 +482,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       success: function (response) {
         const data = response;
         dataRoom = data;
-        console.log(data);
+        // console.log(data);
         const tags = JSON.parse(data.tag);
         // console.log("DATA TAG");
         // console.log(tags);
@@ -513,6 +516,12 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           // Tambahkan baris baru dengan nama "Tanggung Jawab"
           const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Baca <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
+
+          // Jika is_public sama dengan false, hapus baris dataTenantROW
+          if (data.is_public == true) {
+            // Hapus baris yang baru saja ditambahkan
+            updatedName.closest("tr").next("tr").next("tr").next("tr").remove();
+          }
         }
         scan();
         // add URI
@@ -606,29 +615,47 @@ $(document).on("click", "#btnDetailRoom", function (e) {
   const parcel_id = $(this).data("parcel");
   const room_id = $(this).data("room");
   const data = dataRoom;
-  const table =
-    `<table class="table"><tbody>` +
-    `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-    `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
-    `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-    `<tr><th>Nomor Perjanjian Sewa</th><td style="width: 1%;">:</td><td> ${
-      data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
-        ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
-        : "Tidak ada Data!"
-    }
+  let table;
+  if (data.is_public == true) {
+    table =
+      `<table class="table"><tbody>` +
+      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+      `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+      `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
+      `</tbody></table>`;
+  } else {
+    table =
+      `<table class="table"><tbody>` +
+      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+      `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+      `<tr><th>Nomor Perjanjian Sewa</th><td style="width: 1%;">:</td><td> ${
+        data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
+          ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
+          : "Tidak ada Data!"
+      }
     </td></tr>` +
-    `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"}
+      `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${
+        data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"
+      }
     </td></tr>` +
-    `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
-    `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
-    `<tr><th>Waktu Berakhir</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
-    `<tr><th>Biaya Sewa (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-    `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
-    `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
-    `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
-    `</tbody></table>`;
+      `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
+      `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
+      `<tr><th>Waktu Berakhir</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
+      `<tr><th>Biaya Sewa (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+      `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
+      `</tbody></table>`;
+  }
+
   $("#detailRoom .modal-body").html(table);
   scan();
 });
@@ -3112,6 +3139,8 @@ function handleFileUpload(event) {
           const bbox = await computeBoundingBoxFromGLB(uint8Array);
           buildingHeight = getObjectHeight(bbox);
           $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+          const { length, width } = getBoundingBoxDimensions(bbox);
+          console.log("Length:", length, "Width:", width);
 
           // Tampilkan input koordinat
           document.getElementById("coordinateInputs").style.display = "block";
@@ -3121,6 +3150,7 @@ function handleFileUpload(event) {
           window.uploadedFileType = "glb";
           window.uploadedFileBBox = bbox;
         } catch (error) {
+          console.log(error);
           alert("Gagal memparsing model GLB");
         }
       } else if (file.name.endsWith(".obj")) {
@@ -3205,12 +3235,10 @@ function updateModelPosition() {
     currentModel = primitive;
   }
 
+  // var tilesetLocationEditor = new Cesium3dTilesetLocationEditor(viewer, currentModel);
   viewer.flyTo(currentModel, {
     duration: 1,
   });
-
-  const modelBoundingSphere = new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(longitude, latitude, buildingHeight), 1.0);
-  detectIntersection(modelBoundingSphere, viewer.dataSources.get(1).entities.values);
 }
 
 function calculateBoundingSphereFromEntity(entity) {
@@ -3242,24 +3270,12 @@ function calculateBoundingSphereFromEntity(entity) {
 
   return new Cesium.BoundingSphere(Cesium.Cartesian3.midpoint(minPosition, maxPosition, new Cesium.Cartesian3()), Cesium.Cartesian3.distance(minPosition, maxPosition) / 2);
 }
-function detectIntersection(modelBBox, geojsonEntities) {
-  geojsonEntities.forEach((entity) => {
-    const entityBBox = calculateBoundingSphereFromEntity(entity);
-    if (!entityBBox) return;
 
-    // Periksa interseksi antara dua bounding spheres
-    const distance = Cesium.Cartesian3.distance(modelBBox.center, entityBBox.center);
-    const sumRadii = modelBBox.radius + entityBBox.radius;
-
-    if (distance < sumRadii) {
-      console.log({ entity });
-      console.log(`Model intersect dengan entity dengan ID: ${entity.id}`);
-      console.log(entity.properties.objectid.getValue());
-      // Dapatkan properties dari GeoJSON yang berpotongan
-      const properties = entity.properties;
-      console.log("Properties yang bertampalan:", properties);
-    }
-  });
+// Fungsi untuk mendapatkan dimensi panjang dan lebar dari penampang bawah model
+function getBoundingBoxDimensions(bbox) {
+  const length = bbox.max.x - bbox.min.x; // Panjang (sumbu X)
+  const width = bbox.max.z - bbox.min.z; // Lebar (sumbu Z)
+  return { length, width };
 }
 
 // Event listeners

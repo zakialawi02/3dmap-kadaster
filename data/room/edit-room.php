@@ -55,6 +55,21 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="flexRadioDefault" class="form-label">Public Place/Shared Space</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="is_public" id="yes_public" value="yes">
+                            <label class="form-check-label" for="yes_public">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="is_public" id="no_public" value="no" checked>
+                            <label class="form-check-label" for="no_public">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="room_name" class="form-label">Room Name</label>
                         <input type="text" class="form-control" id="room_name" name="room_name" value="<?= old('room_name') ?? $rooms_table['room_name']; ?>" required>
                     </div>
@@ -70,11 +85,11 @@
                             <!-- get with ajax asycn -->
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="rent_fee_container">
                         <label for="rent_fee" class="form-label">Rent Fee</label>
                         <div class="input-group">
                             <div class="input-group-text">Rp.</div>
-                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee') ?? $rooms_table['rent_fee']; ?>" placeholder="200000" required>
+                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee') ?? $rooms_table['rent_fee']; ?>" placeholder="200000">
                         </div>
                     </div>
 
@@ -94,6 +109,28 @@
 
     <script src="/assets/js/script.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            let oldValue = "<?= old('is_public') ?? $rooms_table['is_public'] ?>";
+
+            if (oldValue == 1) {
+                $('#yes_public').prop('checked', true);
+                $('#rent_fee_container').hide();
+            } else {
+                $('#no_public').prop('checked', true);
+                $('#rent_fee_container').show();
+            }
+
+            // Change event handler for radio buttons
+            $('input[name="is_public"]').change(function() {
+                if ($('#yes_public').is(':checked')) {
+                    $('#rent_fee_container').hide();
+                } else {
+                    $('#rent_fee_container').show();
+                }
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();

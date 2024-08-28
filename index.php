@@ -1909,6 +1909,7 @@
   <script src="assets/js/script.js"></script>
 
 
+  <script src="assets/js/Cesium3DTileLocationEditor.js"></script>
   <script type="module" src="assets/js/cesiumScript.js"></script>
 
 </body>
