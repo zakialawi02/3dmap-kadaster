@@ -62,7 +62,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     if (isset($_GET['source']) && !empty($_GET['source']) && $_GET['source'] == "map" && isset($_GET['objectId'])) {
         $objectId = $_GET['objectId'];
         $sql = "SELECT lo.parcel_id, lo.parcel_name, lp.building, 
-               rm.room_id, rm.organizer_id, rm.room_name, rm.space_usage, rm.rent_fee, rm.is_public,
+               rm.room_id, rm.organizer_id, rm.room_name, rm.space_usage, rm.rent_fee, rm.is_public, rm.uri_room,
                lu.object_id, rt.id AS renters_id, rt.due_started, rt.due_finished, rt.tenure_status, rt.agreement_number, rt.permit_flats, tt.*, tt.id as tenant_id,
                JSON_ARRAYAGG(
                    JSON_OBJECT(

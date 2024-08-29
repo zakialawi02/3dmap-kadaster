@@ -50,6 +50,13 @@
 
                     <div class="additional_info">
                         <div class="mb-3">
+                            <label for="tenure_status" class="form-label">Teanure Status</label>
+                            <select class="form-select" id="tenure_status" name="tenure_status" style="width: 100%" required>
+                                <option value="Sewa">Sewa</option>
+                                <option value="Pakai">Pakai</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="tenant_name" class="form-label">Name of Person</label>
                             <input type="text" class="form-control" id="tenant_name" name="tenant_name" value="<?= old('tenant_name'); ?>" required>
                         </div>
@@ -62,13 +69,13 @@
                             <input type="text" class="form-control" id="tenant_job" name="tenant_job" value="<?= old('tenant_job'); ?>" required>
                         </div>
                         <!-- <div class="mb-3">
-                        <label for="number_residents" class="form-label">Number of Residents</label>
-                        <input type="text" class="form-control" id="number_residents" name="number_residents" value="<?= old('number_residents'); ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="marriage_status" class="form-label">Marriage Status</label>
-                        <input type="text" class="form-control" id="marriage_status" name="marriage_status" value="<?= old('marriage_status'); ?>" required>
-                    </div> -->
+                            <label for="number_residents" class="form-label">Number of Residents</label>
+                            <input type="text" class="form-control" id="number_residents" name="number_residents" value="<?= old('number_residents'); ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="marriage_status" class="form-label">Marriage Status</label>
+                            <input type="text" class="form-control" id="marriage_status" name="marriage_status" value="<?= old('marriage_status'); ?>" required>
+                        </div> -->
                         <div class="mb-3">
                             <label for="tenant_religion" class="form-label">Religion</label>
                             <input type="text" class="form-control" id="tenant_religion" name="tenant_religion" value="<?= old('tenant_religion'); ?>" required>

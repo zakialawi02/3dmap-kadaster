@@ -21,12 +21,12 @@
 
     </style>
 
-    <title>Renters Data</title>
+    <title>Organizer Data</title>
 </head>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php'; ?>
 <?php checkIsLogin(); ?>
-<?php include_once '../../action/get-renters.php' ?>
+<?php include_once '../../action/get-management.php' ?>
 
 <body>
     <!-- HEADER -->
@@ -43,47 +43,36 @@
                         </div>
                     <?php endif ?>
                     <div class="col-md-6">
-                        <a href="/data/renters/add-renter.php" class="btn btn-primary">Add Renter</a>
+                        <a href="/data/organizer/add-management.php" class="btn btn-primary">Add Organizer</a>
                     </div>
                     <div class="row p-3 m-2">
                         <div class="col-md-12">
-                            <table id="datatable" class="table table-bordered table-striped table-hover display nowrap" style="width:100%">
+                            <table id="datatable" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">ObjectID</th>
-                                        <th scope="col">Room ID</th>
-                                        <th scope="col">Room Name</th>
-                                        <th scope="col">Tenant Name</th>
-                                        <th scope="col">Tenure Status</th>
-                                        <th scope="col">Started</th>
-                                        <th scope="col">Finished</th>
-                                        <th scope="col">Lease of Agreement</th>
-                                        <th scope="col">Permit</th>
+                                        <th scope="col">Organizer Name</th>
+                                        <th scope="col">Link</th>
+                                        <th scope="col">Organizer Head</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">City</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $tenures = ['lease', 'Sewa', 'Pakai']
-                                    ?>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($renters_table as $row) : ?>
+                                    <?php foreach ($organizer_table as $row) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++; ?></th>
-                                            <td><?= $row['legal_object_id'] ?></td>
-                                            <td><?= $row['building']; ?> [<?= $row['room_id'] ?>]</td>
-                                            <td><?= $row['room_name'] ?></td>
-                                            <td><?= $row['tenant_name'] ?></td>
-                                            <td><?= $row['tenure_status'] ?></td>
-                                            <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
-                                            <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
-                                            <td><?= (!empty($row['agreement_number']) ? '<a href="/assets/PDF/agreement/' . str_replace('/', '.', $row['agreement_number']) . '.pdf" target="_blank"><i class="bi bi-download"></i></a><span> ' . $row['agreement_number'] . '</span>' : (empty($row['agreement_number']) && in_array($row['tenure_status'], $tenures) ? '<button class="asbn btn btn-primary generateAgreementRusun" data-room="' . $row['room_id'] . '" data-tenant="' . $row['tenant_id'] . '" data-from="' . $row['lp_id'] . '">Generate</button>' : '-')) ?></td>
-                                            <td><?= (!empty($row['permit_flats'])) ? '<a href="/assets/PDF/certificate/' . $row['permit_flats'] . '"><i class="bi bi-download" target="_blank"></i></a>' : '<span id="P-' . $row['tenant_id'] . '">No data</span>' ?></td>
+                                            <td><?= $row['organizer_name']; ?></td>
+                                            <td><a href="<?= $row['uri_organizer']; ?>"><?= $row['uri_organizer']; ?></a></td>
+                                            <td><?= $row['organizer_head'] ?></td>
+                                            <td><?= $row['organizer_address'] ?></td>
+                                            <td><?= $row['organizer_city'] ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">
-                                                    <a href="/data/renters/edit-renter.php?Tenant=<?= $row['tenant_id']; ?>&Room=<?= $row['room_id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
-                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-renters.php" method="post">
+                                                    <a href="/data/organizer/edit-management.php?id=<?= $row['id']; ?>" class="btn xs-btn btn-secondary bi bi-pencil-square"></a>
+                                                    <form id="delete-<?= $row['id']; ?>" action="/action/delete-management.php" method="post">
                                                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <button type="button" class="asbn btn btn-danger bi bi-trash delete-btn" data-id="<?= $row['id']; ?>"></button>
@@ -130,43 +119,7 @@
             });
         });
 
-        $(".generateAgreementRusun").click(function(e) {
-            const buttonClicked = $(this);
-            const tenant_id = $(this).data('tenant');
-            const room_id = $(this).data('room');
-            const place = $(this).data('from');
-            const loader = `<button class="loader" style=" margin: 0 auto; "></button>`;
-            buttonClicked.replaceWith(loader);
-            $.ajax({
-                method: "POST",
-                url: `../../action/agreement.php`,
-                data: {
-                    tenant_id,
-                    room_id,
-                    place
-                },
-                dataType: "json",
-                success: function(response) {
-                    const agreementNumber = response;
-                    const file = agreementNumber.replace(/\//g, '.');
-                    $('.loader').replaceWith(`<a href="/assets/PDF/agreement/${file}.pdf"><i class="bi bi-download" target="_blank"></i></a><span> ${agreementNumber}</span>`);
-                    $(`#P-${tenant_id}`).replaceWith(`<a href="/assets/PDF/certificate/S_${file}.pdf"><i class="bi bi-download" target="_blank"></i></a>`);
-                },
-                error: function(error) {
-                    console.log("error");
-                    alert("Failed!!");
-                    $('.loader').replaceWith(buttonClicked);
-                }
-            });
-        });
-
-        const datatable = new DataTable('#datatable', {
-            scrollX: true,
-        });
-        datatable.on('click', 'button', function(e) {
-            let data = datatable.row(e.target.closest('tr')).data();
-
-        });
+        const datatable = new DataTable('#datatable');
     </script>
     <?php unset($_SESSION['oldForm']); ?>
 

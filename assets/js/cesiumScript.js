@@ -503,24 +503,20 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           // Tambahkan baris baru dengan nama "Data Pengelola"
           const dataOrganizerROW = `<tr><th>Data Pengelola</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").after(dataOrganizerROW);
-          // Tambahkan baris baru dengan nama "Tenant Detail"
-          const dataTenantROW = `<tr><th>Data Penyewa</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
-          updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
+          if (data.is_public == false) {
+            // Tambahkan baris baru dengan nama "Tenant Detail"
+            const dataTenantROW = `<tr><th>Data Penyewa/Pengguna</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
-          // Tambahkan baris baru dengan nama "Hak"
-          const dataRightROW = `<tr><th>Hak</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
-          // Tambahkan baris baru dengan nama "Batasan"
-          const dataRestrictionROW = `<tr><th>Batasan</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
-          // Tambahkan baris baru dengan nama "Tanggung Jawab"
-          const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
-
-          // Jika is_public sama dengan false, hapus baris dataTenantROW
-          if (data.is_public == true) {
-            // Hapus baris yang baru saja ditambahkan
-            updatedName.closest("tr").next("tr").next("tr").next("tr").remove();
+            // Tambahkan baris baru dengan nama "Hak"
+            const dataRightROW = `<tr><th>Hak</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
+            // Tambahkan baris baru dengan nama "Batasan"
+            const dataRestrictionROW = `<tr><th>Batasan</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
+            // Tambahkan baris baru dengan nama "Tanggung Jawab"
+            const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Baca <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
           }
         }
         scan();
@@ -620,7 +616,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
     table =
       `<table class="table"><tbody>` +
       `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
       `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
       `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
@@ -632,7 +628,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
     table =
       `<table class="table"><tbody>` +
       `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
       `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
       `<tr><th>Nomor Perjanjian Sewa</th><td style="width: 1%;">:</td><td> ${
         data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
@@ -732,7 +728,7 @@ $(document).on("click", "#btnRight", function (e) {
   $("#detailRight .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRight(parcel, "right").then((result) => {
+  displayRRR(parcel, "right").then((result) => {
     $("#detailRight .modal-body").html(result);
     scan();
   });
@@ -745,7 +741,7 @@ $(document).on("click", "#btnRestriction", function (e) {
   $("#detailRestriction .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRight(parcel, "restriction").then((result) => {
+  displayRRR(parcel, "restriction").then((result) => {
     $("#detailRestriction .modal-body").html(result);
     scan();
   });
@@ -758,13 +754,13 @@ $(document).on("click", "#btnResponsibilities", function (e) {
   $("#detailResponsibilities .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRight(parcel, "responsibilities").then((result) => {
+  displayRRR(parcel, "responsibilities").then((result) => {
     $("#detailResponsibilities .modal-body").html(result);
     scan();
   });
 });
 
-function displayRight(parcelId, typerrr) {
+function displayRRR(parcelId, typerrr) {
   let url;
   const type = typerrr.toLowerCase();
   if (parcelId == "3578071002B0001") {
@@ -783,17 +779,17 @@ function displayRight(parcelId, typerrr) {
 
 // TARGETSCAN
 const dataKeyword = [
-  {
-    keyword: "Hak",
-    url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
-  },
-  {
-    keyword: "Kewajiban",
-    url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
-  },
+  // {
+  //   keyword: "Hak",
+  //   url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
+  // },
+  // {
+  //   keyword: "Kewajiban",
+  //   url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
+  // },
 ];
 function scan() {
-  console.log("SCAN");
+  // console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
   const modals = document.querySelectorAll(".TARGETSCAN");
   // Iterasi melalui setiap elemen modal

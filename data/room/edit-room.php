@@ -74,6 +74,10 @@
                         <input type="text" class="form-control" id="room_name" name="room_name" value="<?= old('room_name') ?? $rooms_table['room_name']; ?>" required>
                     </div>
                     <div class="mb-3">
+                        <label for="uri_room" class="form-label">Room Link</label>
+                        <input type="text" class="form-control" id="uri_room" name="uri_room" placeholder="https://" value="<?= old('uri_room') ?? $rooms_table['uri_room']; ?>">
+                    </div>
+                    <div class="mb-3">
                         <label for="space_usage" class="form-label">Space Usage</label>
                         <input type="text" class="form-control" id="space_usage" name="space_usage" value="<?= old('space_usage') ?? $rooms_table['space_usage']; ?>" required>
                     </div>
