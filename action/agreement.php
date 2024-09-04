@@ -59,21 +59,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($from == "1") {
             $t = "SIOLA";
             $c = "Kota Surabaya";
-            $uu = "821.2/166/35.78.071 /2021";
+            $a = "Jl. Tunjungan No.1, Genteng, Kec. Genteng, Surabaya";
         } elseif ($from == "2") {
             $t = "BALAI PEMUDA";
             $c = "Kota Surabaya";
-            $uu = "821.2/166/35.78.071 /2021";
+            $a = "Jl. Gubernur Suryo No.15, Embong Kaliasin, Kec. Genteng, Surabaya";
         } elseif ($from == "3") {
             $t = "RUSUNAWA BURING 2";
             $c = "Kota Malang";
             $uu = "821.2/166/35.73.502 /2022";
         }
-        $htmlContent = str_replace('{place}', $t, $htmlContent);
         $htmlContent = str_replace('{room_id}', $roomID, $htmlContent);
+        $htmlContent = str_replace('{building}', $t, $htmlContent);
+        $htmlContent = str_replace('{building_address}', $a, $htmlContent);
         $htmlContent = str_replace('{agreement_number}', json_decode($agrementNumber), $htmlContent);
-        $htmlContent = str_replace('{date_now}', timeIDN(), $htmlContent);
-        $htmlContent = str_replace('{agrement_place}', $c, $htmlContent);
+        $htmlContent = str_replace('{date_now}', timeIDN('tanggal bulan tahun'), $htmlContent);
+        $htmlContent = str_replace('{due_started}', timeIDN('tanggal bulan tahun', $renter_table['due_started']), $htmlContent);
+        $htmlContent = str_replace('{pemakaian_ruang}', $renter_table['room_name'], $htmlContent);
+        $htmlContent = str_replace('{organizer_head}', $renter_table['organizer_head'], $htmlContent);
+        $htmlContent = str_replace('{organizer_name}', $renter_table['organizer_name'], $htmlContent);
 
         $mpdf = new Mpdf(['orientation' => 'P', 'format' => 'A4-P']);
 
@@ -81,11 +85,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Simpan PDF ke folder server
         $fileName = $fileName . '.pdf';
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
-        $mpdf->Output($filePath, 'F');
+        $filePath1 = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/agreement/' . $fileName;
+        $filePath2 = $_SERVER['DOCUMENT_ROOT'] . '/assets/PDF/certificate/S_' . $fileName;
+        $mpdf->Output($filePath1, 'F');
+        $mpdf->Output($filePath2, 'F');
 
-        $urlToRun = base_url() . "/action/sertifikatSurabayaBuilding.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
-        $response = file_get_contents($urlToRun);
+        $sqlUpdateRenter = "UPDATE renters_tenants SET permit_flats = 'S_" . $fileName . "' WHERE tenant_id = " . $tenantID;
+        $resultSql = mysqli_query($conn, $sqlUpdateRenter);
+
+
+        // $urlToRun = base_url() . "/action/sertifikatSurabayaBuilding.php?Tenant=" . $tenantID . "&Room=" . $roomID . "&fileName=S_" .  $fileName;
+        // $response = file_get_contents($urlToRun);
     } elseif ($from == "3") {
         $html = $_SERVER['DOCUMENT_ROOT'] . "/generateAgreementRusunPDF.html";
         $htmlContent = file_get_contents($html);

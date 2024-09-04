@@ -677,6 +677,7 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
         `<tr><th>Alamat</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
         `<tr><th>Kab/Kota</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
         `<tr><th>Kepala Pengelola</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
+        `<tr><th>url</th><td style="width: 1%;">:</td><td>${data.uri_organizer ? `<a href="${data.uri_organizer}" target="_blank">lihat <i class="bi bi-box-arrow-up-right"></i></a>` : "-"}</td></tr>` +
         `</tbody></table>`;
       $("#detailOrganizer .modal-body").html(table);
       scan();
