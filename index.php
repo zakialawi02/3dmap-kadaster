@@ -135,7 +135,7 @@
 
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
     <div class="saran">
-      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Lakukan Tes</button>
+      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Uji Usability</button>
     </div>
 
     <!-- button kritik dan saran -->
@@ -312,18 +312,20 @@
     <!-- Panel Usability Test -->
     <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold" id="usabLabel">Usability Test Guide</h5>
+        <h5 class="offcanvas-title fw-bold" id="usabLabel">Panduan Uji Kebergunaan</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, numquam maiores. Voluptatibus, culpa non. Iusto perspiciatis fugiat quidem magnam perferendis:
+          Berikut adalah daftar skenario pengujian usability untuk WebGIS kadaster 3D Anda:
           <ol>
-            <li>Petunjuk 1</li>
-            <li>Perintah 2</li>
-            <li>Penjelasan 3</li>
-            <li>Contoh 4</li>
-            <li>Tugas 5</li>
+            <li>Navigasi ke lokasi bangunan tertentu (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) di peta 3D</li>
+            <li>Cek pengelolaan layer dengan cara menyembunyikan/menampilkan layer</li>
+            <li>Tampilkan informasi dari salah satu objek ruang/yuridis suatu bangunan</li>
+            <!-- <li>Lakukan cek ketinggian bangunan rencana dengan fitur simulasi desain, sampel data 3d dapat menggunakan berikut <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
+            <li>Melihat zona tata ruang dan batas tinggi bangunan zona yang ada</li>
+            <li>Jelajahi semua fitur/objek pada peta</li>
+            <li>Isi form uji kebergunaan berikut <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
           </ol>
         </div>
       </div>

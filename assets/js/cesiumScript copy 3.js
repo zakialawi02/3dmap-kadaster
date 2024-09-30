@@ -15,35 +15,6 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
-// Create a new div element to display coordinates
-const coordsDisplay = document.createElement("div");
-coordsDisplay.style.position = "absolute";
-coordsDisplay.style.bottom = "10px";
-coordsDisplay.style.left = "50%";
-coordsDisplay.style.transform = "translateX(-50%)";
-coordsDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-coordsDisplay.style.color = "white";
-coordsDisplay.style.padding = "5px 10px";
-coordsDisplay.style.borderRadius = "5px";
-coordsDisplay.style.fontFamily = "Arial, sans-serif";
-coordsDisplay.style.fontSize = "14px";
-viewer.container.appendChild(coordsDisplay);
-
-// Add event listener for mouse move
-viewer.scene.canvas.addEventListener("mousemove", function (e) {
-  var ellipsoid = viewer.scene.globe.ellipsoid;
-  // Mouse over the globe to see the cartographic position
-  var cartesian = viewer.camera.pickEllipsoid(new Cesium.Cartesian2(e.clientX, e.clientY), ellipsoid);
-  if (cartesian) {
-    var cartographic = ellipsoid.cartesianToCartographic(cartesian);
-    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(10);
-    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(10);
-    coordsDisplay.textContent = `Lon: ${longitudeString}, Lat: ${latitudeString}`;
-  } else {
-    coordsDisplay.textContent = "Coordinates: N/A";
-  }
-});
-
 //** */ Set environment cesium parameters
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
@@ -3150,7 +3121,6 @@ $(".loader-container").removeClass("d-none");
 
 let currentModel;
 let buildingHeight;
-let axesPolylines;
 
 // Fungsi untuk membaca file 3D yang diupload
 function handleFileUpload(event) {
@@ -3219,48 +3189,7 @@ function getObjectHeight(bbox) {
   return height;
 }
 
-function createAxes(position, orientation, scale) {
-  if (axesPolylines) {
-    viewer.scene.primitives.remove(axesPolylines);
-  }
-
-  axesPolylines = new Cesium.PolylineCollection();
-
-  const axisLength = buildingHeight + 10;
-
-  // X-axis (Red)
-  axesPolylines.add({
-    positions: [position, Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), new Cesium.Cartesian3(axisLength, 0, 0), new Cesium.Cartesian3())],
-    width: 25,
-    material: Cesium.Material.fromType("Color", { color: Cesium.Color.RED }),
-  });
-
-  // Y-axis (Green)
-  axesPolylines.add({
-    positions: [position, Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), new Cesium.Cartesian3(0, axisLength, 0), new Cesium.Cartesian3())],
-    width: 25,
-    material: Cesium.Material.fromType("Color", { color: Cesium.Color.GREEN }),
-  });
-
-  // Z-axis (Blue)
-  axesPolylines.add({
-    positions: [position, Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), new Cesium.Cartesian3(0, 0, axisLength), new Cesium.Cartesian3())],
-    width: 25,
-    material: Cesium.Material.fromType("Color", { color: Cesium.Color.BLUE }),
-  });
-
-  viewer.scene.primitives.add(axesPolylines);
-}
-
-// Updated function to remove axes
-function removeAxes() {
-  if (axesPolylines) {
-    viewer.scene.primitives.remove(axesPolylines);
-    axesPolylines = undefined;
-  }
-}
-
-// Modified updateModelPosition function
+// Fungsi untuk menampilkan model dan mengupdate posisinya
 function updateModelPosition() {
   const latitude = parseFloat(document.getElementById("latitude").value);
   const longitude = parseFloat(document.getElementById("longitude").value);
@@ -3295,14 +3224,28 @@ function updateModelPosition() {
         scale: 1.0,
       },
     });
-
-    // Create axes at the model's origin
-    createAxes(position, orientation, 1.0);
+  } else if (window.uploadedFileType === "obj") {
+    const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+    const primitive = viewer.scene.primitives.add(
+      Cesium.Model.fromGltf({
+        url: URL.createObjectURL(new Blob([window.uploadedFile])),
+        modelMatrix: modelMatrix,
+        scale: 1.0,
+      })
+    );
+    currentModel = primitive;
   }
+
+  addAxes(position);
 
   viewer.flyTo(currentModel, {
     duration: 1,
   });
+
+  if (currentModel) {
+    const modelPosition = currentModel.position.getValue(viewer.clock.currentTime);
+    updateAxesPosition(modelPosition);
+  }
 }
 
 // Fungsi untuk mendapatkan dimensi panjang dan lebar dari penampang bawah model
@@ -3310,6 +3253,118 @@ function getBoundingBoxDimensions(bbox) {
   const length = bbox.max.x - bbox.min.x; // Panjang (sumbu X)
   const width = bbox.max.z - bbox.min.z; // Lebar (sumbu Z)
   return { length, width };
+}
+
+let isDragging = false;
+let selectedAxis = null;
+let startMousePosition;
+let startEntityPosition;
+
+function addAxes(position) {
+  // Define the length of the axes for visualization
+  const axisLength = 10; // Panjang sumbu untuk ditampilkan
+
+  // Offset posisi model ke atas 5 meter
+  const offsetPosition = Cesium.Cartesian3.add(position, new Cesium.Cartesian3(0, 3, 0), new Cesium.Cartesian3());
+
+  // Add X axis (Red)
+  viewer.entities.add({
+    id: "Xaxis",
+    name: "X axis",
+    polyline: {
+      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, new Cesium.Cartesian3(axisLength, 0, 0), new Cesium.Cartesian3())],
+      width: 25,
+      arcType: Cesium.ArcType.NONE,
+      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.RED),
+      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(1.0, 0, 0, 0.2)),
+    },
+  });
+
+  // Add Y axis (Green)
+  viewer.entities.add({
+    id: "Yaxis",
+    name: "Y axis",
+    polyline: {
+      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, new Cesium.Cartesian3(0, axisLength, 0), new Cesium.Cartesian3())],
+      width: 25,
+      arcType: Cesium.ArcType.NONE,
+      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.GREEN),
+      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(0, 1, 0, 0.2)),
+    },
+  });
+
+  // Add Z axis (Blue)
+  viewer.entities.add({
+    id: "Zaxis",
+    name: "Z axis",
+    polyline: {
+      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, new Cesium.Cartesian3(0, 0, axisLength), new Cesium.Cartesian3())],
+      width: 25,
+      arcType: Cesium.ArcType.NONE,
+      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.BLUE),
+      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(0, 0, 1, 0.2)),
+    },
+  });
+
+  // Add drag handlers to each axis
+  addDragHandler("Xaxis", Cesium.Cartesian3.UNIT_X);
+  addDragHandler("Yaxis", Cesium.Cartesian3.UNIT_Y);
+  addDragHandler("Zaxis", Cesium.Cartesian3.UNIT_Z);
+}
+
+// Fungsi untuk menghapus sumbu XYZ
+function removeAxes() {
+  viewer.entities.removeById("Xaxis");
+  viewer.entities.removeById("Yaxis");
+  viewer.entities.removeById("Zaxis");
+}
+
+function addDragHandler(axisId, axisDirection) {
+  const axis = viewer.entities.getById(axisId);
+
+  const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+  handler.setInputAction(function (event) {
+    const pickedObject = viewer.scene.pick(event.position);
+    if (Cesium.defined(pickedObject) && pickedObject.id === axis) {
+      isDragging = true;
+      selectedAxis = axisDirection;
+      startMousePosition = event.position;
+      startEntityPosition = currentModel.position.getValue(viewer.clock.currentTime);
+      viewer.scene.screenSpaceCameraController.enableRotate = false;
+    }
+  }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+  handler.setInputAction(function (event) {
+    if (isDragging) {
+      const endPosition = event.endPosition;
+      const diff = Cesium.Cartesian2.subtract(endPosition, startMousePosition, new Cesium.Cartesian2());
+      const scaleFactor = 0.01; // Adjust this value to control drag sensitivity
+
+      const movementVector = Cesium.Cartesian3.multiplyByScalar(selectedAxis, diff.x * scaleFactor, new Cesium.Cartesian3());
+
+      const newPosition = Cesium.Cartesian3.add(startEntityPosition, movementVector, new Cesium.Cartesian3());
+
+      currentModel.position = newPosition;
+      updateAxesPosition(newPosition);
+    }
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  handler.setInputAction(function (event) {
+    isDragging = false;
+    selectedAxis = null;
+    viewer.scene.screenSpaceCameraController.enableRotate = true;
+  }, Cesium.ScreenSpaceEventType.LEFT_UP);
+}
+
+function updateAxesPosition(newPosition) {
+  const axes = ["Xaxis", "Yaxis", "Zaxis"];
+  axes.forEach((axisId) => {
+    const axis = viewer.entities.getById(axisId);
+    const positions = axis.polyline.positions.getValue();
+    positions[0] = newPosition;
+    axis.polyline.positions = positions;
+  });
 }
 
 // Event listeners
