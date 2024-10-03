@@ -1,5 +1,8 @@
-````let currentModel;
+```
+
+let currentModel;
 let buildingHeight;
+let axesEntities = [];
 
 // Fungsi untuk membaca file 3D yang diupload
 function handleFileUpload(event) {
@@ -68,7 +71,44 @@ function getObjectHeight(bbox) {
   return height;
 }
 
-// Fungsi untuk menampilkan model dan mengupdate posisinya
+// Updated function to create and display axes with arrow tips
+function createAxes(position, orientation, scale) {
+  removeAxes();
+
+  const axisLength = buildingHeight + 10;
+
+  // Helper function to create an axis
+  function createAxis(color, direction) {
+    const endPosition = Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), direction, new Cesium.Cartesian3());
+
+    const axis = viewer.entities.add({
+      polyline: {
+        positions: [position, endPosition],
+        width: 40,
+        material: new Cesium.PolylineArrowMaterialProperty(color),
+      },
+    });
+
+    axesEntities.push(axis);
+  }
+
+  // X-axis (Red)
+  createAxis(Cesium.Color.RED, new Cesium.Cartesian3(axisLength, 0, 0));
+
+  // Y-axis (Green)
+  createAxis(Cesium.Color.GREEN, new Cesium.Cartesian3(0, axisLength, 0));
+
+  // Z-axis (Blue)
+  createAxis(Cesium.Color.BLUE, new Cesium.Cartesian3(0, 0, axisLength));
+}
+
+// Updated function to remove axes
+function removeAxes() {
+  axesEntities.forEach((axis) => viewer.entities.remove(axis));
+  axesEntities = [];
+}
+
+// Modified updateModelPosition function
 function updateModelPosition() {
   const latitude = parseFloat(document.getElementById("latitude").value);
   const longitude = parseFloat(document.getElementById("longitude").value);
@@ -103,19 +143,10 @@ function updateModelPosition() {
         scale: 1.0,
       },
     });
-  } else if (window.uploadedFileType === "obj") {
-    const modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
-    const primitive = viewer.scene.primitives.add(
-      Cesium.Model.fromGltf({
-        url: URL.createObjectURL(new Blob([window.uploadedFile])),
-        modelMatrix: modelMatrix,
-        scale: 1.0,
-      })
-    );
-    currentModel = primitive;
-  }
 
-  addAxes(position);
+    // Create axes at the model's origin
+    createAxes(position, orientation, 1.0);
+  }
 
   viewer.flyTo(currentModel, {
     duration: 1,
@@ -129,74 +160,8 @@ function getBoundingBoxDimensions(bbox) {
   return { length, width };
 }
 
-// Fungsi untuk menambahkan sumbu XYZ pada model dengan offset 5 meter ke atas
-function addAxes(position) {
-  // Define the length of the axes for visualization
-  const axisLength = buildingHeight + 10;
-
-  // Adjust the position by adding 5 meters to the Z-axis
-  const offsetPosition = Cesium.Cartesian3.add(position, new Cesium.Cartesian3(0, 3, 0), new Cesium.Cartesian3());
-
-  // Define the rotation matrix for the X axis
-  const xRotationMatrix = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(23));
-  const xDirection = Cesium.Matrix3.multiplyByVector(xRotationMatrix, new Cesium.Cartesian3(1, 0, 0), new Cesium.Cartesian3());
-
-  const rmz = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(23));
-  const rmx = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(-5));
-  const yRotationMatrix = Cesium.Matrix3.multiply(rmx, rmz, new Cesium.Matrix3());
-  const yDirection = Cesium.Matrix3.multiplyByVector(yRotationMatrix, new Cesium.Cartesian3(0, 1, 0), new Cesium.Cartesian3());
-
-  const zRotationMatrix = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(-7));
-  const zDirection = Cesium.Matrix3.multiplyByVector(zRotationMatrix, new Cesium.Cartesian3(0, 0, 1), new Cesium.Cartesian3());
-
-  // Add X axis (Red)
-  viewer.entities.add({
-    id: "Xaxis",
-    name: "X axis",
-    polyline: {
-      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, Cesium.Cartesian3.multiplyByScalar(xDirection, axisLength, new Cesium.Cartesian3()), new Cesium.Cartesian3())],
-      width: 25,
-      arcType: Cesium.ArcType.NONE,
-      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.RED),
-      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(1.0, 0, 0, 0.2)),
-    },
-  });
-
-  // Add Y axis (Green)
-  viewer.entities.add({
-    id: "Yaxis",
-    name: "Y axis",
-    polyline: {
-      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, Cesium.Cartesian3.multiplyByScalar(yDirection, axisLength, new Cesium.Cartesian3()), new Cesium.Cartesian3())],
-      width: 25,
-      arcType: Cesium.ArcType.NONE,
-      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.GREEN),
-      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(0, 1, 0, 0.2)),
-    },
-  });
-
-  // Add Z axis (Blue)
-  viewer.entities.add({
-    id: "Zaxis",
-    name: "Z axis",
-    polyline: {
-      positions: [offsetPosition, Cesium.Cartesian3.add(offsetPosition, Cesium.Cartesian3.multiplyByScalar(zDirection, axisLength, new Cesium.Cartesian3()), new Cesium.Cartesian3())],
-      width: 25,
-      arcType: Cesium.ArcType.NONE,
-      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.BLUE),
-      depthFailMaterial: new Cesium.PolylineArrowMaterialProperty(new Cesium.Color(0, 0, 1, 0.2)),
-    },
-  });
-}
-
-// Fungsi untuk menghapus sumbu XYZ
-function removeAxes() {
-  viewer.entities.removeAll(); // This will remove all entities; you might want to refine this to remove only the axes
-}
-
-
-
 // Event listeners
 document.getElementById("formFileSm").addEventListener("change", handleFileUpload);
-document.getElementById("cek3d").addEventListener("click", updateModelPosition);```
-````
+document.getElementById("cek3d").addEventListener("click", updateModelPosition);
+
+```

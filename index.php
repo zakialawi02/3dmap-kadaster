@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Purwarupa Kadaster 3 Dimensi</title>
+  <title>Purwarupa Administrasi Pertanahan 3 Dimensi</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -185,32 +185,41 @@
         <div class="modal-body modal-dialog-scrollable">
           <ol>
             <li>
-              <p><strong>Apa itu kadaster 3 dimensi?</strong></p>
-              <p>Kadaster 3 dimensi adalah sistem pendataan dan pendaftaran tanah yang mencakup informasi ruang tiga dimensi. Sistem ini memungkinkan pemetaan dan dokumentasi properti tidak hanya pada bidang datar dua dimensi, tetapi juga dalam ruang tiga dimensi, termasuk lantai atas dan bawah tanah.&nbsp;</p>
+              <p><strong>Apa yang dimaksud dengan Representasi dalam sistem administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Representasi yang dimaksud adalah memvisualisasikan objek fisik dan yuridis dalam bentuk data spasial 3 dimensi dan menyajikan informasi data tekstual yang melekat pada objek tersebut mengacu pada sistem administrasi pertanahan agar mudah dipahami oleh pengguna.</p>
             </li>
             <li>
-              <p><strong>Hak apa saja yang dapat tercakup dalam kadaster 3 dimensi?</strong></p>
-              <p>Dalam kadaster 3 dimensi, hak atas tanah dibedakan menjadi beberapa lapisan atau zona. Misalnya, satu zona untuk permukaan tanah, satu lagi untuk ruang di bawah tanah, dan satu lagi mungkin untuk ruang udara di atasnya. Setiap zona dapat memiliki pemilik yang berbeda dengan hak yang terdefinisi dengan jelas. Misalnya, seseorang dapat memiliki apartemen di lantai 5 tanpa memiliki seluruh gedung.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Fisik ?</strong></p>
+              <p>Objek fisik merujuk pada realitas fisik dari tanah atau properti yang ada di lapangan. Objek ini mencakup segala bentuk bangunan, struktur, dan batas-batas fisik tanah yang dapat diidentifikasi dan diukur.</p>
             </li>
             <li>
-              <p><strong>Apa batasan yang ada dalam sistem kadaster 3 dimensi?</strong></p>
-              <p>Batasan dalam kadaster 3 dimensi terutama berkaitan dengan penggunaan ruang atas dan bawah. Setiap unit properti memiliki batas vertikal yang jelas yang tidak boleh dilanggar oleh unit lain tanpa persetujuan. Misalnya, tidak boleh ada penetrasi struktural yang mengganggu unit lain di atas atau di bawahnya.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Yuridis ?</strong></p>
+              <p>Objek legal mengacu pada entitas hukum yang mengatur hak, kewajiban, dan batas-batas yang berkaitan dengan kepemilikan atau penggunaan suatu properti. Objek legal ini sering kali berbeda dari batas-batas fisik, karena mengatur aspek hukum dari penggunaan dan pemanfaatan ruang. Objek legal sering kali dipetakan dalam 3 dimensi untuk mencerminkan hak kepemilikan atau penggunaan dalam ruang vertikal.</p>
             </li>
             <li>
-              <p><strong>Bagaimana tanggung jawab dibagi dalam kadaster 3 dimensi?</strong></p>
-              <p>Tanggung jawab umumnya dibagi berdasarkan posisi vertikal dan horizontal properti. Misalnya, pemilik apartemen bertanggung jawab atas perawatan dan perbaikan dalam unitnya, sementara asosiasi pemilik gedung mungkin bertanggung jawab untuk area umum dan fasilitas bersama seperti atap, lift, dan sistem utilitas utama.</p>
+              <p><strong>Bagaimana hubungan antara Objek Fisik dan Objek Yuridis dalam administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Dalam administrasi pertanahan 3 dimensi, penting untuk memastikan bahwa <strong>objek fisik</strong> dan <strong>objek legal</strong> dipetakan secara akurat untuk menghindari konflik kepemilikan atau penggunaan ruang. Misalnya, ruang bawah tanah di bawah suatu bangunan mungkin menjadi milik pihak lain yang berbeda dengan pemilik tanah di permukaan, dan hal ini harus diatur secara legal.</p>
+              <p>Penyajian data spasial 3 dimensi bertujuan untuk memberikan representasi yang lebih komprehensif dari kepemilikan dan penggunaan ruang dalam tiga dimensi, baik secara fisik maupun yuridis. Sistem ini sangat relevan di area perkotaan dengan struktur bangunan yang rumit dan penggunaan ruang yang tumpang tindih, sehingga memungkinkan pengelolaan tanah yang lebih efisien dan adil.</p>
             </li>
             <li>
-              <p><strong>Apa manfaat utama dari sistem kadaster 3 dimensi?</strong></p>
-              <p>Manfaat utama termasuk peningkatan kejelasan dalam kepemilikan dan batasan properti, penyelesaian sengketa yang lebih efektif, dan peningkatan efisiensi dalam pengelolaan dan pembangunan ruang vertikal. Ini juga mendukung inovasi dalam pengembangan real estat dan infrastruktur perkotaan.</p>
+              <p><strong>Apa yang dimaksud dengan RRR ?</strong></p>
+              <p>RRR kependekan dari Rights, Restriction and Responsibilities atau dalam Bahasa Indonesia diterjemahkan sebagai Hak, Batasan dan Tanggungjawab</p>
             </li>
             <li>
-              <p><strong>Bagaimana kadaster 3 dimensi mempengaruhi pembangunan bertingkat?</strong></p>
-              <p>Kadaster 3 dimensi sangat penting dalam pembangunan bertingkat karena memungkinkan pengembang dan pemilik properti untuk memisahkan hak kepemilikan secara vertikal. Ini memudahkan penjualan dan pengelolaan unit individu dalam gedung bertingkat, seperti apartemen atau kantor.</p>
+              <p><strong>Apa yang dimaksud dengan Hak ?</strong></p>
+              <p>Hak merujuk pada kewenangan hukum yang dimiliki seseorang atau entitas (seperti pemilik, penyewa, atau pengelola) untuk menggunakan, mengelola, atau menguasai suatu properti dalam batasan yang diatur oleh hukum. Dalam administrasi pertanahan 3 dimensi, hak ini tidak hanya mencakup permukaan tanah (2D) tetapi juga mencakup hak atas ruang di atas dan di bawah permukaan tanah (3D).</p>
             </li>
             <li>
-              <p><strong>Apakah kadaster 3 dimensi mempengaruhi nilai properti?</strong></p>
-              <p>Ya, kadaster 3 dimensi dapat mempengaruhi nilai properti karena memberikan kejelasan hukum yang lebih besar tentang apa yang dimiliki seseorang secara tepat. Ini meningkatkan keamanan hukum bagi pemilik dan potensial investor, yang bisa meningkatkan nilai properti tersebut.</p>
+              <p><strong>Apa yang dimaksud dengan Batasan ?</strong></p>
+              <p>Batasan adalah pembatasan hukum atau yang mengatur apa yang tidak boleh dilakukan oleh pemilik atau pengguna properti tertentu. Batasan ini diterapkan oleh pemerintah, otoritas perencanaan, atau peraturan hukum lainnya untuk melindungi kepentingan publik, keamanan, dan kelestarian lingkungan. Dalam konteks administrasi pertanahan 3 dimensi, batasan ini sering kali berhubungan dengan batas ketinggian pemanfaatan ruang.</p>
+            </li>
+            <li>
+              <p><strong>Apa &nbsp;yang dimaksud dengan Tanggung Jawab ?</strong></p>
+              <p>Tanggung jawab merujuk pada kewajiban yang melekat pada pemilik atau pengguna tanah atau bangunan atau ruang untuk mematuhi aturan yang berlaku. Tanggung jawab dalam administrasi pertanahan 3 dimensi mencakup berbagai aspek yang terkait dengan pengelolaan ruang fisik dan hubungan dengan pihak lain.</p>
+            </li>
+            <li>
+              <p><strong>Apa itu Administrasi Pertanahan 3 Dimensi?</strong></p>
+              <p>Administrasi Pertanahan 3 Dimensi adalah konsep pengelolaan data pertanahan yang mencakup dimensi ketiga, yaitu ketinggian atau kedalaman, untuk menggambarkan kepemilikan, penggunaan, dan penguasaan tanah secara lebih lengkap. Hal ini sangat relevan di wilayah dengan penggunaan ruang yang kompleks seperti gedung bertingkat, terowongan bawah tanah, atau infrastruktur lain yang melibatkan elemen vertikal.</p>
             </li>
           </ol>
         </div>
@@ -317,7 +326,7 @@
       </div>
       <div class="offcanvas-body">
         <div>
-          Berikut adalah daftar skenario pengujian usability untuk WebGIS kadaster 3D Anda:
+          Berikut adalah daftar skenario pengujian usability untuk WebGIS Administrasi Pertanahan 3D Anda:
           <ol>
             <li>Navigasi ke lokasi bangunan tertentu (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) di peta 3D</li>
             <li>Cek pengelolaan layer dengan cara menyembunyikan/menampilkan layer</li>
@@ -1784,11 +1793,11 @@
               <div id="buildingHeight" class="py-1"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label">Latitude</label>
-                <input class="form-control form-control-sm" id="latitude" type="number" step="any" min="-180" max="180" placeholder="-7,258300">
+                <input class="form-control form-control-sm" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300">
                 <label for="longitude" class="form-label">Longitude</label>
-                <input class="form-control form-control-sm" id="longitude" type="number" step="any" min="-180" max="180" placeholder="112,73890">
+                <input class="form-control form-control-sm" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890">
                 <label for="longitude" class="form-label">Heading</label>
-                <input class="form-control form-control-sm" id="hdg" type="number" step="any" min="0" max="360" value="0" placeholder="330">
+                <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
               </div>
               <div class="mt-2 d-flex justify-content-end">
                 <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
