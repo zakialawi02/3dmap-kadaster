@@ -1,9 +1,9 @@
-//** */ Inisiasi cesium token
+// inisiasi cesium token
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
 // Cesium.Ion.defaultAccessToken =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
-//** */ Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
+// Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
   // terrain: Cesium.Terrain.fromWorldTerrain(),
   animation: false,
@@ -15,36 +15,6 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   fullscreenButton: false,
 });
 
-// Create a new div element to display coordinates
-const coordsDisplay = document.createElement("div");
-coordsDisplay.style.position = "absolute";
-coordsDisplay.style.bottom = "10px";
-coordsDisplay.style.left = "50%";
-coordsDisplay.style.transform = "translateX(-50%)";
-coordsDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-coordsDisplay.style.color = "white";
-coordsDisplay.style.padding = "5px 10px";
-coordsDisplay.style.borderRadius = "5px";
-coordsDisplay.style.fontFamily = "Arial, sans-serif";
-coordsDisplay.style.fontSize = "14px";
-viewer.container.appendChild(coordsDisplay);
-
-// Add event listener for mouse move
-viewer.scene.canvas.addEventListener("mousemove", function (e) {
-  var ellipsoid = viewer.scene.globe.ellipsoid;
-  // Mouse over the globe to see the cartographic position
-  var cartesian = viewer.camera.pickEllipsoid(new Cesium.Cartesian2(e.clientX, e.clientY), ellipsoid);
-  if (cartesian) {
-    var cartographic = ellipsoid.cartesianToCartographic(cartesian);
-    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(10);
-    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(10);
-    coordsDisplay.textContent = `Lon: ${longitudeString}, Lat: ${latitudeString}`;
-  } else {
-    coordsDisplay.textContent = "Coordinates: N/A";
-  }
-});
-
-//** */ Set environment cesium parameters
 viewer.clock.currentTime = new Cesium.JulianDate(9107651.04167);
 viewer.scene.globe.enableLighting = true;
 viewer.scene.highDynamicRange = true;
@@ -56,7 +26,6 @@ viewer.scene.globe.depthTestAgainstTerrain = true;
 viewer.scene.screenSpaceCameraController.enableCollisionDetection = true;
 viewer.scene.globe.translucency.frontFaceAlphaByDistance = new Cesium.NearFarScalar(400.0, 0.0, 800.0, 1.0);
 
-//** */ Set camera position for first time
 viewer.camera.flyTo({
   destination: Cesium.Cartesian3.fromDegrees(112.73677426629814, -7.259593062440535, 20000),
   orientation: {
@@ -65,7 +34,6 @@ viewer.camera.flyTo({
   },
 });
 
-// ** */ Add Minimap
 // Initialize OpenLayers map
 const miniMap = new ol.Map({
   target: "map2d",
@@ -100,7 +68,6 @@ const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
 miniMap.addLayer(vectorLayer);
-
 // get center view from cesium
 const getCenterView = function () {
   // Get the current camera position
@@ -121,7 +88,6 @@ const getCenterView = function () {
     roll,
   };
 };
-
 // Adjust OpenLayers zoom based on height
 const getZoom = function (currentView) {
   let zoomLevel;
@@ -148,7 +114,6 @@ const getZoom = function (currentView) {
   }
   return zoomLevel;
 };
-
 // Add an event listener for camera move end
 viewer.camera.moveEnd.addEventListener(function () {
   const currentView = getCenterView();
@@ -168,7 +133,6 @@ const openStreetMapBasemap = layers.addImageryProvider(
   })
 );
 
-// Fungsi untuk mengganti layer peta dasar
 function changeBasemapLayer(selectedBasemap) {
   // console.log(layers);
   if ($("#ShowBasemap").prop("checked") === true) {
@@ -212,7 +176,6 @@ $("#basemapSelector, #ShowBasemap").change(function () {
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = !$("#underground_1").prop("checked");
 });
 
-//** */ Fungsi untuk posisi camera
 // Set first camera the given longitude, latitude, and height.
 function firstCamera() {
   viewer.camera.flyTo({
@@ -244,7 +207,6 @@ function thirdCamera() {
   });
 }
 
-// Fungsi untuk mengubah koordinat
 function DD2DMS(deg, direct = false) {
   var direction = "";
   if (direct == "lat") {
@@ -261,7 +223,6 @@ function DD2DMS(deg, direct = false) {
   return `${degrees}° ${Math.floor(minutes)}' ${seconds.toFixed(2)}" ${direction}`;
 }
 
-// Fungsi untuk mengatur zoom ke tileset
 function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDistance = 300) {
   // Zoom to the tileset
   const heading = Cesium.Math.toRadians(headingDegrees);
@@ -276,7 +237,6 @@ function zoomToTileset(tileset, pitchDegrees = -25, headingDegrees = 0, zoomDist
   });
 }
 
-// Fungsi untuk mengatur zoom ke lokasi
 function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchDegrees = -25, roll = 0) {
   // Zoom to position
   const heading = Cesium.Math.toRadians(headingDegrees);
@@ -294,7 +254,6 @@ function zoomToLocation(headingDegrees, height = 20, longitude, latitude, pitchD
   });
 }
 
-// Fungsi untuk membuat style transparan [not use]
 function createTransparentStyle(alphaValue) {
   return new Cesium.Cesium3DTileStyle({
     color: {
@@ -303,7 +262,6 @@ function createTransparentStyle(alphaValue) {
   });
 }
 
-//** */ Event click camera
 $("#first-camera").click(function (e) {
   firstCamera();
 });
@@ -335,12 +293,11 @@ const selected = {
 // Entitas yang menyimpan info tentang fitur terpilih
 const selectedEntity = new Cesium.Entity();
 
-// Penanganan event klik kiri default
+// Penanganan klik kiri default
 const clickHandler = viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 // Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedFeatureDescription(pickedFeature) {
-  // ambil informasi pada objek gml
   const description =
     `<table class="cesium-infoBox-defaultTable"><tbody>` +
     `<tr><th>ObjectID</th><td>${pickedFeature.getProperty("Tag")}</td></tr>` +
@@ -355,10 +312,8 @@ function createPickedFeatureDescription(pickedFeature) {
     `</tbody></table>`;
   return description;
 }
-// Fungsi untuk membuat deskripsi HTML fitur terpilih
 function createPickedDataDescription(pickedData) {
   if (pickedData.hasProperty("GlobalId")) {
-    // ambil data atribut pada bidang parcel
     const description =
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.id.getValue()}</td></tr>` +
@@ -383,7 +338,6 @@ function createPickedDataDescription(pickedData) {
       `</tbody></table>`;
     return description;
   } else if (pickedData.hasProperty("kode")) {
-    // ambil data atribut pada bidang tata bangunan
     const description =
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
@@ -416,7 +370,6 @@ function createPickedDataDescription(pickedData) {
   }
 }
 
-//** */ Event untuk klik kiri mouse
 let pickedFeature;
 let dataRoom;
 // Cek apakah siluet didukung
@@ -449,7 +402,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-  // Saat mouse diklik, siluetkan fitur berwarna hijau dan tampilkan metadata gml di properti panel
+  // Saat mouse diklik, siluetkan fitur berwarna hijau dan tampilkan metadata di InfoBox
   viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     silhouetteGreen.selected = [];
 
@@ -511,7 +464,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
       success: function (response) {
         const data = response;
         dataRoom = data;
-        // console.log(data);
+        console.log(data);
         const tags = JSON.parse(data.tag);
         // console.log("DATA TAG");
         // console.log(tags);
@@ -532,21 +485,19 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           // Tambahkan baris baru dengan nama "Organizer Data"
           const dataOrganizerROW = `<tr><th>Organizer Data</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").after(dataOrganizerROW);
-          if (data.is_public == false) {
-            // Tambahkan baris baru dengan nama "Tenant Detail"
-            const dataTenantROW = `<tr><th>Data Penyewa/Pengguna</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">Lihat <i class="bi bi-zoom-in"></i></button></td></tr>`;
-            updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
+          // Tambahkan baris baru dengan nama "Tenant Detail"
+          const dataTenantROW = `<tr><th>Tenant Data</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
+          updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
 
-            // Tambahkan baris baru dengan nama "Hak"
-            const dataRightROW = `<tr><th>Hak</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-            updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
-            // Tambahkan baris baru dengan nama "Batasan"
-            const dataRestrictionROW = `<tr><th>Batasan</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
-            // Tambahkan baris baru dengan nama "Tanggung Jawab"
-            const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Baca <i class="bi bi-eye"></i></button></td></tr>`;
-            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
-          }
+          // Tambahkan baris baru dengan nama "Right"
+          const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read<i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
+          // Tambahkan baris baru dengan nama "Restriction"
+          const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
+          // Tambahkan baris baru dengan nama "Tanggung Jawab"
+          const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
+          updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
         }
         // scan();
         // add URI
@@ -565,7 +516,8 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         }
       },
       error: function (error) {
-        console.error(error);
+        console.log("error");
+        console.log(error);
       },
     });
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -576,7 +528,6 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     originalColor: new Cesium.Color(),
   };
 
-  // Saat mouse hover siluetkan fitur berwarna biru
   viewer.screenSpaceEventHandler.setInputAction(function onMouseMove(movement) {
     if (Cesium.defined(highlighted.feature)) {
       highlighted.feature.color = highlighted.originalColor;
@@ -596,7 +547,6 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
     }
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-  // Saat mouse diklik, tampilkan metadata geojson di properti panel
   viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
     if (Cesium.defined(selected.feature)) {
       selected.feature.color = selected.originalColor;
@@ -629,7 +579,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 
-// Menangani event klik pada tombol "View (room)"
+// Menangani klik pada tombol "View (room)"
 $(document).on("click", "#btnDetailRoom", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -639,53 +589,34 @@ $(document).on("click", "#btnDetailRoom", function (e) {
   const parcel_id = $(this).data("parcel");
   const room_id = $(this).data("room");
   const data = dataRoom;
-
-  let table;
-  if (data.is_public == true) {
-    table =
-      `<table class="table"><tbody>` +
-      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
-      `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
-      `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
-      `</tbody></table>`;
-  } else {
-    table =
-      `<table class="table"><tbody>` +
-      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
-      `<tr><th>Nama Ruang</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
-      `<tr><th>Penggunaan</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
-      `<tr><th>Nomor Perjanjian Sewa</th><td style="width: 1%;">:</td><td> ${
-        data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
-          ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
-          : "Tidak ada Data!"
-      }
+  const table =
+    `<table class="table"><tbody>` +
+    `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+    `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}</td></tr>` +
+    `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+    `<tr><th>Agreement Number</th><td style="width: 1%;">:</td><td> ${
+      data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
+        ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
+        : "No Data!"
+    }
     </td></tr>` +
-      `<tr><th>Bukti Perjanjian</th><td style="width: 1%;">:</td><td> ${
-        data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "Tidak ada Data!"
-      }
+    `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "No Data!"}
     </td></tr>` +
-      `<tr><th>Status Kepemilikan</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
-      `<tr><th>Waktu Mulai</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
-      `<tr><th>Waktu Berakhir</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
-      `<tr><th>Biaya Sewa (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
-      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
-      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
-      `<tr><th>Tinggi</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
-      `<tr><th>Luas</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
-      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
-      `</tbody></table>`;
-  }
-
+    `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
+    `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
+    `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
+    `<tr><th>Rent Fee (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+    `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+    `<tr><th>Height</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+    `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+    `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
+    `</tbody></table>`;
   $("#detailRoom .modal-body").html(table);
   scan();
 });
 
-// Menangani event klik pada tombol "View (organizer)"
+// Menangani klik pada tombol "View (organizer)"
 $(document).on("click", "#btnDetailOrganizer", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -702,11 +633,10 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
       const data = response;
       const table =
         `<table class="table"><tbody>` +
-        `<tr><th>Nama Pengelola</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
-        `<tr><th>Alamat</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
-        `<tr><th>Kab/Kota</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
-        `<tr><th>Kepala Pengelola</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
-        `<tr><th>url</th><td style="width: 1%;">:</td><td>${data.uri_organizer ? `<a href="${data.uri_organizer}" target="_blank">lihat <i class="bi bi-box-arrow-up-right"></i></a>` : "-"}</td></tr>` +
+        `<tr><th>Organizer Name</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
+        `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
+        `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
+        `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
         `</tbody></table>`;
       $("#detailOrganizer .modal-body").html(table);
       scan();
@@ -718,7 +648,7 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
   });
 });
 
-// Menangani event klik pada tombol "View (Tenant)"
+// Menangani klik pada tombol "View (Tenant)"
 $(document).on("click", "#btnDetailTenant", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
@@ -751,46 +681,46 @@ $(document).on("click", "#btnDetailTenant", function (e) {
   }
 });
 
-// Menangani event klik pada tombol "Read (Right)"
+// Menangani klik pada tombol "Read (Right)"
 $(document).on("click", "#btnRight", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
   $("#detailRight .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRRR(parcel, "right").then((result) => {
+  displayRight(parcel, "right").then((result) => {
     $("#detailRight .modal-body").html(result);
     scan();
   });
 });
 
-// Menangani event klik pada tombol "Read (Restriction)"
+// Menangani klik pada tombol "Read (Restriction)"
 $(document).on("click", "#btnRestriction", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
   $("#detailRestriction .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRRR(parcel, "restriction").then((result) => {
+  displayRight(parcel, "restriction").then((result) => {
     $("#detailRestriction .modal-body").html(result);
     scan();
   });
 });
 
-// Menangani event klik pada tombol "Read (Responsibilities)"
+// Menangani klik pada tombol "Read (Responsibilities)"
 $(document).on("click", "#btnResponsibilities", function (e) {
   // loader animation
   const loader = `<div class="loader" style=" margin: 0 auto; "></div>`;
   $("#detailResponsibilities .modal-body").html(loader);
   const data = dataRoom;
   const parcel = data.parcel_id;
-  displayRRR(parcel, "responsibilities").then((result) => {
+  displayRight(parcel, "responsibilities").then((result) => {
     $("#detailResponsibilities .modal-body").html(result);
     scan();
   });
 });
 
-function displayRRR(parcelId, typerrr) {
+function displayRight(parcelId, typerrr) {
   let url;
   const type = typerrr.toLowerCase();
   if (parcelId == "3578071002B0001") {
@@ -809,17 +739,21 @@ function displayRRR(parcelId, typerrr) {
 
 // TARGETSCAN
 const dataKeyword = [
-  // {
-  //   keyword: "Hak",
-  //   url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
-  // },
-  // {
-  //   keyword: "Kewajiban",
-  //   url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
-  // },
+  {
+    keyword: "Rights",
+    url: "https://www.gramedia.com/literasi/pengertian-hak-menurut-para-ahli/",
+  },
+  {
+    keyword: "Responsibilities",
+    url: "https://www.gramedia.com/literasi/pengertian-kewajiban/",
+  },
+  {
+    keyword: "Rusunawa",
+    url: "http://3dmap-kadaster.test/data/uri/view.php?uri=rumah-susun",
+  },
 ];
 function scan() {
-  // console.log("SCAN");
+  console.log("SCAN");
   // Mendapatkan semua elemen <div> dengan kelas "modal"
   const modals = document.querySelectorAll(".TARGETSCAN");
   // Iterasi melalui setiap elemen modal
@@ -956,7 +890,6 @@ $("#siolaLegal_5a1").change(function () {
   setVisibilityByobject_id(siolaLegal, "850924", $(this).prop("checked"));
 });
 
-// Event klik zoomTo Siola legal
 $("#zoomToSiolaLegal_1all").on("click", function () {
   setTransparentByobject_id(siolaLegal, ["817240", "825386", "820896", "820815", "919493", "820143", "821077", "823865", "821964", "826868"]);
   zoomToTileset(siolaBuildingL1, -5, 90, 150);
@@ -1200,7 +1133,6 @@ $("#balaiLegal_0a9").change(function () {
   setVisibilityByobject_id(balaiLegal, "609329", $(this).prop("checked"));
 });
 
-// Event zoomTo Balai Legal
 $("#zoomToBalaiLegal_0all").on("click", function () {
   setTransparentByobject_id(balaiLegal, ["612619", "612232", "613040", "613441", "610552", "611250", "611746", "610016", "609329"]);
   zoomToTileset(balaiBuildingL1, -25, 355, 150);
@@ -1711,7 +1643,6 @@ $("#rusunawaLegal_5a26").change(function () {
   setVisibilityByobject_id(rusunawaLegal, "618232", $(this).prop("checked"));
 });
 
-// Event zoomTo Rusunawa Legal
 $("#zoomToRusunawaLegal_1all").on("click", function () {
   setTransparentByobject_id(rusunawaLegal, ["599276", "599642", "619195", "619194", "619196", "601694", "601835", "601952", "600414", "600975", "600292", "600222", "600145", "600045", "599963", "599868", "599584"]);
   zoomToTileset(rusunawaBuildingL1, -25, 180, 100);
@@ -2341,12 +2272,11 @@ $("#zoomToRusunawaLegal_5a26").on("click", function () {
 });
 
 // Layering Parcel Building  #############################
-// Function to toggle visibility based on feature objectId geojson
+// Function to toggle visibility based on feature objectId
 function toggleVisibilityGeojson(objectId, isVisible) {
   const dataSources = viewer.dataSources; // Mengambil semua sumber data GeoJSON yang dimuat
   for (let i = 0; i < dataSources.length; i++) {
     const dataSource = dataSources.get(i);
-    // [0]=> measurement, [1]=>environment geojson, [2]=>bidang tanah geojson
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
       if (entity.properties.hasOwnProperty("objectid") && entity.properties.objectid.getValue() == objectId) {
@@ -2361,7 +2291,6 @@ function toggleVisibilityGeojson(objectId, isVisible) {
   }
 }
 
-// Event untuk show/hide objek geojson
 $("#siolaParcel").change(function () {
   toggleVisibilityGeojson("910222", $(this).is(":checked"));
 });
@@ -2879,7 +2808,7 @@ $("#rusunawaLegal_5all").change(function () {
   setVisibilityByobject_id(rusunawaLegal, "618232", isChecked);
 });
 
-// set style for tileset [gml]
+// set style tileset [gml]
 const colorMap = {
   "Anotha Blue": new Cesium.Color(0 / 255, 0 / 255, 255 / 255, 1.0), // Anotha Blue
   "Baby Blue": new Cesium.Color(173 / 255, 216 / 255, 230 / 255, 1.0), // Baby Blue
@@ -2953,7 +2882,6 @@ function mappingHide(Tag, isChecked) {
   console.log(MappingHideTileset);
 }
 
-// Fungsi untuk set visibility object tileset
 function setVisibilityByobject_id(tileset, Tag, isChecked) {
   mappingHide(Tag, isChecked);
   tileset.style = new Cesium.Cesium3DTileStyle({
@@ -2998,7 +2926,6 @@ function mappingTransparent(Tag) {
   // console.log(MappingTransparentTileset);
 }
 
-// Fungsi untuk set transparansi objek legal
 function setTransparentByobject_id(tileset, Tag) {
   MappingTransparentTileset = [];
   mappingTransparent(Tag);
@@ -3050,8 +2977,8 @@ $("#resetTransparent").click(function () {
 
 firstCamera();
 
-// Get building layout (all building in one file geojson) ##########################################################################################
-const ENVBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
+// Get Parcel (all building in one file geojson) ##########################################################################################
+const EVNBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
     entities.forEach((entity) => {
@@ -3078,21 +3005,21 @@ const ENVBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
           entity.polygon.material = Cesium.Color.fromCssColorString("rgb(128, 128, 128)").withAlpha(0.5);
         }
         entity.polygon.outlineColor = Cesium.Color.fromCssColorString("gray").withAlpha(0.5);
-
-        // Add these properties to make polygons non-pickable
-        entity.polygon.classificationType = Cesium.ClassificationType.TERRAIN;
-        entity.polygon.pickPrimitive = false;
       }
     });
     return viewer.dataSources.add(dataSource);
   })
   .then(() => {
-    console.log("GeoJSON ENVBD berhasil dimuat dan ditampilkan di viewer.");
+    console.log("GeoJSON EVNBD berhasil dimuat dan ditampilkan di viewer.");
   })
   .catch((error) => {
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
+// const parcelBD = await Cesium.GeoJsonDataSource.load(await Cesium.IonResource.fromAssetId(2489835));
+// await viewer.dataSources.add(parcelBD);
+// const parcelBD = await Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson");
+// await viewer.dataSources.add(parcelBD);
 const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
   .then((dataSource) => {
     const entities = dataSource.entities.values;
@@ -3148,260 +3075,10 @@ const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.from
 siolaLegal.style = setColorStyle;
 
 // hide preloader after finish load data
-
-$(".preload").addClass("d-none");
-$(".loader-container").removeClass("d-none");
-
-let currentModel;
-let buildingHeight;
-let axesEntities = [];
-let isDragging = false;
-let selectedAxis = null;
-let startMousePosition;
-let startModelPosition;
-
-// Fungsi untuk membaca file 3D yang diupload
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = async function (e) {
-      const arrayBuffer = e.target.result;
-      const uint8Array = new Uint8Array(arrayBuffer);
-
-      if (file.name.endsWith(".glb")) {
-        try {
-          const bbox = await computeBoundingBoxFromGLB(uint8Array);
-          buildingHeight = getObjectHeight(bbox);
-          $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
-          const { length, width } = getBoundingBoxDimensions(bbox);
-          console.log("Length:", length, "Width:", width);
-
-          // Tampilkan input koordinat
-          document.getElementById("coordinateInputs").style.display = "block";
-
-          // Simpan data file dan bounding box untuk digunakan saat update posisi
-          window.uploadedFile = uint8Array;
-          window.uploadedFileType = "glb";
-          window.uploadedFileBBox = bbox;
-        } catch (error) {
-          console.log(error);
-          alert("Gagal memparsing model GLB");
-        }
-      } else if (file.name.endsWith(".obj")) {
-        // Implementasi untuk OBJ jika diperlukan
-        alert("Format file OBJ belum didukung untuk perhitungan tinggi.");
-      } else {
-        alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
-      }
-    };
-    reader.readAsArrayBuffer(file);
-  }
-}
-
-// Fungsi untuk menghitung bounding box dari model GLB
-function computeBoundingBoxFromGLB(uint8Array) {
-  return new Promise((resolve, reject) => {
-    const loader = new THREE.GLTFLoader();
-    const blob = new Blob([uint8Array], { type: "model/gltf-binary" });
-    const url = URL.createObjectURL(blob);
-
-    loader.load(
-      url,
-      (gltf) => {
-        const bbox = new THREE.Box3().setFromObject(gltf.scene);
-        URL.revokeObjectURL(url);
-        resolve(bbox);
-      },
-      undefined,
-      (error) => {
-        reject(error);
-      }
-    );
-  });
-}
-
-// Fungsi untuk mendapatkan tinggi objek dari bounding box
-function getObjectHeight(bbox) {
-  const height = bbox.max.y - bbox.min.y;
-  return height;
-}
-
-// Updated function to create draggable axes
-function createAxes(position, orientation, scale) {
-  removeAxes();
-
-  const axisLength = buildingHeight + 50;
-
-  // Helper function to create a draggable axis
-  function createAxis(color, direction, axisName) {
-    const endPosition = Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), direction, new Cesium.Cartesian3());
-
-    const axis = viewer.entities.add({
-      polyline: {
-        positions: [position, endPosition],
-        width: 40,
-        material: new Cesium.PolylineArrowMaterialProperty(color),
-      },
-      name: axisName,
-    });
-
-    axesEntities.push(axis);
-  }
-
-  // Create axes with names
-  createAxis(Cesium.Color.RED, new Cesium.Cartesian3(axisLength, 0, 0), "x-axis");
-  createAxis(Cesium.Color.GREEN, new Cesium.Cartesian3(0, axisLength, 0), "y-axis");
-  createAxis(Cesium.Color.BLUE, new Cesium.Cartesian3(0, 0, axisLength), "z-axis");
-}
-
-// Add mouse event handlers
-viewer.screenSpaceEventHandler.setInputAction(function (movement) {
-  // Get all picked objects
-  const pickedObjects = viewer.scene.drillPick(movement.position);
-
-  let axisFound = false;
-  for (let i = 0; i < pickedObjects.length; i++) {
-    const pickedObject = pickedObjects[i];
-    if (Cesium.defined(pickedObject) && pickedObject.id && axesEntities.includes(pickedObject.id)) {
-      axisFound = true;
-      isDragging = true;
-      selectedAxis = pickedObject.id.name;
-      startMousePosition = movement.position;
-      startModelPosition = Cesium.Cartesian3.clone(currentModel.position.getValue());
-      viewer.scene.screenSpaceCameraController.enableRotate = false;
-      break;
-    }
-  }
-
-  if (!axisFound) {
-    isDragging = false;
-    selectedAxis = null;
-  }
-}, Cesium.ScreenSpaceEventType.LEFT_DOWN);
-
-viewer.screenSpaceEventHandler.setInputAction(function (movement) {
-  if (isDragging && selectedAxis) {
-    const currentMousePosition = movement.endPosition;
-    const diff = {
-      x: currentMousePosition.x - startMousePosition.x,
-      y: currentMousePosition.y - startMousePosition.y,
-    };
-
-    const ellipsoid = viewer.scene.globe.ellipsoid;
-
-    // Get model's current orientation
-    const modelOrientation = currentModel.orientation.getValue();
-
-    // Calculate movement based on selected axis using model's orientation
-    let movementAmount = new Cesium.Cartesian3();
-    const movementScale = 0.01; // Adjust this value to control movement sensitivity
-
-    switch (selectedAxis) {
-      case "x-axis":
-        // Red axis - move along model's x-axis
-        const xAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 0, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(xAxis, diff.x * movementScale, movementAmount);
-        break;
-      case "y-axis":
-        // Green axis - move along model's y-axis
-        const yAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 1, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(yAxis, diff.x * movementScale, movementAmount);
-        break;
-      case "z-axis":
-        // Blue axis - move along model's z-axis
-        const zAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 2, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(zAxis, -diff.y * movementScale, movementAmount);
-        break;
-    }
-
-    // Update model position
-    const newPosition = Cesium.Cartesian3.add(currentModel.position.getValue(), movementAmount, new Cesium.Cartesian3());
-
-    currentModel.position = newPosition;
-
-    // Update axes positions
-    removeAxes();
-    createAxes(newPosition, modelOrientation, 1.0);
-
-    // Update coordinate display
-    const cartographic = ellipsoid.cartesianToCartographic(newPosition);
-    const lat = Cesium.Math.toDegrees(cartographic.latitude);
-    const lon = Cesium.Math.toDegrees(cartographic.longitude);
-    document.getElementById("latitude").value = lat.toFixed(6);
-    document.getElementById("longitude").value = lon.toFixed(6);
-  }
-}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-viewer.screenSpaceEventHandler.setInputAction(function (movement) {
-  if (isDragging) {
-    isDragging = false;
-    selectedAxis = null;
-    viewer.scene.screenSpaceCameraController.enableRotate = true;
-  }
-}, Cesium.ScreenSpaceEventType.LEFT_UP);
-
-// Updated function to remove axes
-function removeAxes() {
-  axesEntities.forEach((axis) => viewer.entities.remove(axis));
-  axesEntities = [];
-}
-
-// Modified updateModelPosition function
-function updateModelPosition() {
-  const latitude = parseFloat(document.getElementById("latitude").value);
-  const longitude = parseFloat(document.getElementById("longitude").value);
-  const hdg = parseFloat(document.getElementById("hdg").value);
-  const xOffset = 0;
-  const yOffset = 0;
-  const zOffset = 0;
-
-  if (isNaN(latitude) || isNaN(longitude)) {
-    alert("Masukkan koordinat yang valid.");
-    return;
-  }
-
-  const position = Cesium.Cartesian3.fromDegrees(longitude, latitude, 0);
-  const heading = Cesium.Math.toRadians(hdg || 0);
-  const pitch = 0;
-  const roll = 0;
-  const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
-  const orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
-
-  if (currentModel) {
-    viewer.entities.remove(currentModel);
-    removeAxes();
-  }
-
-  if (window.uploadedFileType === "glb") {
-    currentModel = viewer.entities.add({
-      position: Cesium.Cartesian3.add(position, new Cesium.Cartesian3(xOffset, yOffset, zOffset), new Cesium.Cartesian3()),
-      orientation: orientation,
-      model: {
-        uri: URL.createObjectURL(new Blob([window.uploadedFile])),
-        scale: 1.0,
-      },
-    });
-
-    // Create axes at the model's origin
-    createAxes(position, orientation, 1.0);
-  }
-
-  viewer.flyTo(currentModel, {
-    duration: 1,
-  });
-}
-
-// Fungsi untuk mendapatkan dimensi panjang dan lebar dari penampang bawah model
-function getBoundingBoxDimensions(bbox) {
-  const length = bbox.max.x - bbox.min.x; // Panjang (sumbu X)
-  const width = bbox.max.z - bbox.min.z; // Lebar (sumbu Z)
-  return { length, width };
-}
-
-// Event listeners
-document.getElementById("formFileSm").addEventListener("change", handleFileUpload);
-document.getElementById("cek3d").addEventListener("click", updateModelPosition);
+$(function () {
+  $(".preload").addClass("d-none");
+  $(".loader-container").removeClass("d-none");
+});
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
@@ -3572,7 +3249,6 @@ $("#reset-clip").click(function (e) {
   resetClipTilesets();
 });
 
-// Fungsi untuk mereset semua clipping tileset
 function resetClipTilesets(first = false) {
   // Iterasi melalui semua jenis bangunan
   Object.keys(tilesetsList).forEach(function (buildingType) {
@@ -3617,8 +3293,22 @@ function resetClipTilesets(first = false) {
   });
 }
 
-// Handle event autocomplete seacrh
+// handle autocomplete seacrh
 $(document).ready(function () {
+  async function fetchSuggestionsFromDatabase() {
+    try {
+      const response = await fetch(`/action/get-search.php?param=legal`);
+      if (!response.ok) {
+        throw new Error("Error fetching suggestions");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+      throw error;
+    }
+  }
+
   const suggestionsData = [
     {
       id: "1",
@@ -3725,25 +3415,6 @@ $(document).ready(function () {
             suggestionsData.push({
               id: item.legal_object_id,
               data: item.room_name,
-            });
-          }
-        });
-      } catch (error) {
-        throw error;
-      }
-      try {
-        const renterdata = await fetch(`/action/get-search.php?param=renters`);
-        if (!renterdata.ok) {
-          throw new Error("Error fetching suggestions");
-        }
-        const renterlData = await renterdata.json();
-
-        await renterlData.forEach((item) => {
-          // Push separate objects for data with the same ID
-          if (item.id != undefined && item.id != null && item.id != "") {
-            suggestionsData.push({
-              id: item.id,
-              data: item.tenant_name,
             });
           }
         });

@@ -64,9 +64,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $tenures = ['lease', 'Sewa', 'Pakai']
-                                    ?>
                                     <?php $no = 1; ?>
                                     <?php foreach ($renters_table as $row) : ?>
                                         <tr>
@@ -78,7 +75,7 @@
                                             <td><?= $row['tenure_status'] ?></td>
                                             <td><?= !empty($row['due_started']) ? (new DateTime($row['due_started']))->format('j-M-Y') : "-"; ?></td>
                                             <td><?= !empty($row['due_finished']) ? (new DateTime($row['due_finished']))->format('j-M-Y') : "-"; ?></td>
-                                            <td><?= (!empty($row['agreement_number']) ? '<a href="/assets/PDF/agreement/' . str_replace('/', '.', $row['agreement_number']) . '.pdf" target="_blank"><i class="bi bi-download"></i></a><span> ' . $row['agreement_number'] . '</span>' : (empty($row['agreement_number']) && in_array($row['tenure_status'], $tenures) ? '<button class="asbn btn btn-primary generateAgreementRusun" data-room="' . $row['room_id'] . '" data-tenant="' . $row['tenant_id'] . '" data-from="' . $row['lp_id'] . '">Generate</button>' : '-')) ?></td>
+                                            <td><?= (!empty($row['agreement_number']) ? '<a href="/assets/PDF/agreement/' . str_replace('/', '.', $row['agreement_number']) . '.pdf" target="_blank"><i class="bi bi-download"></i></a><span> ' . $row['agreement_number'] . '</span>' : (empty($row['agreement_number']) && $row['tenure_status'] == "lease" ? '<button class="asbn btn btn-primary generateAgreementRusun" data-room="' . $row['room_id'] . '" data-tenant="' . $row['tenant_id'] . '" data-from="' . $row['lp_id'] . '">Generate</button>' : '-')) ?></td>
                                             <td><?= (!empty($row['permit_flats'])) ? '<a href="/assets/PDF/certificate/' . $row['permit_flats'] . '"><i class="bi bi-download" target="_blank"></i></a>' : '<span id="P-' . $row['tenant_id'] . '">No data</span>' ?></td>
                                             <td>
                                                 <div class="d-flex flex-row gap-1">

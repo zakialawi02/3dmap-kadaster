@@ -43,10 +43,6 @@
                     <i class="bi bi-link-45deg"></i>
                     URI Data
                 </a>
-                <a href="/data/organizer/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
-                    <i class="bi bi-person-vcard-fill"></i>
-                    Manage Organizer
-                </a>
                 <a href="/data/room/" class="col-6  btn btn-primary text-center text-lg-start text-decoration-none p-3 rounded-xl text-light fw-bold fs-5 border border-2 border-dark m-2">
                     <i class="bi bi-building-gear"></i>
                     Rooms Data

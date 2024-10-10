@@ -5,15 +5,9 @@ include 'db_connect.php';
 
 // jika request method get biasa
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['id']) && !empty($_GET['id'])) {
-        // get by id
-        $sql = "SELECT * FROM managements_table WHERE id = " . $_GET['id'] . " LIMIT 1";
-        $result = $conn->query($sql);
-        $organizer_table = [];
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            $organizer_table = $result->fetch_assoc();
-        }
+    if (isset($_GET['']) && !empty($_GET[''])) {
+        // 
+
     } else {
         // get all data land_parcel
         $sql = "SELECT * FROM managements_table";
@@ -63,6 +57,5 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     }
 }
 
-// print_r($organizer_table);
 
 mysqli_close($conn);

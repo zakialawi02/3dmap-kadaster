@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 29, 2024 at 07:28 AM
+-- Generation Time: Jun 26, 2024 at 03:20 PM
 -- Server version: 8.0.30
--- PHP Version: 8.2.17
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -657,7 +657,6 @@ INSERT INTO `linked_uri` (`object_id`, `id_keyword`) VALUES
 CREATE TABLE `managements_table` (
   `id` int NOT NULL,
   `organizer_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `uri_organizer` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `organizer_address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `organizer_city` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `organizer_head` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -667,9 +666,9 @@ CREATE TABLE `managements_table` (
 -- Dumping data for table `managements_table`
 --
 
-INSERT INTO `managements_table` (`id`, `organizer_name`, `uri_organizer`, `organizer_address`, `organizer_city`, `organizer_head`) VALUES
-(1, 'Dinas Pekerjaan Umum, Penataan Ruang, Perumahan dan Kawasan Permukiman Permukiman', NULL, 'Jl.  Bingkil  Nomor  1', 'Malang', 'Drs. R. Dandung Julhardjanto, MT'),
-(2, 'Dinas Perumahan Rakyat dan Kawasan Permukiman, Cipta Karya dan Tata Ruang', NULL, 'Jl. Taman Surya No.1', 'Surabaya', 'Lilik Arijanto, ST, MT');
+INSERT INTO `managements_table` (`id`, `organizer_name`, `organizer_address`, `organizer_city`, `organizer_head`) VALUES
+(1, 'Dinas Pekerjaan Umum, Penataan Ruang, Perumahan dan Kawasan Permukiman Permukiman', 'Jl.  Bingkil  Nomor  1', 'Malang', 'Drs. R. Dandung Julhardjanto, MT'),
+(2, 'Dinas Perumahan Rakyat dan Kawasan Permukiman, Cipta Karya dan Tata Ruang', 'Jl. Taman Surya No.1', 'Surabaya', 'Lilik Arijanto, ST, MT');
 
 -- --------------------------------------------------------
 
@@ -700,12 +699,12 @@ INSERT INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due
 (14, 14, '0177', NULL, NULL, 'lease', '0014/1679/3573403/2024', 'S_0014.1679.3573403.2024.pdf'),
 (15, 15, '0168', NULL, NULL, 'lease', NULL, NULL),
 (16, 16, '0169', NULL, NULL, 'lease', NULL, NULL),
-(17, 17, '0170', NULL, NULL, 'lease', '0017/1679/3573403/2024', 'S_0017.1679.3573403.2024.pdf'),
-(18, 18, '0171', NULL, NULL, 'lease', '0018/1679/3573403/2024', 'S_0018.1679.3573403.2024.pdf'),
-(19, 19, '0172', NULL, NULL, 'lease', '0019/1679/3573403/2024', 'S_0019.1679.3573403.2024.pdf'),
-(20, 20, '0173', NULL, NULL, 'lease', '0020/1679/3573403/2024', 'S_0020.1679.3573403.2024.pdf'),
-(21, 21, '0174', NULL, NULL, 'lease', '0021/1679/3573403/2024', 'S_0021.1679.3573403.2024.pdf'),
-(22, 22, '0175', NULL, NULL, 'lease', '0022/1679/3573403/2024', 'S_0022.1679.3573403.2024.pdf'),
+(17, 17, '0170', NULL, NULL, 'lease', NULL, NULL),
+(18, 18, '0171', NULL, NULL, 'lease', NULL, NULL),
+(19, 19, '0172', NULL, NULL, 'lease', NULL, NULL),
+(20, 20, '0173', NULL, NULL, 'lease', NULL, NULL),
+(21, 21, '0174', NULL, NULL, 'lease', NULL, NULL),
+(22, 22, '0175', NULL, NULL, 'lease', NULL, NULL),
 (23, 23, '0178', NULL, NULL, 'lease', '0023/1679/3573403/2024', 'S_0023.1679.3573403.2024.pdf'),
 (24, 24, '0176', NULL, NULL, 'lease', '0024/1679/3573403/2024', 'S_0024.1679.3573403.2024.pdf'),
 (25, 25, '0130', NULL, NULL, 'lease', NULL, NULL),
@@ -792,9 +791,7 @@ INSERT INTO `renters_tenants` (`id`, `tenant_id`, `room_id`, `due_started`, `due
 (106, 106, '0094', NULL, NULL, 'lease', NULL, NULL),
 (107, 107, '0083', NULL, NULL, 'lease', NULL, NULL),
 (108, 108, '0084', NULL, NULL, 'lease', NULL, NULL),
-(109, 109, '0087', NULL, NULL, 'in queue', NULL, NULL),
-(121, 121, '0051', '2024-02-05', NULL, 'lease', '0121/1679/3578071/2024', 'S_0121.1679.3578071.2024.pdf'),
-(123, 123, '0027', '2024-08-01', '2099-07-31', 'lease', NULL, NULL);
+(109, 109, '0087', NULL, NULL, 'in queue', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -808,188 +805,186 @@ CREATE TABLE `rooms_table` (
   `organizer_id` int DEFAULT NULL,
   `room_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `space_usage` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `rent_fee` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `uri_room` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `is_public` tinyint(1) NOT NULL DEFAULT '0'
+  `rent_fee` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms_table`
 --
 
-INSERT INTO `rooms_table` (`room_id`, `legal_object_id`, `organizer_id`, `room_name`, `space_usage`, `rent_fee`, `uri_room`, `is_public`) VALUES
-('0001', 550615, 2, 'Tourism Information Center', 'Tourism Information Center', '', NULL, 0),
-('0002', 558371, 2, 'PISA (Pusat Informasi Sahabat Anak)', 'PISA (Pusat Informasi Sahabat Anak)', '', NULL, 0),
-('0003', 559588, 2, 'public space', 'public space', '', NULL, 0),
-('0004', 560626, 2, 'Main Room', 'Main Room', '', NULL, 0),
-('0005', 592037, 2, 'Back Main Room', 'Back Main Room', '', NULL, 0),
-('0006', 595885, 2, 'Staff Office', 'Staff Office', '', NULL, 0),
-('0007', 596362, 2, 'Storage', 'Storage', '', NULL, 0),
-('0008', 596892, 2, 'Bengkel Muda Surabaya', 'Bengkel Muda Surabaya', '', NULL, 0),
-('0009', 598132, 2, 'Hallway', 'Hallway', '', NULL, 0),
-('0010', 599448, 2, 'DKS Gallery', 'DKS Gallery', '', NULL, 0),
-('0011', 600819, 2, 'Mathematics House', 'Mathematics House', '', NULL, 0),
-('0012', 601254, 2, 'Merah Putih Gallery', 'Merah Putih Gallery', '', NULL, 0),
-('0013', 609329, 2, 'Indoor Skateboard', 'Indoor Skateboard', '', NULL, 0),
-('0014', 610016, 2, 'Central doorway', 'Central doorway', '', NULL, 0),
-('0015', 610552, 2, 'Entrance Door', 'Entrance Door', '', NULL, 0),
-('0016', 611250, 2, 'Exhibition space', 'Exhibition space', '', NULL, 0),
-('0017', 611746, 2, 'Below Space', 'Below Space', '', NULL, 0),
-('0018', 612232, 2, 'Hallway', 'Hallway', '', NULL, 0),
-('0019', 612619, 2, 'Elevator', 'Elevator', '', NULL, 0),
-('0020', 613040, 2, 'Toilet', 'Toilet', '', NULL, 0),
-('0021', 613441, 2, 'Operator Room', 'Operator Room', '', NULL, 0),
-('0022', 639829, 2, 'UPT Balai Pemuda', 'UPT Balai Pemuda', '', NULL, 0),
-('0025', 700690, 2, 'Tourism Information Center', 'Tourism Information Center', '', NULL, 0),
-('0027', 817240, 2, 'Kriya Gallery', 'Pertokoan', '', NULL, 0),
-('0028', 820143, 2, 'Museum', 'Museum', '', NULL, 0),
-('0029', 820815, 2, 'Tangga', 'Benda Bersama', '', NULL, 1),
-('0030', 820896, 2, 'Toilet Nursery', 'Toilet Nursery', '', NULL, 0),
-('0031', 821077, 2, 'UPTSA', 'UPTSA', '', NULL, 0),
-('0032', 821964, 2, 'ATM 1st floor', 'ATM 1st floor', '', NULL, 0),
-('0033', 823865, 2, 'Emergency Staircase', 'Emergency Staircase', '', NULL, 0),
-('0034', 825386, 2, 'Lorong', 'Bagian Bersama', '', '', 1),
-('0035', 826868, 2, 'Pantry Room', 'Pantry Room', '', NULL, 0),
-('0036', 829098, 2, 'Disparta', 'Disparta', '', NULL, 0),
-('0037', 829358, 2, 'Command Center', 'Command Center', '', NULL, 0),
-('0038', 830288, 2, 'DPM', 'DPM', '', NULL, 0),
-('0039', 831096, 2, 'Dispenduk', 'Dispenduk', '', NULL, 0),
-('0040', 831440, 2, 'Dispora', 'Dispora', '', NULL, 0),
-('0041', 838147, 2, 'Disperindag', 'Disperindag', '', NULL, 0),
-('0042', 839609, 2, 'Dispendukcapil', 'Dispendukcapil', '', NULL, 0),
-('0043', 840850, 2, '2nd Floor Corridor', '2nd Floor Corridor', '', NULL, 0),
-('0044', 841116, 2, 'Bridge 2nd floor', 'Bridge 2nd floor', '', NULL, 0),
-('0045', 843868, 2, '3rd Floor Corridor', '3rd Floor Corridor', '', NULL, 0),
-('0046', 847875, 2, 'Dinkop', 'Dinkop', '', NULL, 0),
-('0047', 848368, 2, 'Secretary Room', 'Secretary Room', '', NULL, 0),
-('0048', 849039, 2, 'Convention Hall 4th floor', 'Convention Hall 4th floor', '', NULL, 0),
-('0049', 849276, 2, 'Dispusip', 'Dispusip', '', NULL, 0),
-('0050', 850924, 2, 'Parking Siola', 'Parking Siola', '', NULL, 0),
-('0051', 886033, 2, 'Shared Space 4th floor', 'Shared Space 4th floor', '', NULL, 0),
-('0053', 913870, 2, 'L2.7 Ramp', 'L2.7 Ramp', '', NULL, 0),
-('0054', 914699, 2, 'Bridge 3rd floor', 'Bridge 3rd floor', '', NULL, 0),
-('0056', 919493, 2, 'Lorong', 'Bagian Bersama', '', NULL, 1),
-('0060', 599276, 1, 'Shared Space 1st floor', 'Shared Space 1st floor', '', NULL, 0),
-('0061', 599584, 1, 'Parking Rusunawa', 'Parking Rusunawa', '', NULL, 0),
-('0062', 599642, 1, 'Warehouse', 'Warehouse', '', NULL, 0),
-('0063', 599868, 1, 'Unit A.1.03', 'Residence', '400000', NULL, 0),
-('0064', 599963, 1, 'Unit A.1.02', 'Residence', '400000', NULL, 0),
-('0065', 600045, 1, 'Unit A.1.01', 'Residence', '400000', NULL, 0),
-('0066', 600145, 1, 'Manager Room', 'Manager Room', '', NULL, 0),
-('0067', 600222, 1, 'Panel Room', 'Panel Room', '', NULL, 0),
-('0068', 600292, 1, 'Parking Rusunawa', 'Parking Rusunawa', '', NULL, 0),
-('0069', 600414, 1, 'Jantor 1st floor', 'Jantor 1st floor', '', NULL, 0),
-('0070', 600975, 1, 'Trash Bin 1st floor', 'Trash Bin 1st floor', '', NULL, 0),
-('0071', 601694, 1, 'Office', 'Office', '', NULL, 0),
-('0072', 601835, 1, 'Toilet 1st floor', 'Toilet 1st floor', '', NULL, 0),
-('0073', 601952, 1, 'Prayer room', 'Prayer room', '', NULL, 0),
-('0074', 602333, 1, 'Shared Space 2nd floor', 'Shared Space 2nd floor', '', NULL, 0),
-('0075', 602474, 1, 'Trash Bin 2nd floor', 'Trash Bin 2nd floor', '', NULL, 0),
-('0076', 606558, 1, 'Shared Space 3rd floor', 'Shared Space 3rd floor', '', NULL, 0),
-('0077', 606910, 1, 'Trash Bin 3rd floor', 'Trash Bin 3rd floor', '', NULL, 0),
-('0078', 606926, 1, 'Trash Bin 4th floor', 'Trash Bin 4th floor', '', NULL, 0),
-('0079', 606942, 1, 'Trash Bin 5th floor', 'Trash Bin 5th floor', '', NULL, 0),
-('0080', 607296, 1, 'Shared Space 4th floor', 'Shared Space 4th floor', '', NULL, 0),
-('0081', 607326, 1, 'Shared Space 5th floor', 'Shared Space 5th floor', '', NULL, 0),
-('0083', 618222, 1, 'Unit A.5.23', 'Residence', '200000', NULL, 0),
-('0084', 618223, 1, 'Unit A.5.24', 'Residence', '200000', NULL, 0),
-('0085', 618224, 1, 'Unit A.5.13', 'Residence', '200000', NULL, 0),
-('0086', 618225, 1, 'Unit A.5.14', 'Residence', '200000', NULL, 0),
-('0087', 618226, 1, 'Unit A.5.15', 'Residence', '200000', NULL, 0),
-('0088', 618227, 1, 'Unit A.5.16', 'Residence', '200000', NULL, 0),
-('0089', 618228, 1, 'Unit A.5.17', 'Residence', '200000', NULL, 0),
-('0090', 618229, 1, 'Unit A.5.18', 'Residence', '200000', NULL, 0),
-('0091', 618230, 1, 'Unit A.5.19', 'Residence', '200000', NULL, 0),
-('0092', 618231, 1, 'Unit A.5.20', 'Residence', '200000', NULL, 0),
-('0093', 618232, 1, 'Unit A.5.21', 'Residence', '200000', NULL, 0),
-('0094', 618233, 1, 'Unit A.5.22', 'Residence', '200000', NULL, 0),
-('0095', 618333, 1, 'Unit A.4.14', 'Residence', '250000', NULL, 0),
-('0096', 618334, 1, 'Unit A.4.15', 'Residence', '250000', NULL, 0),
-('0097', 618335, 1, 'Unit A.4.16', 'Residence', '250000', NULL, 0),
-('0098', 618336, 1, 'Unit A.4.17', 'Residence', '250000', NULL, 0),
-('0099', 618337, 1, 'Unit A.4.18', 'Residence', '250000', NULL, 0),
-('0100', 618338, 1, 'Unit A.4.19', 'Residence', '250000', NULL, 0),
-('0101', 618339, 1, 'Unit A.4.20', 'Residence', '250000', NULL, 0),
-('0102', 618340, 1, 'Unit A.4.21', 'Residence', '250000', NULL, 0),
-('0103', 618341, 1, 'Unit A.4.22', 'Residence', '250000', NULL, 0),
-('0104', 618342, 1, 'Unit A.4.23', 'Residence', '250000', NULL, 0),
-('0105', 618343, 1, 'Unit A.4.24', 'Residence', '250000', NULL, 0),
-('0106', 618344, 1, 'Unit A.4.13', 'Residence', '250000', NULL, 0),
-('0107', 618444, 1, 'Unit A.3.14', 'Residence', '300000', NULL, 0),
-('0108', 618445, 1, 'Unit A.3.15', 'Residence', '300000', NULL, 0),
-('0109', 618446, 1, 'Unit A.3.16', 'Residence', '300000', NULL, 0),
-('0110', 618447, 1, 'Unit A.3.17', 'Residence', '300000', NULL, 0),
-('0111', 618448, 1, 'Unit A.3.18', 'Residence', '300000', NULL, 0),
-('0112', 618449, 1, 'Unit A.3.19', 'Residence', '300000', NULL, 0),
-('0113', 618450, 1, 'Unit A.3.20', 'Residence', '300000', NULL, 0),
-('0114', 618451, 1, 'Unit A.3.21', 'Residence', '300000', NULL, 0),
-('0115', 618452, 1, 'Unit A.3.22', 'Residence', '300000', NULL, 0),
-('0116', 618453, 1, 'Unit A.3.23', 'Residence', '300000', NULL, 0),
-('0117', 618454, 1, 'Unit A.3.24', 'Residence', '300000', NULL, 0),
-('0118', 618455, 1, 'Unit A.3.13', 'Residence', '300000', NULL, 0),
-('0119', 618555, 1, 'Unit A.2.14', 'Residence', '350000', NULL, 0),
-('0120', 618556, 1, 'Unit A.2.15', 'Residence', '350000', NULL, 0),
-('0121', 618557, 1, 'Unit A.2.16', 'Residence', '350000', NULL, 0),
-('0122', 618558, 1, 'Unit A.2.17', 'Residence', '350000', NULL, 0),
-('0123', 618559, 1, 'Unit A.2.18', 'Residence', '350000', NULL, 0),
-('0124', 618560, 1, 'Unit A.2.19', 'Residence', '350000', NULL, 0),
-('0125', 618561, 1, 'Unit A.2.20', 'Residence', '350000', NULL, 0),
-('0126', 618562, 1, 'Unit A.2.21', 'Residence', '350000', NULL, 0),
-('0127', 618563, 1, 'Unit A.2.22', 'Residence', '350000', NULL, 0),
-('0128', 618564, 1, 'Unit A.2.23', 'Residence', '350000', NULL, 0),
-('0129', 618565, 1, 'Unit A.2.24', 'Residence', '350000', NULL, 0),
-('0130', 618566, 1, 'Unit A.2.13', 'Residence', '350000', NULL, 0),
-('0131', 618690, 1, 'Unit A.5.01', 'Residence', '200000', NULL, 0),
-('0132', 618691, 1, 'Unit A.5.03', 'Residence', '200000', NULL, 0),
-('0133', 618692, 1, 'Unit A.5.04', 'Residence', '200000', NULL, 0),
-('0134', 618693, 1, 'Unit A.5.05', 'Residence', '200000', NULL, 0),
-('0135', 618694, 1, 'Unit A.5.06', 'Residence', '200000', NULL, 0),
-('0136', 618695, 1, 'Unit A.5.07', 'Residence', '200000', NULL, 0),
-('0137', 618696, 1, 'Unit A.5.08', 'Residence', '200000', NULL, 0),
-('0138', 618697, 1, 'Unit A.5.09', 'Residence', '200000', NULL, 0),
-('0139', 618698, 1, 'Unit A.5.10', 'Residence', '200000', NULL, 0),
-('0140', 618699, 1, 'Unit A.5.12', 'Residence', '200000', NULL, 0),
-('0141', 618700, 1, 'Unit A.5.02', 'Residence', '200000', NULL, 0),
-('0142', 618701, 1, 'Unit A.5.11', 'Residence', '200000', NULL, 0),
-('0143', 618801, 1, 'Unit A.4.01', 'Residence', '250000', NULL, 0),
-('0144', 618802, 1, 'Unit A.4.03', 'Residence', '250000', NULL, 0),
-('0145', 618803, 1, 'Unit A.4.04', 'Residence', '250000', NULL, 0),
-('0146', 618804, 1, 'Unit A.4.05', 'Residence', '250000', NULL, 0),
-('0147', 618805, 1, 'Unit A.4.06', 'Residence', '250000', NULL, 0),
-('0148', 618806, 1, 'Unit A.4.07', 'Residence', '250000', NULL, 0),
-('0149', 618807, 1, 'Unit A.4.08', 'Residence', '250000', NULL, 0),
-('0150', 618808, 1, 'Unit A.4.09', 'Residence', '250000', NULL, 0),
-('0151', 618809, 1, 'Unit A.4.10', 'Residence', '250000', NULL, 0),
-('0152', 618810, 1, 'Unit A.4.12', 'Residence', '250000', NULL, 0),
-('0153', 618811, 1, 'Unit A.4.02', 'Residence', '250000', NULL, 0),
-('0154', 618812, 1, 'Unit A.4.11', 'Residence', '250000', NULL, 0),
-('0155', 618912, 1, 'Unit A.3.01', 'Residence', '300000', NULL, 0),
-('0156', 618913, 1, 'Unit A.3.03', 'Residence', '300000', NULL, 0),
-('0157', 618914, 1, 'Unit A.3.04', 'Residence', '300000', NULL, 0),
-('0158', 618915, 1, 'Unit A.3.05', 'Residence', '300000', NULL, 0),
-('0159', 618916, 1, 'Unit A.3.06', 'Residence', '300000', NULL, 0),
-('0160', 618917, 1, 'Unit A.3.07', 'Residence', '300000', NULL, 0),
-('0161', 618918, 1, 'Unit A.3.08', 'Residence', '300000', NULL, 0),
-('0162', 618919, 1, 'Unit A.3.09', 'Residence', '300000', NULL, 0),
-('0163', 618920, 1, 'Unit A.3.10', 'Residence', '300000', NULL, 0),
-('0164', 618921, 1, 'Unit A.3.12', 'Residence', '300000', NULL, 0),
-('0165', 618922, 1, 'Unit A.3.02', 'Residence', '300000', NULL, 0),
-('0166', 618923, 1, 'Unit A.3.11', 'Residence', '300000', NULL, 0),
-('0167', 619134, 1, 'Unit A.2.01', 'Residence', '350000', NULL, 0),
-('0168', 619135, 1, 'Unit A.2.03', 'Residence', '350000', NULL, 0),
-('0169', 619136, 1, 'Unit A.2.04', 'Residence', '350000', NULL, 0),
-('0170', 619137, 1, 'Unit A.2.05', 'Residence', '350000', NULL, 0),
-('0171', 619138, 1, 'Unit A.2.06', 'Residence', '350000', NULL, 0),
-('0172', 619139, 1, 'Unit A.2.07', 'Residence', '350000', NULL, 0),
-('0173', 619140, 1, 'Unit A.2.08', 'Residence', '350000', NULL, 0),
-('0174', 619141, 1, 'Unit A.2.09', 'Residence', '350000', NULL, 0),
-('0175', 619142, 1, 'Unit A.2.10', 'Residence', '350000', NULL, 0),
-('0176', 619143, 1, 'Unit A.2.12', 'Residence', '350000', NULL, 0),
-('0177', 619144, 1, 'Unit A.2.02', 'Residence', '350000', NULL, 0),
-('0178', 619145, 1, 'Unit A.2.11', 'Residence', '350000', NULL, 0),
-('0179', 619194, 1, 'Commercial K2', 'Commercial K2', '', NULL, 0),
-('0180', 619195, 1, 'Commercial K3', 'Commercial K3', '', NULL, 0),
-('0181', 619196, 1, 'Commercial K1', 'Commercial K1', '', NULL, 0);
+INSERT INTO `rooms_table` (`room_id`, `legal_object_id`, `organizer_id`, `room_name`, `space_usage`, `rent_fee`) VALUES
+('0001', 550615, 2, 'Tourism Information Center', 'Tourism Information Center', ''),
+('0002', 558371, 2, 'PISA (Pusat Informasi Sahabat Anak)', 'PISA (Pusat Informasi Sahabat Anak)', ''),
+('0003', 559588, 2, 'public space', 'public space', ''),
+('0004', 560626, 2, 'Main Room', 'Main Room', ''),
+('0005', 592037, 2, 'Back Main Room', 'Back Main Room', ''),
+('0006', 595885, 2, 'Staff Office', 'Staff Office', ''),
+('0007', 596362, 2, 'Storage', 'Storage', ''),
+('0008', 596892, 2, 'Bengkel Muda Surabaya', 'Bengkel Muda Surabaya', ''),
+('0009', 598132, 2, 'Hallway', 'Hallway', ''),
+('0010', 599448, 2, 'DKS Gallery', 'DKS Gallery', ''),
+('0011', 600819, 2, 'Mathematics House', 'Mathematics House', ''),
+('0012', 601254, 2, 'Merah Putih Gallery', 'Merah Putih Gallery', ''),
+('0013', 609329, 2, 'Indoor Skateboard', 'Indoor Skateboard', ''),
+('0014', 610016, 2, 'Central doorway', 'Central doorway', ''),
+('0015', 610552, 2, 'Entrance Door', 'Entrance Door', ''),
+('0016', 611250, 2, 'Exhibition space', 'Exhibition space', ''),
+('0017', 611746, 2, 'Below Space', 'Below Space', ''),
+('0018', 612232, 2, 'Hallway', 'Hallway', ''),
+('0019', 612619, 2, 'Elevator', 'Elevator', ''),
+('0020', 613040, 2, 'Toilet', 'Toilet', ''),
+('0021', 613441, 2, 'Operator Room', 'Operator Room', ''),
+('0022', 639829, 2, 'UPT Balai Pemuda', 'UPT Balai Pemuda', ''),
+('0025', 700690, 2, 'Tourism Information Center', 'Tourism Information Center', ''),
+('0027', 817240, 2, 'Kriya Gallery', 'Kriya Gallery', ''),
+('0028', 820143, 2, 'Museum', 'Museum', ''),
+('0029', 820815, 2, 'Stairs', 'Stairs', ''),
+('0030', 820896, 2, 'Toilet Nursery', 'Toilet Nursery', ''),
+('0031', 821077, 2, 'UPTSA', 'UPTSA', ''),
+('0032', 821964, 2, 'ATM 1st floor', 'ATM 1st floor', ''),
+('0033', 823865, 2, 'Emergency Staircase', 'Emergency Staircase', ''),
+('0034', 825386, 2, 'Shaft', 'Shaft', ''),
+('0035', 826868, 2, 'Pantry Room', 'Pantry Room', ''),
+('0036', 829098, 2, 'Disparta', 'Disparta', ''),
+('0037', 829358, 2, 'Command Center', 'Command Center', ''),
+('0038', 830288, 2, 'DPM', 'DPM', ''),
+('0039', 831096, 2, 'Dispenduk', 'Dispenduk', ''),
+('0040', 831440, 2, 'Dispora', 'Dispora', ''),
+('0041', 838147, 2, 'Disperindag', 'Disperindag', ''),
+('0042', 839609, 2, 'Dispendukcapil', 'Dispendukcapil', ''),
+('0043', 840850, 2, '2nd Floor Corridor', '2nd Floor Corridor', ''),
+('0044', 841116, 2, 'Bridge 2nd floor', 'Bridge 2nd floor', ''),
+('0045', 843868, 2, '3rd Floor Corridor', '3rd Floor Corridor', ''),
+('0046', 847875, 2, 'Dinkop', 'Dinkop', ''),
+('0047', 848368, 2, 'Secretary Room', 'Secretary Room', ''),
+('0048', 849039, 2, 'Convention Hall 4th floor', 'Convention Hall 4th floor', ''),
+('0049', 849276, 2, 'Dispusip', 'Dispusip', ''),
+('0050', 850924, 2, 'Parking Siola', 'Parking Siola', ''),
+('0051', 886033, 2, 'Shared Space 4th floor', 'Shared Space 4th floor', ''),
+('0053', 913870, 2, 'L2.7 Ramp', 'L2.7 Ramp', ''),
+('0054', 914699, 2, 'Bridge 3rd floor', 'Bridge 3rd floor', ''),
+('0056', 919493, 2, 'Shaft', 'Shaft', ''),
+('0060', 599276, 1, 'Shared Space 1st floor', 'Shared Space 1st floor', ''),
+('0061', 599584, 1, 'Parking Rusunawa', 'Parking Rusunawa', ''),
+('0062', 599642, 1, 'Warehouse', 'Warehouse', ''),
+('0063', 599868, 1, 'Unit A.1.03', 'Residence', '400000'),
+('0064', 599963, 1, 'Unit A.1.02', 'Residence', '400000'),
+('0065', 600045, 1, 'Unit A.1.01', 'Residence', '400000'),
+('0066', 600145, 1, 'Manager Room', 'Manager Room', ''),
+('0067', 600222, 1, 'Panel Room', 'Panel Room', ''),
+('0068', 600292, 1, 'Parking Rusunawa', 'Parking Rusunawa', ''),
+('0069', 600414, 1, 'Jantor 1st floor', 'Jantor 1st floor', ''),
+('0070', 600975, 1, 'Trash Bin 1st floor', 'Trash Bin 1st floor', ''),
+('0071', 601694, 1, 'Office', 'Office', ''),
+('0072', 601835, 1, 'Toilet 1st floor', 'Toilet 1st floor', ''),
+('0073', 601952, 1, 'Prayer room', 'Prayer room', ''),
+('0074', 602333, 1, 'Shared Space 2nd floor', 'Shared Space 2nd floor', ''),
+('0075', 602474, 1, 'Trash Bin 2nd floor', 'Trash Bin 2nd floor', ''),
+('0076', 606558, 1, 'Shared Space 3rd floor', 'Shared Space 3rd floor', ''),
+('0077', 606910, 1, 'Trash Bin 3rd floor', 'Trash Bin 3rd floor', ''),
+('0078', 606926, 1, 'Trash Bin 4th floor', 'Trash Bin 4th floor', ''),
+('0079', 606942, 1, 'Trash Bin 5th floor', 'Trash Bin 5th floor', ''),
+('0080', 607296, 1, 'Shared Space 4th floor', 'Shared Space 4th floor', ''),
+('0081', 607326, 1, 'Shared Space 5th floor', 'Shared Space 5th floor', ''),
+('0083', 618222, 1, 'Unit A.5.23', 'Residence', '200000'),
+('0084', 618223, 1, 'Unit A.5.24', 'Residence', '200000'),
+('0085', 618224, 1, 'Unit A.5.13', 'Residence', '200000'),
+('0086', 618225, 1, 'Unit A.5.14', 'Residence', '200000'),
+('0087', 618226, 1, 'Unit A.5.15', 'Residence', '200000'),
+('0088', 618227, 1, 'Unit A.5.16', 'Residence', '200000'),
+('0089', 618228, 1, 'Unit A.5.17', 'Residence', '200000'),
+('0090', 618229, 1, 'Unit A.5.18', 'Residence', '200000'),
+('0091', 618230, 1, 'Unit A.5.19', 'Residence', '200000'),
+('0092', 618231, 1, 'Unit A.5.20', 'Residence', '200000'),
+('0093', 618232, 1, 'Unit A.5.21', 'Residence', '200000'),
+('0094', 618233, 1, 'Unit A.5.22', 'Residence', '200000'),
+('0095', 618333, 1, 'Unit A.4.14', 'Residence', '250000'),
+('0096', 618334, 1, 'Unit A.4.15', 'Residence', '250000'),
+('0097', 618335, 1, 'Unit A.4.16', 'Residence', '250000'),
+('0098', 618336, 1, 'Unit A.4.17', 'Residence', '250000'),
+('0099', 618337, 1, 'Unit A.4.18', 'Residence', '250000'),
+('0100', 618338, 1, 'Unit A.4.19', 'Residence', '250000'),
+('0101', 618339, 1, 'Unit A.4.20', 'Residence', '250000'),
+('0102', 618340, 1, 'Unit A.4.21', 'Residence', '250000'),
+('0103', 618341, 1, 'Unit A.4.22', 'Residence', '250000'),
+('0104', 618342, 1, 'Unit A.4.23', 'Residence', '250000'),
+('0105', 618343, 1, 'Unit A.4.24', 'Residence', '250000'),
+('0106', 618344, 1, 'Unit A.4.13', 'Residence', '250000'),
+('0107', 618444, 1, 'Unit A.3.14', 'Residence', '300000'),
+('0108', 618445, 1, 'Unit A.3.15', 'Residence', '300000'),
+('0109', 618446, 1, 'Unit A.3.16', 'Residence', '300000'),
+('0110', 618447, 1, 'Unit A.3.17', 'Residence', '300000'),
+('0111', 618448, 1, 'Unit A.3.18', 'Residence', '300000'),
+('0112', 618449, 1, 'Unit A.3.19', 'Residence', '300000'),
+('0113', 618450, 1, 'Unit A.3.20', 'Residence', '300000'),
+('0114', 618451, 1, 'Unit A.3.21', 'Residence', '300000'),
+('0115', 618452, 1, 'Unit A.3.22', 'Residence', '300000'),
+('0116', 618453, 1, 'Unit A.3.23', 'Residence', '300000'),
+('0117', 618454, 1, 'Unit A.3.24', 'Residence', '300000'),
+('0118', 618455, 1, 'Unit A.3.13', 'Residence', '300000'),
+('0119', 618555, 1, 'Unit A.2.14', 'Residence', '350000'),
+('0120', 618556, 1, 'Unit A.2.15', 'Residence', '350000'),
+('0121', 618557, 1, 'Unit A.2.16', 'Residence', '350000'),
+('0122', 618558, 1, 'Unit A.2.17', 'Residence', '350000'),
+('0123', 618559, 1, 'Unit A.2.18', 'Residence', '350000'),
+('0124', 618560, 1, 'Unit A.2.19', 'Residence', '350000'),
+('0125', 618561, 1, 'Unit A.2.20', 'Residence', '350000'),
+('0126', 618562, 1, 'Unit A.2.21', 'Residence', '350000'),
+('0127', 618563, 1, 'Unit A.2.22', 'Residence', '350000'),
+('0128', 618564, 1, 'Unit A.2.23', 'Residence', '350000'),
+('0129', 618565, 1, 'Unit A.2.24', 'Residence', '350000'),
+('0130', 618566, 1, 'Unit A.2.13', 'Residence', '350000'),
+('0131', 618690, 1, 'Unit A.5.01', 'Residence', '200000'),
+('0132', 618691, 1, 'Unit A.5.03', 'Residence', '200000'),
+('0133', 618692, 1, 'Unit A.5.04', 'Residence', '200000'),
+('0134', 618693, 1, 'Unit A.5.05', 'Residence', '200000'),
+('0135', 618694, 1, 'Unit A.5.06', 'Residence', '200000'),
+('0136', 618695, 1, 'Unit A.5.07', 'Residence', '200000'),
+('0137', 618696, 1, 'Unit A.5.08', 'Residence', '200000'),
+('0138', 618697, 1, 'Unit A.5.09', 'Residence', '200000'),
+('0139', 618698, 1, 'Unit A.5.10', 'Residence', '200000'),
+('0140', 618699, 1, 'Unit A.5.12', 'Residence', '200000'),
+('0141', 618700, 1, 'Unit A.5.02', 'Residence', '200000'),
+('0142', 618701, 1, 'Unit A.5.11', 'Residence', '200000'),
+('0143', 618801, 1, 'Unit A.4.01', 'Residence', '250000'),
+('0144', 618802, 1, 'Unit A.4.03', 'Residence', '250000'),
+('0145', 618803, 1, 'Unit A.4.04', 'Residence', '250000'),
+('0146', 618804, 1, 'Unit A.4.05', 'Residence', '250000'),
+('0147', 618805, 1, 'Unit A.4.06', 'Residence', '250000'),
+('0148', 618806, 1, 'Unit A.4.07', 'Residence', '250000'),
+('0149', 618807, 1, 'Unit A.4.08', 'Residence', '250000'),
+('0150', 618808, 1, 'Unit A.4.09', 'Residence', '250000'),
+('0151', 618809, 1, 'Unit A.4.10', 'Residence', '250000'),
+('0152', 618810, 1, 'Unit A.4.12', 'Residence', '250000'),
+('0153', 618811, 1, 'Unit A.4.02', 'Residence', '250000'),
+('0154', 618812, 1, 'Unit A.4.11', 'Residence', '250000'),
+('0155', 618912, 1, 'Unit A.3.01', 'Residence', '300000'),
+('0156', 618913, 1, 'Unit A.3.03', 'Residence', '300000'),
+('0157', 618914, 1, 'Unit A.3.04', 'Residence', '300000'),
+('0158', 618915, 1, 'Unit A.3.05', 'Residence', '300000'),
+('0159', 618916, 1, 'Unit A.3.06', 'Residence', '300000'),
+('0160', 618917, 1, 'Unit A.3.07', 'Residence', '300000'),
+('0161', 618918, 1, 'Unit A.3.08', 'Residence', '300000'),
+('0162', 618919, 1, 'Unit A.3.09', 'Residence', '300000'),
+('0163', 618920, 1, 'Unit A.3.10', 'Residence', '300000'),
+('0164', 618921, 1, 'Unit A.3.12', 'Residence', '300000'),
+('0165', 618922, 1, 'Unit A.3.02', 'Residence', '300000'),
+('0166', 618923, 1, 'Unit A.3.11', 'Residence', '300000'),
+('0167', 619134, 1, 'Unit A.2.01', 'Residence', '350000'),
+('0168', 619135, 1, 'Unit A.2.03', 'Residence', '350000'),
+('0169', 619136, 1, 'Unit A.2.04', 'Residence', '350000'),
+('0170', 619137, 1, 'Unit A.2.05', 'Residence', '350000'),
+('0171', 619138, 1, 'Unit A.2.06', 'Residence', '350000'),
+('0172', 619139, 1, 'Unit A.2.07', 'Residence', '350000'),
+('0173', 619140, 1, 'Unit A.2.08', 'Residence', '350000'),
+('0174', 619141, 1, 'Unit A.2.09', 'Residence', '350000'),
+('0175', 619142, 1, 'Unit A.2.10', 'Residence', '350000'),
+('0176', 619143, 1, 'Unit A.2.12', 'Residence', '350000'),
+('0177', 619144, 1, 'Unit A.2.02', 'Residence', '350000'),
+('0178', 619145, 1, 'Unit A.2.11', 'Residence', '350000'),
+('0179', 619194, 1, 'Commercial K2', 'Commercial K2', ''),
+('0180', 619195, 1, 'Commercial K3', 'Commercial K3', ''),
+('0181', 619196, 1, 'Commercial K1', 'Commercial K1', '');
 
 -- --------------------------------------------------------
 
@@ -1117,9 +1112,7 @@ INSERT INTO `tenants_table` (`id`, `tenant_name`, `name_number`, `tenant_job`, `
 (106, 'Dewi Ratih Ayu Rachmani', '358000000097', 'guru', 'islam', NULL, NULL, 'jl. sasdedfsdf', '{\"tenant_rt\":\"01\",\"tenant_rw\":\"04\"}', 'Keputih', 'Sukolilo', 'E', 'F'),
 (107, 'Laga Widya Eka Putera', '358000000098', 'guru', 'islam', NULL, NULL, 'jl. sasdedfsdf', '{\"tenant_rt\":\"01\",\"tenant_rw\":\"04\"}', 'Keputih', 'Sukolilo', 'E', 'F'),
 (108, 'Wawan Hermanto', '358000000099', 'guru', 'islam', NULL, NULL, 'jl. sasdedfsdf', '{\"tenant_rt\":\"01\",\"tenant_rw\":\"04\"}', 'Keputih', 'Sukolilo', 'E', 'F'),
-(109, 'Ahmad Zaki Alawi', '158000000000', 'guru', 'islam', NULL, NULL, 'jl. sasdedfsdf', '{\"tenant_rt\":\"01\",\"tenant_rw\":\"04\"}', 'Keputih', 'Sukolilo', 'E', 'F'),
-(121, 'Yanto Budisusanto', '54656454364', 'Kepala Bagian', 'Islam', NULL, NULL, 'Perumahan Mangiawan', '{\"tenant_rt\":\"04\",\"tenant_rw\":\"15\"}', 'Mangliawan', 'Pakis', 'Kabupaten Malang', 'Jawa Timur'),
-(123, 'Pemilik Toko', '357809 000000000', 'Wiraswasta', 'Islam', NULL, NULL, 'Jalan Persimpangan', '{\"tenant_rt\":\"00\",\"tenant_rw\":\"00\"}', 'Kelurahan/Desa', 'Kecamatan', 'Kota', 'Propinsi');
+(109, 'Ahmad Zaki Alawi', '158000000000', 'guru', 'islam', NULL, NULL, 'jl. sasdedfsdf', '{\"tenant_rt\":\"01\",\"tenant_rw\":\"04\"}', 'Keputih', 'Sukolilo', 'E', 'F');
 
 -- --------------------------------------------------------
 
@@ -1170,8 +1163,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'admin@mail.com', '$2y$10$bG4QsXup/sKlS0tD8Jv5l.NcgoUYP0ZH3S7B4X1LDIFA1ZhOE9sOu', '2024-01-27 14:11:39', '2024-01-28 01:45:41'),
-(47, 'yantobudisusanto@gmail.com', '$2y$10$syLTNdl/hH288qSb9WqzCOjscBT1hLWPJN3R5ikH4P2g6FJDjNhXK', '2024-02-06 02:55:44', '2024-02-06 02:55:44'),
-(52, 'yantobudisusanto72@mail.ugm.ac.id', '$2y$10$gNOLeLBoQjDABcCJohZO6ujDRrx4S0gIc7Ap/cdEYksfsshkSzWc6', '2024-08-11 09:47:22', '2024-08-11 09:47:22');
+(47, 'yantobudisusanto@gmail.com', '$2y$10$syLTNdl/hH288qSb9WqzCOjscBT1hLWPJN3R5ikH4P2g6FJDjNhXK', '2024-02-06 02:55:44', '2024-02-06 02:55:44');
 
 --
 -- Indexes for dumped tables
@@ -1267,19 +1259,19 @@ ALTER TABLE `land_parcel_table`
 -- AUTO_INCREMENT for table `managements_table`
 --
 ALTER TABLE `managements_table`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `renters_tenants`
 --
 ALTER TABLE `renters_tenants`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `tenants_table`
 --
 ALTER TABLE `tenants_table`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `uri_table`
@@ -1291,7 +1283,7 @@ ALTER TABLE `uri_table`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables

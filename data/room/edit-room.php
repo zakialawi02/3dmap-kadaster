@@ -55,27 +55,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="flexRadioDefault" class="form-label">Public Place/Shared Space</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_public" id="yes_public" value="yes">
-                            <label class="form-check-label" for="yes_public">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_public" id="no_public" value="no" checked>
-                            <label class="form-check-label" for="no_public">
-                                No
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-3">
                         <label for="room_name" class="form-label">Room Name</label>
                         <input type="text" class="form-control" id="room_name" name="room_name" value="<?= old('room_name') ?? $rooms_table['room_name']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="uri_room" class="form-label">Room Link</label>
-                        <input type="text" class="form-control" id="uri_room" name="uri_room" placeholder="https://" value="<?= old('uri_room') ?? $rooms_table['uri_room']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="space_usage" class="form-label">Space Usage</label>
@@ -89,11 +70,11 @@
                             <!-- get with ajax asycn -->
                         </select>
                     </div>
-                    <div class="mb-3" id="rent_fee_container">
+                    <div class="mb-3">
                         <label for="rent_fee" class="form-label">Rent Fee</label>
                         <div class="input-group">
                             <div class="input-group-text">Rp.</div>
-                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee') ?? $rooms_table['rent_fee']; ?>" placeholder="200000">
+                            <input type="text" class="form-control" id="rent_fee" name="rent_fee" value="<?= old('rent_fee') ?? $rooms_table['rent_fee']; ?>" placeholder="200000" required>
                         </div>
                     </div>
 
@@ -113,28 +94,6 @@
 
     <script src="/assets/js/script.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            let oldValue = "<?= old('is_public') ?? $rooms_table['is_public'] ?>";
-
-            if (oldValue == 1) {
-                $('#yes_public').prop('checked', true);
-                $('#rent_fee_container').hide();
-            } else {
-                $('#no_public').prop('checked', true);
-                $('#rent_fee_container').show();
-            }
-
-            // Change event handler for radio buttons
-            $('input[name="is_public"]').change(function() {
-                if ($('#yes_public').is(':checked')) {
-                    $('#rent_fee_container').hide();
-                } else {
-                    $('#rent_fee_container').show();
-                }
-            });
-        });
-    </script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
