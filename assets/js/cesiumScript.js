@@ -565,8 +565,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
         }
       },
       error: function (error) {
-        console.log("error");
-        console.log(error);
+        console.error(error);
       },
     });
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);

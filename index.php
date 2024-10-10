@@ -1850,43 +1850,43 @@
           <div class="slider-group clsiola">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clbalai" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clrusunawa" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <button id="reset-clip">Reset</button>
