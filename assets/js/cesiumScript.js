@@ -321,7 +321,11 @@ function createPickedDataDescription(pickedData) {
       `<tr><th>NIB</th><td>${pickedData.NIB.getValue()}</td></tr>` +
       `<tr><th>Name</th><td>${pickedData.Name.getValue()}</td></tr>` +
       `<tr><th>Land Rights Status</th><td>${pickedData.land_right_status.getValue()}</td></tr>` +
+<<<<<<< Updated upstream
       `<tr><th>Situation Map No.	</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+=======
+      `<tr><th>Situation Map No.</th><td>${pickedData.situation_map_number.getValue()}</td></tr>` +
+>>>>>>> Stashed changes
       `<tr><th>Right Expiration Time</th><td>${pickedData.rights_expirationTime.getValue()}</td></tr>` +
       `<tr><th>Origin of Rights</th><td>${pickedData.rights_origin.getValue()}</td></tr>` +
       `<tr><th>Date of Measurement Letter</th><td>${pickedData.date_measurement_letter.getValue()}</td></tr>` +
@@ -342,27 +346,44 @@ function createPickedDataDescription(pickedData) {
       `<table class="cesium-infoBox-defaultTable"><tbody>` +
       `<tr><th>ObjectID</th><td>${pickedData.objectid.getValue()}</td></tr>` +
       `<tr><th>Code</th><td>${pickedData.kode.getValue()}</td></tr>` +
+<<<<<<< Updated upstream
       `<tr><th>Zone</th><td>${pickedData.zona.getValue()}</td></tr>` +
       `<tr><th>Sub Zone</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
+=======
+      `<tr><th>Zona</th><td>${pickedData.zona.getValue()}</td></tr>` +
+      `<tr><th>Sub Zona</th><td>${pickedData.sub_zona.getValue()}</td></tr>` +
+>>>>>>> Stashed changes
       `<tr><th>Region</th><td>${pickedData.kawasan.getValue()}</td></tr>` +
       `<tr><th>Sub UP</th><td>${pickedData.sub_up.getValue()}</td></tr>` +
       `<tr><th>UP</th><td>${pickedData.up.getValue()}</td></tr>` +
       `<tr><th>Block</th><td>${pickedData.blok.getValue()}</td></tr>` +
+<<<<<<< Updated upstream
       // `<tr><th>Province</th><td>${pickedData.province.getValue()}</td></tr>` +
       // `<tr><th>City</th><td>${pickedData.city.getValue()}</td></tr>` +
       // `<tr><th>District</th><td>${pickedData.district.getValue()}</td></tr>` +
       // `<tr><th>Village</th><td>${pickedData.village.getValue()}</td></tr>` +
+=======
+      // `<tr><th>Provinsi</th><td>${pickedData.province.getValue()}</td></tr>` +
+      // `<tr><th>Kab/Kota</th><td>${pickedData.city.getValue()}</td></tr>` +
+      // `<tr><th>Kecamatan</th><td>${pickedData.district.getValue()}</td></tr>` +
+      // `<tr><th>Kelurahan</th><td>${pickedData.village.getValue()}</td></tr>` +
+>>>>>>> Stashed changes
       // `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Bujur <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
       // `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Lintang <i class="bi bi-box-arrow-up-right"></i></a></th><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
       `<tr><th>Height</th><td>${parseFloat(pickedData.height.getValue()).toFixed(3)} m</td></tr>` +
       `<tr><th>Area</th><td>${parseFloat(pickedData.shape_area.getValue()).toFixed(3)} m²</td></tr>` +
       `<tr><th>Length</th><td>${parseFloat(pickedData.shape_leng.getValue()).toFixed(3)} m</td></tr>` +
+<<<<<<< Updated upstream
       `<tr><th style="align-content: start;;">Peraturan Batas Tinggi Bangunan</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
       `<tr><th>Sumber peraturan</th><td>${
+=======
+      `<tr><th style="align-content: start;;">Building Height Limit Regulations</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
+      `<tr><th>Source of regulations</th><td>${
+>>>>>>> Stashed changes
         pickedData.kota.getValue() === "Surabaya"
           ? `<a href='https://petaperuntukan-dprkpp.surabaya.go.id/' target='_blank'>link</a>`
           : pickedData.kota.getValue() === "Malang"
-          ? `<a href='https://drive.google.com/file/d/1_ezBnAv40YjHUE0N1elo1csVky1Kr-Io/view?usp=sharing' target='_blank'>dokumen 1</a> & <a href='https://drive.google.com/file/d/1ag675Dtp3Y4Bx1e_j3bolyRPf1GUO0rz/view?usp=sharing' target='_blank'>dokumen 2</a>`
+          ? `<a href='https://drive.google.com/file/d/1_ezBnAv40YjHUE0N1elo1csVky1Kr-Io/view?usp=sharing' target='_blank'>document 1</a> & <a href='https://drive.google.com/file/d/1ag675Dtp3Y4Bx1e_j3bolyRPf1GUO0rz/view?usp=sharing' target='_blank'>document 2</a>`
           : ""
       }</td></tr>` +
       `</tbody></table>`;
@@ -485,6 +506,7 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           // Tambahkan baris baru dengan nama "Organizer Data"
           const dataOrganizerROW = `<tr><th>Organizer Data</th><td><button type="button" id="btnDetailOrganizer" class="btn asbn cesium-button" data-organizer="${data.organizer_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailOrganizer">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").after(dataOrganizerROW);
+<<<<<<< Updated upstream
           // Tambahkan baris baru dengan nama "Tenant Detail"
           const dataTenantROW = `<tr><th>Tenant Data</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
@@ -498,6 +520,23 @@ if (Cesium.PostProcessStageLibrary.isSilhouetteSupported(viewer.scene)) {
           // Tambahkan baris baru dengan nama "Tanggung Jawab"
           const dataResponsibilitiesROW = `<tr><th>Tanggung Jawab</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
           updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
+=======
+          if (data.is_public == false) {
+            // Tambahkan baris baru dengan nama "Tenant Detail"
+            const dataTenantROW = `<tr><th>Tenant Detail</th><td><button type="button" id="btnDetailTenant" class="btn asbn cesium-button" data-tenant="${data.tenant_id}" data-renter="${data.renters_id}" data-room="${data.room_id}" data-bs-toggle="modal" data-bs-target="#detailTenant">View <i class="bi bi-zoom-in"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").after(dataTenantROW);
+
+            // Tambahkan baris baru dengan nama "Right"
+            const dataRightROW = `<tr><th>Right</th><td><button type="button" id="btnRight" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRight">Read <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").after(dataRightROW);
+            // Tambahkan baris baru dengan nama "Restriction"
+            const dataRestrictionROW = `<tr><th>Restriction</th><td><button type="button" id="btnRestriction" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailRestriction">Read <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").after(dataRestrictionROW);
+            // Tambahkan baris baru dengan nama "Responsibilities"
+            const dataResponsibilitiesROW = `<tr><th>Responsibilities</th><td><button type="button" id="btnResponsibilities" class="btn asbn cesium-button" data-bs-toggle="modal" data-bs-target="#detailResponsibilities">Read <i class="bi bi-eye"></i></button></td></tr>`;
+            updatedName.closest("tr").next("tr").next("tr").next("tr").next("tr").next("tr").after(dataResponsibilitiesROW);
+          }
+>>>>>>> Stashed changes
         }
         // scan();
         // add URI
@@ -589,6 +628,7 @@ $(document).on("click", "#btnDetailRoom", function (e) {
   const parcel_id = $(this).data("parcel");
   const room_id = $(this).data("room");
   const data = dataRoom;
+<<<<<<< Updated upstream
   const table =
     `<table class="table"><tbody>` +
     `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
@@ -612,6 +652,49 @@ $(document).on("click", "#btnDetailRoom", function (e) {
     `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
     `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
     `</tbody></table>`;
+=======
+  let table;
+  if (data.is_public == true) {
+    table =
+      `<table class="table"><tbody>` +
+      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+      `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
+      `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Height</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+      `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
+      `</tbody></table>`;
+  } else {
+    table =
+      `<table class="table"><tbody>` +
+      `<tr><th>Room ID</th><td style="width: 1%;">:</td><td>${data.room_id}</td></tr>` +
+      `<tr><th>Room Name</th><td style="width: 1%;">:</td><td>${data.room_name}  ${data.uri_room ? `<a href="${data.uri_room}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>` : ""}</td></tr>` +
+      `<tr><th>Usage</th><td style="width: 1%;">:</td><td>${data.space_usage}</td></tr>` +
+      `<tr><th>Lease Agreement Number</th><td style="width: 1%;">:</td><td> ${
+        data.agreement_number !== undefined && data.agreement_number !== null && data.agreement_number !== ""
+          ? `${data.agreement_number} <a href="/assets/PDF/agreement/${data.agreement_number.replace(/\//g, ".")}.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-download"></i></a>`
+          : "No data!"
+      }
+    </td></tr>` +
+      `<tr><th>Proof of Permit</th><td style="width: 1%;">:</td><td> ${
+        data.permit_flats !== undefined && data.permit_flats !== null && data.permit_flats !== "" ? `<a href="/assets/PDF/certificate/${data.permit_flats}" target="_blank"><i class="bi bi-download"></i></a>` : "No data!"
+      }
+    </td></tr>` +
+      `<tr><th>Tenure Status</th><td style="width: 1%;">:</td><td> ${data.tenure_status ?? "-"} </td></tr>` +
+      `<tr><th>Started</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_started) ?? "-"}</td></tr>` +
+      `<tr><th>Finished</th><td style="width: 1%;">:</td><td>${formatCustomDate(data.due_finished) ?? "-"}</td></tr>` +
+      `<tr><th>Rent Fee (IDR)</th><td style="width: 1%;">:</td><td>${data.rent_fee ?? "-"}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=longitude" target="_blank">Longitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Longitude")), "lon")}</td></tr>` +
+      `<tr><th><a href="/data/uri/view.php?uri=latitude" target="_blank">Latitude <i class="bi bi-box-arrow-up-right"></i></a></th><td style="width: 1%;">:</td><td>${DD2DMS(parseFloat(pickedFeature.getProperty("Latitude")), "lat")}</td></tr>` +
+      `<tr><th>Height</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("Height")).toFixed(3)} m</td></tr>` +
+      `<tr><th>Area</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("area")).toFixed(3)} m²</td></tr>` +
+      `<tr><th>Volume</th><td style="width: 1%;">:</td><td>${parseFloat(pickedFeature.getProperty("volume")).toFixed(3)} m³</td></tr>` +
+      `</tbody></table>`;
+  }
+
+>>>>>>> Stashed changes
   $("#detailRoom .modal-body").html(table);
   scan();
 });
@@ -636,7 +719,12 @@ $(document).on("click", "#btnDetailOrganizer", function (e) {
         `<tr><th>Organizer Name</th><td style="width: 1%;">:</td><td>${data.organizer_name}</td></tr>` +
         `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.organizer_address}</td></tr>` +
         `<tr><th>City</th><td style="width: 1%;">:</td><td>${data.organizer_city}</td></tr>` +
+<<<<<<< Updated upstream
         `<tr><th>Head of Organizer</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
+=======
+        `<tr><th>Organizer Head</th><td style="width: 1%;">:</td><td>${data.organizer_head}</td></tr>` +
+        `<tr><th>url</th><td style="width: 1%;">:</td><td>${data.uri_organizer ? `<a href="${data.uri_organizer}" target="_blank">lihat <i class="bi bi-box-arrow-up-right"></i></a>` : "-"}</td></tr>` +
+>>>>>>> Stashed changes
         `</tbody></table>`;
       $("#detailOrganizer .modal-body").html(table);
       scan();
@@ -663,7 +751,11 @@ $(document).on("click", "#btnDetailTenant", function (e) {
     const table =
       `<table class="table"><tbody>` +
       `<tr><th>Name</th><td style="width: 1%;">:</td><td>${data.tenant_name}</td></tr>` +
+<<<<<<< Updated upstream
       `<tr><th style="width: 55%;">Nomor Induk (NIK)</th><td style="width: 1%;">:</td><td>${data.name_number}</td></tr>` +
+=======
+      `<tr><th style="width: 55%;">Identification Number (NIK)</th><td style="width: 1%;">:</td><td>${data.name_number}</td></tr>` +
+>>>>>>> Stashed changes
       `<tr><th>Job</th><td style="width: 1%;">:</td><td>${data.tenant_job}</td></tr>` +
       `<tr><th>Religion</th><td style="width: 1%;">:</td><td>${data.tenant_religion}</td></tr>` +
       `<tr><th>Address</th><td style="width: 1%;">:</td><td>${data.tenant_address}</td></tr>` +

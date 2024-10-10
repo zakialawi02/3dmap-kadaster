@@ -1,22 +1,26 @@
 <ol style="list-style-type:upper-roman;">
+<<<<<<< Updated upstream
     <li><strong>Renters and Organizers</strong>
+=======
+    <li><strong>Tenant and Organizer</strong>
+>>>>>>> Stashed changes
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
-                    <li>Penyelesaian Perselisihan (Pasal 11)</li>
+                    <li>Dispute Resolution (Article 11)</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
-                <ol style="list-style-type:decimal;">
-                    <li>&nbsp;</li>
-                </ol>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Occupancy Permit Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
+                    <li>&nbsp;</li>
+                </ol>
+            </li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Mayor’s Regulation <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
@@ -25,35 +29,39 @@
     </li>
 </ol>
 <ol style="list-style-type:upper-roman;" start="2">
+<<<<<<< Updated upstream
     <li><strong>Renters</strong>
+=======
+    <li><strong>Tenant</strong>
+>>>>>>> Stashed changes
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
-                    <li>Penyewa memberikan imbalan uang tunai (Pasal 1 Ketentuan Umum Ayat 2)</li>
-                    <li>Biaya sewa untuk rekening PLN, rekening PDAM, dan iuran pengelolaan (Pasal 1 Ketentuan Umum Ayat 3)</li>
-                    <li>Membayar biaya sewa sesuai jumlah yang telah ditetapkan
-                        <meta charset="utf-8">(Pasal 3 Besaran Sewa)
+                    <li>The tenant provides a cash payment (Article 1 General Provisions Paragraph 2)</li>
+                    <li>Rental costs for PLN bills, PDAM bills, and management fees (Article 1 General Provisions Paragraph 3)</li>
+                    <li>Pay the rental fee as determined
+                        <meta charset="utf-8">(Article 3 Rental Amount)
                     </li>
                     <li>
-                        <meta charset="utf-8">Kewajiban Penerima Hak (Pasal 5 Hak dan Kewajiban Ayat 2)
+                        <meta charset="utf-8">Obligations of the Grantee (Article 5 Rights and Obligations Paragraph 2)
                     </li>
-                    <li>Kewajiban mengajukan perpanjangan sewa 1 bulan sebelum berakhir masa sewa (Pasal 6 Jangka Waktu dan Berakhirnya Perjanjian Sewa Ayat 2)</li>
-                    <li>Kewajiban mengosongkan ruang hunian jika tidak memiliki hak atas ruang yang dimaksud (Pasal 6 Jangka Waktu dan Berakhirnya Perjanjian Sewa Ayat 3)</li>
-                    <li>Penghuni Melaporkan kepada pemberi hak jika ada perubahan data tentang daftar penghuni (Pasal 7 Tata Tertib Ayat 3)</li>
-                    <li>Penghuni, sebagai penyewa, memiliki kewajiban-kewajiban seperti melaporkan perubahan dalam daftar penghuni, menciptakan lingkungan yang aman dan bersih, serta mematuhi semua peraturan yang ditetapkan oleh pengelola. Mereka juga harus mematikan perangkat elektronik saat meninggalkan hunian, menjaga ketenangan lingkungan, dan melaporkan jika akan meninggalkan hunian untuk sementara waktu. Selain itu, penghuni diwajibkan mematuhi peraturan parkir, serta meminta izin untuk peralatan dan renovasi umum.</li>
+                    <li>Obligations to submit a lease extension 1 month before the lease term expires (Article 6 Lease Term and Termination of Lease Paragraph 2)</li>
+                    <li>Obligations to vacate the residential space if they no longer have rights to the space in question (Article 6 Lease Term and Termination of Lease Paragraph 3)</li>
+                    <li>Tenants must report to the grantor if there is any change in the list of occupants (Article 7 House Rules Paragraph 3)</li>
+                    <li>The tenant, as the occupant, has several obligations, such as reporting any changes in the list of occupants, maintaining a clean and safe environment, and complying with all regulations set by the manager. They must also turn off electronic devices when leaving, ensure a quiet environment, and inform the manager if they leave the residence for an extended period. Additionally, they are required to follow parking rules and seek permission for general equipment and renovations.</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Occupancy Permit Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Mayor’s Regulation <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
@@ -62,22 +70,22 @@
     </li>
     <li><strong>Organizer</strong>
         <ol style="list-style-type:upper-latin;">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Surat Perjanjian Sewa Menyewa <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1ers_6_wewvzWZQs1sQ4mroGPxTe1QRVe/view?usp=sharing" download="file">Lease Agreement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
-                    <li>Kewajiban Pemberi Hak penyewa (Pasal 4 Hak dan Kewajiban Ayat 2)</li>
+                    <li>Obligations of the Grantor to the tenant (Article 4 Rights and Obligations Paragraph 2)</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Surat Pernyataan <i class="bi bi-file-earmark-pdf-fill"></i></a>
-                <ol style="list-style-type:decimal;">
-                    <li>&nbsp;</li>
-                </ol>
-            </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Surat Ijin Penghunian <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zg3UohjY_oILcRlScwoq8fI8bMW31LZI/view?usp=sharing" download="file">Statement Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
             </li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Aturan Walikota <i class="bi bi-file-earmark-pdf-fill"></i></a>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=drive_link">Occupancy Permit Letter <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                <ol style="list-style-type:decimal;">
+                    <li>&nbsp;</li>
+                </ol>
+            </li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1aGFyTaCmI0UdT_4V1EPLb4SL9aohVczJ/view?usp=sharing" download="file">Mayor’s Regulation <i class="bi bi-file-earmark-pdf-fill"></i></a>
                 <ol style="list-style-type:decimal;">
                     <li>&nbsp;</li>
                 </ol>
