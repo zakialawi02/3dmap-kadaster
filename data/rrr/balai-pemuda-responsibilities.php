@@ -4,7 +4,6 @@
             <ol style="list-style-type:decimal;">
                 <li>Mematuhi semua peraturan dan ketentuan yang telah disepakati terkait penggunaan ruangan, termasuk tidak merusak atau mengabaikan fasilitas yang ada.</li>
                 <li>Berkoordinasi dalam hal terjadi perubahan peruntukan atau penggunaan ruangan untuk memastikan kesesuaian dengan aturan yang berlaku.</li>
-
             </ol>
         </li>
     </ol>

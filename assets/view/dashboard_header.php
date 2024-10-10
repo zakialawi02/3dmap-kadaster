@@ -22,14 +22,14 @@
         </div>
         <div class="nav-menu">
             <ul class="nav-menu-group">
-                <li><a href="/" title="">Home</a></li>
-                <li><a href="/dashboard" title="">Dashboard</a></li>
+                <li><a href="/" title="">Beranda</a></li>
+                <li><a href="/dashboard" title="">Dasbor</a></li>
                 <!-- <li><a href="/data/uri" title="">URI Data</a></li>
                 <li><a href="/data/legal" title="">Parcel Data</a></li> -->
                 <?php if (isset($_SESSION['islogin'])) : ?>
-                    <li><a href="/action/auth/process_logout.php" title="Logout">Logout</a></li>
+                    <li><a href="/action/auth/process_logout.php" title="Keluar">Keluar</a></li>
                 <?php else : ?>
-                    <li><a href="/auth/login.php" title="Login">Login</a></li>
+                    <li><a href="/auth/login.php" title="Masuk">Masuk</a></li>
                 <?php endif ?>
             </ul>
             <div id="hamb"><i class="bi bi-list"></i></div>
