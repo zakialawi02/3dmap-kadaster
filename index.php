@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>Purwarupa Administrasi Pertanahan 3 Dimensi</title>
+  <title>3D Land Administration Prototype</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
