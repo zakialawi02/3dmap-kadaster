@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sqlUpdateTenant = "UPDATE tenants_table SET tenant_name = '$tenant_name', name_number = '$name_number', tenant_job = '$tenant_job', tenant_religion = '$tenant_religion', tenant_address = '$tenant_address', tenant_village = '$tenant_village', tenant_district = '$tenant_district', tenant_city = '$tenant_city', tenant_province = '$tenant_province', tenant_rt_rw = '$rtrw' WHERE id = $TenantID";
             $resultSql = mysqli_query($conn, $sqlUpdateTenant);
             if ($resultSql) {
-                $tenure_status = "lease";
+                $tenure_status = $_POST['tenure_status'];
             } else {
                 setFlashMessage('error', 'Failed to save data');
                 header("Location: /data/renters");
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $resultSql = mysqli_query($conn, $sqlInsertTenant);
             if ($resultSql) {
                 $tenantInsertedId = mysqli_insert_id($conn);
-                $tenure_status = "lease";
+                $tenure_status = $_POST['tenure_status'];
             } else {
                 setFlashMessage('error', 'Failed to save data');
                 header("Location: /data/renters");

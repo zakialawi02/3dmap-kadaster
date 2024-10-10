@@ -48,19 +48,27 @@
                             <!-- get with ajax asycn -->
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="tenant_name" class="form-label">Name of Person</label>
-                        <input type="text" class="form-control" id="tenant_name" name="tenant_name" value="<?= old('tenant_name') ?? $renters_table['tenant_name']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name_number" class="form-label">Code/Identification Resident Number (NIK)</label>
-                        <input type="text" class="form-control" id="name_number" name="name_number" value="<?= old('name_number') ?? $renters_table['name_number']; ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tenant_job" class="form-label">Job</label>
-                        <input type="text" class="form-control" id="tenant_job" name="tenant_job" value="<?= old('tenant_job') ?? $renters_table['tenant_job']; ?>" required>
-                    </div>
-                    <!-- <div class="mb-3">
+                    <div class="additional_info">
+                        <div class="mb-3">
+                            <label for="tenure_status" class="form-label">Teanure Status</label>
+                            <select class="form-select" id="tenure_status" name="tenure_status" style="width: 100%" required>
+                                <option value="Sewa" <?= $renters_table['tenure_status'] == 'Sewa' ? 'selected' : ''; ?>>Sewa</option>
+                                <option value="Pakai" <?= $renters_table['tenure_status'] == 'Pakai' ? 'selected' : ''; ?>>Pakai</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tenant_name" class="form-label">Name of Person</label>
+                            <input type="text" class="form-control" id="tenant_name" name="tenant_name" value="<?= old('tenant_name') ?? $renters_table['tenant_name']; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name_number" class="form-label">Code/Identification Resident Number (NIK)</label>
+                            <input type="text" class="form-control" id="name_number" name="name_number" value="<?= old('name_number') ?? $renters_table['name_number']; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tenant_job" class="form-label">Job</label>
+                            <input type="text" class="form-control" id="tenant_job" name="tenant_job" value="<?= old('tenant_job') ?? $renters_table['tenant_job']; ?>" required>
+                        </div>
+                        <!-- <div class="mb-3">
                         <label for="number_residents" class="form-label">Number of Residents</label>
                         <input type="text" class="form-control" id="number_residents" name="number_residents" value="<?= old('number_residents') ?? $renters_table['number_residents']; ?>">
                     </div>
@@ -68,50 +76,56 @@
                         <label for="marriage_status" class="form-label">Marriage Status</label>
                         <input type="text" class="form-control" id="marriage_status" name="marriage_status" value="<?= old('marriage_status') ?? $renters_table['marriage_status']; ?>" required>
                     </div> -->
-                    <div class="mb-3">
-                        <label for="tenant_religion" class="form-label">Religion</label>
-                        <input type="text" class="form-control" id="tenant_religion" name="tenant_religion" value="<?= old('tenant_religion') ?? $renters_table['tenant_religion']; ?>" required>
+                        <div class="mb-3">
+                            <label for="tenant_religion" class="form-label">Religion</label>
+                            <input type="text" class="form-control" id="tenant_religion" name="tenant_religion" value="<?= old('tenant_religion') ?? $renters_table['tenant_religion']; ?>" required>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="tenant_address" class="form-label">Address</label>
+                            <div class="mb-3 col-md-12">
+                                <label for="tenant_address" class="form-label">Address/Street Name</label>
+                                <input type="text" class="form-control" id="tenant_address" name="tenant_address" value="<?= old('tenant_address') ?? $renters_table['tenant_address']; ?>" required>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="tenant_village" class="form-label">Village</label>
+                                <input type="text" class="form-control" id="tenant_village" name="tenant_village" value="<?= old('tenant_village') ?? $renters_table['tenant_village']; ?>" required>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="tenant_district" class="form-label">District</label>
+                                <input type="text" class="form-control" id="tenant_district" name="tenant_district" value="<?= old('tenant_district') ?? $renters_table['tenant_district']; ?>" required>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="tenant_city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="tenant_city" name="tenant_city" value="<?= old('tenant_city') ?? $renters_table['tenant_city']; ?>" required>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="tenant_province" class="form-label">Province</label>
+                                <input type="text" class="form-control" id="tenant_province" name="tenant_province" value="<?= old('tenant_province') ?? $renters_table['tenant_province']; ?>" required>
+                            </div>
+                            <?php $tenantRtRw = json_decode($renters_table['tenant_rt_rw'], true); ?>
+                            <div class="mb-3 col-sm-2">
+                                <label for="tenant_rt" class="form-label">RT</label>
+                                <input type="text" class="form-control" id="tenant_rt" name="tenant_rt" value="<?= old('tenant_rt') ?? $tenantRtRw['tenant_rt']; ?>" required>
+                            </div>
+                            <div class="mb-3 col-sm-2">
+                                <label for="tenant_rw" class="form-label">RW</label>
+                                <input type="text" class="form-control" id="tenant_rw" name="tenant_rw" value="<?= old('tenant_rw') ?? $tenantRtRw['tenant_rw']; ?>" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="due_started" class="form-label">Contract started</label>
+                            <input type="date" class="form-control" id="due_started" name="due_started" value="<?= old('due_started') ?? $renters_table['due_started']; ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="due_finished" class="form-label">Contract finished</label>
+                            <input type="date" class="form-control" id="due_finished" name="due_finished" value="<?= old('due_finished') ?? $renters_table['due_finished']; ?>">
+                        </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="tenant_address" class="form-label">Address</label>
-                        <div class="mb-3 col-md-12">
-                            <label for="tenant_address" class="form-label">Address/Street Name</label>
-                            <input type="text" class="form-control" id="tenant_address" name="tenant_address" value="<?= old('tenant_address') ?? $renters_table['tenant_address']; ?>" required>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="tenant_village" class="form-label">Village</label>
-                            <input type="text" class="form-control" id="tenant_village" name="tenant_village" value="<?= old('tenant_village') ?? $renters_table['tenant_village']; ?>" required>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="tenant_district" class="form-label">District</label>
-                            <input type="text" class="form-control" id="tenant_district" name="tenant_district" value="<?= old('tenant_district') ?? $renters_table['tenant_district']; ?>" required>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="tenant_city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="tenant_city" name="tenant_city" value="<?= old('tenant_city') ?? $renters_table['tenant_city']; ?>" required>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="tenant_province" class="form-label">Province</label>
-                            <input type="text" class="form-control" id="tenant_province" name="tenant_province" value="<?= old('tenant_province') ?? $renters_table['tenant_province']; ?>" required>
-                        </div>
-                        <?php $tenantRtRw = json_decode($renters_table['tenant_rt_rw'], true); ?>
-                        <div class="mb-3 col-sm-2">
-                            <label for="tenant_rt" class="form-label">RT</label>
-                            <input type="text" class="form-control" id="tenant_rt" name="tenant_rt" value="<?= old('tenant_rt') ?? $tenantRtRw['tenant_rt']; ?>" required>
-                        </div>
-                        <div class="mb-3 col-sm-2">
-                            <label for="tenant_rw" class="form-label">RW</label>
-                            <input type="text" class="form-control" id="tenant_rw" name="tenant_rw" value="<?= old('tenant_rw') ?? $tenantRtRw['tenant_rw']; ?>" required>
-                        </div>
+
+                    <div id="additional_info_warning">
+                        <p class="text-danger">This room is a shared space/item</p>
                     </div>
-                    <div class="mb-3">
-                        <label for="due_started" class="form-label">Contract started</label>
-                        <input type="date" class="form-control" id="due_started" name="due_started" value="<?= old('due_started') ?? $renters_table['due_started']; ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="due_finished" class="form-label">Contract finished</label>
-                        <input type="date" class="form-control" id="due_finished" name="due_finished" value="<?= old('due_finished') ?? $renters_table['due_finished']; ?>">
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -144,9 +158,11 @@
                 cache: true,
                 success: function(response) {
                     $.each(response, function(index, roomsData) {
-                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + '>' + "[" + roomsData.building + " - " + roomsData.parcel_id + "] " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
+                        $("#room_id").append('<option value="' + roomsData.room_id + '" ' + (roomsData.room_id == selectedRoom ? "selected" : "") + ' data-room="' + roomsData.is_public + '">' + "[" + roomsData.building + " - " + roomsData.parcel_id + "] " + roomsData.room_id + " - " + roomsData.room_name + '</option>');
                     });
-                    (selectedRoom ? "" : $("#parcel_id").val(''));
+                    if (selectedRoom) {
+                        checkPublicRoom();
+                    }
                 },
                 error: function(error) {
                     console.log("error");
@@ -154,6 +170,30 @@
                 }
             });
         }
+
+        function checkPublicRoom() {
+            var selectedOption = $('#room_id option:selected');
+            var isPublic = selectedOption.data('room');
+            if (isPublic == 1) { // Assuming is_public == 1 means "public"
+                $('.additional_info').hide();
+                $('#additional_info_warning').show();
+            } else {
+                $('.additional_info').show();
+                $('#additional_info_warning').hide();
+            }
+        }
+
+        $(document).ready(function() {
+            // Attach event listener to dropdown
+            $('#room_id').change(function() {
+                checkPublicRoom();
+            });
+
+            // Initial check if a room is pre-selected
+            if ($('#room_id').val() !== "") {
+                checkPublicRoom();
+            }
+        });
     </script>
 
 

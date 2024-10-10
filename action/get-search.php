@@ -36,6 +36,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $result_table = json_encode($result_table);
         header('Content-Type: application/json');
         echo $result_table;
+    } elseif (isset($_GET['param']) && !empty($_GET['param']) && $_GET['param'] == "renters") {
+        $sql = "SELECT rts.*, tp.*, rm.*, p.*
+        FROM renters_tenants rts
+        LEFT JOIN tenants_table tp ON rts.tenant_id = tp.id
+        LEFT JOIN rooms_table rm ON rts.room_id = rm.room_id
+        LEFT JOIN legal_objects_table p ON rm.legal_object_id = p.id
+        ORDER BY LOWER(rts.room_id) ASC";
+        $result = $conn->query($sql);
+        $result_table = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $result_table[] = $row;
+            }
+        }
+        // debugVarDump($result_table);
+        $result_table = json_encode($result_table);
+        header('Content-Type: application/json');
+        echo $result_table;
     } elseif (isset($_GET['param']) && !empty($_GET['param']) && $_GET['param'] == "parcel") {
         $sql = "SELECT * FROM land_parcel_table";
         $result = $conn->query($sql);

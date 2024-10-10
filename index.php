@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>3D Cadastre</title>
+
+  <title>Purwarupa Administrasi Pertanahan 3 Dimensi</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -10,17 +11,21 @@
 
   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
-  <!-- Bootstrap CSS v5.2.1 -->
+  <!-- Bootstrap & Jquery -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.js "></script>
   <link href=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.css " rel="stylesheet">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/OBJLoader.js"></script>
 
   <link rel="stylesheet" href="assets/css/style.css" />
 
@@ -96,6 +101,7 @@
     </nav>
   </header>
 
+  <!-- Preload -->
   <div class="preload">
     <div class="bg-loading">
       <img src="assets/img/load.gif">
@@ -127,6 +133,10 @@
 
 
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
+    <div class="saran">
+      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Uji Usability</button>
+    </div>
+
     <!-- button kritik dan saran -->
     <div class="saran">
       <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics & Suggestions</button>
@@ -175,32 +185,41 @@
         <div class="modal-body modal-dialog-scrollable">
           <ol>
             <li>
-              <p><strong>What is a 3-dimensional cadastre?</strong></p>
-              <p>A 3-dimensional cadastral is a land collection and registration system that includes three-dimensional space information. The system allows mapping and documentation of properties not only on two-dimensional flat planes, but also in three-dimensional spaces, including upper and underground floors.&nbsp;</p>
+              <p><strong>Apa yang dimaksud dengan Representasi dalam sistem administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Representasi yang dimaksud adalah memvisualisasikan objek fisik dan yuridis dalam bentuk data spasial 3 dimensi dan menyajikan informasi data tekstual yang melekat pada objek tersebut mengacu pada sistem administrasi pertanahan agar mudah dipahami oleh pengguna.</p>
             </li>
             <li>
-              <p><strong>What rights can be covered in a 3-dimensional cadastre?</strong></p>
-              <p>In 3-dimensional cadastre, land rights are distinguished into layers or zones. For example, one zone is for ground level, another is for underground space, and another may be for air space above it. Each zone can have different owners with clearly defined rights. For example, a person can have an apartment on the 5th floor without owning the entire building.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Fisik ?</strong></p>
+              <p>Objek fisik merujuk pada realitas fisik dari tanah atau properti yang ada di lapangan. Objek ini mencakup segala bentuk bangunan, struktur, dan batas-batas fisik tanah yang dapat diidentifikasi dan diukur.</p>
             </li>
             <li>
-              <p><strong>What limitations exist in the 3-dimensional cadastral system?</strong></p>
-              <p>The limitations in the 3-dimensional cadastral relate primarily to the use of upper and lower chambers. Each unit of property has clear vertical boundaries that must not be violated by other units without consent. For example, there should be no structural penetration interfering with other units above or below it.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Yuridis ?</strong></p>
+              <p>Objek legal mengacu pada entitas hukum yang mengatur hak, kewajiban, dan batas-batas yang berkaitan dengan kepemilikan atau penggunaan suatu properti. Objek legal ini sering kali berbeda dari batas-batas fisik, karena mengatur aspek hukum dari penggunaan dan pemanfaatan ruang. Objek legal sering kali dipetakan dalam 3 dimensi untuk mencerminkan hak kepemilikan atau penggunaan dalam ruang vertikal.</p>
             </li>
             <li>
-              <p><strong>How are responsibilities divided in 3-dimensional cadastre?</strong></p>
-              <p>Responsibilities are generally divided based on the vertical and horizontal position of the property. For example, an apartment owner is responsible for maintenance and repairs within his unit, while a building owners association may be responsible for common areas and shared amenities such as roofs, elevators, and major utility systems.</p>
+              <p><strong>Bagaimana hubungan antara Objek Fisik dan Objek Yuridis dalam administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Dalam administrasi pertanahan 3 dimensi, penting untuk memastikan bahwa <strong>objek fisik</strong> dan <strong>objek legal</strong> dipetakan secara akurat untuk menghindari konflik kepemilikan atau penggunaan ruang. Misalnya, ruang bawah tanah di bawah suatu bangunan mungkin menjadi milik pihak lain yang berbeda dengan pemilik tanah di permukaan, dan hal ini harus diatur secara legal.</p>
+              <p>Penyajian data spasial 3 dimensi bertujuan untuk memberikan representasi yang lebih komprehensif dari kepemilikan dan penggunaan ruang dalam tiga dimensi, baik secara fisik maupun yuridis. Sistem ini sangat relevan di area perkotaan dengan struktur bangunan yang rumit dan penggunaan ruang yang tumpang tindih, sehingga memungkinkan pengelolaan tanah yang lebih efisien dan adil.</p>
             </li>
             <li>
-              <p><strong>What are the main benefits of a 3-dimensional cadastral system?</strong></p>
-              <p>Key benefits include increased clarity in property ownership and boundaries, more effective dispute resolution, and increased efficiency in the management and construction of vertical spaces. It also supports innovation in real estate development and urban infrastructure.</p>
+              <p><strong>Apa yang dimaksud dengan RRR ?</strong></p>
+              <p>RRR kependekan dari Rights, Restriction and Responsibilities atau dalam Bahasa Indonesia diterjemahkan sebagai Hak, Batasan dan Tanggungjawab</p>
             </li>
             <li>
-              <p><strong>How does the 3-dimensional cadastral affect multilevel development?</strong></p>
-              <p>3-dimensional cadastre is very important in multi-storey development because it allows developers and property owners to separate ownership rights vertically. This makes it easier to sell and manage individual units within a multi-storey building, such as an apartment or office.</p>
+              <p><strong>Apa yang dimaksud dengan Hak ?</strong></p>
+              <p>Hak merujuk pada kewenangan hukum yang dimiliki seseorang atau entitas (seperti pemilik, penyewa, atau pengelola) untuk menggunakan, mengelola, atau menguasai suatu properti dalam batasan yang diatur oleh hukum. Dalam administrasi pertanahan 3 dimensi, hak ini tidak hanya mencakup permukaan tanah (2D) tetapi juga mencakup hak atas ruang di atas dan di bawah permukaan tanah (3D).</p>
             </li>
             <li>
-              <p><strong>Does the 3-dimensional cadastral affect the value of the property?</strong></p>
-              <p>Yes, a 3-dimensional cadastral can affect the value of a property because it provides greater legal clarity on what a person owns exactly. This increases legal security for owners and potential investors, which can increase the value of the property.</p>
+              <p><strong>Apa yang dimaksud dengan Batasan ?</strong></p>
+              <p>Batasan adalah pembatasan hukum atau yang mengatur apa yang tidak boleh dilakukan oleh pemilik atau pengguna properti tertentu. Batasan ini diterapkan oleh pemerintah, otoritas perencanaan, atau peraturan hukum lainnya untuk melindungi kepentingan publik, keamanan, dan kelestarian lingkungan. Dalam konteks administrasi pertanahan 3 dimensi, batasan ini sering kali berhubungan dengan batas ketinggian pemanfaatan ruang.</p>
+            </li>
+            <li>
+              <p><strong>Apa &nbsp;yang dimaksud dengan Tanggung Jawab ?</strong></p>
+              <p>Tanggung jawab merujuk pada kewajiban yang melekat pada pemilik atau pengguna tanah atau bangunan atau ruang untuk mematuhi aturan yang berlaku. Tanggung jawab dalam administrasi pertanahan 3 dimensi mencakup berbagai aspek yang terkait dengan pengelolaan ruang fisik dan hubungan dengan pihak lain.</p>
+            </li>
+            <li>
+              <p><strong>Apa itu Administrasi Pertanahan 3 Dimensi?</strong></p>
+              <p>Administrasi Pertanahan 3 Dimensi adalah konsep pengelolaan data pertanahan yang mencakup dimensi ketiga, yaitu ketinggian atau kedalaman, untuk menggambarkan kepemilikan, penggunaan, dan penguasaan tanah secara lebih lengkap. Hal ini sangat relevan di wilayah dengan penggunaan ruang yang kompleks seperti gedung bertingkat, terowongan bawah tanah, atau infrastruktur lain yang melibatkan elemen vertikal.</p>
             </li>
           </ol>
         </div>
@@ -209,7 +228,7 @@
   </div>
 
   <main>
-    <!-- Modal -->
+    <!-- Modal Room -->
     <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -224,7 +243,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Organizer -->
     <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -239,12 +258,12 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Tenant -->
     <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailTenantLabel">Tenant Detail</h1>
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Penyewa/Pengguna</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -254,7 +273,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Right -->
     <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -269,7 +288,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Restriction -->
     <div class="modal fade" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -284,7 +303,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Responsibilities -->
     <div class="modal fade" id="detailResponsibilities" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailResponsibilitiesLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -299,10 +318,32 @@
       </div>
     </div>
 
+    <!-- Panel Usability Test -->
+    <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" id="usabLabel">Panduan Uji Kebergunaan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          Berikut adalah daftar skenario pengujian usability untuk WebGIS Administrasi Pertanahan 3D Anda:
+          <ol>
+            <li>Navigasi ke lokasi bangunan tertentu (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) di peta 3D</li>
+            <li>Cek pengelolaan layer dengan cara menyembunyikan/menampilkan layer</li>
+            <li>Tampilkan informasi dari salah satu objek ruang/yuridis suatu bangunan</li>
+            <!-- <li>Lakukan cek ketinggian bangunan rencana dengan fitur simulasi desain, sampel data 3d dapat menggunakan berikut <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
+            <li>Melihat zona tata ruang dan batas tinggi bangunan zona yang ada</li>
+            <li>Jelajahi semua fitur/objek pada peta</li>
+            <li>Isi form uji kebergunaan berikut <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
+          </ol>
+        </div>
+      </div>
+      <button class="btn btn-warning" id="usab-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#usab" aria-controls="usab">Usability Test Guide ⬆️</button>
+    </div>
 
+    <!-- Panel Layer Data -->
     <div class="layer-panel card">
       <div class="card-body p-2">
-
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -548,144 +589,143 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Building boundary line <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola <a href="#" id="zoomToSiolaParcel"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola </label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Building Plan S<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-                            Building Plan S.1 <a href="#" id="zoomToe1"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-                            Building Plan S.2 <a href="#" id="zoomToe2"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-                            Building Plan S.3 <a href="#" id="zoomToe3"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-                            Building Plan S.4 <a href="#" id="zoomToe4"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-                            Building Plan S.5 <a href="#" id="zoomToe5"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-                            Building Plan S.6 <a href="#" id="zoomToe6"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-                            Building Plan S.7 <a href="#" id="zoomToe7"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-                            Building Plan S.8 <a href="#" id="zoomToe8"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-                            Building Plan S.9 <a href="#" id="zoomToe9"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-                            Building Plan S.10 <a href="#" id="zoomToe10"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            Building Plan S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.11 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            Building Plan S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.12 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-                            Building Plan S.13 <a href="#" id="zoomToe13"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.13 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-                            Building Plan S.14 <a href="#" id="zoomToe14"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.14 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-                            Building Plan S.15 <a href="#" id="zoomToe15"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.15 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-                            Building Plan S.16 <a href="#" id="zoomToe16"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.16 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-                            Building Plan S.17 <a href="#" id="zoomToe17"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.17 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-                            Building Plan S.18 <a href="#" id="zoomToe18"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.18 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-                            Building Plan S.19 <a href="#" id="zoomToe19"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.19 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-                            Building Plan S.20 <a href="#" id="zoomToe20"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.20 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-                            Building Plan S.21 <a href="#" id="zoomToe21"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.21 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-                            Building Plan S.22 <a href="#" id="zoomToe22"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.22 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-                            Building Plan S.23 <a href="#" id="zoomToe23"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.23 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-                            Building Plan S.24 <a href="#" id="zoomToe24"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.24 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-                            Building Plan S.25 <a href="#" id="zoomToe25"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.25 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-                            Building Plan S.26 <a href="#" id="zoomToe26"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan S.26 </label>
                         </li>
                       </ul>
                     </li>
@@ -871,69 +911,68 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Building boundary line <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda<a href="#" id="zoomToBalaiParcel"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Building Plan B<a href="#" id="zoomToeallb"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-                            Building Plan B.1 <a href="#" id="zoomToe27"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-                            Building Plan B.2 <a href="#" id="zoomToe28"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            Building Plan B.3 <a href="#" id="zoomToe29"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-                            Building Plan B.4 <a href="#" id="zoomToe30"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            Building Plan B.5 <a href="#" id="zoomToe31"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-                            Building Plan B.6 <a href="#" id="zoomToe32"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-                            Building Plan B.7 <a href="#" id="zoomToe33"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-                            Building Plan B.8 <a href="#" id="zoomToe34"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-                            Building Plan B.9 <a href="#" id="zoomToe35"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-                            Building Plan B.10 <a href="#" id="zoomToe36"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-                            Building Plan B.11 <a href="#" id="zoomToe37"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan B.11 </label>
                         </li>
                       </ul>
                     </li>
@@ -1653,39 +1692,38 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Building boundary line <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Building Plan R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-                            Building Plan R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-                            Building Plan R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-                            Building Plan R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-                            Building Plan R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-                            Building Plan R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
+                            Tata Bangunan R.5 </label>
                         </li>
                       </ul>
                     </li>
@@ -1730,20 +1768,62 @@
       </div>
     </div>
 
+    <!-- Panel Cek Simulasi -->
+    <div id="topRight" class="">
+      <div id="simSection" class="position-relative">
+        <div class="d-flex flex-row align-items-center gap-1">
+          <div class="p-1">
+            <span>Cek simulasi desain</span>
+          </div>
+          <div id="menuToggleBtn" class="border-0 border-start">
+            <i class="bi bi-list"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="menuSection" class="d-none">
+        <div class="m-1 p-2">
+          <div id="menuItem" class="d-flex flex-column">
+            <div class="mb-0">
+              <label for="formFileSm" class="form-label">File input</label>
+              <div class="input-group">
+                <input class="form-control form-control-sm" id="formFileSm" type="file">
+              </div>
+              <div id="buildingHeight" class="py-1"></div>
+              <div id="coordinateInputs" class="my-2" style="display: none;">
+                <label for="latitude" class="form-label">Latitude</label>
+                <input class="form-control form-control-sm" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300">
+                <label for="longitude" class="form-label">Longitude</label>
+                <input class="form-control form-control-sm" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890">
+                <label for="longitude" class="form-label">Heading</label>
+                <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
+              </div>
+              <div class="mt-2 d-flex justify-content-end">
+                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Minimap -->
     <div class="minimap-panel card">
       <div id="map2d"></div>
     </div>
 
+    <!-- Panel properti data -->
     <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
       </div>
       <div class="property-content cesium-infoBox-description" id="property-content">
-
       </div>
     </div>
 
+    <!-- Panel Meassurement -->
     <div class="measure-panel card">
       <div class="card-body p-2">
         <button id="mdistance" type="button" class="asbn cesium-button">distance (horizontal)</button>
@@ -1756,6 +1836,7 @@
       </div>
     </div>
 
+    <!-- Panel Clipping -->
     <div class="clip-panel card">
       <div class="card-body p-2">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="clsiola" checked>
@@ -1768,43 +1849,43 @@
           <div class="slider-group clsiola">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clbalai" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clrusunawa" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <button id="reset-clip">Reset</button>
@@ -1831,11 +1912,14 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script>
+
 
   <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>
 
 
+  <script src="assets/js/Cesium3DTileLocationEditor.js"></script>
   <script type="module" src="assets/js/cesiumScript.js"></script>
 
 </body>
