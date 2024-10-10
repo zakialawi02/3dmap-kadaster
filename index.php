@@ -123,18 +123,28 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h4>Welcome to Cadastral 3D Geographic Information System</h4>
-          <p>3D cadastral is an innovation in geographic information technology that allows visualization and management of cadastral data with the representation of real estate objects in three dimensions, allowing more accurate mapping of the available space, both above and below ground level. The system is designed to provide a clearer and more detailed picture of cadastral objects such as buildings, land, and other infrastructure, by displaying information on location, dimensions, and land rights and related limitations and responsibilities.</p>
-          <p>Explore new dimensions in mapping and land management with our 3D GIS technology. Discover detailed property data, space analysis related to RRR (Right, Restriction, Resposibility), and visualizations that help you make better decisions and innovate planning. WebGIS 3D Cadastre, brings a new perspective in the understanding and management of your space.</p>
+          <h4 class="text-center mb-3">Prototype of 3D Land Administration Application</h4>
+          <p class="text-center">This application is designed to facilitate the understanding and management
+            <br>of <b>rights, boundaries, and responsibilities</b> in the context of modern land administration.
+            <br>Through 3D technology, you can explore detailed
+            <br>land rights, property boundaries, and associated responsibilities
+            <br>in a more interactive and informative way.
+          </p>
+          <p class="text-center">The application provides the necessary tools to ensure compliance with
+            <br>applicable land regulations, assists in the preparation of legal documents, and simplifies decision-making processes related to properties.
+          </p>
+          <p class="text-center">Let's start the journey towards more transparent and efficient land management.</p>
         </div>
       </div>
+
     </div>
+  </div>
   </div>
 
 
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
     <div class="saran">
-      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Uji Usability</button>
+      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Usability Test</button>
     </div>
 
     <!-- button kritik dan saran -->
@@ -185,43 +195,44 @@
         <div class="modal-body modal-dialog-scrollable">
           <ol>
             <li>
-              <p><strong>Apa yang dimaksud dengan Representasi dalam sistem administrasi pertanahan 3 dimensi?</strong></p>
-              <p>Representasi yang dimaksud adalah memvisualisasikan objek fisik dan yuridis dalam bentuk data spasial 3 dimensi dan menyajikan informasi data tekstual yang melekat pada objek tersebut mengacu pada sistem administrasi pertanahan agar mudah dipahami oleh pengguna.</p>
+              <p><strong>What is meant by Representation in the 3D land administration system?</strong></p>
+              <p>Representation refers to visualizing physical and legal objects in the form of 3D spatial data and presenting textual information attached to those objects, based on the land administration system, to make it easier for users to understand.</p>
             </li>
             <li>
-              <p><strong>Apa yang dimaksud dengan Objek Fisik ?</strong></p>
-              <p>Objek fisik merujuk pada realitas fisik dari tanah atau properti yang ada di lapangan. Objek ini mencakup segala bentuk bangunan, struktur, dan batas-batas fisik tanah yang dapat diidentifikasi dan diukur.</p>
+              <p><strong>What is meant by Physical Objects?</strong></p>
+              <p>Physical objects refer to the physical reality of land or property in the field. These objects include all types of buildings, structures, and physical land boundaries that can be identified and measured.</p>
             </li>
             <li>
-              <p><strong>Apa yang dimaksud dengan Objek Yuridis ?</strong></p>
-              <p>Objek legal mengacu pada entitas hukum yang mengatur hak, kewajiban, dan batas-batas yang berkaitan dengan kepemilikan atau penggunaan suatu properti. Objek legal ini sering kali berbeda dari batas-batas fisik, karena mengatur aspek hukum dari penggunaan dan pemanfaatan ruang. Objek legal sering kali dipetakan dalam 3 dimensi untuk mencerminkan hak kepemilikan atau penggunaan dalam ruang vertikal.</p>
+              <p><strong>What is meant by Legal Objects?</strong></p>
+              <p>Legal objects refer to legal entities that regulate the rights, obligations, and boundaries related to ownership or use of a property. Legal objects often differ from physical boundaries because they govern the legal aspects of space use and utilization. Legal objects are often mapped in 3D to reflect ownership or usage rights in vertical space.</p>
             </li>
             <li>
-              <p><strong>Bagaimana hubungan antara Objek Fisik dan Objek Yuridis dalam administrasi pertanahan 3 dimensi?</strong></p>
-              <p>Dalam administrasi pertanahan 3 dimensi, penting untuk memastikan bahwa <strong>objek fisik</strong> dan <strong>objek legal</strong> dipetakan secara akurat untuk menghindari konflik kepemilikan atau penggunaan ruang. Misalnya, ruang bawah tanah di bawah suatu bangunan mungkin menjadi milik pihak lain yang berbeda dengan pemilik tanah di permukaan, dan hal ini harus diatur secara legal.</p>
-              <p>Penyajian data spasial 3 dimensi bertujuan untuk memberikan representasi yang lebih komprehensif dari kepemilikan dan penggunaan ruang dalam tiga dimensi, baik secara fisik maupun yuridis. Sistem ini sangat relevan di area perkotaan dengan struktur bangunan yang rumit dan penggunaan ruang yang tumpang tindih, sehingga memungkinkan pengelolaan tanah yang lebih efisien dan adil.</p>
+              <p><strong>What is the relationship between Physical and Legal Objects in 3D land administration?</strong></p>
+              <p>In 3D land administration, it is important to ensure that <strong>physical objects</strong> and <strong>legal objects</strong> are accurately mapped to avoid ownership or space-use conflicts. For example, the underground space beneath a building may belong to a different party than the surface landowner, and this must be legally regulated.</p>
+              <p>The presentation of 3D spatial data aims to provide a more comprehensive representation of ownership and space usage in three dimensions, both physically and legally. This system is highly relevant in urban areas with complex building structures and overlapping space usage, allowing for more efficient and equitable land management.</p>
             </li>
             <li>
-              <p><strong>Apa yang dimaksud dengan RRR ?</strong></p>
-              <p>RRR kependekan dari Rights, Restriction and Responsibilities atau dalam Bahasa Indonesia diterjemahkan sebagai Hak, Batasan dan Tanggungjawab</p>
+              <p><strong>What is meant by RRR?</strong></p>
+              <p>RRR stands for Rights, Restrictions, and Responsibilities.</p>
             </li>
             <li>
-              <p><strong>Apa yang dimaksud dengan Hak ?</strong></p>
-              <p>Hak merujuk pada kewenangan hukum yang dimiliki seseorang atau entitas (seperti pemilik, penyewa, atau pengelola) untuk menggunakan, mengelola, atau menguasai suatu properti dalam batasan yang diatur oleh hukum. Dalam administrasi pertanahan 3 dimensi, hak ini tidak hanya mencakup permukaan tanah (2D) tetapi juga mencakup hak atas ruang di atas dan di bawah permukaan tanah (3D).</p>
+              <p><strong>What is meant by Rights?</strong></p>
+              <p>Rights refer to the legal authority held by an individual or entity (such as an owner, tenant, or manager) to use, manage, or control a property within limits set by law. In 3D land administration, these rights not only cover surface land (2D) but also rights over space above and below the surface (3D).</p>
             </li>
             <li>
-              <p><strong>Apa yang dimaksud dengan Batasan ?</strong></p>
-              <p>Batasan adalah pembatasan hukum atau yang mengatur apa yang tidak boleh dilakukan oleh pemilik atau pengguna properti tertentu. Batasan ini diterapkan oleh pemerintah, otoritas perencanaan, atau peraturan hukum lainnya untuk melindungi kepentingan publik, keamanan, dan kelestarian lingkungan. Dalam konteks administrasi pertanahan 3 dimensi, batasan ini sering kali berhubungan dengan batas ketinggian pemanfaatan ruang.</p>
+              <p><strong>What is meant by Restrictions?</strong></p>
+              <p>Restrictions are legal limitations or regulations that govern what cannot be done by the owner or user of a particular property. These restrictions are imposed by the government, planning authorities, or other legal regulations to protect public interest, safety, and environmental sustainability. In the context of 3D land administration, restrictions often relate to height limits on space utilization.</p>
             </li>
             <li>
-              <p><strong>Apa &nbsp;yang dimaksud dengan Tanggung Jawab ?</strong></p>
-              <p>Tanggung jawab merujuk pada kewajiban yang melekat pada pemilik atau pengguna tanah atau bangunan atau ruang untuk mematuhi aturan yang berlaku. Tanggung jawab dalam administrasi pertanahan 3 dimensi mencakup berbagai aspek yang terkait dengan pengelolaan ruang fisik dan hubungan dengan pihak lain.</p>
+              <p><strong>What is meant by Responsibilities?</strong></p>
+              <p>Responsibilities refer to the obligations that fall upon the owner or user of land, buildings, or space to comply with applicable regulations. Responsibilities in 3D land administration include various aspects related to the management of physical space and relationships with other parties.</p>
             </li>
             <li>
-              <p><strong>Apa itu Administrasi Pertanahan 3 Dimensi?</strong></p>
-              <p>Administrasi Pertanahan 3 Dimensi adalah konsep pengelolaan data pertanahan yang mencakup dimensi ketiga, yaitu ketinggian atau kedalaman, untuk menggambarkan kepemilikan, penggunaan, dan penguasaan tanah secara lebih lengkap. Hal ini sangat relevan di wilayah dengan penggunaan ruang yang kompleks seperti gedung bertingkat, terowongan bawah tanah, atau infrastruktur lain yang melibatkan elemen vertikal.</p>
+              <p><strong>What is 3D Land Administration?</strong></p>
+              <p>3D Land Administration is a concept of land data management that incorporates the third dimension, i.e., height or depth, to more comprehensively depict ownership, usage, and control of land. This is particularly relevant in areas with complex space usage, such as multi-story buildings, underground tunnels, or other infrastructure involving vertical elements.</p>
             </li>
           </ol>
+
         </div>
       </div>
     </div>
@@ -263,7 +274,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Penyewa/Pengguna</h1>
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Tenant Detail</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -321,22 +332,23 @@
     <!-- Panel Usability Test -->
     <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold" id="usabLabel">Panduan Uji Kebergunaan</h5>
+        <h5 class="offcanvas-title fw-bold" id="usabLabel">Usability Testing Guidelines</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <div>
-          Berikut adalah daftar skenario pengujian usability untuk WebGIS Administrasi Pertanahan 3D Anda:
+          Here is the list of usability testing scenarios for your 3D Land Administration WebGIS:
           <ol>
-            <li>Navigasi ke lokasi bangunan tertentu (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) di peta 3D</li>
-            <li>Cek pengelolaan layer dengan cara menyembunyikan/menampilkan layer</li>
-            <li>Tampilkan informasi dari salah satu objek ruang/yuridis suatu bangunan</li>
-            <!-- <li>Lakukan cek ketinggian bangunan rencana dengan fitur simulasi desain, sampel data 3d dapat menggunakan berikut <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
-            <li>Melihat zona tata ruang dan batas tinggi bangunan zona yang ada</li>
-            <li>Jelajahi semua fitur/objek pada peta</li>
-            <li>Isi form uji kebergunaan berikut <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
+            <li>Navigate to a specific building location (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) on the 3D map</li>
+            <li>Check layer management by hiding/showing layers</li>
+            <li>Display information from one of the spatial/legal objects of a building</li>
+            <!-- <li>Check the height of a planned building using the design simulation feature, sample 3D data can be used from the following link <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
+            <li>View spatial planning zones and the height limits of existing building zones</li>
+            <li>Explore all features/objects on the map</li>
+            <li>Fill out the following usability testing form <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
           </ol>
         </div>
+
       </div>
       <button class="btn btn-warning" id="usab-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#usab" aria-controls="usab">Usability Test Guide ⬆️</button>
     </div>
@@ -594,138 +606,138 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Building Layout S</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-                            Tata Bangunan S.1 </label>
+                            Building Layout S.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-                            Tata Bangunan S.2 </label>
+                            Building Layout S.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-                            Tata Bangunan S.3 </label>
+                            Building Layout S.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-                            Tata Bangunan S.4 </label>
+                            Building Layout S.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-                            Tata Bangunan S.5 </label>
+                            Building Layout S.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-                            Tata Bangunan S.6 </label>
+                            Building Layout S.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-                            Tata Bangunan S.7 </label>
+                            Building Layout S.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-                            Tata Bangunan S.8 </label>
+                            Building Layout S.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-                            Tata Bangunan S.9 </label>
+                            Building Layout S.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-                            Tata Bangunan S.10 </label>
+                            Building Layout S.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            Tata Bangunan S.11 </label>
+                            Building Layout S.11 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            Tata Bangunan S.12 </label>
+                            Building Layout S.12 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-                            Tata Bangunan S.13 </label>
+                            Building Layout S.13 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-                            Tata Bangunan S.14 </label>
+                            Building Layout S.14 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-                            Tata Bangunan S.15 </label>
+                            Building Layout S.15 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-                            Tata Bangunan S.16 </label>
+                            Building Layout S.16 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-                            Tata Bangunan S.17 </label>
+                            Building Layout S.17 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-                            Tata Bangunan S.18 </label>
+                            Building Layout S.18 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-                            Tata Bangunan S.19 </label>
+                            Building Layout S.19 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-                            Tata Bangunan S.20 </label>
+                            Building Layout S.20 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-                            Tata Bangunan S.21 </label>
+                            Building Layout S.21 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-                            Tata Bangunan S.22 </label>
+                            Building Layout S.22 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-                            Tata Bangunan S.23 </label>
+                            Building Layout S.23 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-                            Tata Bangunan S.24 </label>
+                            Building Layout S.24 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-                            Tata Bangunan S.25 </label>
+                            Building Layout S.25 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-                            Tata Bangunan S.26 </label>
+                            Building Layout S.26 </label>
                         </li>
                       </ul>
                     </li>
@@ -916,63 +928,63 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Building Layout B</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-                            Tata Bangunan B.1 </label>
+                            Building Layout B.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-                            Tata Bangunan B.2 </label>
+                            Building Layout B.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            Tata Bangunan B.3 </label>
+                            Building Layout B.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-                            Tata Bangunan B.4 </label>
+                            Building Layout B.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            Tata Bangunan B.5 </label>
+                            Building Layout B.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-                            Tata Bangunan B.6 </label>
+                            Building Layout B.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-                            Tata Bangunan B.7 </label>
+                            Building Layout B.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-                            Tata Bangunan B.8 </label>
+                            Building Layout B.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-                            Tata Bangunan B.9 </label>
+                            Building Layout B.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-                            Tata Bangunan B.10 </label>
+                            Building Layout B.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-                            Tata Bangunan B.11 </label>
+                            Building Layout B.11 </label>
                         </li>
                       </ul>
                     </li>
@@ -1697,33 +1709,33 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Building Layout R</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-                            Tata Bangunan R.1 </label>
+                            Building Layout R.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-                            Tata Bangunan R.2 </label>
+                            Building Layout R.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-                            Tata Bangunan R.3 </label>
+                            Building Layout R.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-                            Tata Bangunan R.4 </label>
+                            Building Layout R.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-                            Tata Bangunan R.5 </label>
+                            Building Layout R.5 </label>
                         </li>
                       </ul>
                     </li>
@@ -1773,7 +1785,7 @@
       <div id="simSection" class="position-relative">
         <div class="d-flex flex-row align-items-center gap-1">
           <div class="p-1">
-            <span>Cek simulasi desain</span>
+            <span>Check design simulation</span>
           </div>
           <div id="menuToggleBtn" class="border-0 border-start">
             <i class="bi bi-list"></i>
@@ -1799,7 +1811,7 @@
                 <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
               </div>
               <div class="mt-2 d-flex justify-content-end">
-                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
+                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Check</button>
               </div>
             </div>
           </div>
