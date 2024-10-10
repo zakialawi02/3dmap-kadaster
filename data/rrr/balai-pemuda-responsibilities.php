@@ -1,90 +1,30 @@
 <div class="rrr" id="rrr">
     <ol style="list-style-type:upper-roman;">
-<<<<<<< Updated upstream
-        <li><strong>Renters and Organizers</strong>
-            <ol style="list-style-type:upper-latin;">
-                <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>
-                    <p>Surat Ijin Sewa</p>
-                    <p>WEWEW</p>
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-=======
-        <li><strong>Managers and Users</strong>
+        <li><strong>Pengelola dan Pemakai</strong>
             <ol style="list-style-type:decimal;">
-                <li>Adhere to all regulations and agreements related to the use of the space, including not damaging or neglecting the facilities provided.</li>
-                <li>Coordinate in case of any changes in the purpose or use of the space to ensure compliance with the applicable rules.</li>
->>>>>>> Stashed changes
+                <li>Mematuhi semua peraturan dan ketentuan yang telah disepakati terkait penggunaan ruangan, termasuk tidak merusak atau mengabaikan fasilitas yang ada.</li>
+                <li>Berkoordinasi dalam hal terjadi perubahan peruntukan atau penggunaan ruangan untuk memastikan kesesuaian dengan aturan yang berlaku.</li>
+
             </ol>
         </li>
     </ol>
     <ol style="list-style-type:upper-roman;" start="2">
-<<<<<<< Updated upstream
-        <li><strong>Renters</strong>
-            <ol style="list-style-type:upper-latin;">
-                <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
+        <li><strong>Pengelola</strong>
+            <ol style="list-style-type:decimal;">
+                <li>Menyediakan gedung atau ruangan yang layak dan sesuai dengan kebutuhan operasional Dinas.</li>
+                <li>Melakukan perawatan dan pemeliharaan rutin terhadap gedung atau ruangan agar tetap dalam kondisi baik.</li>
+                <li>Menyediakan fasilitas yang memadai seperti listrik, air, dan kebersihan untuk mendukung operasional Dinas.</li>
+                <li>Menyusun dan mensosialisasikan peraturan terkait penggunaan gedung atau ruangan kepada pemakai gedung.</li>
             </ol>
         </li>
-        <li><strong>Organizer</strong>
-            <ol style="list-style-type:upper-latin;">
-                <li>Lease Agreement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Surat Ijin Sewa<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-=======
-        <li><strong>Managers</strong>
+        <li><strong>Pemakai</strong>
             <ol style="list-style-type:decimal;">
-                <li>Provide suitable buildings or rooms that meet the operational needs of the department.</li>
-                <li>Conduct regular maintenance and repairs to keep the building or room in good condition.</li>
-                <li>Provide adequate facilities such as electricity, water, and cleanliness to support the department's operations.</li>
-                <li>Establish and communicate rules related to the use of the building or room to the users.</li>
-            </ol>
-        </li>
-        <li><strong>Users</strong>
-            <ol style="list-style-type:decimal;">
-                <li>Use the building or room according to its designated purpose and applicable regulations.</li>
-                <li>Maintain the cleanliness, security, and integrity of the building or room facilities.</li>
-                <li>Report any damages or issues with the building or room to the management immediately.</li>
-                <li>Comply with the rules and regulations set by the government/management regarding the use of the building or room.</li>
->>>>>>> Stashed changes
+                <li>Menggunakan gedung atau ruangan sesuai dengan peruntukan dan ketentuan yang berlaku.</li>
+                <li>Menjaga kebersihan, keamanan, dan keutuhan fasilitas gedung atau ruangan.</li>
+                <li>Melaporkan segera kepada pengelola jika terdapat kerusakan atau masalah pada gedung atau ruangan.</li>
+                <li>Mematuhi peraturan dan ketentuan yang telah ditetapkan oleh pemerintah/pengelola terkait penggunaan gedung atau ruangan.</li>
             </ol>
         </li>
     </ol>
+    <p>&nbsp;</p>
 </div>

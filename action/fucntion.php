@@ -5,18 +5,27 @@ function base_url(string $uri = ''): string
     return rtrim($BASE_URL, '/') . '/' . ltrim($uri, '/');
 }
 
-function timeIDN($format = 'hari, tanggal bulan tahun')
+function timeIDN($format = 'hari, tanggal bulan tahun', $time = 'now')
 {
     include_once $_SERVER['DOCUMENT_ROOT'] . '/action/first-load.php';
     // Array nama hari dalam Bahasa Indonesia
     $nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
     // Array nama bulan dalam Bahasa Indonesia
     $nama_bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
     // Mendapatkan informasi hari, tanggal, bulan, dan tahun
-    $hari = date('w'); // Mendapatkan hari dalam angka (0 = Minggu, 1 = Senin, dst.)
-    $tanggal = date('d');
-    $bulan = date('m'); // Mendapatkan bulan dalam angka (1-12)
-    $tahun = date('Y');
+    if ($time == 'now') {
+        $hari = date('w'); // Mendapatkan hari dalam angka (0 = Minggu, 1 = Senin, dst.)
+        $tanggal = date('d');
+        $bulan = date('m'); // Mendapatkan bulan dalam angka (1-12)
+        $tahun = date('Y');
+    } else {
+        $date = DateTime::createFromFormat('Y-m-d', $time);
+        $hari = $date->format('w');
+        $tanggal = $date->format('d');
+        $bulan = $date->format('m');
+        $tahun = $date->format('Y');
+    }
 
     // Menyesuaikan format yang diminta
     $format = str_replace("hari", $nama_hari[$hari], $format);

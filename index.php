@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-<<<<<<< Updated upstream
-  <title>3D Cadastre</title>
-=======
-  <title>3D Land Administration Prototype</title>
->>>>>>> Stashed changes
+
+  <title>Purwarupa Administrasi Pertanahan 3 Dimensi</title>
   <!-- Required meta tags -->
 
   <meta charset="utf-8" />
@@ -14,17 +11,21 @@
 
   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
-  <!-- Bootstrap CSS v5.2.1 -->
+  <!-- Bootstrap & Jquery -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css" rel="stylesheet" type="text/css">
   <script src=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.js "></script>
   <link href=" https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.min.css " rel="stylesheet">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/OBJLoader.js"></script>
 
   <link rel="stylesheet" href="assets/css/style.css" />
 
@@ -79,11 +80,7 @@
             </ul>
           </li>
           <li>
-<<<<<<< Updated upstream
             <a id="meassure" class="" href="#" title="Meassurement"><i class="bi bi-rulers"></i></a>
-=======
-            <a id="meassure" class="" href="#" title="Distance Measurement"><i class="bi bi-rulers"></i></a>
->>>>>>> Stashed changes
           </li>
           <li>
             <a id="minimap" class="" href="#" title="Minimap/Inset"><i class="bi bi-globe-asia-australia"></i></a>
@@ -104,6 +101,7 @@
     </nav>
   </header>
 
+  <!-- Preload -->
   <div class="preload">
     <div class="bg-loading">
       <img src="assets/img/load.gif">
@@ -121,7 +119,6 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header p-2">
-<<<<<<< Updated upstream
           <h1 class="modal-title fs-5" id="welcomeLabel">Welcome</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -129,24 +126,6 @@
           <h4>Welcome to Cadastral 3D Geographic Information System</h4>
           <p>3D cadastral is an innovation in geographic information technology that allows visualization and management of cadastral data with the representation of real estate objects in three dimensions, allowing more accurate mapping of the available space, both above and below ground level. The system is designed to provide a clearer and more detailed picture of cadastral objects such as buildings, land, and other infrastructure, by displaying information on location, dimensions, and land rights and related limitations and responsibilities.</p>
           <p>Explore new dimensions in mapping and land management with our 3D GIS technology. Discover detailed property data, space analysis related to RRR (Right, Restriction, Resposibility), and visualizations that help you make better decisions and innovate planning. WebGIS 3D Cadastre, brings a new perspective in the understanding and management of your space.</p>
-=======
-          <h1 class="modal-title fs-5" id="welcomeLabel">Welcome to 3D Land Administration</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h4 class="text-center mb-3">Prototype of 3D Land Administration Application</h4>
-          <p class="text-center">This application is designed to facilitate the understanding and management of
-            <br><b>rights, restrictions, and responsibilities</b> in the context of modern land administration.
-            <br>Through 3D technology, you can explore detailed
-            <br>land rights, property boundaries, and the associated responsibilities
-            <br>in a more interactive and informative way.
-          </p>
-          <p class="text-center">This application provides the necessary tools to ensure compliance with
-            <br>applicable land regulations, assist in the preparation of legal documents, and streamline decision-making processes related to property.
-          </p>
-          <p class="text-center">Let us embark on a journey towards more transparent and efficient land management.</p>
-
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
@@ -154,19 +133,13 @@
 
 
   <div class="cesiumContainer" style="display:inline-flex; position: absolute; bottom:10px; right:10px; z-index:100;">
-<<<<<<< Updated upstream
-    <!-- button kritik dan saran -->
     <div class="saran">
-      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics & Suggestions</button>
-=======
-    <div class="saran">
-      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Usability Test</button>
+      <button type="button" class="cesium-button" id="btn-usability" data-bs-toggle="modal" data-bs-target="#usability">Uji Usability</button>
     </div>
 
     <!-- button kritik dan saran -->
     <div class="saran">
-      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics and Suggestions</button>
->>>>>>> Stashed changes
+      <button type="button" class="cesium-button" id="btn-critics" data-bs-toggle="modal" data-bs-target="#critics">Critics & Suggestions</button>
     </div>
 
     <!-- button F&Q -->
@@ -212,80 +185,50 @@
         <div class="modal-body modal-dialog-scrollable">
           <ol>
             <li>
-<<<<<<< Updated upstream
-              <p><strong>What is a 3-dimensional cadastre?</strong></p>
-              <p>A 3-dimensional cadastral is a land collection and registration system that includes three-dimensional space information. The system allows mapping and documentation of properties not only on two-dimensional flat planes, but also in three-dimensional spaces, including upper and underground floors.&nbsp;</p>
+              <p><strong>Apa yang dimaksud dengan Representasi dalam sistem administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Representasi yang dimaksud adalah memvisualisasikan objek fisik dan yuridis dalam bentuk data spasial 3 dimensi dan menyajikan informasi data tekstual yang melekat pada objek tersebut mengacu pada sistem administrasi pertanahan agar mudah dipahami oleh pengguna.</p>
             </li>
             <li>
-              <p><strong>What rights can be covered in a 3-dimensional cadastre?</strong></p>
-              <p>In 3-dimensional cadastre, land rights are distinguished into layers or zones. For example, one zone is for ground level, another is for underground space, and another may be for air space above it. Each zone can have different owners with clearly defined rights. For example, a person can have an apartment on the 5th floor without owning the entire building.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Fisik ?</strong></p>
+              <p>Objek fisik merujuk pada realitas fisik dari tanah atau properti yang ada di lapangan. Objek ini mencakup segala bentuk bangunan, struktur, dan batas-batas fisik tanah yang dapat diidentifikasi dan diukur.</p>
             </li>
             <li>
-              <p><strong>What limitations exist in the 3-dimensional cadastral system?</strong></p>
-              <p>The limitations in the 3-dimensional cadastral relate primarily to the use of upper and lower chambers. Each unit of property has clear vertical boundaries that must not be violated by other units without consent. For example, there should be no structural penetration interfering with other units above or below it.</p>
+              <p><strong>Apa yang dimaksud dengan Objek Yuridis ?</strong></p>
+              <p>Objek legal mengacu pada entitas hukum yang mengatur hak, kewajiban, dan batas-batas yang berkaitan dengan kepemilikan atau penggunaan suatu properti. Objek legal ini sering kali berbeda dari batas-batas fisik, karena mengatur aspek hukum dari penggunaan dan pemanfaatan ruang. Objek legal sering kali dipetakan dalam 3 dimensi untuk mencerminkan hak kepemilikan atau penggunaan dalam ruang vertikal.</p>
             </li>
             <li>
-              <p><strong>How are responsibilities divided in 3-dimensional cadastre?</strong></p>
-              <p>Responsibilities are generally divided based on the vertical and horizontal position of the property. For example, an apartment owner is responsible for maintenance and repairs within his unit, while a building owners association may be responsible for common areas and shared amenities such as roofs, elevators, and major utility systems.</p>
+              <p><strong>Bagaimana hubungan antara Objek Fisik dan Objek Yuridis dalam administrasi pertanahan 3 dimensi?</strong></p>
+              <p>Dalam administrasi pertanahan 3 dimensi, penting untuk memastikan bahwa <strong>objek fisik</strong> dan <strong>objek legal</strong> dipetakan secara akurat untuk menghindari konflik kepemilikan atau penggunaan ruang. Misalnya, ruang bawah tanah di bawah suatu bangunan mungkin menjadi milik pihak lain yang berbeda dengan pemilik tanah di permukaan, dan hal ini harus diatur secara legal.</p>
+              <p>Penyajian data spasial 3 dimensi bertujuan untuk memberikan representasi yang lebih komprehensif dari kepemilikan dan penggunaan ruang dalam tiga dimensi, baik secara fisik maupun yuridis. Sistem ini sangat relevan di area perkotaan dengan struktur bangunan yang rumit dan penggunaan ruang yang tumpang tindih, sehingga memungkinkan pengelolaan tanah yang lebih efisien dan adil.</p>
             </li>
             <li>
-              <p><strong>What are the main benefits of a 3-dimensional cadastral system?</strong></p>
-              <p>Key benefits include increased clarity in property ownership and boundaries, more effective dispute resolution, and increased efficiency in the management and construction of vertical spaces. It also supports innovation in real estate development and urban infrastructure.</p>
+              <p><strong>Apa yang dimaksud dengan RRR ?</strong></p>
+              <p>RRR kependekan dari Rights, Restriction and Responsibilities atau dalam Bahasa Indonesia diterjemahkan sebagai Hak, Batasan dan Tanggungjawab</p>
             </li>
             <li>
-              <p><strong>How does the 3-dimensional cadastral affect multilevel development?</strong></p>
-              <p>3-dimensional cadastre is very important in multi-storey development because it allows developers and property owners to separate ownership rights vertically. This makes it easier to sell and manage individual units within a multi-storey building, such as an apartment or office.</p>
+              <p><strong>Apa yang dimaksud dengan Hak ?</strong></p>
+              <p>Hak merujuk pada kewenangan hukum yang dimiliki seseorang atau entitas (seperti pemilik, penyewa, atau pengelola) untuk menggunakan, mengelola, atau menguasai suatu properti dalam batasan yang diatur oleh hukum. Dalam administrasi pertanahan 3 dimensi, hak ini tidak hanya mencakup permukaan tanah (2D) tetapi juga mencakup hak atas ruang di atas dan di bawah permukaan tanah (3D).</p>
             </li>
             <li>
-              <p><strong>Does the 3-dimensional cadastral affect the value of the property?</strong></p>
-              <p>Yes, a 3-dimensional cadastral can affect the value of a property because it provides greater legal clarity on what a person owns exactly. This increases legal security for owners and potential investors, which can increase the value of the property.</p>
-=======
-              <p><strong>What is meant by Representation in the 3D land administration system?</strong></p>
-              <p>Representation refers to visualizing physical and legal objects in the form of 3D spatial data and presenting textual information attached to those objects, based on the land administration system, to make it easier for users to understand.</p>
+              <p><strong>Apa yang dimaksud dengan Batasan ?</strong></p>
+              <p>Batasan adalah pembatasan hukum atau yang mengatur apa yang tidak boleh dilakukan oleh pemilik atau pengguna properti tertentu. Batasan ini diterapkan oleh pemerintah, otoritas perencanaan, atau peraturan hukum lainnya untuk melindungi kepentingan publik, keamanan, dan kelestarian lingkungan. Dalam konteks administrasi pertanahan 3 dimensi, batasan ini sering kali berhubungan dengan batas ketinggian pemanfaatan ruang.</p>
             </li>
             <li>
-              <p><strong>What is meant by Physical Objects?</strong></p>
-              <p>Physical objects refer to the physical reality of land or property in the field. These objects include all types of buildings, structures, and physical land boundaries that can be identified and measured.</p>
+              <p><strong>Apa &nbsp;yang dimaksud dengan Tanggung Jawab ?</strong></p>
+              <p>Tanggung jawab merujuk pada kewajiban yang melekat pada pemilik atau pengguna tanah atau bangunan atau ruang untuk mematuhi aturan yang berlaku. Tanggung jawab dalam administrasi pertanahan 3 dimensi mencakup berbagai aspek yang terkait dengan pengelolaan ruang fisik dan hubungan dengan pihak lain.</p>
             </li>
             <li>
-              <p><strong>What is meant by Legal Objects?</strong></p>
-              <p>Legal objects refer to legal entities that regulate the rights, obligations, and boundaries related to ownership or use of a property. Legal objects often differ from physical boundaries because they govern the legal aspects of space use and utilization. Legal objects are often mapped in 3D to reflect ownership or usage rights in vertical space.</p>
-            </li>
-            <li>
-              <p><strong>What is the relationship between Physical and Legal Objects in 3D land administration?</strong></p>
-              <p>In 3D land administration, it is important to ensure that <strong>physical objects</strong> and <strong>legal objects</strong> are accurately mapped to avoid ownership or space-use conflicts. For example, the underground space beneath a building may belong to a different party than the surface landowner, and this must be legally regulated.</p>
-              <p>The presentation of 3D spatial data aims to provide a more comprehensive representation of ownership and space usage in three dimensions, both physically and legally. This system is highly relevant in urban areas with complex building structures and overlapping space usage, allowing for more efficient and equitable land management.</p>
-            </li>
-            <li>
-              <p><strong>What is meant by RRR?</strong></p>
-              <p>RRR stands for Rights, Restrictions, and Responsibilities.</p>
-            </li>
-            <li>
-              <p><strong>What is meant by Rights?</strong></p>
-              <p>Rights refer to the legal authority held by an individual or entity (such as an owner, tenant, or manager) to use, manage, or control a property within limits set by law. In 3D land administration, these rights not only cover surface land (2D) but also rights over space above and below the surface (3D).</p>
-            </li>
-            <li>
-              <p><strong>What is meant by Restrictions?</strong></p>
-              <p>Restrictions are legal limitations or regulations that govern what cannot be done by the owner or user of a particular property. These restrictions are imposed by the government, planning authorities, or other legal regulations to protect public interest, safety, and environmental sustainability. In the context of 3D land administration, restrictions often relate to height limits on space utilization.</p>
-            </li>
-            <li>
-              <p><strong>What is meant by Responsibilities?</strong></p>
-              <p>Responsibilities refer to the obligations that fall upon the owner or user of land, buildings, or space to comply with applicable regulations. Responsibilities in 3D land administration include various aspects related to the management of physical space and relationships with other parties.</p>
-            </li>
-            <li>
-              <p><strong>What is 3D Land Administration?</strong></p>
-              <p>3D Land Administration is a concept of land data management that incorporates the third dimension, i.e., height or depth, to more comprehensively depict ownership, usage, and control of land. This is particularly relevant in areas with complex space usage, such as multi-story buildings, underground tunnels, or other infrastructure involving vertical elements.</p>
->>>>>>> Stashed changes
+              <p><strong>Apa itu Administrasi Pertanahan 3 Dimensi?</strong></p>
+              <p>Administrasi Pertanahan 3 Dimensi adalah konsep pengelolaan data pertanahan yang mencakup dimensi ketiga, yaitu ketinggian atau kedalaman, untuk menggambarkan kepemilikan, penggunaan, dan penguasaan tanah secara lebih lengkap. Hal ini sangat relevan di wilayah dengan penggunaan ruang yang kompleks seperti gedung bertingkat, terowongan bawah tanah, atau infrastruktur lain yang melibatkan elemen vertikal.</p>
             </li>
           </ol>
-
         </div>
       </div>
     </div>
   </div>
 
   <main>
-    <!-- Modal -->
+    <!-- Modal Room -->
     <div class="modal fade" id="detailRoom" tabindex="-1" aria-labelledby="detailRoomLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -300,7 +243,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Organizer -->
     <div class="modal fade" id="detailOrganizer" tabindex="-1" aria-labelledby="detailOrganizerLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -315,12 +258,12 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Tenant -->
     <div class="modal fade" id="detailTenant" tabindex="-1" aria-labelledby="detailTenantLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header p-2">
-            <h1 class="modal-title fs-5" id="detailTenantLabel">Tenant Detail</h1>
+            <h1 class="modal-title fs-5" id="detailTenantLabel">Detail Penyewa/Pengguna</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body TARGETSCAN">
@@ -330,7 +273,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Right -->
     <div class="modal fade" id="detailRight" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRightLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -345,7 +288,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Restriction -->
     <div class="modal fade" id="detailRestriction" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailRestrictionLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -360,7 +303,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Responsibilities -->
     <div class="modal fade" id="detailResponsibilities" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="detailResponsibilitiesLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -375,36 +318,32 @@
       </div>
     </div>
 
-<<<<<<< Updated upstream
-=======
     <!-- Panel Usability Test -->
     <div class="offcanvas offcanvas-start usab-test" data-bs-backdrop="static" tabindex="-1" id="usab" aria-labelledby="usabLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold" id="usabLabel">Usability Test Guideline</h5>
+        <h5 class="offcanvas-title fw-bold" id="usabLabel">Panduan Uji Kebergunaan</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <div>
-          Here is the list of usability testing scenarios for your 3D Land Administration WebGIS:
+          Berikut adalah daftar skenario pengujian usability untuk WebGIS Administrasi Pertanahan 3D Anda:
           <ol>
-            <li>Navigate to a specific building location (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) on the 3D map</li>
-            <li>Check layer management by hiding/showing layers</li>
-            <li>Display information from one of the spatial/legal objects of a building</li>
-            <!-- <li>Check the height of a planned building using the design simulation feature, sample 3D data can be used from the following link <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
-            <li>View spatial planning zones and the height limits of existing building zones</li>
-            <li>Explore all features/objects on the map</li>
-            <li>Fill out the following usability testing form <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
+            <li>Navigasi ke lokasi bangunan tertentu (Siola Surabaya/Balai Pemuda Surabaya/Rusunawa Buring 2 Malang) di peta 3D</li>
+            <li>Cek pengelolaan layer dengan cara menyembunyikan/menampilkan layer</li>
+            <li>Tampilkan informasi dari salah satu objek ruang/yuridis suatu bangunan</li>
+            <!-- <li>Lakukan cek ketinggian bangunan rencana dengan fitur simulasi desain, sampel data 3d dapat menggunakan berikut <a href="https://s.id/tHaq4" target="_blank">https://s.id/tHaq4</a></li> -->
+            <li>Melihat zona tata ruang dan batas tinggi bangunan zona yang ada</li>
+            <li>Jelajahi semua fitur/objek pada peta</li>
+            <li>Isi form uji kebergunaan berikut <a href="https://s.id/UjiKadaster3D" target="_blank">https://s.id/UjiKadaster3D</a></li>
           </ol>
         </div>
-
       </div>
       <button class="btn btn-warning" id="usab-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#usab" aria-controls="usab">Usability Test Guide ⬆️</button>
     </div>
->>>>>>> Stashed changes
 
+    <!-- Panel Layer Data -->
     <div class="layer-panel card">
       <div class="card-body p-2">
-
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -423,13 +362,8 @@
 
                 <div class="siola-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-<<<<<<< Updated upstream
                     <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllShow">Check all</button>
                     <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllHide">Uncheck all</button>
-=======
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllShow">Show All</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="siolaLevelAllHide">Hide All</button>
->>>>>>> Stashed changes
                   </div>
 
                   <p class="mb-1">Upperrground object </p>
@@ -655,252 +589,143 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Building boundary line <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola <a href="#" id="zoomToSiolaParcel"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="siolaParcel" id="siolaParcel"> Parcel Siola </label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-<<<<<<< Updated upstream
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Building Plan S<a href="#" id="zoomToealla"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Building Plan S</label>
->>>>>>> Stashed changes
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-<<<<<<< Updated upstream
-                            Building Plan S.1 <a href="#" id="zoomToe1"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.1 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-<<<<<<< Updated upstream
-                            Building Plan S.2 <a href="#" id="zoomToe2"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.2 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-<<<<<<< Updated upstream
-                            Building Plan S.3 <a href="#" id="zoomToe3"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.3 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-<<<<<<< Updated upstream
-                            Building Plan S.4 <a href="#" id="zoomToe4"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.4 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-<<<<<<< Updated upstream
-                            Building Plan S.5 <a href="#" id="zoomToe5"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.5 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-<<<<<<< Updated upstream
-                            Building Plan S.6 <a href="#" id="zoomToe6"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.6 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-<<<<<<< Updated upstream
-                            Building Plan S.7 <a href="#" id="zoomToe7"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.7 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-<<<<<<< Updated upstream
-                            Building Plan S.8 <a href="#" id="zoomToe8"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.8 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-<<<<<<< Updated upstream
-                            Building Plan S.9 <a href="#" id="zoomToe9"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.9 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-<<<<<<< Updated upstream
-                            Building Plan S.10 <a href="#" id="zoomToe10"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.10 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-<<<<<<< Updated upstream
-                            Building Plan S.11 <a href="#" id="zoomToe11"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.11 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.11 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-<<<<<<< Updated upstream
-                            Building Plan S.12 <a href="#" id="zoomToe12"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.12 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.12 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-<<<<<<< Updated upstream
-                            Building Plan S.13 <a href="#" id="zoomToe13"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.13 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.13 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-<<<<<<< Updated upstream
-                            Building Plan S.14 <a href="#" id="zoomToe14"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.14 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.14 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-<<<<<<< Updated upstream
-                            Building Plan S.15 <a href="#" id="zoomToe15"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.15 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.15 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-<<<<<<< Updated upstream
-                            Building Plan S.16 <a href="#" id="zoomToe16"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.16 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.16 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-<<<<<<< Updated upstream
-                            Building Plan S.17 <a href="#" id="zoomToe17"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.17 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.17 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-<<<<<<< Updated upstream
-                            Building Plan S.18 <a href="#" id="zoomToe18"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.18 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.18 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-<<<<<<< Updated upstream
-                            Building Plan S.19 <a href="#" id="zoomToe19"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.19 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.19 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-<<<<<<< Updated upstream
-                            Building Plan S.20 <a href="#" id="zoomToe20"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.20 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.20 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-<<<<<<< Updated upstream
-                            Building Plan S.21 <a href="#" id="zoomToe21"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.21 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.21 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-<<<<<<< Updated upstream
-                            Building Plan S.22 <a href="#" id="zoomToe22"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.22 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.22 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-<<<<<<< Updated upstream
-                            Building Plan S.23 <a href="#" id="zoomToe23"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.23 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.23 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-<<<<<<< Updated upstream
-                            Building Plan S.24 <a href="#" id="zoomToe24"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.24 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.24 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-<<<<<<< Updated upstream
-                            Building Plan S.25 <a href="#" id="zoomToe25"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.25 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.25 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-<<<<<<< Updated upstream
-                            Building Plan S.26 <a href="#" id="zoomToe26"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan S.26 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan S.26 </label>
                         </li>
                       </ul>
                     </li>
@@ -927,13 +752,8 @@
 
                 <div class="balai-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-<<<<<<< Updated upstream
                     <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllShow">Check all</button>
                     <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllHide">Uncheck all</button>
-=======
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllShow">Show All</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="balaiLevelAllHide">Hide All</button>
->>>>>>> Stashed changes
                   </div>
 
                   <p class="mb-1">Upperrground object </p>
@@ -1091,117 +911,68 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="balaiLegal_GSB" id="balaiLegal_GSB"> Building boundary line <a href="#" id="zoomToBalaiLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda<a href="#" id="zoomToBalaiParcel"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="balaiParcel" id="balaiParcel"> Parcel Balai Pemuda</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-<<<<<<< Updated upstream
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Building Plan B<a href="#" id="zoomToeallb"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Building Plan B</label>
->>>>>>> Stashed changes
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-<<<<<<< Updated upstream
-                            Building Plan B.1 <a href="#" id="zoomToe27"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.1 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-<<<<<<< Updated upstream
-                            Building Plan B.2 <a href="#" id="zoomToe28"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.2 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-<<<<<<< Updated upstream
-                            Building Plan B.3 <a href="#" id="zoomToe29"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.3 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-<<<<<<< Updated upstream
-                            Building Plan B.4 <a href="#" id="zoomToe30"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.4 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-<<<<<<< Updated upstream
-                            Building Plan B.5 <a href="#" id="zoomToe31"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.5 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-<<<<<<< Updated upstream
-                            Building Plan B.6 <a href="#" id="zoomToe32"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.6 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-<<<<<<< Updated upstream
-                            Building Plan B.7 <a href="#" id="zoomToe33"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.7 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-<<<<<<< Updated upstream
-                            Building Plan B.8 <a href="#" id="zoomToe34"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.8 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-<<<<<<< Updated upstream
-                            Building Plan B.9 <a href="#" id="zoomToe35"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.9 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.9 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-<<<<<<< Updated upstream
-                            Building Plan B.10 <a href="#" id="zoomToe36"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.10 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.10 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-<<<<<<< Updated upstream
-                            Building Plan B.11 <a href="#" id="zoomToe37"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan B.11 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan B.11 </label>
                         </li>
                       </ul>
                     </li>
@@ -1227,19 +998,11 @@
 
                 <div class="rusunawa-building-layer-panel p-2 m-1">
                   <div class="mb-2">
-<<<<<<< Updated upstream
                     <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllShow">Check all</button>
                     <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllHide">Uncheck all</button>
                   </div>
 
                   <p class="mb-1">Upperground object </p>
-=======
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllShow">Show All</button>
-                    <button type="button" class="btn xs-btn btn-outline-primary" id="rusunawaLevelAllHide">Hide All</button>
-                  </div>
-
-                  <p class="mb-1">Upperrground object </p>
->>>>>>> Stashed changes
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_level" name="rusunawaLevel_r" id="rusunawaLevel_r"> Roof</label>
                   <label class="layer-item" style="margin-left: 0px">
@@ -1929,63 +1692,38 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="rusunawaLegal_GSB" id="rusunawaLegal_GSB"> Building boundary line <a href="#" id="zoomToRusunawaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa<a href="#" id="zoomToRusunawa"><i class="bi bi-zoom-in"></i></a></label>
-
+                    <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="rusunawa" id="rusunawa"> Parcel Rusunawa</label>
                   <ul id="myUL">
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-<<<<<<< Updated upstream
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Building Plan R<a href="#" id="zoomToeallc"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Building Plan R</label>
->>>>>>> Stashed changes
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-<<<<<<< Updated upstream
-                            Building Plan R.1 <a href="#" id="zoomToe38"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan R.1 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan R.1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-<<<<<<< Updated upstream
-                            Building Plan R.2 <a href="#" id="zoomToe39"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan R.2 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan R.2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-<<<<<<< Updated upstream
-                            Building Plan R.3 <a href="#" id="zoomToe40"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan R.3 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan R.3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-<<<<<<< Updated upstream
-                            Building Plan R.4 <a href="#" id="zoomToe41"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan R.4 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan R.4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-<<<<<<< Updated upstream
-                            Building Plan R.5 <a href="#" id="zoomToe42"><i class="bi bi-zoom-in"></i></a></label>
-=======
-                            Building Plan R.5 </label>
->>>>>>> Stashed changes
+                            Tata Bangunan R.5 </label>
                         </li>
                       </ul>
                     </li>
@@ -2009,11 +1747,7 @@
                   </select>
                   <div class="pt-3">
                     <label class="layer-item" style="margin-left: 0px">
-<<<<<<< Updated upstream
                       <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="" name="ShowBasemap" id="ShowBasemap"> Show Basemap</label>
-=======
-                      <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="" name="ShowBasemap" id="ShowBasemap"> Show basemap</label>
->>>>>>> Stashed changes
                   </div>
                 </div>
 
@@ -2028,24 +1762,18 @@
           <label class="layer-item" style="margin-left: 0px">
             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" autocomplete="off" class="underground" name="underground_1" id="underground_1"> Underground view</label>
           <div>
-<<<<<<< Updated upstream
             <button type="button" class="btn xs-btn btn-outline-info" id="resetTransparent">Reset Transparency</button>
-=======
-            <button type="button" class="btn xs-btn btn-outline-info" id="resetTransparent">Reset Transparent</button>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
     </div>
 
-<<<<<<< Updated upstream
-=======
     <!-- Panel Cek Simulasi -->
     <div id="topRight" class="">
       <div id="simSection" class="position-relative">
         <div class="d-flex flex-row align-items-center gap-1">
           <div class="p-1">
-            <span>Check design simulation</span>
+            <span>Cek simulasi desain</span>
           </div>
           <div id="menuToggleBtn" class="border-0 border-start">
             <i class="bi bi-list"></i>
@@ -2071,7 +1799,7 @@
                 <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
               </div>
               <div class="mt-2 d-flex justify-content-end">
-                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Check</button>
+                <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
               </div>
             </div>
           </div>
@@ -2081,21 +1809,21 @@
     </div>
 
     <!-- Panel Minimap -->
->>>>>>> Stashed changes
     <div class="minimap-panel card">
       <div id="map2d"></div>
     </div>
 
+    <!-- Panel properti data -->
     <div class="property-panel card">
       <div class="card-header property-header d-flex justify-content-between align-items-center px-3 mx-1">
         <span class="card-title" id="card-title-property"></span>
         <button type="button" class="btn btn-sm" id="closeProperty" style="color:white;">X</button>
       </div>
       <div class="property-content cesium-infoBox-description" id="property-content">
-
       </div>
     </div>
 
+    <!-- Panel Meassurement -->
     <div class="measure-panel card">
       <div class="card-body p-2">
         <button id="mdistance" type="button" class="asbn cesium-button">distance (horizontal)</button>
@@ -2108,6 +1836,7 @@
       </div>
     </div>
 
+    <!-- Panel Clipping -->
     <div class="clip-panel card">
       <div class="card-body p-2">
         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="clsiola" checked>
@@ -2120,43 +1849,43 @@
           <div class="slider-group clsiola">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clbalai" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-120" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <div class="slider-group clrusunawa" style="display:none;">
             <div>
               <label for="sliderX">Slider X:</label>
-              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90">
+              <input type="range" class="sliderX" min="-90" max="90" step="0.05" value="90" />
             </div>
             <div>
               <label for="sliderY">Slider Y:</label>
-              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderY" min="-90" max="90" step="0.05" value="-90" />
             </div>
             <div>
               <label for="sliderZ">Slider Z:</label>
-              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90">
+              <input type="range" class="sliderZ" min="-90" max="90" step="0.05" value="-90" />
             </div>
           </div>
           <button id="reset-clip">Reset</button>
@@ -2183,11 +1912,14 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script>
+
 
   <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>
 
 
+  <script src="assets/js/Cesium3DTileLocationEditor.js"></script>
   <script type="module" src="assets/js/cesiumScript.js"></script>
 
 </body>

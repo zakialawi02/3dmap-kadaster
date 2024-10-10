@@ -1,100 +1,27 @@
 <div class="rrr" id="rrr">
     <ol style="list-style-type:upper-roman;">
-<<<<<<< Updated upstream
-        <li><strong>Renters and Organizers</strong>
-            <ol style="list-style-type:upper-latin;">
-
-                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
-
-                        <li>A</li>
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-
-                <li>
-                    <p>Surat Ijin Penggunaan Ruang</p>
-                    <p>WEWEW</p>
-
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-=======
-        <li><strong>Manager and User</strong>
+        <li><strong>Pengelola dan Pemakai</strong>
             <ol style="list-style-type:decimal;">
-                <li>Provide feedback or complaints regarding the facilities and use of the space through agreed communication channels.</li>
->>>>>>> Stashed changes
+                <li>Menyampaikan masukan atau keluhan terkait fasilitas dan penggunaan ruangan melalui saluran komunikasi yang telah disepakati.</li>
             </ol>
         </li>
     </ol>
     <ol style="list-style-type:upper-roman;" start="2">
-<<<<<<< Updated upstream
-        <li><strong>Renters</strong>
-            <ol style="list-style-type:upper-latin;">
-
-                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-
-                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
-
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
+        <li><strong>Pengelola</strong>
+            <ol style="list-style-type:decimal;">
+                <li>Memeriksa dan mengawasi pemakaian gedung atau ruangan oleh Dinas yang bersangkutan untuk memastikan kesesuaian dengan peruntukan.</li>
+                <li>Menarik biaya pemeliharaan dari anggaran yang telah disepakati untuk perawatan dan operasional gedung atau ruangan.</li>
+                <li>Mendapatkan laporan secara berkala dari pemakai gedung terkait kondisi fasik dan operasional gedung atau ruangan.</li>
+                <li>Menyusun kebijakan terkait penggunaan gedung atau ruangan sesuai dengan peraturan yang berlaku.</li>
             </ol>
         </li>
-        <li><strong>Organizer</strong>
-            <ol style="list-style-type:upper-latin;">
-
-                <li>Surat Perjanjian Penggunaan Ruang<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-
-                    </ol>
-                </li>
-                <li>Statement Letter<ol style="list-style-type:decimal;">
-                        <li>A</li>
-                    </ol>
-                </li>
-
-                <li>Surat Ijin Penggunaan Ruang<ol style="list-style-type:decimal;">
-
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-                <li>Mayor's Rules<ol style="list-style-type:decimal;">
-                        <li>&nbsp;</li>
-                    </ol>
-                </li>
-=======
-        <li><strong>Manager</strong>
+        <li><strong>Pemakai</strong>
             <ol style="list-style-type:decimal;">
-                <li>Inspect and supervise the use of the building or space by the respective department to ensure compliance with its designated purpose.</li>
-                <li>Allocate maintenance costs from the agreed budget for the upkeep and operation of the building or space.</li>
-                <li>Receive regular reports from building users regarding the condition and operational status of the building or space.</li>
-                <li>Develop policies regarding the use of the building or space in accordance with applicable regulations.</li>
-            </ol>
-        </li>
-        <li><strong>User</strong>
-            <ol style="list-style-type:decimal;">
-                <li>Use the building or space according to its designated purpose without interference from others.</li>
-                <li>Request repairs or assistance in case of damage or issues with the building or space facilities.</li>
-                <li>Receive suitable and adequate facilities to support office operational activities.</li>
->>>>>>> Stashed changes
+                <li>Menggunakan gedung atau ruangan sesuai dengan peruntukan yang telah ditetapkan tanpa gangguan dari pihak lain.</li>
+                <li>Meminta perbaikan atau penanganan apabila terjadi kerusakan atau masalah pada fasilitas gedung atau ruangan.</li>
+                <li>Mendapatkan fasilitas yang layak dan memadai untuk menunjang kegiatan operasional kantor.</li>
             </ol>
         </li>
     </ol>
+    <p>&nbsp;</p>
 </div>
