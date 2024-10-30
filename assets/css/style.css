@@ -305,7 +305,8 @@ header .nav-menu .hamb {
 
 /* clip panel */
 .clip-panel,
-.measure-panel {
+.measure-panel,
+.help-panel {
   position: absolute;
   margin-top: 4rem;
   top: -25rem;
@@ -315,7 +316,8 @@ header .nav-menu .hamb {
 }
 
 .clip-panel-show,
-.measure-panel-show {
+.measure-panel-show,
+.help-panel-show {
   top: 10px;
 }
 
@@ -496,6 +498,16 @@ ul,
   header nav .nav-menu {
     display: contents;
   }
+
+  #topRight {
+    top: 8rem;
+  }
+
+  .clip-panel-show,
+  .measure-panel-show,
+  .help-panel-show {
+    top: 80px;
+  }
 }
 
 @media (max-width: 1111px) {
@@ -531,6 +543,10 @@ ul,
     border-radius: 8px;
     z-index: 1;
   }
+
+  #topRight {
+    top: 5rem;
+  }
 }
 
 @media (max-width: 760px) {
@@ -552,5 +568,11 @@ ul,
 
   #topRight {
     top: 140px;
+  }
+
+  .clip-panel-show,
+  .measure-panel-show,
+  .help-panel-show {
+    top: 75px;
   }
 }

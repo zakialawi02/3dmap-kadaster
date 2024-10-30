@@ -1,8 +1,11 @@
 ```
-
 let currentModel;
 let buildingHeight;
 let axesEntities = [];
+let isDragging = false;
+let selectedAxis = null;
+let startMousePosition;
+let startModelPosition;
 
 // Fungsi untuk membaca file 3D yang diupload
 function handleFileUpload(event) {
@@ -71,14 +74,14 @@ function getObjectHeight(bbox) {
   return height;
 }
 
-// Updated function to create and display axes with arrow tips
+// Updated function to create draggable axes
 function createAxes(position, orientation, scale) {
   removeAxes();
 
-  const axisLength = buildingHeight + 10;
+  const axisLength = buildingHeight + 50;
 
-  // Helper function to create an axis
-  function createAxis(color, direction) {
+  // Helper function to create a draggable axis
+  function createAxis(color, direction, axisName) {
     const endPosition = Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.fromTranslationQuaternionRotationScale(position, orientation, new Cesium.Cartesian3(scale, scale, scale)), direction, new Cesium.Cartesian3());
 
     const axis = viewer.entities.add({
@@ -87,20 +90,103 @@ function createAxes(position, orientation, scale) {
         width: 40,
         material: new Cesium.PolylineArrowMaterialProperty(color),
       },
+      name: axisName,
     });
 
     axesEntities.push(axis);
   }
 
-  // X-axis (Red)
-  createAxis(Cesium.Color.RED, new Cesium.Cartesian3(axisLength, 0, 0));
-
-  // Y-axis (Green)
-  createAxis(Cesium.Color.GREEN, new Cesium.Cartesian3(0, axisLength, 0));
-
-  // Z-axis (Blue)
-  createAxis(Cesium.Color.BLUE, new Cesium.Cartesian3(0, 0, axisLength));
+  // Create axes with names
+  createAxis(Cesium.Color.RED, new Cesium.Cartesian3(axisLength, 0, 0), "x-axis");
+  createAxis(Cesium.Color.GREEN, new Cesium.Cartesian3(0, axisLength, 0), "y-axis");
+  createAxis(Cesium.Color.BLUE, new Cesium.Cartesian3(0, 0, axisLength), "z-axis");
 }
+
+// Add mouse event handlers
+viewer.screenSpaceEventHandler.setInputAction(function (movement) {
+  // Get all picked objects
+  const pickedObjects = viewer.scene.drillPick(movement.position);
+
+  let axisFound = false;
+  for (let i = 0; i < pickedObjects.length; i++) {
+    const pickedObject = pickedObjects[i];
+    if (Cesium.defined(pickedObject) && pickedObject.id && axesEntities.includes(pickedObject.id)) {
+      axisFound = true;
+      isDragging = true;
+      selectedAxis = pickedObject.id.name;
+      startMousePosition = movement.position;
+      startModelPosition = Cesium.Cartesian3.clone(currentModel.position.getValue());
+      viewer.scene.screenSpaceCameraController.enableRotate = false;
+      break;
+    }
+  }
+
+  if (!axisFound) {
+    isDragging = false;
+    selectedAxis = null;
+  }
+}, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+viewer.screenSpaceEventHandler.setInputAction(function (movement) {
+  if (isDragging && selectedAxis) {
+    const currentMousePosition = movement.endPosition;
+    const diff = {
+      x: currentMousePosition.x - startMousePosition.x,
+      y: currentMousePosition.y - startMousePosition.y,
+    };
+
+    const ellipsoid = viewer.scene.globe.ellipsoid;
+
+    // Get model's current orientation
+    const modelOrientation = currentModel.orientation.getValue();
+
+    // Calculate movement based on selected axis using model's orientation
+    let movementAmount = new Cesium.Cartesian3();
+    const movementScale = 0.01; // Adjust this value to control movement sensitivity
+
+    switch (selectedAxis) {
+      case "x-axis":
+        // Red axis - move along model's x-axis
+        const xAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 0, new Cesium.Cartesian3());
+        Cesium.Cartesian3.multiplyByScalar(xAxis, diff.x * movementScale, movementAmount);
+        break;
+      case "y-axis":
+        // Green axis - move along model's y-axis
+        const yAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 1, new Cesium.Cartesian3());
+        Cesium.Cartesian3.multiplyByScalar(yAxis, diff.x * movementScale, movementAmount);
+        break;
+      case "z-axis":
+        // Blue axis - move along model's z-axis
+        const zAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 2, new Cesium.Cartesian3());
+        Cesium.Cartesian3.multiplyByScalar(zAxis, -diff.y * movementScale, movementAmount);
+        break;
+    }
+
+    // Update model position
+    const newPosition = Cesium.Cartesian3.add(currentModel.position.getValue(), movementAmount, new Cesium.Cartesian3());
+
+    currentModel.position = newPosition;
+
+    // Update axes positions
+    removeAxes();
+    createAxes(newPosition, modelOrientation, 1.0);
+
+    // Update coordinate display
+    const cartographic = ellipsoid.cartesianToCartographic(newPosition);
+    const lat = Cesium.Math.toDegrees(cartographic.latitude);
+    const lon = Cesium.Math.toDegrees(cartographic.longitude);
+    document.getElementById("latitude").value = lat.toFixed(6);
+    document.getElementById("longitude").value = lon.toFixed(6);
+  }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+viewer.screenSpaceEventHandler.setInputAction(function (movement) {
+  if (isDragging) {
+    isDragging = false;
+    selectedAxis = null;
+    viewer.scene.screenSpaceCameraController.enableRotate = true;
+  }
+}, Cesium.ScreenSpaceEventType.LEFT_UP);
 
 // Updated function to remove axes
 function removeAxes() {
@@ -163,5 +249,59 @@ function getBoundingBoxDimensions(bbox) {
 // Event listeners
 document.getElementById("formFileSm").addEventListener("change", handleFileUpload);
 document.getElementById("cek3d").addEventListener("click", updateModelPosition);
+
+```
+
+```
+viewer.screenSpaceEventHandler.setInputAction(function (movement) {
+  if (isDragging && selectedAxis) {
+    const currentMousePosition = movement.endPosition;
+    const diff = {
+      x: currentMousePosition.x - startMousePosition.x,
+      y: currentMousePosition.y - startMousePosition.y,
+    };
+
+    const ellipsoid = viewer.scene.globe.ellipsoid;
+
+    // Ambil orientasi kamera
+    const cameraDirection = viewer.camera.direction;
+
+    // Dapatkan orientasi model saat ini
+    const modelOrientation = currentModel.orientation.getValue();
+
+    let movementAmount = new Cesium.Cartesian3();
+    const movementScale = 0.01; // Adjust this value to control movement sensitivity
+
+    // Sesuaikan gerakan berdasarkan sumbu yang dipilih
+    switch (selectedAxis) {
+      case "x-axis":
+        const xAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 0, new Cesium.Cartesian3());
+        const signX = Cesium.Cartesian3.dot(xAxis, cameraDirection) < 0 ? -1 : 1;
+        Cesium.Cartesian3.multiplyByScalar(xAxis, signX * diff.x * movementScale, movementAmount);
+        break;
+
+      case "y-axis":
+        const yAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 1, new Cesium.Cartesian3());
+        const signY = Cesium.Cartesian3.dot(yAxis, cameraDirection) < 0 ? -1 : 1;
+        Cesium.Cartesian3.multiplyByScalar(yAxis, signY * diff.x * movementScale, movementAmount);
+        break;
+
+      case "z-axis":
+        const zAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 2, new Cesium.Cartesian3());
+        const signZ = Cesium.Cartesian3.dot(zAxis, cameraDirection) < 0 ? -1 : 1;
+        Cesium.Cartesian3.multiplyByScalar(zAxis, -signZ * diff.y * movementScale, movementAmount);
+        break;
+    }
+
+    const newPosition = Cesium.Cartesian3.add(currentModel.position.getValue(), movementAmount, new Cesium.Cartesian3());
+    currentModel.position = newPosition;
+    removeAxes();
+    createAxes(newPosition, modelOrientation, 1.0);
+
+    const cartographic = ellipsoid.cartesianToCartographic(newPosition);
+    document.getElementById("latitude").value = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+    document.getElementById("longitude").value = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+  }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 ```

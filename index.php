@@ -13,6 +13,7 @@
   <!-- Bootstrap & Jquery -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <!-- mapSystem -->
@@ -79,7 +80,7 @@
             <a id="minimap" class="" href="#" title="Minimap/Inset"><i class="bi bi-globe-asia-australia"></i></a>
           </li>
           <li>
-            <a id="helpCesium" href="#" title="Bantuan Penggunaan"><i class="bi bi-question-circle-fill"></i></a>
+            <a id="helpCesium" href="#" title="Bantuan Penggunaan"><i class="bi bi-question-circle-fill"></i> Bantuan</a>
           </li>
           <span class="divider solid"></span>
           <?php if (isset($_SESSION['islogin'])) : ?>
@@ -585,8 +586,7 @@
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BT" id="siolaLegal_BT"> Ruang atas tanah <a href="#" id="zoomToSiolaLegal_gsb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
-                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BB" id="siolaLegal_BB"> Underground
-                    space <a href="#" id="zoomToSiolaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
+                    <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_BB" id="siolaLegal_BB"> Ruang bawah tanah <a href="#" id="zoomToSiolaLegal_bt"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="layer-item" style="margin-left: 0px">
                     <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="virtual" name="siolaLegal_GSB" id="siolaLegal_GSB"> Garis Sempadan Bangunan <a href="#" id="zoomToSiolaLegal_bb"><i class="bi bi-zoom-in"></i></a></label>
                   <label class="" style="margin-left: 0px">
@@ -1786,10 +1786,16 @@
         <div class="m-1 p-2">
           <div id="menuItem" class="d-flex flex-column">
             <div class="mb-0">
-              <label for="formFileSm" class="form-label">File input</label>
+              <div class="d-inline">
+                <label for="formFileSm" class="form-label">File input</label>
+                <button type="button" class="btn px-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="format ekstensi file yang didukung : .glb">
+                  <i class="bi bi-info-circle"></i>
+                </button>
+              </div>
               <div class="input-group">
                 <input class="form-control form-control-sm" id="formFileSm" type="file">
               </div>
+              <p><small>Download file sample <a href="/assets/building.glb" class="" id="sampleFile">disini</a></small> </p>
               <div id="buildingHeight" class="py-1"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label">Latitude</label>
@@ -1834,6 +1840,18 @@
           <span>Left-click to measure.</span><br>
           <span>Right-click to stop measuring.</span>
         </div>
+      </div>
+    </div>
+
+    <!-- Panel Help -->
+    <div class="help-panel card">
+      <div class="card-body p-3">
+        <ol>
+          <li>Cara navigasi peta / objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/l7zrhgnD9D0" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menyembunyikan / menampilkan layer <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/7vES390KqTs" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menampilkan informasi objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/20dLMKrC53k" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara melihat Hak, Batasan, dan Tanggung jawab suatu objek ruang <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/xf7x4rYiw7w" class="text-primary glightbox1"> lihat</span></a></li>
+        </ol>
       </div>
     </div>
 
@@ -1909,10 +1927,10 @@
   </script>
 
   <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js" integrity="sha512-RBWI5Qf647bcVhqbEnRoL4KuUT+Liz+oG5jtF+HP05Oa5088M9G0GxG0uoHR9cyq35VbjahcI+Hd1xwY8E1/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script>
 
 

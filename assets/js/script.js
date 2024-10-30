@@ -2,9 +2,9 @@
 $(document).ready(function () {
   const helpCesium = $(".cesium-navigation-help");
   $(".cesium-viewer-toolbar").remove();
-  const helping = $("#helpingCesium");
+  const helping = $(".help-panel .card-body");
   helping.append(helpCesium);
-  helpCesium.css("top", "70px");
+  helpCesium.css("top", "10rem");
   helpCesium.css("right", "5px");
   $("#helpCesium").on("click", function () {
     helpCesium.toggleClass("cesium-navigation-help-visible");
@@ -66,7 +66,28 @@ $(document).ready(function () {
     $("#clip-toggle").toggleClass("selected");
     $(".clip-item input[type='range']").val(90);
   });
+
+  // Minimap toggle
+  $("#minimap").click(function (e) {
+    $(".minimap-panel").toggleClass("minimap-panel-show");
+    $("#minimap").toggleClass("selected");
+  });
+
+  $("#helpCesium").click(function (e) {
+    $(".help-panel").toggleClass("help-panel-show");
+    $("#helpCesium").toggleClass("selected");
+  });
 });
+
+const playVideo = function () {
+  const glightbox = GLightbox({
+    selector: ".glightbox1",
+    touchNavigation: true,
+    loop: true,
+    autoplayVideos: true,
+  });
+};
+playVideo();
 
 // clip toggle
 toggleSliderClipGroup();
@@ -80,12 +101,6 @@ function toggleSliderClipGroup() {
   // Tampilkan grup slider yang sesuai dengan radio box yang terchecked
   $("." + $("input[name='flexRadioDefault']:checked").val()).show();
 }
-
-// Minimap toggle
-$("#minimap").click(function (e) {
-  $(".minimap-panel").toggleClass("minimap-panel-show");
-  $("#minimap").toggleClass("selected");
-});
 
 // node tree view
 $(document).ready(function () {
@@ -198,3 +213,6 @@ $(document).ready(function () {
     }
   });
 });
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));

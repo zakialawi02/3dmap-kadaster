@@ -406,7 +406,7 @@ function createPickedDataDescription(pickedData) {
       `<tr><th style="align-content: start;;">Peraturan Batas Tinggi Bangunan</th><td>${pickedData.height_policy.getValue().replace(/\\n/g, "<br>")}</td></tr>` +
       `<tr><th>Sumber peraturan</th><td>${
         pickedData.kota.getValue() === "Surabaya"
-          ? `<a href='https://petaperuntukan-dprkpp.surabaya.go.id/' target='_blank'>link</a>`
+          ? `<a href='https://petaperuntukan.dprkpp.web.id/' target='_blank'>link</a>`
           : pickedData.kota.getValue() === "Malang"
           ? `<a href='https://drive.google.com/file/d/1_ezBnAv40YjHUE0N1elo1csVky1Kr-Io/view?usp=sharing' target='_blank'>dokumen 1</a> & <a href='https://drive.google.com/file/d/1ag675Dtp3Y4Bx1e_j3bolyRPf1GUO0rz/view?usp=sharing' target='_blank'>dokumen 2</a>`
           : ""
@@ -3085,8 +3085,10 @@ const ENVBD = Cesium.GeoJsonDataSource.load("/assets/Environment.geojson")
     });
     return viewer.dataSources.add(dataSource);
   })
-  .then(() => {
+  .then((dataSource) => {
     console.log("GeoJSON ENVBD berhasil dimuat dan ditampilkan di viewer.");
+    $("#ealla").trigger("click");
+    $("#eallc").trigger("click");
   })
   .catch((error) => {
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
@@ -3289,19 +3291,24 @@ viewer.screenSpaceEventHandler.setInputAction(function (movement) {
 
     const ellipsoid = viewer.scene.globe.ellipsoid;
 
-    // Get model's current orientation
+    // Ambil orientasi kamera
+    const cameraDirection = viewer.camera.direction;
+
+    // Dapatkan orientasi model saat ini
     const modelOrientation = currentModel.orientation.getValue();
 
-    // Calculate movement based on selected axis using model's orientation
     let movementAmount = new Cesium.Cartesian3();
     const movementScale = 0.01; // Adjust this value to control movement sensitivity
 
+    // Sesuaikan gerakan berdasarkan sumbu yang dipilih
     switch (selectedAxis) {
       case "x-axis":
         // Red axis - move along model's x-axis
         const xAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 0, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(xAxis, diff.x * movementScale, movementAmount);
+        const signX = Cesium.Cartesian3.dot(xAxis, cameraDirection) < 0 ? -1 : 1;
+        Cesium.Cartesian3.multiplyByScalar(xAxis, signX * diff.x * movementScale, movementAmount);
         break;
+
       case "y-axis":
         // Green axis - move along model's y-axis
         const yAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 1, new Cesium.Cartesian3());
@@ -3314,21 +3321,14 @@ viewer.screenSpaceEventHandler.setInputAction(function (movement) {
         break;
     }
 
-    // Update model position
     const newPosition = Cesium.Cartesian3.add(currentModel.position.getValue(), movementAmount, new Cesium.Cartesian3());
-
     currentModel.position = newPosition;
-
-    // Update axes positions
     removeAxes();
     createAxes(newPosition, modelOrientation, 1.0);
 
-    // Update coordinate display
     const cartographic = ellipsoid.cartesianToCartographic(newPosition);
-    const lat = Cesium.Math.toDegrees(cartographic.latitude);
-    const lon = Cesium.Math.toDegrees(cartographic.longitude);
-    document.getElementById("latitude").value = lat.toFixed(6);
-    document.getElementById("longitude").value = lon.toFixed(6);
+    document.getElementById("latitude").value = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+    document.getElementById("longitude").value = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
   }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
