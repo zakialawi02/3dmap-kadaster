@@ -595,138 +595,138 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan S</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="ealla" id="ealla"> Tata Bangunan</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e1" id="e1">
-                            Tata Bangunan S.1 </label>
+                            Tata Bangunan Perdagangan dan Jasa 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e2" id="e2">
-                            Tata Bangunan S.2 </label>
+                            Tata Bangunan Perdagangan dan Jasa 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e3" id="e3">
-                            Tata Bangunan S.3 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e4" id="e4">
-                            Tata Bangunan S.4 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e5" id="e5">
-                            Tata Bangunan S.5 </label>
+                            Tata Bangunan Perdagangan dan Jasa 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e6" id="e6">
-                            Tata Bangunan S.6 </label>
+                            Tata Bangunan Perumahan </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e7" id="e7">
-                            Tata Bangunan S.7 </label>
+                            Tata Bangunan Perdagangan dan Jasa 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e8" id="e8">
-                            Tata Bangunan S.8 </label>
+                            Tata Bangunan Perdagangan dan Jasa 5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e9" id="e9">
-                            Tata Bangunan S.9 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e10" id="e10">
-                            Tata Bangunan S.10 </label>
+                            Tata Bangunan Perkantoran 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e11" id="e11">
-                            Tata Bangunan S.11 </label>
+                            Tata Bangunan Perkantoran 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e12" id="e12">
-                            Tata Bangunan S.12 </label>
+                            Tata Bangunan Perdagangan dan Jasa 6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e13" id="e13">
-                            Tata Bangunan S.13 </label>
+                            Tata Bangunan Perkantoran 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e14" id="e14">
-                            Tata Bangunan S.14 </label>
+                            Tata Bangunan Perumahan 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e15" id="e15">
-                            Tata Bangunan S.15 </label>
+                            Tata Bangunan Perumahan 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e16" id="e16">
-                            Tata Bangunan S.16 </label>
+                            Tata Bangunan Perumahan 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e17" id="e17">
-                            Tata Bangunan S.17 </label>
+                            Tata Sarana Pelayanan Umum 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e18" id="e18">
-                            Tata Bangunan S.18 </label>
+                            Tata Bangunan Perumahan 5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e19" id="e19">
-                            Tata Bangunan S.19 </label>
+                            Tata Bangunan Perumahan 6 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e20" id="e20">
-                            Tata Bangunan S.20 </label>
+                            Tata Bangunan Perkantoran 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e21" id="e21">
-                            Tata Bangunan S.21 </label>
+                            Tata Bangunan Perdagangan dan Jasa 7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e22" id="e22">
-                            Tata Bangunan S.22 </label>
+                            Tata Bangunan Perumahan 7 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e23" id="e23">
-                            Tata Bangunan S.23 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e24" id="e24">
-                            Tata Bangunan S.24 </label>
+                            Tata Bangunan Perkantoran 5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e25" id="e25">
-                            Tata Bangunan S.25 </label>
+                            Tata Bangunan Perdagangan dan Jasa 8 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e26" id="e26">
-                            Tata Bangunan S.26 </label>
+                            Tata Bangunan Perdagangan dan Jasa 9 </label>
                         </li>
                       </ul>
                     </li>
@@ -917,63 +917,63 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan B</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallb" id="eallb"> Tata Bangunan</label>
 
                       <ul class="nested">
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e27" id="e27">
-                            Tata Bangunan B.1 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e28" id="e28">
-                            Tata Bangunan B.2 </label>
+                            Tata Bangunan Perkantoran 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            Tata Bangunan B.3 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e30" id="e30">
-                            Tata Bangunan B.4 </label>
+                            Tata Bangunan Perkantoran 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            Tata Bangunan B.5 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
-                            Tata Bangunan B.6 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
-                            Tata Bangunan B.7 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 4 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e34" id="e34">
-                            Tata Bangunan B.8 </label>
+                            Tata Bangunan Perdagangan dan Jasa 1 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e35" id="e35">
-                            Tata Bangunan B.9 </label>
+                            Tata Bangunan Peruntukan Khusus </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e36" id="e36">
-                            Tata Bangunan B.10 </label>
+                            Tata Bangunan Perkantoran 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e37" id="e37">
-                            Tata Bangunan B.11 </label>
+                            Tata Bangunan Perdagangan dan Jasa 2 </label>
                         </li>
                       </ul>
                     </li>
@@ -1698,7 +1698,7 @@
                     <li>
                       <span class="caret"> </span>
                       <label class="" style="margin-left: 0px">
-                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan R</label>
+                        <input type="checkbox" style="transform: scale(1.4); color: blue;" checked autocomplete="off" class="set_legal" name="eallc" id="eallc"> Tata Bangunan</label>
 
                       <ul class="nested">
                         <li>
@@ -1795,7 +1795,7 @@
               <div class="input-group">
                 <input class="form-control form-control-sm" id="formFileSm" type="file">
               </div>
-              <p><small>Download file sample <a href="/assets/building.glb" class="" id="sampleFile">disini</a></small> </p>
+              <p><small>Download file sample <a href="/assets/building.glb" class="" id="sampleFile" target="_blank">disini</a></small> </p>
               <div id="buildingHeight" class="py-1"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label">Latitude</label>
@@ -1850,6 +1850,7 @@
           <li>Cara navigasi peta / objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/l7zrhgnD9D0" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara menyembunyikan / menampilkan layer <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/7vES390KqTs" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara menampilkan informasi objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/20dLMKrC53k" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menggunakan fitur pencarian <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/7fCqGpi1GsQ" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara melihat Hak, Batasan, dan Tanggung jawab suatu objek ruang <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/xf7x4rYiw7w" class="text-primary glightbox1"> lihat</span></a></li>
         </ol>
       </div>
@@ -1931,14 +1932,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js" integrity="sha512-RBWI5Qf647bcVhqbEnRoL4KuUT+Liz+oG5jtF+HP05Oa5088M9G0GxG0uoHR9cyq35VbjahcI+Hd1xwY8E1/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script> -->
 
 
   <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>
 
 
-  <script src="assets/js/Cesium3DTileLocationEditor.js"></script>
+  <!-- <script src="assets/js/Cesium3DTileLocationEditor.js"></script> -->
   <script type="module" src="assets/js/cesiumScript.js"></script>
 
 </body>

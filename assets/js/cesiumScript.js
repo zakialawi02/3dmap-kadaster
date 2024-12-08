@@ -3291,41 +3291,73 @@ viewer.screenSpaceEventHandler.setInputAction(function (movement) {
 
     const ellipsoid = viewer.scene.globe.ellipsoid;
 
-    // Ambil orientasi kamera
+    // Get camera vectors
+    const cameraRight = viewer.camera.right;
+    const cameraUp = viewer.camera.up;
     const cameraDirection = viewer.camera.direction;
 
-    // Dapatkan orientasi model saat ini
+    // Get current model orientation
     const modelOrientation = currentModel.orientation.getValue();
+    const modelMatrix = Cesium.Matrix3.fromQuaternion(modelOrientation);
+
+    // Get model axes
+    const modelRight = Cesium.Matrix3.getColumn(modelMatrix, 0, new Cesium.Cartesian3());
+    const modelUp = Cesium.Matrix3.getColumn(modelMatrix, 1, new Cesium.Cartesian3());
+    const modelForward = Cesium.Matrix3.getColumn(modelMatrix, 2, new Cesium.Cartesian3());
 
     let movementAmount = new Cesium.Cartesian3();
-    const movementScale = 0.01; // Adjust this value to control movement sensitivity
+    const movementScale = 0.01;
 
-    // Sesuaikan gerakan berdasarkan sumbu yang dipilih
+    // Calculate camera's view angle relative to up vector
+    const viewAngle = Cesium.Cartesian3.dot(Cesium.Cartesian3.normalize(cameraDirection, new Cesium.Cartesian3()), Cesium.Cartesian3.UNIT_Z);
+
+    // Calculate screen space movement direction
     switch (selectedAxis) {
-      case "x-axis":
-        // Red axis - move along model's x-axis
-        const xAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 0, new Cesium.Cartesian3());
-        const signX = Cesium.Cartesian3.dot(xAxis, cameraDirection) < 0 ? -1 : 1;
-        Cesium.Cartesian3.multiplyByScalar(xAxis, signX * diff.x * movementScale, movementAmount);
-        break;
+      case "x-axis": {
+        // Calculate camera-model alignment
+        const rightAlignment = Cesium.Cartesian3.dot(Cesium.Cartesian3.normalize(modelRight, new Cesium.Cartesian3()), cameraRight);
 
-      case "y-axis":
-        // Green axis - move along model's y-axis
-        const yAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 1, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(yAxis, diff.x * movementScale, movementAmount);
+        // Calculate move direction based on camera view
+        const xMove = diff.x * Math.sign(rightAlignment);
+        const yMove = diff.y * Math.sign(viewAngle);
+
+        const movement = Cesium.Cartesian3.multiplyByScalar(modelRight, xMove * movementScale, new Cesium.Cartesian3());
+
+        Cesium.Cartesian3.add(movementAmount, movement, movementAmount);
         break;
-      case "z-axis":
-        // Blue axis - move along model's z-axis
-        const zAxis = Cesium.Matrix3.getColumn(Cesium.Matrix3.fromQuaternion(modelOrientation), 2, new Cesium.Cartesian3());
-        Cesium.Cartesian3.multiplyByScalar(zAxis, -diff.y * movementScale, movementAmount);
+      }
+      case "y-axis": {
+        // Calculate camera-model alignment
+        const forwardAlignment = Cesium.Cartesian3.dot(Cesium.Cartesian3.normalize(modelUp, new Cesium.Cartesian3()), cameraRight);
+
+        // Calculate move direction based on camera view
+        const xMove = diff.x * Math.sign(forwardAlignment);
+        const yMove = diff.y * Math.sign(viewAngle);
+
+        const movement = Cesium.Cartesian3.multiplyByScalar(modelUp, xMove * movementScale, new Cesium.Cartesian3());
+
+        Cesium.Cartesian3.add(movementAmount, movement, movementAmount);
         break;
+      }
+      case "z-axis": {
+        // For Z-axis, we want up mouse movement to move object up regardless of camera angle
+        const verticalMovement = Cesium.Cartesian3.multiplyByScalar(modelForward, -diff.y * movementScale, new Cesium.Cartesian3());
+
+        Cesium.Cartesian3.add(movementAmount, verticalMovement, movementAmount);
+        break;
+      }
     }
 
+    // Update model position
     const newPosition = Cesium.Cartesian3.add(currentModel.position.getValue(), movementAmount, new Cesium.Cartesian3());
+
     currentModel.position = newPosition;
+
+    // Update axes visualization
     removeAxes();
     createAxes(newPosition, modelOrientation, 1.0);
 
+    // Update coordinate inputs
     const cartographic = ellipsoid.cartesianToCartographic(newPosition);
     document.getElementById("latitude").value = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
     document.getElementById("longitude").value = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
