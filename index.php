@@ -64,6 +64,9 @@
           <li>
             <a href="#" id="layer-toggle" title="Show layer panel"><i class="bi bi-stack"></i> Layer</a>
           </li>
+          <li>
+            <a href="/data/information/table.php" target="_blank" title="keterangan layer"><i class="bi bi-card-list"></i> Tabel</a>
+          </li>
           <li><a href="#" id="clip-toggle" title="klip">klip</a></li>
           <li>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-camera-video-fill"></i> Kamera</a>
