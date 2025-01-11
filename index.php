@@ -343,7 +343,7 @@
     </div>
 
     <!-- Panel Layer Data -->
-    <div class="layer-panel card">
+    <div class="layer-panel card" id="layerPanel">
       <div class="card-body p-2">
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
@@ -354,6 +354,9 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
+                <div class="mb-1 mt-0 small">
+                  <a href="/data/information/table.php" target="_blank">Tabel informasi layer</a>
+                </div>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
                     <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
@@ -744,6 +747,9 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div class="accordion-body">
+                <div class="mb-1 mt-0 small">
+                  <a href="/data/information/table.php" target="_blank">Tabel informasi layer</a>
+                </div>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
                     <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
@@ -933,7 +939,7 @@
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e29" id="e29">
-                            Tata Bangunan Sarana Pelayanan Umum 1 </label>
+                            Tata Bangunan Sarana Pelayanan Umum 2 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
@@ -943,17 +949,17 @@
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e31" id="e31">
-                            Tata Bangunan Sarana Pelayanan Umum 2 </label>
-                        </li>
-                        <li>
-                          <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
                             Tata Bangunan Sarana Pelayanan Umum 3 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
-                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e32" id="e32">
                             Tata Bangunan Sarana Pelayanan Umum 4 </label>
+                        </li>
+                        <li>
+                          <label class="layer-item" style="margin-left: 0px">
+                            <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e33" id="e33">
+                            Tata Bangunan Sarana Pelayanan Umum 5 </label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
@@ -990,6 +996,9 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
               <div class="accordion-body">
+                <div class="mb-1 mt-0 small">
+                  <a href="/data/information/table.php" target="_blank">Tabel informasi layer</a>
+                </div>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <div class="btn-group me-2" role="group" aria-label="First group">
                     <button type="button" class="btn xs-btn btn-primary building-segment active">Objek Fisik</button>
@@ -1704,27 +1713,27 @@
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e38" id="e38">
-                            Tata Bangunan R.1 </label>
+                            Tata Bangunan Ruang Terbuka Hijau</label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e39" id="e39">
-                            Tata Bangunan R.2 </label>
+                            Tata Bangunan Sarana Pelayanan Umum</label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e40" id="e40">
-                            Tata Bangunan R.3 </label>
+                            Tata Bangunan Perumahan</label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e41" id="e41">
-                            Tata Bangunan R.4 </label>
+                            Tata Bangunan Ruang Terbuka Hijau</label>
                         </li>
                         <li>
                           <label class="layer-item" style="margin-left: 0px">
                             <input type="checkbox" style="transform: scale(1.4); margin-right: 6px; color: blue;" checked autocomplete="off" class="set_legal" name="e42" id="e42">
-                            Tata Bangunan R.5 </label>
+                            Tata Bangunan Perkantoran</label>
                         </li>
                       </ul>
                     </li>
