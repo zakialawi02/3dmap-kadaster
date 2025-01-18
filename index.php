@@ -1864,6 +1864,8 @@
           <li>Cara menampilkan informasi objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/20dLMKrC53k" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara menggunakan fitur pencarian <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/7fCqGpi1GsQ" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara melihat Hak, Batasan, dan Tanggung jawab suatu objek ruang <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/xf7x4rYiw7w" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menggunakan fitur pengukuran / distance measurement <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/OslphFM20JI" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menggunakan fitur klip <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/VqyKzSIUOy4" class="text-primary glightbox1"> lihat</span></a></li>
         </ol>
       </div>
     </div>

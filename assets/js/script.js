@@ -4,7 +4,7 @@ $(document).ready(function () {
   $(".cesium-viewer-toolbar").remove();
   const helping = $(".help-panel .card-body");
   helping.append(helpCesium);
-  helpCesium.css("top", "10rem");
+  helpCesium.css("top", "13rem");
   helpCesium.css("right", "5px");
   $("#helpCesium").on("click", function () {
     helpCesium.toggleClass("cesium-navigation-help-visible");

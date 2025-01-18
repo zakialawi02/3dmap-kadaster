@@ -108,7 +108,7 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>L1.1</td>
-                                        <td>Kriya Gallery</td>
+                                        <td class="attachment" data-img="https://lh3.googleusercontent.com/p/AF1QipNSlTU0IycvvTxdMgxM0Vxi_IgG9vHA-Q-BViZn=s1360-w1360-h1020">Kriya Gallery</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
                                         <td>
@@ -119,7 +119,7 @@
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>L1.2</td>
-                                        <td>Lorong</td>
+                                        <td class="attachment">Lorong</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
                                         <td>
@@ -163,7 +163,7 @@
                                     <tr>
                                         <th scope="row">6</th>
                                         <td>L1.6</td>
-                                        <td>Museum</td>
+                                        <td class="attachment" data-img="https://tiketwisata.surabaya.go.id/storage/tour/museum-surabayagedung-siola_1666543455.jpg">Museum</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
                                         <td>
@@ -174,7 +174,7 @@
                                     <tr>
                                         <th scope="row">7</th>
                                         <td>L1.7</td>
-                                        <td>UPTSA (Unit Pelayanan Terpadu Satu Atap)</td>
+                                        <td class="attachment" data-img="https://fastly.4sqi.net/img/general/600x600/14004519_0q-Kcse1w8XMunorOI4kadkNcSpNpBAz8BnzzcDTrnQ.jpg">UPTSA (Unit Pelayanan Terpadu Satu Atap)</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
                                         <td>
@@ -2758,6 +2758,53 @@
         });
         new DataTable('#table3', {
             "pageLength": 25
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Select all elements with class 'attachment'
+            const attachments = document.querySelectorAll('.attachment');
+
+            // Loop through the elements and apply styles if 'data-img' attribute exists
+            attachments.forEach((attachment) => {
+                if (attachment.hasAttribute('data-img')) {
+                    attachment.style.color = '#2565fa'; // Set text color to blue
+                    attachment.style.cursor = 'pointer'; // Set cursor to pointer
+                }
+            });
+
+            // Handle click event for elements with class 'attachment'
+            $(".attachment").click(function(e) {
+                e.preventDefault();
+                const imgUrl = $(this).data('img');
+
+                if (imgUrl) {
+                    // Create a modal dynamically
+                    const modal = `
+                <div id="imageModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+                    <div style="position: relative;">
+                        <img src="${imgUrl}" alt="Image" style="max-width: 90vw; max-height: 90vh; border: 5px solid white; border-radius: 5px;">
+                        <button id="closeModal" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; cursor: pointer;">&times;</button>
+                    </div>
+                </div>`;
+
+                    // Append the modal to the body
+                    $("body").append(modal);
+
+                    // Add click event to close the modal
+                    $("#closeModal").click(function() {
+                        $("#imageModal").remove();
+                    });
+
+                    // Close the modal when clicking outside the image
+                    $("#imageModal").click(function(event) {
+                        if ($(event.target).is("#imageModal")) {
+                            $("#imageModal").remove();
+                        }
+                    });
+                }
+            });
         });
     </script>
 
