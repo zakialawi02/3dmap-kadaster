@@ -1811,12 +1811,13 @@
               <div id="buildingHeight" class="py-1"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label">Latitude</label>
-                <input class="form-control form-control-sm" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300">
+                <input class="form-control form-control-sm" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300" value="-7.258300">
                 <label for="longitude" class="form-label">Longitude</label>
-                <input class="form-control form-control-sm" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890">
+                <input class="form-control form-control-sm" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890" value="112.73890">
                 <label for="longitude" class="form-label">Heading</label>
                 <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
               </div>
+              <div class="mb-2 small" id="resultCek"></div>
               <div class="mt-2 d-flex justify-content-end">
                 <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
               </div>
