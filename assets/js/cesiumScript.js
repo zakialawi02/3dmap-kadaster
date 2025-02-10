@@ -3193,8 +3193,8 @@ function handleFileUpload(event) {
             console.log("Origin tidak berada di tengah model. (Posisi relatif: ", center, ")");
             setOffset = true;
           }
-
-          buildingHeight = getObjectHeight(bbox);
+          const dimensions = getBoundingBoxDimensions(bbox);
+          buildingHeight = dimensions.height;
           $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
           const { length, width } = getBoundingBoxDimensions(bbox);
           console.log("Length:", length, "Width:", width);
@@ -3211,8 +3211,63 @@ function handleFileUpload(event) {
           alert("Gagal memparsing model GLB");
         }
       } else if (file.name.endsWith(".obj")) {
-        // Implementasi untuk OBJ jika diperlukan
-        alert("Format file OBJ belum didukung untuk perhitungan tinggi.");
+        try {
+          const loader = new THREE.OBJLoader();
+          const blob = new Blob([uint8Array], { type: "model/obj" });
+          const url = URL.createObjectURL(blob);
+
+          loader.load(url, (obj) => {
+            // Hitung bounding box model
+            const bbox = new THREE.Box3().setFromObject(obj);
+            const dimensions = getBoundingBoxDimensions(bbox);
+            buildingHeight = dimensions.height;
+            $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+            const { length, width } = getBoundingBoxDimensions(bbox);
+            console.log("Length:", length, "Width:", width);
+
+            const center = new THREE.Vector3();
+            bbox.getCenter(center); // Mendapatkan pusat dari bounding box
+
+            const origin = new THREE.Vector3(0, 0, 0);
+            const distanceToOrigin = center.distanceTo(origin);
+
+            console.log("Pusat bounding box:", center);
+            console.log("Jarak origin ke pusat model:", distanceToOrigin);
+
+            // Tentukan threshold kecil untuk menangani kesalahan floating point
+            const threshold = 10;
+
+            if (distanceToOrigin < threshold) {
+              console.log("Origin berada di tengah model.");
+            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
+              console.log("Origin berada di dasar model.");
+            } else {
+              console.log("Origin berada di posisi lain.");
+            }
+
+            // Konversi OBJ ke GLTF
+            const gltfExporter = new THREE.GLTFExporter();
+            gltfExporter.parse(
+              obj,
+              (gltf) => {
+                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfUrl = URL.createObjectURL(gltfBlob);
+
+                // Tampilkan input koordinat
+                document.getElementById("coordinateInputs").style.display = "block";
+
+                // Simpan ke variabel global, tanpa langsung memuat
+                window.uploadedFileUrl = gltfUrl;
+                window.uploadedFileType = "obj";
+                window.uploadedFileBBox = bbox;
+              },
+              { binary: true }
+            );
+          });
+        } catch (error) {
+          console.log(error);
+          alert("Gagal memparsing model OBJ");
+        }
       } else {
         alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
       }
@@ -3589,7 +3644,20 @@ function updateModelPosition() {
 
     // Create axes at the model's origin
     createAxes(position, orientation, 1.0);
+  } else if (window.uploadedFileType === "obj") {
+    currentModel = viewer.entities.add({
+      position: position,
+      orientation: orientation,
+      model: {
+        uri: window.uploadedFileUrl,
+        scale: 1.0,
+      },
+    });
+
+    // Create axes at the model's origin
+    createAxes(position, orientation, 1.0);
   }
+
   checkIfModelIsAboveBuilding();
   viewer.flyTo(currentModel, {
     duration: 1,
@@ -3598,9 +3666,11 @@ function updateModelPosition() {
 
 // Fungsi untuk mendapatkan dimensi panjang dan lebar dari penampang bawah model
 function getBoundingBoxDimensions(bbox) {
-  const length = Number(bbox.max.x - bbox.min.x); // Panjang (sumbu X)
-  const width = Number(bbox.max.z - bbox.min.z); // Lebar (sumbu Z)
-  return { length, width };
+  return {
+    length: bbox.max.x - bbox.min.x, // Panjang (sumbu X)
+    width: bbox.max.z - bbox.min.z, // Lebar (sumbu Z)
+    height: bbox.max.y - bbox.min.y, // Tinggi (sumbu Y)
+  };
 }
 
 // Event listeners
