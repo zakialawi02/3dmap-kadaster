@@ -3268,6 +3268,108 @@ function handleFileUpload(event) {
           console.log(error);
           alert("Gagal memparsing model OBJ");
         }
+      } else if (file.name.endsWith(".zip")) {
+        const zip = new JSZip();
+        const zipContent = await zip.loadAsync(file);
+        let objFile = null;
+        let mtlFile = null;
+        let textures = {};
+
+        // Ekstrak file dari ZIP
+        for (let fileName in zipContent.files) {
+          if (fileName.endsWith(".obj")) {
+            objFile = await zipContent.files[fileName].async("text");
+          } else if (fileName.endsWith(".mtl")) {
+            mtlFile = await zipContent.files[fileName].async("text");
+          } else if (fileName.match(/\.(jpg|jpeg|png)$/i)) {
+            textures[fileName] = await zipContent.files[fileName].async("blob");
+          }
+        }
+
+        if (!objFile || !mtlFile) {
+          alert("ZIP harus berisi file .obj dan .mtl!");
+          return;
+        }
+
+        // Buat URL untuk file OBJ dan MTL
+        const objBlob = new Blob([objFile], { type: "text/plain" });
+        const objUrl = URL.createObjectURL(objBlob);
+        const mtlBlob = new Blob([mtlFile], { type: "text/plain" });
+        const mtlUrl = URL.createObjectURL(mtlBlob);
+
+        // Buat URL untuk setiap tekstur
+        let textureUrls = {};
+        for (let texName in textures) {
+          const textureBlob = new Blob([textures[texName]], { type: "image/png" });
+          textureUrls[texName] = URL.createObjectURL(textureBlob);
+        }
+
+        const objLoader = new THREE.OBJLoader();
+        const mtlLoader = new THREE.MTLLoader();
+
+        mtlLoader.load(mtlUrl, (materials) => {
+          materials.preload();
+
+          // Gunakan tekstur yang sudah diekstrak dari ZIP
+          for (let matName in materials.materials) {
+            let material = materials.materials[matName];
+            for (let texName in textureUrls) {
+              if (material.map === undefined) {
+                material.map = new THREE.TextureLoader().load(textureUrls[texName]);
+              }
+            }
+          }
+
+          objLoader.setMaterials(materials);
+          objLoader.load(objUrl, (obj) => {
+            // Hitung bounding box model
+            const bbox = new THREE.Box3().setFromObject(obj);
+            const dimensions = getBoundingBoxDimensions(bbox);
+            buildingHeight = dimensions.height;
+            $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+            const { length, width } = getBoundingBoxDimensions(bbox);
+            console.log("Length:", length, "Width:", width);
+
+            const center = new THREE.Vector3();
+            bbox.getCenter(center); // Mendapatkan pusat dari bounding box
+
+            const origin = new THREE.Vector3(0, 0, 0);
+            const distanceToOrigin = center.distanceTo(origin);
+
+            console.log("Pusat bounding box:", center);
+            console.log("Jarak origin ke pusat model:", distanceToOrigin);
+
+            // Tentukan threshold kecil untuk menangani kesalahan floating point
+            const threshold = 10;
+
+            if (distanceToOrigin < threshold) {
+              console.log("Origin berada di tengah model.");
+            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
+              console.log("Origin berada di dasar model.");
+            } else {
+              console.log("Origin berada di posisi lain.");
+            }
+
+            // Konversi OBJ ke GLTF
+            const gltfExporter = new THREE.GLTFExporter();
+            gltfExporter.parse(
+              obj,
+              (gltf) => {
+                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfUrl = URL.createObjectURL(gltfBlob);
+
+                // Tampilkan input koordinat
+                document.getElementById("coordinateInputs").style.display = "block";
+
+                // Simpan ke variabel global, tanpa langsung memuat
+                window.uploadedFileUrl = gltfUrl;
+                window.uploadedFileType = "obj";
+                window.uploadedFileBBox = bbox;
+              },
+              { binary: true }
+            );
+          });
+        });
       } else {
         alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
       }
