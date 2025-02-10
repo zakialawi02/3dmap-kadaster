@@ -3160,6 +3160,7 @@ let isDragging = false;
 let selectedAxis = null;
 let startMousePosition;
 let startModelPosition;
+let setOffset = false;
 
 // Fungsi untuk membaca file 3D yang diupload
 function handleFileUpload(event) {
@@ -3173,7 +3174,27 @@ function handleFileUpload(event) {
       if (file.name.endsWith(".glb")) {
         try {
           const bbox = await computeBoundingBoxFromGLB(uint8Array);
-          buildingHeight = getObjectHeight(bbox);
+
+          const center = getBoundingBoxCenter(bbox);
+          console.log("Pusat bounding box:", center);
+
+          // Bandingkan dengan origin (0,0,0)
+          const origin = new THREE.Vector3(0, 0, 0);
+          const distanceToOrigin = center.distanceTo(origin);
+          console.log("Jarak pusat bounding box ke origin:", distanceToOrigin);
+
+          // Menentukan apakah origin berada di tengah model
+          // Gunakan threshold kecil untuk mengantisipasi ketidakakuratan floating point
+          const threshold = 10;
+          if (distanceToOrigin < threshold) {
+            console.log("Origin berada di tengah model.");
+            setOffset = false;
+          } else {
+            console.log("Origin tidak berada di tengah model. (Posisi relatif: ", center, ")");
+            setOffset = true;
+          }
+          const dimensions = getBoundingBoxDimensions(bbox);
+          buildingHeight = dimensions.height;
           $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
           const { length, width } = getBoundingBoxDimensions(bbox);
           console.log("Length:", length, "Width:", width);
@@ -3190,8 +3211,165 @@ function handleFileUpload(event) {
           alert("Gagal memparsing model GLB");
         }
       } else if (file.name.endsWith(".obj")) {
-        // Implementasi untuk OBJ jika diperlukan
-        alert("Format file OBJ belum didukung untuk perhitungan tinggi.");
+        try {
+          const loader = new THREE.OBJLoader();
+          const blob = new Blob([uint8Array], { type: "model/obj" });
+          const url = URL.createObjectURL(blob);
+
+          loader.load(url, (obj) => {
+            // Hitung bounding box model
+            const bbox = new THREE.Box3().setFromObject(obj);
+            const dimensions = getBoundingBoxDimensions(bbox);
+            buildingHeight = dimensions.height;
+            $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+            const { length, width } = getBoundingBoxDimensions(bbox);
+            console.log("Length:", length, "Width:", width);
+
+            const center = new THREE.Vector3();
+            bbox.getCenter(center); // Mendapatkan pusat dari bounding box
+
+            const origin = new THREE.Vector3(0, 0, 0);
+            const distanceToOrigin = center.distanceTo(origin);
+
+            console.log("Pusat bounding box:", center);
+            console.log("Jarak origin ke pusat model:", distanceToOrigin);
+
+            // Tentukan threshold kecil untuk menangani kesalahan floating point
+            const threshold = 10;
+
+            if (distanceToOrigin < threshold) {
+              console.log("Origin berada di tengah model.");
+            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
+              console.log("Origin berada di dasar model.");
+            } else {
+              console.log("Origin berada di posisi lain.");
+            }
+
+            // Konversi OBJ ke GLTF
+            const gltfExporter = new THREE.GLTFExporter();
+            gltfExporter.parse(
+              obj,
+              (gltf) => {
+                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfUrl = URL.createObjectURL(gltfBlob);
+
+                // Tampilkan input koordinat
+                document.getElementById("coordinateInputs").style.display = "block";
+
+                // Simpan ke variabel global, tanpa langsung memuat
+                window.uploadedFileUrl = gltfUrl;
+                window.uploadedFileType = "obj";
+                window.uploadedFileBBox = bbox;
+              },
+              { binary: true }
+            );
+          });
+        } catch (error) {
+          console.log(error);
+          alert("Gagal memparsing model OBJ");
+        }
+      } else if (file.name.endsWith(".zip")) {
+        const zip = new JSZip();
+        const zipContent = await zip.loadAsync(file);
+        let objFile = null;
+        let mtlFile = null;
+        let textures = {};
+
+        // Ekstrak file dari ZIP
+        for (let fileName in zipContent.files) {
+          if (fileName.endsWith(".obj")) {
+            objFile = await zipContent.files[fileName].async("text");
+          } else if (fileName.endsWith(".mtl")) {
+            mtlFile = await zipContent.files[fileName].async("text");
+          } else if (fileName.match(/\.(jpg|jpeg|png)$/i)) {
+            textures[fileName] = await zipContent.files[fileName].async("blob");
+          }
+        }
+
+        if (!objFile || !mtlFile) {
+          alert("ZIP harus berisi file .obj dan .mtl!");
+          return;
+        }
+
+        // Buat URL untuk file OBJ dan MTL
+        const objBlob = new Blob([objFile], { type: "text/plain" });
+        const objUrl = URL.createObjectURL(objBlob);
+        const mtlBlob = new Blob([mtlFile], { type: "text/plain" });
+        const mtlUrl = URL.createObjectURL(mtlBlob);
+
+        // Buat URL untuk setiap tekstur
+        let textureUrls = {};
+        for (let texName in textures) {
+          const textureBlob = new Blob([textures[texName]], { type: "image/png" });
+          textureUrls[texName] = URL.createObjectURL(textureBlob);
+        }
+
+        const objLoader = new THREE.OBJLoader();
+        const mtlLoader = new THREE.MTLLoader();
+
+        mtlLoader.load(mtlUrl, (materials) => {
+          materials.preload();
+
+          // Gunakan tekstur yang sudah diekstrak dari ZIP
+          for (let matName in materials.materials) {
+            let material = materials.materials[matName];
+            for (let texName in textureUrls) {
+              if (material.map === undefined) {
+                material.map = new THREE.TextureLoader().load(textureUrls[texName]);
+              }
+            }
+          }
+
+          objLoader.setMaterials(materials);
+          objLoader.load(objUrl, (obj) => {
+            // Hitung bounding box model
+            const bbox = new THREE.Box3().setFromObject(obj);
+            const dimensions = getBoundingBoxDimensions(bbox);
+            buildingHeight = dimensions.height;
+            $("#buildingHeight").html(`Tinggi bangunan : ${buildingHeight.toFixed(3)} m`);
+            const { length, width } = getBoundingBoxDimensions(bbox);
+            console.log("Length:", length, "Width:", width);
+
+            const center = new THREE.Vector3();
+            bbox.getCenter(center); // Mendapatkan pusat dari bounding box
+
+            const origin = new THREE.Vector3(0, 0, 0);
+            const distanceToOrigin = center.distanceTo(origin);
+
+            console.log("Pusat bounding box:", center);
+            console.log("Jarak origin ke pusat model:", distanceToOrigin);
+
+            // Tentukan threshold kecil untuk menangani kesalahan floating point
+            const threshold = 10;
+
+            if (distanceToOrigin < threshold) {
+              console.log("Origin berada di tengah model.");
+            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
+              console.log("Origin berada di dasar model.");
+            } else {
+              console.log("Origin berada di posisi lain.");
+            }
+
+            // Konversi OBJ ke GLTF
+            const gltfExporter = new THREE.GLTFExporter();
+            gltfExporter.parse(
+              obj,
+              (gltf) => {
+                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfUrl = URL.createObjectURL(gltfBlob);
+
+                // Tampilkan input koordinat
+                document.getElementById("coordinateInputs").style.display = "block";
+
+                // Simpan ke variabel global, tanpa langsung memuat
+                window.uploadedFileUrl = gltfUrl;
+                window.uploadedFileType = "obj";
+                window.uploadedFileBBox = bbox;
+              },
+              { binary: true }
+            );
+          });
+        });
       } else {
         alert("Format file tidak valid. Hanya mendukung GLB atau OBJ.");
       }
@@ -3220,6 +3398,13 @@ function computeBoundingBoxFromGLB(uint8Array) {
       }
     );
   });
+}
+
+// Fungsi untuk mendapatkan pusat bounding box
+function getBoundingBoxCenter(bbox) {
+  const center = new THREE.Vector3();
+  bbox.getCenter(center); // Menghitung pusat dari bbox
+  return center;
 }
 
 // Fungsi untuk mendapatkan tinggi objek dari bounding box
@@ -3254,6 +3439,151 @@ function createAxes(position, orientation, scale) {
   createAxis(Cesium.Color.RED, new Cesium.Cartesian3(axisLength, 0, 0), "x-axis");
   createAxis(Cesium.Color.GREEN, new Cesium.Cartesian3(0, axisLength, 0), "y-axis");
   createAxis(Cesium.Color.BLUE, new Cesium.Cartesian3(0, 0, axisLength), "z-axis");
+}
+
+function checkIfModelIsAboveBuilding() {
+  if (!currentModel || !window.uploadedFileBBox) return;
+
+  // Ambil posisi dan orientasi model
+  const modelPosition = currentModel.position.getValue(Cesium.JulianDate.now());
+  const modelOrientation = currentModel.orientation.getValue(Cesium.JulianDate.now());
+
+  // Ambil heading (hdg) dari input form
+  const headingDegrees = parseFloat(document.getElementById("hdg").value) || 0;
+  const headingRadians = Cesium.Math.toRadians(headingDegrees);
+
+  // Konversi ke koordinat geografis
+  const modelCartographic = Cesium.Cartographic.fromCartesian(modelPosition);
+  const modelHeight = modelCartographic.height;
+
+  // Ambil bounding box model dengan heading dan offset dari input form
+  const bboxCorners = getModelBoundingBoxCorners(modelPosition, headingRadians, window.uploadedFileBBox);
+
+  // Visualisasikan bounding box di peta untuk debugging
+  visualizeBoundingBox(bboxCorners);
+
+  let detectedBuildings = [];
+
+  for (let dsIndex = 1; dsIndex < viewer.dataSources.length; dsIndex++) {
+    const dataSource = viewer.dataSources.get(dsIndex);
+    if (!dataSource) continue;
+
+    const entities = dataSource.entities.values;
+
+    for (let i = 0; i < entities.length; i++) {
+      const entity = entities[i];
+
+      if (entity.polygon && entity.polygon.hierarchy) {
+        const hierarchy = entity.polygon.hierarchy.getValue();
+        const positions = hierarchy.positions;
+
+        // Konversi koordinat poligon ke lat/lon
+        let polygonCoords = positions.map((pos) => {
+          let carto = Cesium.Cartographic.fromCartesian(pos);
+          return [Cesium.Math.toDegrees(carto.longitude), Cesium.Math.toDegrees(carto.latitude)];
+        });
+
+        // Periksa apakah salah satu sudut bounding box model berada dalam poligon GeoJSON
+        let isAbove = bboxCorners.some((corner) => pointInPolygon([corner.longitude, corner.latitude], polygonCoords));
+
+        if (isAbove) {
+          const buildingHeight = entity.properties.height ? entity.properties.height.getValue() : 0;
+
+          detectedBuildings.push({
+            kode: entity.properties.kode.getValue(),
+            height: buildingHeight,
+          });
+        }
+      }
+    }
+  }
+
+  // Cetak semua fitur yang ditemukan
+  if (detectedBuildings.length > 0) {
+    console.log(`Model berada di atas ${detectedBuildings.length} bangunan:`);
+    detectedBuildings.forEach((building) => {
+      console.log(` - Kode: ${building.kode}, Tinggi: ${building.height} m`);
+      $("#resultCek").html(`${detectedBuildings.length} bidang terdeteksi: <br> ${detectedBuildings.map((b) => `${b.kode} - ${b.height} m`).join("<br>")}`);
+    });
+  } else {
+    console.log("Model tidak berada di atas bangunan manapun.");
+  }
+}
+
+// **Fungsi Baru**: Hitung Bounding Box Model dengan Heading dan Offset dari Input Form
+function getModelBoundingBoxCorners(position, heading, bbox) {
+  const transformMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+
+  let offsetX = 0;
+  let offsetY = 0;
+  if (setOffset) {
+    const { length, width } = getBoundingBoxDimensions(bbox);
+    // Ambil offset
+    offsetX = parseFloat(Math.sqrt(length * length + width * width) / 2.9);
+    offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 2) : parseFloat(Math.sqrt(width * width - length * length) / 2);
+    console.log({ offsetX, offsetY });
+  }
+
+  // Add 90 degrees (π/2 radians) to the heading for rotation
+  const rotatedHeading = heading + Math.PI / 2;
+
+  // Create rotation matrix with the new heading
+  const headingRotation = Cesium.Matrix3.fromRotationZ(rotatedHeading);
+
+  const halfLength = (bbox.max.x - bbox.min.x) / 2;
+  const halfWidth = (bbox.max.z - bbox.min.z) / 2;
+
+  // **Tambahkan offset manual dari input form ke setiap sudut bounding box**
+  let localCorners = [
+    new Cesium.Cartesian3(halfLength + offsetX, halfWidth + offsetY, 0),
+    new Cesium.Cartesian3(halfLength + offsetX, -halfWidth + offsetY, 0),
+    new Cesium.Cartesian3(-halfLength + offsetX, halfWidth + offsetY, 0),
+    new Cesium.Cartesian3(-halfLength + offsetX, -halfWidth + offsetY, 0),
+  ];
+
+  // Transformasikan ke koordinat dunia dengan rotasi heading
+  return localCorners.map((localCorner) => {
+    let rotatedCorner = Cesium.Matrix3.multiplyByVector(headingRotation, localCorner, new Cesium.Cartesian3());
+    let worldCorner = Cesium.Matrix4.multiplyByPoint(transformMatrix, rotatedCorner, new Cesium.Cartesian3());
+    let carto = Cesium.Cartographic.fromCartesian(worldCorner);
+    return {
+      longitude: Cesium.Math.toDegrees(carto.longitude),
+      latitude: Cesium.Math.toDegrees(carto.latitude),
+    };
+  });
+}
+
+// **Fungsi Baru**: Visualisasi Bounding Box di Peta untuk Debugging
+function visualizeBoundingBox(corners) {
+  // Hapus bounding box sebelumnya
+  viewer.entities.removeById("boundingBox");
+
+  viewer.entities.add({
+    id: "boundingBox",
+    polygon: {
+      hierarchy: Cesium.Cartesian3.fromDegreesArray(corners.flatMap((corner) => [corner.longitude, corner.latitude])),
+      material: Cesium.Color.RED.withAlpha(0.5),
+      outline: true,
+      outlineColor: Cesium.Color.BLACK,
+    },
+  });
+}
+
+// Fungsi sederhana untuk mengecek apakah titik berada dalam poligon (Ray-Casting Algorithm)
+function pointInPolygon(point, vs) {
+  let x = point[0],
+    y = point[1];
+  let inside = false;
+  for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+    let xi = vs[i][0],
+      yi = vs[i][1];
+    let xj = vs[j][0],
+      yj = vs[j][1];
+
+    let intersect = yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+    if (intersect) inside = !inside;
+  }
+  return inside;
 }
 
 // Add mouse event handlers
@@ -3416,8 +3746,21 @@ function updateModelPosition() {
 
     // Create axes at the model's origin
     createAxes(position, orientation, 1.0);
+  } else if (window.uploadedFileType === "obj") {
+    currentModel = viewer.entities.add({
+      position: position,
+      orientation: orientation,
+      model: {
+        uri: window.uploadedFileUrl,
+        scale: 1.0,
+      },
+    });
+
+    // Create axes at the model's origin
+    createAxes(position, orientation, 1.0);
   }
 
+  checkIfModelIsAboveBuilding();
   viewer.flyTo(currentModel, {
     duration: 1,
   });
@@ -3425,9 +3768,11 @@ function updateModelPosition() {
 
 // Fungsi untuk mendapatkan dimensi panjang dan lebar dari penampang bawah model
 function getBoundingBoxDimensions(bbox) {
-  const length = bbox.max.x - bbox.min.x; // Panjang (sumbu X)
-  const width = bbox.max.z - bbox.min.z; // Lebar (sumbu Z)
-  return { length, width };
+  return {
+    length: bbox.max.x - bbox.min.x, // Panjang (sumbu X)
+    width: bbox.max.z - bbox.min.z, // Lebar (sumbu Z)
+    height: bbox.max.y - bbox.min.y, // Tinggi (sumbu Y)
+  };
 }
 
 // Event listeners

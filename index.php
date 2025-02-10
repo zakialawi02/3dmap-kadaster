@@ -1805,18 +1805,19 @@
                 </button>
               </div>
               <div class="input-group">
-                <input class="form-control form-control-sm" id="formFileSm" type="file">
+                <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".glb, .gltf, .obj, .mtl, .fbx, .zip">
               </div>
-              <p><small>Download file sample <a href="/assets/building.glb" class="" id="sampleFile" target="_blank">disini</a></small> </p>
-              <div id="buildingHeight" class="py-1"></div>
+              <p><small>Download file sample <a href="/assets/building.glb" class="mb-0" id="sampleFile" target="_blank">disini</a></small> </p>
+              <div id="buildingHeight" class="py-1 small"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
-                <label for="latitude" class="form-label">Latitude</label>
-                <input class="form-control form-control-sm" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300">
-                <label for="longitude" class="form-label">Longitude</label>
-                <input class="form-control form-control-sm" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890">
-                <label for="longitude" class="form-label">Heading</label>
-                <input class="form-control form-control-sm" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
+                <label for="latitude" class="form-label mb-0">Latitude</label>
+                <input class="form-control form-control-sm mb-2" id="latitude" type="number" step="0.0001" min="-180" max="180" placeholder="-7,258300" value="-7.258300">
+                <label for="longitude" class="form-label mb-0">Longitude</label>
+                <input class="form-control form-control-sm mb-2" id="longitude" type="number" step="0.0001" min="-180" max="180" placeholder="112,73890" value="112.73890">
+                <label for="longitude" class="form-label mb-0">Heading</label>
+                <input class="form-control form-control-sm mb-2" id="hdg" type="number" step="0.1" min="0" max="360" value="0" placeholder="330">
               </div>
+              <div class="mb-2 small" id="resultCek"></div>
               <div class="mt-2 d-flex justify-content-end">
                 <button class="btn xs-btn btn-warning" id="cek3d" type="button">Cek</button>
               </div>
@@ -1864,6 +1865,8 @@
           <li>Cara menampilkan informasi objek <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/20dLMKrC53k" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara menggunakan fitur pencarian <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/7fCqGpi1GsQ" class="text-primary glightbox1"> lihat</span></a></li>
           <li>Cara melihat Hak, Batasan, dan Tanggung jawab suatu objek ruang <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/xf7x4rYiw7w" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menggunakan fitur pengukuran / distance measurement <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/OslphFM20JI" class="text-primary glightbox1"> lihat</span></a></li>
+          <li>Cara menggunakan fitur klip <a type="button" data-gallery="video1" data-type="video" href="https://youtu.be/VqyKzSIUOy4" class="text-primary glightbox1"> lihat</span></a></li>
         </ol>
       </div>
     </div>
@@ -1943,9 +1946,12 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js" integrity="sha512-RBWI5Qf647bcVhqbEnRoL4KuUT+Liz+oG5jtF+HP05Oa5088M9G0GxG0uoHR9cyq35VbjahcI+Hd1xwY8E1/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.0.0/turf.min.js"></script> -->
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three/examples/js/exporters/GLTFExporter.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <script src="assets/js/cesium-measure-tool.js"></script>
   <script src="assets/js/script.js"></script>
