@@ -836,6 +836,59 @@ function scan() {
   });
 }
 
+function getCurrentQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  let result = {};
+
+  for (let [key, value] of params.entries()) {
+    result[key] = value;
+  }
+
+  return result ?? null;
+}
+
+function updateQueryParams(paramsObj) {
+  const url = new URL(window.location);
+  const params = new URLSearchParams(url.search);
+
+  // Loop melalui objek dan set setiap parameter
+  for (const [key, value] of Object.entries(paramsObj)) {
+    params.set(key, value);
+  }
+
+  url.search = params.toString();
+  window.history.pushState({}, "", url); // Update URL tanpa reload
+}
+
+function checkLocationParam() {
+  const params = new URLSearchParams(window.location.search);
+  const locationValue = params.get("location"); // Ambil hanya param "location"
+
+  if (!locationValue) return null; // Jika tidak ada "location", kembalikan null
+
+  // Peta kata kunci ke nilai
+  const keywordMap = {
+    siola: 1,
+    balai: 2,
+    rusunawa: 3,
+  };
+
+  // Cek apakah "location" mengandung salah satu kata kunci
+  for (let keyword in keywordMap) {
+    if (locationValue.toLowerCase().includes(keyword)) {
+      return {
+        name: keyword,
+        value: keywordMap[keyword],
+      };
+    }
+  }
+
+  return null; // Jika tidak ada yang cocok
+}
+
+const params = getCurrentQueryParams();
+console.log(params);
+
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {
   siolaBuildingL0.show = $(this).prop("checked");
@@ -2408,7 +2461,6 @@ $("#e2").change(function () {
   toggleVisibilityGeojson("14882", $(this).is(":checked"));
 });
 $("#e3").change(function () {
-  console.log("L3");
   toggleVisibilityGeojson("15296", $(this).is(":checked"));
 });
 $("#e4").change(function () {
@@ -3149,9 +3201,10 @@ const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.from
 siolaLegal.style = setColorStyle;
 
 // hide preloader after finish load data
-
-$(".preload").addClass("d-none");
-$(".loader-container").removeClass("d-none");
+if (!params?.object) {
+  $(".preload").addClass("d-none");
+  $(".loader-container").removeClass("d-none");
+}
 
 let currentModel;
 let buildingHeight;
@@ -3499,6 +3552,7 @@ function checkIfModelIsAboveBuilding() {
   }
 
   // Cetak semua fitur yang ditemukan
+  $("#resultCek").html("");
   if (detectedBuildings.length > 0) {
     console.log(`Model berada di atas ${detectedBuildings.length} bangunan:`);
     detectedBuildings.forEach((building) => {
@@ -3516,29 +3570,26 @@ function getModelBoundingBoxCorners(position, heading, bbox) {
 
   let offsetX = 0;
   let offsetY = 0;
+  const { length, width } = getBoundingBoxDimensions(bbox);
   if (setOffset) {
-    const { length, width } = getBoundingBoxDimensions(bbox);
     // Ambil offset
-    offsetX = parseFloat(Math.sqrt(length * length + width * width) / 2.9);
-    offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 2) : parseFloat(Math.sqrt(width * width - length * length) / 2);
+    offsetX = -parseFloat(Math.sqrt(length * length + width * width) / 3.5);
+    offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 1.6) : parseFloat(Math.sqrt(width * width - length * length) / 1.6);
     console.log({ offsetX, offsetY });
   }
 
-  // Add 90 degrees (π/2 radians) to the heading for rotation
-  const rotatedHeading = heading + Math.PI / 2;
-
   // Create rotation matrix with the new heading
-  const headingRotation = Cesium.Matrix3.fromRotationZ(rotatedHeading);
+  const headingRotation = Cesium.Matrix3.fromRotationZ(-heading);
 
-  const halfLength = (bbox.max.x - bbox.min.x) / 2;
-  const halfWidth = (bbox.max.z - bbox.min.z) / 2;
+  const halfLength = width / 2;
+  const halfWidth = length / 2;
 
   // **Tambahkan offset manual dari input form ke setiap sudut bounding box**
   let localCorners = [
-    new Cesium.Cartesian3(halfLength + offsetX, halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(halfLength + offsetX, -halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(-halfLength + offsetX, halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(-halfLength + offsetX, -halfWidth + offsetY, 0),
+    new Cesium.Cartesian3(-halfLength + offsetX, -halfWidth + offsetY, 0), //3
+    new Cesium.Cartesian3(halfLength + offsetX, -halfWidth + offsetY, 0), // 4
+    new Cesium.Cartesian3(halfLength + offsetX, halfWidth + offsetY, 0), // 2
+    new Cesium.Cartesian3(-halfLength + offsetX, halfWidth + offsetY, 0), //1
   ];
 
   // Transformasikan ke koordinat dunia dengan rotasi heading
@@ -4180,9 +4231,9 @@ $(document).ready(function () {
   });
 
   function selectSuggestion(id, text = false) {
-    $("#searchInput").val(text);
+    $("#searchInput").val(text ? text : "");
     $("#autocompleteResults").html("");
-    console.log("seelct: " + id);
+    console.log("select: " + id);
     switch (String(id)) {
       case "1":
         firstCamera();
@@ -4958,10 +5009,26 @@ $(document).ready(function () {
         break;
     }
   }
-});
 
-$(document).ready(function () {
   $(".loader-container").addClass("d-none");
   resetClipTilesets(1);
   resetClipTilesets();
+
+  if (params?.object) {
+    $(".preload").addClass("d-none");
+    selectSuggestion(params?.object);
+    if (params?.isLegal == "true") {
+      interceptToogleLayer();
+    }
+  }
 });
+
+function interceptToogleLayer() {
+  const key = checkLocationParam();
+  const checkbox = document.querySelectorAll(`.${key.name}-building-layer-panel input[type="checkbox"]`);
+  checkbox.forEach((checkbox) => {
+    checkbox.checked = !checkbox.checked;
+    const id = checkbox.id;
+    $(`#${id}`).trigger("change");
+  });
+}
