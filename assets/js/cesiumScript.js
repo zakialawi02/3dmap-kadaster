@@ -3240,10 +3240,10 @@ function handleFileUpload(event) {
           // Gunakan threshold kecil untuk mengantisipasi ketidakakuratan floating point
           const threshold = 10;
           if (distanceToOrigin < threshold) {
-            console.log("Origin berada di tengah model.");
+            console.log("Origin berada di tengah model. 1");
             setOffset = false;
           } else {
-            console.log("Origin tidak berada di tengah model. (Posisi relatif: ", center, ")");
+            console.log("Origin tidak berada di tengah model. 1 (Posisi relatif: ", center, ")");
             setOffset = true;
           }
           const dimensions = getBoundingBoxDimensions(bbox);
@@ -3284,18 +3284,17 @@ function handleFileUpload(event) {
             const origin = new THREE.Vector3(0, 0, 0);
             const distanceToOrigin = center.distanceTo(origin);
 
-            console.log("Pusat bounding box:", center);
             console.log("Jarak origin ke pusat model:", distanceToOrigin);
 
             // Tentukan threshold kecil untuk menangani kesalahan floating point
             const threshold = 10;
 
             if (distanceToOrigin < threshold) {
-              console.log("Origin berada di tengah model.");
-            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
-              console.log("Origin berada di dasar model.");
+              console.log("Origin berada di tengah model. 2");
+              setOffset = false;
             } else {
-              console.log("Origin berada di posisi lain.");
+              console.log("Origin berada di posisi lain. 2");
+              setOffset = true;
             }
 
             // Konversi OBJ ke GLTF
@@ -3389,18 +3388,17 @@ function handleFileUpload(event) {
             const origin = new THREE.Vector3(0, 0, 0);
             const distanceToOrigin = center.distanceTo(origin);
 
-            console.log("Pusat bounding box:", center);
             console.log("Jarak origin ke pusat model:", distanceToOrigin);
 
             // Tentukan threshold kecil untuk menangani kesalahan floating point
             const threshold = 10;
 
             if (distanceToOrigin < threshold) {
-              console.log("Origin berada di tengah model.");
-            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
-              console.log("Origin berada di dasar model.");
+              console.log("Origin berada di tengah model. 3");
+              setOffset = false;
             } else {
-              console.log("Origin berada di posisi lain.");
+              console.log("Origin berada di posisi lain. 3");
+              setOffset = true;
             }
 
             // Konversi OBJ ke GLTF
@@ -3558,10 +3556,17 @@ function checkIfModelIsAboveBuilding() {
     detectedBuildings.forEach((building) => {
       console.log(` - Kode: ${building.kode}, Tinggi: ${building.height} m`);
       $("#resultCek").html(`${detectedBuildings.length} bidang terdeteksi: <br> ${detectedBuildings.map((b) => `${b.kode} - ${b.height} m`).join("<br>")}`);
+
+      if (buildingHeight > building.height) {
+        // alert("Objek model melebihi aturan tinggi maksimum tata ruang yang ada.");
+        $("#resultCek").append(`<p class="text-danger small">Objek model melebihi aturan tinggi maksimum tata ruang yang ada.</p>`);
+        return;
+      }
     });
   } else {
     console.log("Model tidak berada di atas bangunan manapun.");
   }
+  console.log(detectedBuildings);
 }
 
 // **Fungsi Baru**: Hitung Bounding Box Model dengan Heading dan Offset dari Input Form
@@ -3571,8 +3576,9 @@ function getModelBoundingBoxCorners(position, heading, bbox) {
   let offsetX = 0;
   let offsetY = 0;
   const { length, width } = getBoundingBoxDimensions(bbox);
-  if (setOffset) {
+  if (setOffset && window.uploadedFileType === "glb") {
     // Ambil offset
+    // alert("Offset manual diterapkan");
     offsetX = -parseFloat(Math.sqrt(length * length + width * width) / 3.5);
     offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 1.6) : parseFloat(Math.sqrt(width * width - length * length) / 1.6);
     console.log({ offsetX, offsetY });
