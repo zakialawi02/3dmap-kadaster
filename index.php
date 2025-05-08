@@ -1800,7 +1800,7 @@
             <div class="mb-0">
               <div class="d-inline">
                 <label for="formFileSm" class="form-label">File input</label>
-                <button type="button" class="btn px-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="format ekstensi file yang didukung : .glb">
+                <button type="button" class="btn px-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="format ekstensi file yang didukung : .glb, .obj, zipped(obj,mtl)">
                   <i class="bi bi-info-circle"></i>
                 </button>
               </div>

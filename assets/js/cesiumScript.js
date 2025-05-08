@@ -1,7 +1,6 @@
 //** */ Inisiasi cesium token
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
-// Cesium.Ion.defaultAccessToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
+// Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
 //** */ Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
@@ -9,7 +8,7 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   animation: false,
   timeline: false,
   homeButton: false,
-  geocoder: false,
+  geocoder: true,
   sceneModePicker: false,
   baseLayerPicker: false,
   fullscreenButton: false,
@@ -3158,47 +3157,89 @@ const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
-// // Get Siola   ############################################################################################
+// Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
     show: true,
     featureIdLabel: "siolaBuildingL0",
   })
 );
 const siolaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
     show: true,
     featureIdLabel: "siolaBuildingL1",
   })
 );
 const siolaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
     show: true,
     featureIdLabel: "siolaBuildingL2",
   })
 );
 const siolaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
     show: true,
     featureIdLabel: "siolaBuildingL3",
   })
 );
 const siolaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
     show: true,
     featureIdLabel: "siolaBuildingL4",
   })
 );
 const siolaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
   })
 );
 
-const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465320));
-
+const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465324));
 siolaLegal.style = setColorStyle;
+
+let cadmapper1, cadmapper2;
+
+async function loadCadmapper() {
+  cadmapper1 = await Cesium.Cesium3DTileset.fromIonAssetId(3356449);
+  viewer.scene.primitives.add(cadmapper1);
+}
+async function loadCadmapper2() {
+  cadmapper2 = await Cesium.Cesium3DTileset.fromIonAssetId(3356448);
+  viewer.scene.primitives.add(cadmapper2);
+}
+loadCadmapper();
+loadCadmapper2();
+
+const targetPanel = document.querySelector("#layerPanel .siola-building-layer-panel");
+const targetPanel2 = document.querySelector("#layerPanel .balai-building-layer-panel");
+const targetPanel3 = document.querySelector("#layerPanel .rusunawa-building-layer-panel");
+
+// Fungsi bikin checkbox + label
+function createCheckbox(targetPanel, id, labelText, onChangeCallback) {
+  const label = document.createElement("label");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = id;
+  checkbox.checked = true;
+  checkbox.style.transform = "scale(1.4)";
+  checkbox.style.marginRight = "6px";
+  checkbox.style.color = "blue";
+  checkbox.addEventListener("change", onChangeCallback);
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(labelText));
+  label.className = "layer-item";
+  targetPanel.appendChild(label);
+}
+
+// Checkbox untuk cadmapper1
+createCheckbox(targetPanel, "toggleCadmapper1", "Existing building surrounding", (e) => {
+  if (cadmapper1) cadmapper1.show = e.target.checked;
+});
+// Checkbox untuk cadmapper2
+createCheckbox(targetPanel2, "toggleCadmapper2", "Existing building surrounding", (e) => {
+  if (cadmapper2) cadmapper2.show = e.target.checked;
+});
 
 // hide preloader after finish load data
 if (!params?.object) {
@@ -3302,7 +3343,9 @@ function handleFileUpload(event) {
             gltfExporter.parse(
               obj,
               (gltf) => {
-                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfBlob = new Blob([JSON.stringify(gltf)], {
+                  type: "model/gltf+json",
+                });
                 const gltfUrl = URL.createObjectURL(gltfBlob);
 
                 // Tampilkan input koordinat
@@ -3352,7 +3395,9 @@ function handleFileUpload(event) {
         // Buat URL untuk setiap tekstur
         let textureUrls = {};
         for (let texName in textures) {
-          const textureBlob = new Blob([textures[texName]], { type: "image/png" });
+          const textureBlob = new Blob([textures[texName]], {
+            type: "image/png",
+          });
           textureUrls[texName] = URL.createObjectURL(textureBlob);
         }
 
@@ -3406,7 +3451,9 @@ function handleFileUpload(event) {
             gltfExporter.parse(
               obj,
               (gltf) => {
-                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfBlob = new Blob([JSON.stringify(gltf)], {
+                  type: "model/gltf+json",
+                });
                 const gltfUrl = URL.createObjectURL(gltfBlob);
 
                 // Tampilkan input koordinat
@@ -3541,7 +3588,7 @@ function checkIfModelIsAboveBuilding() {
           const buildingHeight = entity.properties.height ? entity.properties.height.getValue() : 0;
 
           detectedBuildings.push({
-            kode: entity.properties.kode.getValue(),
+            kode: entity.properties?.kode?.getValue(),
             height: buildingHeight,
           });
         }
@@ -3838,80 +3885,78 @@ document.getElementById("cek3d").addEventListener("click", updateModelPosition);
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376891, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376896, {
     show: true,
     featureIdLabel: "balaiBuildingL0",
   })
 );
 const balaiBuildingBasement = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376892, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376894, {
     show: true,
     featureIdLabel: "balaiBuildingBasement",
   })
 );
 const balaiBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376888, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376898, {
     show: true,
     featureIdLabel: "balaiBuildingL1",
   })
 );
 const balaiBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376890, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376900, {
     show: true,
     featureIdLabel: "balaiBuildingL2",
   })
 );
 
-const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520612));
-
+const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465325));
 balaiLegal.style = setColorStyle;
 
 // Get Rusunawa   #########################################################################################
 const rusunawaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376563, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376598, {
     show: true,
     featureIdLabel: "rusunawaBuildingL0",
   })
 );
 const rusunawaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376564, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376599, {
     show: true,
     featureIdLabel: "rusunawaBuildingL1",
   })
 );
 const rusunawaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376565, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376600, {
     show: true,
     featureIdLabel: "rusunawaBuildingL2",
   })
 );
 const rusunawaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376566, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376601, {
     show: true,
     featureIdLabel: "rusunawaBuildingL3",
   })
 );
 const rusunawaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376567, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376602, {
     show: true,
     featureIdLabel: "rusunawaBuildingL4",
   })
 );
 const rusunawaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376603, {
     show: true,
     featureIdLabel: "rusunawaBuildingL5",
   })
 );
 const rusunawaBuildingL6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376604, {
     show: true,
     featureIdLabel: "rusunawaBuildingL6",
   })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2541786));
-
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2478745));
 rusunawaLegal.style = setColorStyle;
 
 // hide preloader after finish load data
@@ -5012,7 +5057,7 @@ $(document).ready(function () {
 
       default:
         console.error("NOT FOUND");
-        break;
+        return null;
     }
   }
 
@@ -5022,8 +5067,8 @@ $(document).ready(function () {
 
   if (params?.object) {
     $(".preload").addClass("d-none");
-    selectSuggestion(params?.object);
-    if (params?.isLegal == "true") {
+    const result = selectSuggestion(params?.object);
+    if (params?.isLegal == "true" && result === undefined) {
       interceptToogleLayer();
     }
   }
