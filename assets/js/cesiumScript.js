@@ -3198,7 +3198,10 @@ const siolaBuildingL5 = viewer.scene.primitives.add(
 const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465324));
 siolaLegal.style = setColorStyle;
 
-let cadmapper1, cadmapper2;
+let cadmapper1, cadmapper2, cadmapper3;
+const targetPanel = document.querySelector("#layerPanel .siola-building-layer-panel");
+const targetPanel2 = document.querySelector("#layerPanel .balai-building-layer-panel");
+const targetPanel3 = document.querySelector("#layerPanel .rusunawa-building-layer-panel");
 
 async function loadCadmapper() {
   cadmapper1 = await Cesium.Cesium3DTileset.fromIonAssetId(3356449);
@@ -3208,13 +3211,28 @@ async function loadCadmapper2() {
   cadmapper2 = await Cesium.Cesium3DTileset.fromIonAssetId(3356448);
   viewer.scene.primitives.add(cadmapper2);
 }
-loadCadmapper();
-loadCadmapper2();
-
-const targetPanel = document.querySelector("#layerPanel .siola-building-layer-panel");
-const targetPanel2 = document.querySelector("#layerPanel .balai-building-layer-panel");
-const targetPanel3 = document.querySelector("#layerPanel .rusunawa-building-layer-panel");
-
+async function loadCadmapper3() {
+  cadmapper2 = await Cesium.Cesium3DTileset.fromIonAssetId(3364006);
+  viewer.scene.primitives.add(cadmapper2);
+}
+loadCadmapper().then(() => {
+  // Checkbox untuk cadmapper1
+  createCheckbox(targetPanel, "toggleCadmapper1", "Existing building surrounding", (e) => {
+    if (cadmapper1) cadmapper1.show = e.target.checked;
+  });
+});
+loadCadmapper2().then(() => {
+  // Checkbox untuk cadmapper2
+  createCheckbox(targetPanel2, "toggleCadmapper2", "Existing building surrounding", (e) => {
+    if (cadmapper2) cadmapper2.show = e.target.checked;
+  });
+});
+loadCadmapper3().then(() => {
+  // Checkbox untuk cadmapper3
+  createCheckbox(targetPanel3, "toggleCadmapper3", "Existing building surrounding", (e) => {
+    if (cadmapper3) cadmapper3.show = e.target.checked;
+  });
+});
 // Fungsi bikin checkbox + label
 function createCheckbox(targetPanel, id, labelText, onChangeCallback) {
   const label = document.createElement("label");
@@ -3231,15 +3249,6 @@ function createCheckbox(targetPanel, id, labelText, onChangeCallback) {
   label.className = "layer-item";
   targetPanel.appendChild(label);
 }
-
-// Checkbox untuk cadmapper1
-createCheckbox(targetPanel, "toggleCadmapper1", "Existing building surrounding", (e) => {
-  if (cadmapper1) cadmapper1.show = e.target.checked;
-});
-// Checkbox untuk cadmapper2
-createCheckbox(targetPanel2, "toggleCadmapper2", "Existing building surrounding", (e) => {
-  if (cadmapper2) cadmapper2.show = e.target.checked;
-});
 
 // hide preloader after finish load data
 if (!params?.object) {
