@@ -1800,14 +1800,14 @@
             <div class="mb-0">
               <div class="d-inline">
                 <label for="formFileSm" class="form-label">File input</label>
-                <button type="button" class="btn px-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="format ekstensi file yang didukung : .glb">
+                <button type="button" class="btn px-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="format ekstensi file yang didukung : .glb, .obj, zipped(obj,mtl)">
                   <i class="bi bi-info-circle"></i>
                 </button>
               </div>
               <div class="input-group">
                 <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".glb, .gltf, .obj, .mtl, .fbx, .zip">
               </div>
-              <p><small>Download file sample <a href="/assets/building.glb" class="mb-0" id="sampleFile" target="_blank">disini</a></small> </p>
+              <p><small>Download file sample <a href="https://drive.google.com/drive/folders/1NwnLr_Br_JCqVY8bqk-Qsxoe_LIQxw1u?usp=sharing" class="mb-0" id="sampleFile" target="_blank">disini</a></small> </p>
               <div id="buildingHeight" class="py-1 small"></div>
               <div id="coordinateInputs" class="my-2" style="display: none;">
                 <label for="latitude" class="form-label mb-0">Latitude</label>

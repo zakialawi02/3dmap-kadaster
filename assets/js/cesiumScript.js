@@ -1,7 +1,6 @@
 //** */ Inisiasi cesium token
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
-// Cesium.Ion.defaultAccessToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
+// Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxODQyMzk1MS1iNWUxLTRhNGQtYTI1OS02OTUzNzI1ZDcwN2MiLCJpZCI6MTcxMjA2LCJpYXQiOjE2OTcwMTI5Mjh9.qk3jXULVR5DGxNlgFOR0aHWgT-1xmz50zY4gE63tXMY";
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYzM3MWVhMC05NTVmLTQwZDQtYjVlYS04MGY2NjFhZWJjZTIiLCJpZCI6MTc0NTY5LCJpYXQiOjE2OTg1MDA4NDd9.CJSLBba2oVAnchzPeMZpazEs2EdocRFKSdoRYXy7gBg";
 
 //** */ Initialize the Cesium Viewer in the HTML element with the `cesiumMap` ID.
 const viewer = new Cesium.Viewer("cesiumMap", {
@@ -9,7 +8,7 @@ const viewer = new Cesium.Viewer("cesiumMap", {
   animation: false,
   timeline: false,
   homeButton: false,
-  geocoder: false,
+  geocoder: true,
   sceneModePicker: false,
   baseLayerPicker: false,
   fullscreenButton: false,
@@ -835,6 +834,59 @@ function scan() {
     });
   });
 }
+
+function getCurrentQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  let result = {};
+
+  for (let [key, value] of params.entries()) {
+    result[key] = value;
+  }
+
+  return result ?? null;
+}
+
+function updateQueryParams(paramsObj) {
+  const url = new URL(window.location);
+  const params = new URLSearchParams(url.search);
+
+  // Loop melalui objek dan set setiap parameter
+  for (const [key, value] of Object.entries(paramsObj)) {
+    params.set(key, value);
+  }
+
+  url.search = params.toString();
+  window.history.pushState({}, "", url); // Update URL tanpa reload
+}
+
+function checkLocationParam() {
+  const params = new URLSearchParams(window.location.search);
+  const locationValue = params.get("location"); // Ambil hanya param "location"
+
+  if (!locationValue) return null; // Jika tidak ada "location", kembalikan null
+
+  // Peta kata kunci ke nilai
+  const keywordMap = {
+    siola: 1,
+    balai: 2,
+    rusunawa: 3,
+  };
+
+  // Cek apakah "location" mengandung salah satu kata kunci
+  for (let keyword in keywordMap) {
+    if (locationValue.toLowerCase().includes(keyword)) {
+      return {
+        name: keyword,
+        value: keywordMap[keyword],
+      };
+    }
+  }
+
+  return null; // Jika tidak ada yang cocok
+}
+
+const params = getCurrentQueryParams();
+console.log(params);
 
 // Layering button Siola  ################################################################################
 $("#siolaLevel_0").change(function () {
@@ -2408,7 +2460,6 @@ $("#e2").change(function () {
   toggleVisibilityGeojson("14882", $(this).is(":checked"));
 });
 $("#e3").change(function () {
-  console.log("L3");
   toggleVisibilityGeojson("15296", $(this).is(":checked"));
 });
 $("#e4").change(function () {
@@ -3106,52 +3157,104 @@ const parcelBD = Cesium.GeoJsonDataSource.load("/assets/Parcel-geojson.geojson")
     console.error("Terjadi kesalahan saat memuat GeoJSON:", error);
   });
 
-// // Get Siola   ############################################################################################
+// Get Siola   ############################################################################################
 const siolaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337813, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337191, {
     show: true,
     featureIdLabel: "siolaBuildingL0",
   })
 );
 const siolaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337814, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337170, {
     show: true,
     featureIdLabel: "siolaBuildingL1",
   })
 );
 const siolaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337815, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337183, {
     show: true,
     featureIdLabel: "siolaBuildingL2",
   })
 );
 const siolaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337816, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337185, {
     show: true,
     featureIdLabel: "siolaBuildingL3",
   })
 );
 const siolaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337817, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337177, {
     show: true,
     featureIdLabel: "siolaBuildingL4",
   })
 );
 const siolaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2337818, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2337254, {
     show: true,
     featureIdLabel: "siolaBuildingL5",
   })
 );
 
-const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465320));
-
+const siolaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465324));
 siolaLegal.style = setColorStyle;
 
-// hide preloader after finish load data
+let cadmapper1, cadmapper2, cadmapper3;
+const targetPanel = document.querySelector("#layerPanel .siola-building-layer-panel");
+const targetPanel2 = document.querySelector("#layerPanel .balai-building-layer-panel");
+const targetPanel3 = document.querySelector("#layerPanel .rusunawa-building-layer-panel");
 
-$(".preload").addClass("d-none");
-$(".loader-container").removeClass("d-none");
+async function loadCadmapper() {
+  cadmapper1 = await Cesium.Cesium3DTileset.fromIonAssetId(3356449);
+  viewer.scene.primitives.add(cadmapper1);
+}
+async function loadCadmapper2() {
+  cadmapper2 = await Cesium.Cesium3DTileset.fromIonAssetId(3356448);
+  viewer.scene.primitives.add(cadmapper2);
+}
+async function loadCadmapper3() {
+  cadmapper2 = await Cesium.Cesium3DTileset.fromIonAssetId(3364006);
+  viewer.scene.primitives.add(cadmapper2);
+}
+loadCadmapper().then(() => {
+  // Checkbox untuk cadmapper1
+  createCheckbox(targetPanel, "toggleCadmapper1", "Existing building surrounding", (e) => {
+    if (cadmapper1) cadmapper1.show = e.target.checked;
+  });
+});
+loadCadmapper2().then(() => {
+  // Checkbox untuk cadmapper2
+  createCheckbox(targetPanel2, "toggleCadmapper2", "Existing building surrounding", (e) => {
+    if (cadmapper2) cadmapper2.show = e.target.checked;
+  });
+});
+loadCadmapper3().then(() => {
+  // Checkbox untuk cadmapper3
+  createCheckbox(targetPanel3, "toggleCadmapper3", "Existing building surrounding", (e) => {
+    if (cadmapper3) cadmapper3.show = e.target.checked;
+  });
+});
+// Fungsi bikin checkbox + label
+function createCheckbox(targetPanel, id, labelText, onChangeCallback) {
+  const label = document.createElement("label");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = id;
+  checkbox.checked = true;
+  checkbox.style.transform = "scale(1.4)";
+  checkbox.style.marginRight = "6px";
+  checkbox.style.color = "blue";
+  checkbox.addEventListener("change", onChangeCallback);
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(labelText));
+  label.className = "layer-item";
+  targetPanel.appendChild(label);
+}
+
+// hide preloader after finish load data
+if (!params?.object) {
+  $(".preload").addClass("d-none");
+  $(".loader-container").removeClass("d-none");
+}
 
 let currentModel;
 let buildingHeight;
@@ -3187,10 +3290,10 @@ function handleFileUpload(event) {
           // Gunakan threshold kecil untuk mengantisipasi ketidakakuratan floating point
           const threshold = 10;
           if (distanceToOrigin < threshold) {
-            console.log("Origin berada di tengah model.");
+            console.log("Origin berada di tengah model. 1");
             setOffset = false;
           } else {
-            console.log("Origin tidak berada di tengah model. (Posisi relatif: ", center, ")");
+            console.log("Origin tidak berada di tengah model. 1 (Posisi relatif: ", center, ")");
             setOffset = true;
           }
           const dimensions = getBoundingBoxDimensions(bbox);
@@ -3231,18 +3334,17 @@ function handleFileUpload(event) {
             const origin = new THREE.Vector3(0, 0, 0);
             const distanceToOrigin = center.distanceTo(origin);
 
-            console.log("Pusat bounding box:", center);
             console.log("Jarak origin ke pusat model:", distanceToOrigin);
 
             // Tentukan threshold kecil untuk menangani kesalahan floating point
             const threshold = 10;
 
             if (distanceToOrigin < threshold) {
-              console.log("Origin berada di tengah model.");
-            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
-              console.log("Origin berada di dasar model.");
+              console.log("Origin berada di tengah model. 2");
+              setOffset = false;
             } else {
-              console.log("Origin berada di posisi lain.");
+              console.log("Origin berada di posisi lain. 2");
+              setOffset = true;
             }
 
             // Konversi OBJ ke GLTF
@@ -3250,7 +3352,9 @@ function handleFileUpload(event) {
             gltfExporter.parse(
               obj,
               (gltf) => {
-                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfBlob = new Blob([JSON.stringify(gltf)], {
+                  type: "model/gltf+json",
+                });
                 const gltfUrl = URL.createObjectURL(gltfBlob);
 
                 // Tampilkan input koordinat
@@ -3300,7 +3404,9 @@ function handleFileUpload(event) {
         // Buat URL untuk setiap tekstur
         let textureUrls = {};
         for (let texName in textures) {
-          const textureBlob = new Blob([textures[texName]], { type: "image/png" });
+          const textureBlob = new Blob([textures[texName]], {
+            type: "image/png",
+          });
           textureUrls[texName] = URL.createObjectURL(textureBlob);
         }
 
@@ -3336,18 +3442,17 @@ function handleFileUpload(event) {
             const origin = new THREE.Vector3(0, 0, 0);
             const distanceToOrigin = center.distanceTo(origin);
 
-            console.log("Pusat bounding box:", center);
             console.log("Jarak origin ke pusat model:", distanceToOrigin);
 
             // Tentukan threshold kecil untuk menangani kesalahan floating point
             const threshold = 10;
 
             if (distanceToOrigin < threshold) {
-              console.log("Origin berada di tengah model.");
-            } else if (Math.abs(origin.y - bbox.min.y) < threshold) {
-              console.log("Origin berada di dasar model.");
+              console.log("Origin berada di tengah model. 3");
+              setOffset = false;
             } else {
-              console.log("Origin berada di posisi lain.");
+              console.log("Origin berada di posisi lain. 3");
+              setOffset = true;
             }
 
             // Konversi OBJ ke GLTF
@@ -3355,7 +3460,9 @@ function handleFileUpload(event) {
             gltfExporter.parse(
               obj,
               (gltf) => {
-                const gltfBlob = new Blob([JSON.stringify(gltf)], { type: "model/gltf+json" });
+                const gltfBlob = new Blob([JSON.stringify(gltf)], {
+                  type: "model/gltf+json",
+                });
                 const gltfUrl = URL.createObjectURL(gltfBlob);
 
                 // Tampilkan input koordinat
@@ -3490,7 +3597,7 @@ function checkIfModelIsAboveBuilding() {
           const buildingHeight = entity.properties.height ? entity.properties.height.getValue() : 0;
 
           detectedBuildings.push({
-            kode: entity.properties.kode.getValue(),
+            kode: entity.properties?.kode?.getValue(),
             height: buildingHeight,
           });
         }
@@ -3499,15 +3606,23 @@ function checkIfModelIsAboveBuilding() {
   }
 
   // Cetak semua fitur yang ditemukan
+  $("#resultCek").html("");
   if (detectedBuildings.length > 0) {
     console.log(`Model berada di atas ${detectedBuildings.length} bangunan:`);
     detectedBuildings.forEach((building) => {
       console.log(` - Kode: ${building.kode}, Tinggi: ${building.height} m`);
       $("#resultCek").html(`${detectedBuildings.length} bidang terdeteksi: <br> ${detectedBuildings.map((b) => `${b.kode} - ${b.height} m`).join("<br>")}`);
+
+      if (buildingHeight > building.height) {
+        // alert("Objek model melebihi aturan tinggi maksimum tata ruang yang ada.");
+        $("#resultCek").append(`<p class="text-danger small">Objek model melebihi aturan tinggi maksimum tata ruang yang ada.</p>`);
+        return;
+      }
     });
   } else {
     console.log("Model tidak berada di atas bangunan manapun.");
   }
+  console.log(detectedBuildings);
 }
 
 // **Fungsi Baru**: Hitung Bounding Box Model dengan Heading dan Offset dari Input Form
@@ -3516,29 +3631,27 @@ function getModelBoundingBoxCorners(position, heading, bbox) {
 
   let offsetX = 0;
   let offsetY = 0;
-  if (setOffset) {
-    const { length, width } = getBoundingBoxDimensions(bbox);
+  const { length, width } = getBoundingBoxDimensions(bbox);
+  if (setOffset && window.uploadedFileType === "glb") {
     // Ambil offset
-    offsetX = parseFloat(Math.sqrt(length * length + width * width) / 2.9);
-    offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 2) : parseFloat(Math.sqrt(width * width - length * length) / 2);
+    // alert("Offset manual diterapkan");
+    offsetX = -parseFloat(Math.sqrt(length * length + width * width) / 3.5);
+    offsetY = length > width ? parseFloat(Math.sqrt(length * length - width * width) / 1.6) : parseFloat(Math.sqrt(width * width - length * length) / 1.6);
     console.log({ offsetX, offsetY });
   }
 
-  // Add 90 degrees (π/2 radians) to the heading for rotation
-  const rotatedHeading = heading + Math.PI / 2;
-
   // Create rotation matrix with the new heading
-  const headingRotation = Cesium.Matrix3.fromRotationZ(rotatedHeading);
+  const headingRotation = Cesium.Matrix3.fromRotationZ(-heading);
 
-  const halfLength = (bbox.max.x - bbox.min.x) / 2;
-  const halfWidth = (bbox.max.z - bbox.min.z) / 2;
+  const halfLength = width / 2;
+  const halfWidth = length / 2;
 
   // **Tambahkan offset manual dari input form ke setiap sudut bounding box**
   let localCorners = [
-    new Cesium.Cartesian3(halfLength + offsetX, halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(halfLength + offsetX, -halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(-halfLength + offsetX, halfWidth + offsetY, 0),
-    new Cesium.Cartesian3(-halfLength + offsetX, -halfWidth + offsetY, 0),
+    new Cesium.Cartesian3(-halfLength + offsetX, -halfWidth + offsetY, 0), //3
+    new Cesium.Cartesian3(halfLength + offsetX, -halfWidth + offsetY, 0), // 4
+    new Cesium.Cartesian3(halfLength + offsetX, halfWidth + offsetY, 0), // 2
+    new Cesium.Cartesian3(-halfLength + offsetX, halfWidth + offsetY, 0), //1
   ];
 
   // Transformasikan ke koordinat dunia dengan rotasi heading
@@ -3781,80 +3894,78 @@ document.getElementById("cek3d").addEventListener("click", updateModelPosition);
 
 // Get Balai Pemuda   ####################################################################################
 const balaiBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376891, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376896, {
     show: true,
     featureIdLabel: "balaiBuildingL0",
   })
 );
 const balaiBuildingBasement = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376892, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376894, {
     show: true,
     featureIdLabel: "balaiBuildingBasement",
   })
 );
 const balaiBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376888, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376898, {
     show: true,
     featureIdLabel: "balaiBuildingL1",
   })
 );
 const balaiBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376890, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376900, {
     show: true,
     featureIdLabel: "balaiBuildingL2",
   })
 );
 
-const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2520612));
-
+const balaiLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2465325));
 balaiLegal.style = setColorStyle;
 
 // Get Rusunawa   #########################################################################################
 const rusunawaBuildingL0 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376563, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376598, {
     show: true,
     featureIdLabel: "rusunawaBuildingL0",
   })
 );
 const rusunawaBuildingL1 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376564, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376599, {
     show: true,
     featureIdLabel: "rusunawaBuildingL1",
   })
 );
 const rusunawaBuildingL2 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376565, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376600, {
     show: true,
     featureIdLabel: "rusunawaBuildingL2",
   })
 );
 const rusunawaBuildingL3 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376566, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376601, {
     show: true,
     featureIdLabel: "rusunawaBuildingL3",
   })
 );
 const rusunawaBuildingL4 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376567, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376602, {
     show: true,
     featureIdLabel: "rusunawaBuildingL4",
   })
 );
 const rusunawaBuildingL5 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376568, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376603, {
     show: true,
     featureIdLabel: "rusunawaBuildingL5",
   })
 );
 const rusunawaBuildingL6 = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(2376570, {
+  await Cesium.Cesium3DTileset.fromIonAssetId(2376604, {
     show: true,
     featureIdLabel: "rusunawaBuildingL6",
   })
 );
 
-const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2541786));
-
+const rusunawaLegal = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2478745));
 rusunawaLegal.style = setColorStyle;
 
 // hide preloader after finish load data
@@ -4180,9 +4291,9 @@ $(document).ready(function () {
   });
 
   function selectSuggestion(id, text = false) {
-    $("#searchInput").val(text);
+    $("#searchInput").val(text ? text : "");
     $("#autocompleteResults").html("");
-    console.log("seelct: " + id);
+    console.log("select: " + id);
     switch (String(id)) {
       case "1":
         firstCamera();
@@ -4955,13 +5066,29 @@ $(document).ready(function () {
 
       default:
         console.error("NOT FOUND");
-        break;
+        return null;
+    }
+  }
+
+  $(".loader-container").addClass("d-none");
+  resetClipTilesets(1);
+  resetClipTilesets();
+
+  if (params?.object) {
+    $(".preload").addClass("d-none");
+    const result = selectSuggestion(params?.object);
+    if (params?.isLegal == "true" && result === undefined) {
+      interceptToogleLayer();
     }
   }
 });
 
-$(document).ready(function () {
-  $(".loader-container").addClass("d-none");
-  resetClipTilesets(1);
-  resetClipTilesets();
-});
+function interceptToogleLayer() {
+  const key = checkLocationParam();
+  const checkbox = document.querySelectorAll(`.${key.name}-building-layer-panel input[type="checkbox"]`);
+  checkbox.forEach((checkbox) => {
+    checkbox.checked = !checkbox.checked;
+    const id = checkbox.id;
+    $(`#${id}`).trigger("change");
+  });
+}

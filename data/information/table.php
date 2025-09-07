@@ -52,37 +52,37 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>Lantai 1</td>
+                                        <td>Lantai 1 <a href="/?object=siola1floor&location=siolaLevel_1&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek atas tanah</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
-                                        <td>Lantai 2</td>
+                                        <td>Lantai 2 <a href="/?object=siola2floor&location=siolaLevel_2&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek atas tanah</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
-                                        <td>Lantai 3</td>
+                                        <td>Lantai 3 <a href="/?object=siola3floor&location=siolaLevel_3&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek atas tanah</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
-                                        <td>Lantai 4</td>
+                                        <td>Lantai 4 <a href="/?object=siola4floor&location=siolaLevel_4&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek atas tanah</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
-                                        <td>Lantai 5</td>
+                                        <td>Lantai 5 <a href="/?object=siola5floor&location=siolaLevel_5&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek atas tanah</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
-                                        <td>Tiang pancang atau pondasi bangunan</td>
+                                        <td>Tiang pancang atau pondasi bangunan <a href="/?object=siola0floor&location=siolaLevel_0&isLegal=false" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Objek bawah tanah</td>
                                         <td>Tiang pancang atau pondasi bangunan</td>
                                     </tr>
@@ -107,7 +107,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>L1.1</td>
+                                        <td>L1.1 <a href="/?object=817240&location=siolaLegal_1a1&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td class="attachment" data-img="https://lh3.googleusercontent.com/p/AF1QipNSlTU0IycvvTxdMgxM0Vxi_IgG9vHA-Q-BViZn=s1360-w1360-h1020">Kriya Gallery</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -118,7 +118,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
-                                        <td>L1.2</td>
+                                        <td>L1.2 <a href="/?object=825386&location=siolaLegal_1a2&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td class="attachment">Lorong</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -129,7 +129,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
-                                        <td>L1.3</td>
+                                        <td>L1.3 <a href="/?object=820896&location=siolaLegal_1a3&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Toliet Umum</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -140,7 +140,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
-                                        <td>L1.4</td>
+                                        <td>L1.4 <a href="/?object=820815&location=siolaLegal_1a4&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Tangga</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -151,7 +151,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
-                                        <td>L1.5</td>
+                                        <td>L1.5 <a href="/?object=919493&location=siolaLegal_1a5&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td>Lorong</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -162,7 +162,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
-                                        <td>L1.6</td>
+                                        <td>L1.6 <a href="/?object=820143&location=siolaLegal_1a6&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td class="attachment" data-img="https://tiketwisata.surabaya.go.id/storage/tour/museum-surabayagedung-siola_1666543455.jpg">Museum</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
@@ -173,7 +173,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
-                                        <td>L1.7</td>
+                                        <td>L1.7 <a href="/?object=821077&location=siolaLegal_1a7&isLegal=true" target="_blank"><i class="bi bi-eye"></i></a></td>
                                         <td class="attachment" data-img="https://fastly.4sqi.net/img/general/600x600/14004519_0q-Kcse1w8XMunorOI4kadkNcSpNpBAz8BnzzcDTrnQ.jpg">UPTSA (Unit Pelayanan Terpadu Satu Atap)</td>
                                         <td>Unit Hak</td>
                                         <td>Lantai 1</td>
