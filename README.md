@@ -1,5 +1,9 @@
 # 3dmap-kadaster
 
+## Documentation
+
+- [Arsitektur aplikasi](docs/architecture.md)
+
 This project is a simple 3d map viewer using CesiumJs library based on Kadaster 3d data. It was created to show how to use cesium with php, jquery, and ajax to load data from a json file. The project also using cesium's built-in 3dtileset to load data from ion assets.
 
 I hope this project can be useful for you.
